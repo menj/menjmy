@@ -11,7 +11,7 @@
  * @package Book_WP
  */
 
-/* ── Layout: wide — matches ratapan column ───────────────── */
+/* ── Layout: 36em prose column (ratapan runs wider at 40em) ── */
 body.bwp-form-nukilan .bwp-work__content {
     max-width: 36em;
     margin-left: auto;

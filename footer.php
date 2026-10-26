@@ -49,7 +49,9 @@ $bwp_portrait  = get_option( 'book_wp_author_portrait', BOOK_WP_URI . '/assets/i
                 <?php endif; ?>
 
                 <div class="bwp-site-footer__identity">
-                    <?php if ( ! has_custom_logo() ) : ?>
+                    <?php if ( has_custom_logo() ) : ?>
+                        <?php echo wp_get_attachment_image( get_theme_mod( 'custom_logo' ), 'medium', false, array( 'class' => 'bwp-site-footer__mark', 'alt' => '', 'loading' => 'lazy' ) ); ?>
+                    <?php else : ?>
                         <img class="bwp-site-footer__mark" src="<?php echo esc_url( BOOK_WP_URI . '/assets/img/brand/mark-inverse.svg' ); ?>" alt="" width="96" height="96" loading="lazy" decoding="async">
                     <?php endif; ?>
                     <div class="bwp-site-footer__identity-text">

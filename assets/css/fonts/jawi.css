@@ -12,8 +12,7 @@
     font-style: normal;
     font-weight: 300;
     font-display: swap;
-    src: url('../../fonts/jawi/DubidamArabic-Light.woff2') format('woff2'),
-         url('../../fonts/jawi/DubidamArabic-Light.woff') format('woff');
+    src: url('../../fonts/jawi/DubidamArabic-Light.woff') format('woff');
     unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
 }
 @font-face {
@@ -21,8 +20,7 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url('../../fonts/jawi/DubidamArabic-Regular.woff2') format('woff2'),
-         url('../../fonts/jawi/DubidamArabic-Regular.woff') format('woff');
+    src: url('../../fonts/jawi/DubidamArabic-Regular.woff') format('woff');
     unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
 }
 @font-face {
@@ -30,8 +28,7 @@
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url('../../fonts/jawi/DubidamArabic-Bold.woff2') format('woff2'),
-         url('../../fonts/jawi/DubidamArabic-Bold.woff') format('woff');
+    src: url('../../fonts/jawi/DubidamArabic-Bold.woff') format('woff');
     unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
 }
 

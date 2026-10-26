@@ -239,8 +239,13 @@ function book_wp_featured_work() {
     // First passage: first non-empty paragraph, line breaks kept for verse.
     $content = apply_filters( 'the_content', $post->post_content );
     $content = book_wp_remove_chapter_blocks( $content );
-    preg_match( '/<p(?:\s[^>]*)?>(.*?)<\/p>/si', $content, $m );
-    $first = isset( $m[1] ) ? $m[1] : wp_strip_all_tags( $content );
+    $first = '';
+    if ( preg_match_all( '/<p(?:\s[^>]*)?>(.*?)<\/p>/si', $content, $mm ) ) {
+        foreach ( $mm[1] as $para ) {
+            if ( '' !== trim( wp_strip_all_tags( str_replace( '&nbsp;', ' ', $para ) ) ) ) { $first = $para; break; }
+        }
+    }
+    if ( '' === $first ) $first = wp_strip_all_tags( $content );
     $first = wp_kses( $first, array( 'br' => array(), 'em' => array(), 'strong' => array() ) );
     if ( ! book_wp_is_poetry( $id ) ) $first = wp_trim_words( wp_strip_all_tags( $first ), 48, '…' );
 

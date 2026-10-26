@@ -21,19 +21,20 @@
                 <?php endif; ?>
             </div>
             <h1 class="bwp-work__title"><?php the_title(); ?></h1>
-            <div class="bwp-work__meta">
-                <?php
-                // "PETIKAN DARIPADA" — shown only when the post is a hikayat
-                // AND the citation toggle is checked in the meta box.
-                if ( 'hikayat' === $form_slug_single
-                    && '1' === get_post_meta( get_the_ID(), 'book_wp_hikayat_is_citation', true ) ) :
-                ?>
-                    <p class="bwp-citation-label"><?php esc_html_e( 'Cited from', 'book-wp' ); ?></p>
-                <?php endif; ?>
-                <?php if ( '1' === get_option( 'book_wp_show_analytics', '1' ) ) : ?>
-                    <?php echo book_wp_analytics_bar(); // phpcs:ignore ?>
-                <?php endif; ?>
-            </div>
+            <?php
+            // Chips row: "Cited from" for hikayat citations, then the analytics
+            // bar. Printed only when something is in it, so no empty ruled strip.
+            $bwp_meta = '';
+            if ( 'hikayat' === $form_slug_single
+                && '1' === get_post_meta( get_the_ID(), 'book_wp_hikayat_is_citation', true ) ) {
+                $bwp_meta .= '<p class="bwp-citation-label">' . esc_html__( 'Cited from', 'book-wp' ) . '</p>';
+            }
+            if ( '1' === get_option( 'book_wp_show_analytics', '1' ) ) {
+                $bwp_meta .= book_wp_analytics_bar();
+            }
+            if ( trim( $bwp_meta ) ) : ?>
+            <div class="bwp-work__meta"><?php echo $bwp_meta; // phpcs:ignore ?></div>
+            <?php endif; ?>
         </header>
 
         <div class="bwp-work__layout">

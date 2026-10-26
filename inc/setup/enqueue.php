@@ -79,14 +79,6 @@ function book_wp_enqueue_frontend() {
     );
     $style_deps[] = 'book-wp-local-fonts';
 
-    // Self-hosted body face (Sabon Next LT) — the reading typeface.
-    wp_enqueue_style(
-        'book-wp-body-font',
-        BOOK_WP_URI . '/assets/css/fonts/sabon.css',
-        array( 'book-wp-frontend' ),
-        BOOK_WP_VERSION
-    );
-    $style_deps[] = 'book-wp-body-font';
     $style_deps[] = 'book-wp-frontend';
 
     // Classical Malay Literary theme layer — augments frontend.css, does not replace it.

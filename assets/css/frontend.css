@@ -112,8 +112,6 @@ img { max-width: 100%; height: auto; display: block; }
 iframe, video, embed, object, svg { max-width: 100%; }
 .bwp-work__content table { display: block; max-width: 100%; overflow-x: auto; }
 
-/* type roles: Kagnue carries h1/h2 (section and title-page level), Fraunces the rest */
-h1, h2 { font-family: var(--bwp-font-brand); letter-spacing: 0; line-height: 1.05; }
 
 h1, h2, h3, h4 {
     font-family: var(--bwp-font-display);
@@ -123,6 +121,8 @@ h1, h2, h3, h4 {
     margin: 0 0 .5em;
     color: var(--bwp-text);
 }
+/* type roles: Kagnue carries h1/h2 (section and title-page level), Fraunces the rest */
+h1, h2 { font-family: var(--bwp-font-brand); letter-spacing: 0; line-height: 1.05; }
 
 ::selection { background: var(--bwp-accent); color: var(--bwp-on-accent); }
 
@@ -694,10 +694,8 @@ body.bwp-toc-masonry .bwp-toc__item { width: 49%; margin-bottom: .75rem; }
         align-items: start;
     }
     .bwp-work__main { --bwp-measure: 44em; min-width: 0; }
-    .bwp-work__main > * { margin-left: 0; }
-    body.bwp-form-puisi .bwp-work__main .bwp-work__content,
-    body.bwp-form-syair .bwp-work__main .bwp-work__content,
-    body.bwp-form-karmina .bwp-work__main .bwp-work__content { margin-left: 0; }
+    /* per-form sheets centre .bwp-work__content with margin-left:auto; this outranks them */
+    body[class] .bwp-work__layout .bwp-work__main > * { margin-left: 0; }
     .bwp-work__aside { position: sticky; top: 1.25rem; }
     .bwp-work__aside .bwp-colophon,
     .bwp-work__aside .bwp-related { max-width: none; margin-left: 0; margin-right: 0; }
