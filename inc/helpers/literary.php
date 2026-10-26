@@ -175,3 +175,18 @@ function book_wp_default_footer_quote() {
 function book_wp_default_footer_quote_sub() {
     return '';
 }
+
+/**
+ * Duotone portrait medallion. Size: 'sm' (56px), 'md' (120px), 'lg' (240px).
+ * The duotone is CSS (grayscale + screen blend over nila), so any photo works.
+ */
+function book_wp_author_portrait( $size = 'md' ) {
+    $url = get_option( 'book_wp_author_portrait', '' );
+    if ( ! $url ) return '';
+    $name = get_option( 'book_wp_author_name', '' );
+    $name = $name ? $name : get_bloginfo( 'name' );
+    $size = in_array( $size, array( 'sm', 'md', 'lg' ), true ) ? $size : 'md';
+    return '<span class="bwp-portrait bwp-portrait--' . esc_attr( $size ) . '">'
+        . '<img src="' . esc_url( $url ) . '" alt="' . esc_attr( $name ) . '" loading="lazy" decoding="async">'
+        . '</span>';
+}

@@ -19,6 +19,7 @@ add_action( 'admin_init', 'book_wp_register_settings' );
 function book_wp_register_settings() {
     $settings = array(
         'book_wp_author_name'     => 'sanitize_text_field',
+        'book_wp_author_portrait' => 'esc_url_raw',
         'book_wp_anthology_name'  => 'sanitize_text_field',
         'book_wp_jawi_name'       => 'sanitize_text_field',
         'book_wp_footer_quote'    => 'sanitize_textarea_field',
@@ -145,6 +146,7 @@ function book_wp_handle_tab_save() {
     $tab_fields = array(
         'general' => array(
             'book_wp_author_name'    => 'sanitize_text_field',
+            'book_wp_author_portrait' => 'esc_url_raw',
             'book_wp_anthology_name' => 'sanitize_text_field',
             'book_wp_jawi_name'      => 'sanitize_text_field',
             'book_wp_footer_quote'   => 'sanitize_textarea_field',
@@ -431,6 +433,15 @@ function bwp_tab_general() {
                        value="<?php echo esc_attr( get_option( 'book_wp_author_name', '' ) ); ?>">
             </div>
             <span class="bwp-field__hint"><?php esc_html_e( 'Displayed in the site header on all pages in place of the WordPress Site Title.', 'book-wp' ); ?></span>
+        </div>
+
+        <div class="bwp-field">
+            <label class="bwp-field__label" for="book_wp_author_portrait"><?php esc_html_e( 'Author Portrait', 'book-wp' ); ?></label>
+            <div class="bwp-field__control">
+                <input type="url" name="book_wp_author_portrait" id="book_wp_author_portrait" placeholder="https://"
+                       value="<?php echo esc_attr( get_option( 'book_wp_author_portrait', '' ) ); ?>">
+                <p class="bwp-field__hint"><?php esc_html_e( 'Media Library URL of a head-and-shoulders photo. The theme renders it as a nila-and-kapas duotone medallion in the footer and on the author page; a plain photo on a light background works best.', 'book-wp' ); ?></p>
+            </div>
         </div>
 
         <div class="bwp-field">

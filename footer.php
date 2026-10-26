@@ -22,6 +22,7 @@ $bwp_jawi      = get_option( 'book_wp_jawi_name', '' );
 $bwp_quote     = get_option( 'book_wp_footer_quote', book_wp_default_footer_quote() );
 $bwp_quote_sub = get_option( 'book_wp_footer_quote_sub', book_wp_default_footer_quote_sub() );
 $bwp_tagline   = get_bloginfo( 'description' );
+$bwp_portrait  = get_option( 'book_wp_author_portrait', '' );
 ?>
 
     <?php if ( is_active_sidebar( 'footer-widgets' ) ) : ?>
@@ -58,7 +59,9 @@ $bwp_tagline   = get_bloginfo( 'description' );
 
             <div class="bwp-site-footer__row">
                 <div class="bwp-site-footer__lockup">
-                    <?php if ( has_custom_logo() ) : ?>
+                    <?php if ( $bwp_portrait ) : ?>
+                        <span class="bwp-portrait bwp-portrait--sm"><img src="<?php echo esc_url( $bwp_portrait ); ?>" alt="" width="56" height="56" loading="lazy" decoding="async"></span>
+                    <?php elseif ( has_custom_logo() ) : ?>
                         <?php echo wp_get_attachment_image( get_theme_mod( 'custom_logo' ), 'thumbnail', false, array( 'class' => 'bwp-site-footer__mark', 'alt' => '' ) ); ?>
                     <?php else : ?>
                         <img class="bwp-site-footer__mark" src="<?php echo esc_url( BOOK_WP_URI . '/assets/img/brand/mark.svg' ); ?>" alt="" width="44" height="44" loading="lazy" decoding="async">
