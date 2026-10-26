@@ -1,5 +1,12 @@
 ## [4.0.0] — Sasterawan: Malaysiana Redesign
 
+### Compatibility
+- Data model unchanged from Book WP 3.5.x: options, post meta keys, taxonomy,
+  menu locations, widget areas and text domain all keep their names.
+- New `inc/helpers/migrate.php` copies theme mods (logo, header/background,
+  Customizer CSS, menu locations) from a `book-wp` folder on activation when
+  the theme is installed under a new folder. Covered by `tests/MigrationTest.php`.
+
 ### Changed
 - Theme renamed **Sasterawan**, tailored for https://menj.my (Di Bawah Permukaan).
 - Front end rebuilt from scratch (`assets/css/frontend.css`): editorial,

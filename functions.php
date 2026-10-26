@@ -36,6 +36,7 @@ require_once BOOK_WP_DIR . '/inc/helpers/navigation.php'; // related, nav, toc, 
 require_once BOOK_WP_DIR . '/inc/helpers/social.php';     // social profile icons
 require_once BOOK_WP_DIR . '/inc/helpers/json-feed.php';  // JSON Feed v1.1
 require_once BOOK_WP_DIR . '/inc/helpers/permalink.php';  // literary form permalinks
+require_once BOOK_WP_DIR . '/inc/helpers/migrate.php';    // upgrade path from Book WP
 
 require_once BOOK_WP_DIR . '/inc/hooks/actions.php';
 require_once BOOK_WP_DIR . '/inc/hooks/filters.php';

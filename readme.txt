@@ -348,6 +348,9 @@ No other remote connections are made by this theme.
 
 
 == Upgrade Notice ==
+= 4.0.0 =
+In-place upgrade from Book WP 3.5.x: options, post meta, the literary_form taxonomy, menu locations and widget areas keep their names. Installed under a new folder, the theme copies the logo, Customizer CSS and header/background settings from the book-wp folder on activation. Previous/next navigation and the front-page blurb are removed.
+
 = 3.5.1 =
 Drop-in upgrade. Fixes Back to Top JavaScript scope, moves custom CSS to the stylesheet queue, adds no-remote-fonts mode, hardens chapter-block analytics, and adds documented lint/test/CI config.
 

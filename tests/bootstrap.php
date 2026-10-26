@@ -345,9 +345,32 @@ if ( ! function_exists( 'doing_filter' ) ) {
 
 /* ── Load the helpers under test ──────────────────────────────────── */
 
+
+/* ── Theme mod / option write stubs for migrate.php ─────────────────── */
+if ( ! function_exists( 'update_option' ) ) {
+    function update_option( $name, $value, $autoload = null ) { $GLOBALS['_bwp_options'][ $name ] = $value; return true; }
+}
+if ( ! function_exists( 'get_stylesheet' ) ) {
+    function get_stylesheet() { return $GLOBALS['_bwp_stylesheet'] ?? 'menjmy'; }
+}
+if ( ! function_exists( 'get_theme_mod' ) ) {
+    function get_theme_mod( $name, $default = false ) {
+        $mods = $GLOBALS['_bwp_options'][ 'theme_mods_' . get_stylesheet() ] ?? array();
+        return array_key_exists( $name, (array) $mods ) ? $mods[ $name ] : $default;
+    }
+}
+if ( ! function_exists( 'set_theme_mod' ) ) {
+    function set_theme_mod( $name, $value ) {
+        $key = 'theme_mods_' . get_stylesheet();
+        $mods = $GLOBALS['_bwp_options'][ $key ] ?? array();
+        $mods[ $name ] = $value; $GLOBALS['_bwp_options'][ $key ] = $mods; return true;
+    }
+}
+
 $base = dirname( __DIR__ ) . '/inc/helpers/';
 
 require_once $base . 'literary.php';
 require_once $base . 'analytics.php';
 require_once $base . 'colophon.php';
 require_once $base . 'navigation.php';
+require_once $base . 'migrate.php';

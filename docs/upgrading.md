@@ -1,13 +1,58 @@
 # Sasterawan — Architecture, Upgrades & Roadmap
 
-**Version:** 3.5.1  
+**Version:** 4.0.0  
 **Type:** Classic PHP template theme (not FSE)  
 **WordPress:** 6.0+ required, tested to 6.9.1  
 **PHP:** 8.2+  
 **Text domain:** `book-wp`  
-**Theme slug:** `book-wp`
+**Theme slug:** `menjmy` (folder); upgrades in place from `book-wp`
 
 ---
+
+
+## Upgrading from Book WP 3.5.x
+
+Sasterawan 4.0 is a visual rebuild on the same data model. Nothing in the
+database needs converting.
+
+**Unchanged, so content and settings carry over as they are**
+
+| Layer | Names kept |
+|---|---|
+| Options | every `book_wp_*` option, including scheme, font, drop caps, analytics, TOC layout and the social profile fields |
+| Post meta | every `book_wp_*` meta key written by the form meta boxes (dateline, location, year, source, epigraph, dedication, notes, hikayat citation, translation fields) |
+| Taxonomy | `literary_form` and its term slugs; 4.0 seeds one new term, `terjemahan`, and leaves the rest alone |
+| Menus | `primary` and `footer` locations |
+| Widget areas | `sidebar-widgets` and `footer-widgets` |
+| Blocks and shortcodes | `book-wp/chapter`, `book-wp/divider` and the existing shortcodes render under the new styles |
+| Text domain | `book-wp`, so existing `.po`/`.mo` files still load |
+
+Two options are no longer read: `book_wp_front_blurb` (the front page no
+longer prints an intro) and `book_wp_show_nav` (previous/next navigation was
+removed). Their stored values are harmless.
+
+**Two ways to install**
+
+1. *Same folder.* Replace the contents of `wp-content/themes/book-wp/` with
+   this release. WordPress sees the same theme, and the logo, Customizer CSS
+   and menu assignments stay as they were.
+2. *New folder.* Install as `wp-content/themes/menjmy/` and activate it.
+   WordPress treats a new folder as a new theme and would normally start the
+   per-theme mods from empty. On activation Sasterawan copies them across
+   from the `book-wp` folder: custom logo, header and background settings,
+   the Customizer's Additional CSS, and nav menu locations as a fallback to
+   core's own mapping. It never overwrites a value the new install already
+   has, and it records what it copied in `book_wp_migrated_from`. Widget
+   placements are restored by WordPress itself because the area IDs match.
+   The old folder can be deleted once the new one is active.
+
+**What looks different by design**
+
+- Defaults for the palette swatches changed (Kapas / Malam); a stored scheme
+  value still selects the same scheme.
+- The front page opens with a cover photograph; switch it off under
+  Settings → General if the old plain title is preferred.
+- Previous/next work navigation and the front-page blurb are gone.
 
 ## Overview
 
