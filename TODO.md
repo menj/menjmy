@@ -56,4 +56,15 @@ Prioritised from the codebase review (v3.5.1). Each item names the file and line
 
 ## Design evaluation
 
-- [ ] _Pending — items to be appended from the visual design review._
+Static renders of the real CSS (28 screenshots in `docs/design-review/`, 1440px and 390px, all four schemes). Scores out of 10: aesthetic 8, scheme consistency 8, contrast 7, hierarchy 7, admin UI 7, typographic rhythm 6, responsive 6, token system 6, reading affordances 5.
+
+- [ ] **Back-to-top and copy tooltip are invisible on every scheme.** Alias `--bwp-ink`/`--bwp-paper` to `--bwp-text`/`--bwp-bg` in `:root` (`assets/css/frontend.css:25`); `--bwp-heading` is also undefined in `templates/single-puisi-generic.php:99`.
+- [ ] **Prose measure too wide.** Cerpen ≈84ch and esei 40em exceed the 75ch ceiling; default page wrap 48em ≈90ch. Cap at 34em (`assets/css/forms/cerpen.css:19`), 36em (`forms/esei.css:19`) and add a `.bwp-work__content{max-width:36em}` fallback at `frontend.css:584`. Poem column (≈58ch) is right.
+- [ ] **Cerpen title stacks four rules within 80px** (title border, `::after` accent, analytics top and bottom borders). Drop `forms/cerpen.css:29` or `:37-43`, and the `.bwp-analytics` border-top at `frontend.css:472`.
+- [ ] **Fixed controls overlap the text column at 390px.** Shrink and re-corner the night toggle and back-to-top in `@media (max-width:36em)` (`frontend.css:2383, 2528`); the two buttons also share the same corner.
+- [ ] **Contrast floors.** Dusk muted ink is 4.53:1 at 13px uppercase; raise to ≈`#5a544c` (`schemes/dusk.css:19`). Footer credit at opacity .55 (2.1–2.9:1) and `.bwp-colophon__line--meta` opacity .7 (`literary.css:41`) fail AA; replace opacity dimming with a `--bwp-muted-faint` token. Night-scheme link vs text is 1.47:1, so keep underlines.
+- [ ] **Single-source the night palette.** It is duplicated at `frontend.css:1115`, `:1140` and `schemes/night.css:19`; make toggle, scheme and OS media query consume one block.
+- [ ] **Mobile nav wraps to two rows with a 1em gap** and the 2.8em hero title breaks to three lines at 390px; tighten the row gap and use `clamp()` for the title.
+- [ ] **Admin polish.** General-tab hints render under the label because `.bwp-field__hint` sits outside `.bwp-field__control` (`settings.php:449-476`); "Show Copyright" is a bare checkbox next to styled toggles (`:478-487`); drop-cap font cards all show the same glyph because `assets/css/dropcap/*.css` is not enqueued in admin; the "Georgia / Default" card is mislabelled, the front end defaults to EB Garamond (`frontend.css:46`).
+- [ ] **Token architecture.** Add a semantic layer (`--bwp-surface-raised`, `--bwp-on-accent`), retire legacy aliases leaking into form CSS (`esei.css:33`, `cerpen.css:76`), and make `theme.json` read the active scheme.
+- [ ] **User-configurable colours.** Add paper / ink / accent colour pickers on the Typography tab that emit `body.bwp-scheme-custom{…}` with WCAG validation at save time, so the colour scheme is genuinely variable rather than a fixed set of presets.
