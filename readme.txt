@@ -843,5 +843,7 @@ Initial release.
 
 == Credits ==
 
+* Front-page cover photograph by David Boca on Pexels (https://www.pexels.com/photo/underwater-view-of-sea-5466506/), Pexels License, cropped and toned. See assets/img/hero/CREDITS.txt.
+
 Author: MENJ — https://github.com/menj
 Licence: GPL-2.0-or-later

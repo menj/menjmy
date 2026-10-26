@@ -9,8 +9,11 @@
   for the anthology watermark, per-form watermarks and the footer signature.
 - New site header: brand mark + author, centred context label
   ("Puisi · Sanggahan"), pill navigation with a phone disclosure button.
-- Front page: hero with Jawi watermark, **jalur tema** pills generated from
-  categories, table of contents as two-column cards.
+- Front page opens like an anthology jacket: a toned underwater photograph
+  (David Boca, Pexels) under the Kagnue title, with an imprint line and Jawi
+  seal at the head and the author's name and edition line at the foot.
+  Switchable and replaceable under Settings → General. **Jalur tema** pills
+  generated from categories, table of contents as two-column cards.
 - Single works: opening grid (form badge + chips left, title right), rounded
   ink-tile drop cap, colophon as a pill card, previous/next as pill cards.
 - Night mode and the Night scheme now share one Malam palette; Cream and Dusk

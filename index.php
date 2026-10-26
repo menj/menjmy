@@ -12,19 +12,34 @@
     $jalur_cats = array_values( array_filter( $jalur_cats, function( $c ) { return 'uncategorized' !== $c->slug; } ) );
     $forms      = get_terms( array( 'taxonomy' => 'literary_form', 'hide_empty' => true, 'orderby' => 'count', 'order' => 'DESC' ) );
     $forms      = ( $forms && ! is_wp_error( $forms ) ) ? $forms : array();
+    $hero_img   = function_exists( 'book_wp_hero_image' ) ? book_wp_hero_image() : array();
     ?>
 
     <?php /* ── Half-title: anthology name and edition line (tagline lives in the footer) ────────── */ ?>
-    <div class="bwp-book-title">
-        <?php if ( $jawi_name ) : ?>
+    <div class="bwp-book-title<?php echo $hero_img ? ' bwp-book-title--cover' : ''; ?>">
+        <?php if ( $hero_img ) : ?>
+            <img class="bwp-book-title__img" src="<?php echo esc_url( $hero_img['src'] ); ?>"<?php if ( $hero_img['srcset'] ) : ?> srcset="<?php echo esc_attr( $hero_img['srcset'] ); ?>" sizes="(min-width: 1200px) 1104px, 100vw"<?php endif; ?> alt="" width="2000" height="833" fetchpriority="high" decoding="async">
+            <?php /* Jacket furniture: imprint line top-left, Jawi seal top-right */ ?>
+            <div class="bwp-book-title__top">
+                <span class="bwp-book-title__kicker"><?php echo esc_html( apply_filters( 'book_wp_cover_kicker', __( 'Antologi puisi dan prosa', 'book-wp' ) ) ); ?></span>
+                <?php if ( $jawi_name ) : ?>
+                    <span class="bwp-book-title__seal" aria-hidden="true" dir="rtl" lang="ms-Arab"><?php echo esc_html( $jawi_name ); ?></span>
+                <?php endif; ?>
+            </div>
+        <?php elseif ( $jawi_name ) : ?>
             <span class="bwp-book-title__jawi" aria-hidden="true" dir="rtl"><?php echo esc_html( $jawi_name ); ?></span>
         <?php endif; ?>
-        <h1 class="bwp-book-title__name"><?php echo esc_html( $anthology ? $anthology : get_bloginfo( 'name' ) ); ?></h1>
-        <p class="bwp-book-title__meta">
-            <span><?php echo esc_html( sprintf( _n( '%s work', '%s works', $published, 'book-wp' ), number_format_i18n( $published ) ) ); ?></span>
-            <?php if ( $jalur_cats ) : ?><span><?php echo esc_html( sprintf( _n( '%s strand', '%s strands', count( $jalur_cats ), 'book-wp' ), number_format_i18n( count( $jalur_cats ) ) ) ); ?></span><?php endif; ?>
-            <?php if ( $forms ) : ?><span><?php echo esc_html( sprintf( _n( '%s form', '%s forms', count( $forms ), 'book-wp' ), number_format_i18n( count( $forms ) ) ) ); ?></span><?php endif; ?>
-        </p>
+        <div class="bwp-book-title__block">
+            <h1 class="bwp-book-title__name"><?php echo esc_html( $anthology ? $anthology : get_bloginfo( 'name' ) ); ?></h1>
+            <?php $cover_author = get_option( 'book_wp_author_name', '' ); if ( $hero_img && $cover_author ) : ?>
+                <p class="bwp-book-title__author"><?php echo esc_html( $cover_author ); ?></p>
+            <?php endif; ?>
+            <p class="bwp-book-title__meta">
+                <span><?php echo esc_html( sprintf( _n( '%s work', '%s works', $published, 'book-wp' ), number_format_i18n( $published ) ) ); ?></span>
+                <?php if ( $jalur_cats ) : ?><span><?php echo esc_html( sprintf( _n( '%s strand', '%s strands', count( $jalur_cats ), 'book-wp' ), number_format_i18n( count( $jalur_cats ) ) ) ); ?></span><?php endif; ?>
+                <?php if ( $forms ) : ?><span><?php echo esc_html( sprintf( _n( '%s form', '%s forms', count( $forms ), 'book-wp' ), number_format_i18n( count( $forms ) ) ) ); ?></span><?php endif; ?>
+            </p>
+        </div>
     </div>
 
     <?php /* ── Pintu masuk: jalur tema + bentuk ──────────────────────────── */ ?>

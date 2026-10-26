@@ -20,6 +20,8 @@ function book_wp_register_settings() {
     $settings = array(
         'book_wp_author_name'     => 'sanitize_text_field',
         'book_wp_author_portrait' => 'esc_url_raw',
+        'book_wp_show_hero_image' => 'book_wp_cb',
+        'book_wp_hero_image'      => 'esc_url_raw',
         'book_wp_anthology_name'  => 'sanitize_text_field',
         'book_wp_jawi_name'       => 'sanitize_text_field',
         'book_wp_jawa_name'       => 'sanitize_text_field',
@@ -150,6 +152,8 @@ function book_wp_handle_tab_save() {
         'general' => array(
             'book_wp_author_name'    => 'sanitize_text_field',
             'book_wp_author_portrait' => 'esc_url_raw',
+            'book_wp_show_hero_image' => 'book_wp_cb',
+            'book_wp_hero_image'     => 'esc_url_raw',
             'book_wp_anthology_name' => 'sanitize_text_field',
             'book_wp_jawi_name'      => 'sanitize_text_field',
             'book_wp_jawa_name'      => 'sanitize_text_field',
@@ -447,6 +451,17 @@ function bwp_tab_general() {
                 <input type="url" name="book_wp_author_portrait" id="book_wp_author_portrait" placeholder="https://"
                        value="<?php echo esc_attr( get_option( 'book_wp_author_portrait', '' ) ); ?>">
                 <p class="bwp-field__hint"><?php esc_html_e( 'Media Library URL of a head-and-shoulders photo. The theme renders it as a nila-and-kapas duotone medallion in the footer and on the author page; a plain photo on a light background works best.', 'book-wp' ); ?></p>
+            </div>
+        </div>
+
+        <?php bwp_toggle( 'book_wp_show_hero_image', __( 'Front-page cover photograph', 'book-wp' ), __( 'Set the anthology title over a photograph on the front page. Off, the title sits on plain paper.', 'book-wp' ), '1' ); ?>
+
+        <div class="bwp-field">
+            <label class="bwp-field__label" for="book_wp_hero_image"><?php esc_html_e( 'Cover Photograph', 'book-wp' ); ?></label>
+            <div class="bwp-field__control">
+                <input type="url" name="book_wp_hero_image" id="book_wp_hero_image" placeholder="https://"
+                       value="<?php echo esc_attr( get_option( 'book_wp_hero_image', '' ) ); ?>">
+                <p class="bwp-field__hint"><?php esc_html_e( 'Media Library URL of a wide photograph (about 2.4:1, at least 2000px wide). Leave empty for the bundled underwater photograph by David Boca (Pexels).', 'book-wp' ); ?></p>
             </div>
         </div>
 

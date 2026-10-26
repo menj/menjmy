@@ -242,3 +242,24 @@ function book_wp_featured_work() {
     wp_reset_postdata();
     return $html;
 }
+
+/**
+ * Front-page cover photograph: the owner's Media Library URL, or the bundled
+ * toned underwater photograph (David Boca, Pexels — see assets/img/hero/CREDITS.txt).
+ * Returns an empty array when the cover is switched off.
+ */
+function book_wp_hero_image() {
+    if ( '1' !== get_option( 'book_wp_show_hero_image', '1' ) ) {
+        return array();
+    }
+    $custom = esc_url( get_option( 'book_wp_hero_image', '' ) );
+    if ( $custom ) {
+        return array( 'src' => $custom, 'srcset' => '' );
+    }
+    $base = BOOK_WP_URI . '/assets/img/hero/';
+    return array(
+        'src'    => $base . 'di-bawah-permukaan.jpg',
+        'srcset' => $base . 'di-bawah-permukaan-sm.jpg 1000w, ' . $base . 'di-bawah-permukaan.jpg 2000w',
+    );
+}
+
