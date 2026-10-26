@@ -408,7 +408,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--bwp-pill); }
     --c-ink: #fdfcf8; --c-dim: rgba(253, 252, 248, .78); --c-gold: #e3b84a;
     isolation: isolate;
     display: flex; flex-direction: column; justify-content: space-between; align-items: stretch;
-    min-height: clamp(380px, 46vw, 620px);
+    min-height: clamp(360px, 40vw, 560px);
     border-bottom: 0; border-radius: 40px;
     padding: clamp(1.4rem, 2.6vw, 2.2rem) clamp(1.25rem, 3.5vw, 3rem) clamp(1.6rem, 3vw, 2.6rem);
     margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
@@ -422,8 +422,9 @@ a:focus-visible, button:focus-visible { border-radius: var(--bwp-pill); }
 .bwp-book-title--cover::after {
     content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
     background:
-        linear-gradient(180deg, rgba(10, 18, 54, .22) 0%, rgba(10, 18, 54, .06) 28%, rgba(10, 18, 54, .12) 50%, rgba(10, 18, 54, .78) 100%),
-        linear-gradient(90deg, rgba(10, 18, 54, .30) 0%, rgba(10, 18, 54, 0) 55%);
+        radial-gradient(120% 90% at 50% 45%, rgba(10, 18, 54, 0) 45%, rgba(10, 18, 54, .42) 100%),
+        linear-gradient(180deg, rgba(10, 18, 54, .28) 0%, rgba(10, 18, 54, .14) 30%, rgba(10, 18, 54, .22) 55%, rgba(10, 18, 54, .82) 100%),
+        linear-gradient(90deg, rgba(10, 18, 54, .32) 0%, rgba(10, 18, 54, 0) 55%);
 }
 .bwp-book-title__top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; position: relative; }
 .bwp-book-title__kicker {
@@ -432,7 +433,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--bwp-pill); }
 }
 .bwp-book-title__seal { font-family: var(--bwp-font-jawi); font-size: clamp(1.3rem, 2.2vw, 1.9rem); line-height: 1; color: var(--c-gold); white-space: nowrap; }
 .bwp-book-title__block { position: relative; display: block; }
-.bwp-book-title--cover .bwp-book-title__name { color: var(--c-ink); text-shadow: 0 1px 2px rgba(6, 10, 30, .35); }
+.bwp-book-title--cover .bwp-book-title__name { color: var(--c-ink); text-shadow: 0 2px 18px rgba(6, 10, 30, .45); }
 .bwp-book-title__author {
     margin: 1.1rem 0 0; padding-top: 1rem; max-width: 36rem;
     border-top: 1px solid var(--c-gold);
