@@ -14,8 +14,11 @@
   seal at the head and the author's name and edition line at the foot.
   Switchable and replaceable under Settings → General. **Jalur tema** pills
   generated from categories, table of contents as two-column cards.
-- Single works: opening grid (form badge + chips left, title right), rounded
-  ink-tile drop cap, colophon as a pill card, previous/next as pill cards.
+- One title-page panel opens every work, page, archive, tag, search and the
+  404: kicker and Jawi seal at the head, Kagnue title, chips or description
+  beneath a hairline. Kagnue carries all h1/h2; Fraunces keeps italics,
+  datelines and list titles. The floating strand blurb under the header is
+  retired. Rounded ink-tile drop cap, colophon and previous/next pill cards.
 - Night mode and the Night scheme now share one Malam palette; Cream and Dusk
   re-ink correctly at clock-night and under the reader toggle.
 - Per-form stylesheets no longer set page width or title treatment; they

@@ -111,6 +111,9 @@ img { max-width: 100%; height: auto; display: block; }
 iframe, video, embed, object, svg { max-width: 100%; }
 .bwp-work__content table { display: block; max-width: 100%; overflow-x: auto; }
 
+/* type roles: Kagnue carries h1/h2 (section and title-page level), Fraunces the rest */
+h1, h2 { font-family: var(--bwp-font-brand); letter-spacing: 0; line-height: 1.05; }
+
 h1, h2, h3, h4 {
     font-family: var(--bwp-font-display);
     font-weight: 400;
@@ -352,13 +355,6 @@ a:focus-visible, button:focus-visible { border-radius: var(--bwp-pill); }
 .bwp-nav__list .sub-menu a:hover { background: var(--bwp-bg-subtle); color: var(--bwp-link); }
 
 /* category blurb under the header on single works */
-.bwp-chapter-blurb {
-    max-width: var(--bwp-measure);
-    margin: -1rem auto clamp(1.5rem, 4vw, 2.5rem); color: var(--bwp-muted);
-    font-style: italic; font-size: 1rem; text-align: center;
-    color: var(--bwp-muted);
-}
-.bwp-chapter-blurb p { margin: 0; }
 
 /* ═══════════════════════════════════════════════════════════
    FRONT PAGE — hero + jalur pills + table of contents
@@ -530,7 +526,7 @@ html.bwp-night .bwp-book-title--cover { background: #0e1636; }
 .bwp-featured__kicker { margin: 0 0 1.25rem; font-family: var(--bwp-font-ui); font-size: .64rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--bwp-rubric); }
 .bwp-featured__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 1.5rem 2rem; align-items: start; }
 .bwp-featured__head { grid-column: 1 / span 12; display: flex; flex-direction: column; gap: .9rem; }
-.bwp-featured__title { margin: 0; font-size: clamp(1.9rem, 3.6vw, 3.2rem); line-height: 1; letter-spacing: -.015em; font-variation-settings: 'opsz' 144, 'SOFT' 50; text-wrap: balance; }
+.bwp-featured__title { margin: 0; font-family: var(--bwp-font-brand); font-size: clamp(1.9rem, 3.4vw, 3rem); line-height: 1.02; letter-spacing: 0; text-wrap: pretty; }
 .bwp-featured__title a { color: var(--bwp-text); }
 .bwp-featured__title a:hover { color: var(--bwp-link); }
 .bwp-featured__dateline { margin: 0; font-family: var(--bwp-font-display); font-style: italic; font-size: 1rem; color: var(--bwp-muted); }
@@ -941,6 +937,10 @@ body.bwp-toc-masonry .bwp-toc__item { width: 49%; margin-bottom: .75rem; }
 
 .bwp-archive-header .bwp-ornament { display: none; }
 .bwp-archive-header__taxlabel { margin: 0; }
+.bwp-archive-header--search .bwp-tag--lg,
+.bwp-archive-header--tag .bwp-tag--lg { all: unset; font: inherit; color: inherit; }
+.bwp-archive-header--search .bwp-tag--lg::before { content: '\201C'; color: var(--bwp-accent); }
+.bwp-archive-header--search .bwp-tag--lg::after  { content: '\201D'; color: var(--bwp-accent); }
 .bwp-archive-header__desc { max-width: 40em; font-size: 1.1rem; font-style: italic; color: var(--bwp-muted); margin: 0; padding-top: 1rem; border-top: 1px solid var(--bwp-border); }
 
 .bwp-archive-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .75rem; }
@@ -959,9 +959,11 @@ body.bwp-archive-masonry .bwp-archive-list__item { width: 49%; margin-bottom: .7
     body.bwp-archive-masonry .bwp-archive-list__item { width: 100%; }
 }
 
-.bwp-empty-state, .bwp-404 { text-align: center; padding: 3rem 0; }
-.bwp-404__title { font-size: clamp(3rem, 10vw, 7rem); line-height: 1; }
-.bwp-404__desc { font-style: italic; color: var(--bwp-muted); }
+.bwp-empty-state { text-align: center; padding: 3rem 0; }
+.bwp-404 .bwp-ornament { display: none; }
+.bwp-404__title { font-family: var(--bwp-font-brand); font-size: clamp(2rem, 4.6vw, 4.4rem); line-height: 1.02; margin: 0; }
+.bwp-404__desc { margin: 0; padding-top: 1rem; border-top: 1px solid var(--bwp-border); font-style: italic; color: var(--bwp-muted); max-width: 40em; }
+.bwp-404 .bwp-search-form { max-width: 28rem; margin: .25rem 0 0; }
 
 /* search form */
 .bwp-search-form { display: flex; gap: .5rem; align-items: center; max-width: 32em; margin: 0 auto; }

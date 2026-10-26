@@ -98,10 +98,6 @@
             }
         }
         ?>
-        <?php if ( ! empty( $chapter_blurb ) ) : ?>
-            <div class="bwp-chapter-blurb">
-                <?php echo wp_kses_post( $chapter_blurb ); ?>
-            </div>
-    <?php endif; ?>
+        <?php /* The strand blurb now lives in the title-page kicker (works) and the archive description; nothing is printed here. */ ?>
     <?php endif; ?>
 
