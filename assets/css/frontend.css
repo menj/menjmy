@@ -912,7 +912,7 @@ body.bwp-archive-masonry .bwp-archive-list__item { width: 49%; margin-bottom: .7
 }
 
 /* 1 · sign-off | identity */
-.bwp-site-footer__top { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 2rem 3rem; align-items: end; }
+.bwp-site-footer__top { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 2rem 3rem; align-items: center; }
 .bwp-site-footer__sign { display: flex; flex-direction: column; gap: .7rem; max-width: 38em; }
 .bwp-site-footer__identity { display: flex; align-items: center; justify-content: flex-end; gap: 1.4rem; }
 .bwp-site-footer__identity .bwp-site-footer__mark { width: 96px; height: 96px; flex: none; }
