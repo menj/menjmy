@@ -302,8 +302,8 @@ a:focus-visible, button:focus-visible { border-radius: var(--bwp-pill); }
 }
 .bwp-site-header__jawi { font-family: var(--bwp-font-jawi); font-size: 1rem; line-height: 1; color: var(--h-gold); }
 .bwp-site-header__tagline, .bwp-site-header__section, .bwp-site-header__band { display: none; }
-.bwp-site-header--front .bwp-brand__text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
-.bwp-site-header--front .bwp-brand { gap: 0; }
+.bwp-site-header--front .bwp-site-header__title { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+.bwp-site-header--front .bwp-site-header__jawi { font-size: 1.45rem; }
 
 .bwp-nav-toggle { display: none; }
 .bwp-nav { grid-area: nav; }
@@ -1205,6 +1205,7 @@ html.bwp-night .bwp-badge--karmina, body.bwp-night .bwp-badge--karmina { color: 
     .bwp-brand__mark { width: 40px; height: 40px; }
     .bwp-site-header__title { font-size: 1.02rem; }
     .bwp-site-header__jawi { display: none; }
+    .bwp-site-header--front .bwp-site-header__jawi { display: inline; font-size: 1.25rem; }
 
     .bwp-nav-toggle {
         grid-area: toggle; align-self: center;

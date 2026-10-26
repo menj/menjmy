@@ -49,7 +49,8 @@
         $bwp_site_name = get_option( 'book_wp_anthology_name', '' );
         $bwp_site_name = $bwp_site_name ? $bwp_site_name : get_bloginfo( 'name' );
         // On the front page the half-title H1 already sets the name, so the
-        // pill shows the brandmark alone and keeps the name for screen readers.
+        // pill shows the brandmark with the Jawi name and keeps the Latin name for
+        // screen readers.
         ?>
         <a class="bwp-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
             <?php if ( has_custom_logo() ) : ?>
