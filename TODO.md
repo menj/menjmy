@@ -4,21 +4,21 @@ Prioritised from the codebase review (v3.5.1). Each item names the file and line
 
 ## P0 — Breaks the site or loses data
 
-- [ ] **Night-time ink on light schemes is unreadable.** `assets/css/times/times.css:87` sets light `--bwp-text` on `:root.bwp-time-night`, but `assets/css/schemes/cream.css:58` and `dusk.css:116` only override surfaces. Cream/Dusk sites show ~1.1:1 contrast every night 21:00–03:59. Resolve ink and surface together per scheme × mode.
-- [ ] **Night toggle broken on Cream/Dusk.** `assets/css/frontend.css:1330` (`html.bwp-night body`) loses to the scheme's `:root.bwp-time-X body.bwp-scheme-*` rules; ink goes dark while paper stays light. Give the toggle one higher-specificity rule.
-- [ ] **Meta box silently discards edits.** `inc/admin/meta-boxes.php:224/269, 398/458` etc. render `book_wp_occasion`, `book_wp_setting`, `book_wp_theme`, `book_wp_inspiration`, `book_wp_rhyme_scheme`, `book_wp_first_published`, `book_wp_point_of_view`, `book_wp_annotation` once per form group; hidden groups still submit and the last duplicate wins. Render shared fields once, or namespace per form.
-- [ ] **Legacy-slug redirect kills pagination/feeds.** `inc/helpers/permalink.php:277-314` 301s any single URL ≠ `get_permalink()`, so `/form/slug/2/`, `comment-page-2/`, `feed/` redirect to page 1. Remove it (core `redirect_canonical` already covers the legacy case) or compare against `$wp->request` with pagination stripped.
-- [ ] **Permalink toggle flushes stale rules.** `inc/helpers/permalink.php:176-181` flushes before the new rules are registered; links 404 until Permalinks are re-saved. Set the deferred flush flag instead.
-- [ ] **Test suite cannot boot.** `tests/bootstrap.php` lacks `add_action`/`add_filter`/`apply_filters` stubs; `inc/helpers/navigation.php:263` fatals on load. Add stubs, then fix the 2 real failures below.
+- [x] **Night-time ink on light schemes is unreadable.** `assets/css/times/times.css:87` sets light `--bwp-text` on `:root.bwp-time-night`, but `assets/css/schemes/cream.css:58` and `dusk.css:116` only override surfaces. Cream/Dusk sites show ~1.1:1 contrast every night 21:00–03:59. Resolve ink and surface together per scheme × mode.
+- [x] **Night toggle broken on Cream/Dusk.** `assets/css/frontend.css:1330` (`html.bwp-night body`) loses to the scheme's `:root.bwp-time-X body.bwp-scheme-*` rules; ink goes dark while paper stays light. Give the toggle one higher-specificity rule.
+- [x] **Meta box silently discards edits.** `inc/admin/meta-boxes.php:224/269, 398/458` etc. render `book_wp_occasion`, `book_wp_setting`, `book_wp_theme`, `book_wp_inspiration`, `book_wp_rhyme_scheme`, `book_wp_first_published`, `book_wp_point_of_view`, `book_wp_annotation` once per form group; hidden groups still submit and the last duplicate wins. Render shared fields once, or namespace per form.
+- [x] **Legacy-slug redirect kills pagination/feeds.** `inc/helpers/permalink.php:277-314` 301s any single URL ≠ `get_permalink()`, so `/form/slug/2/`, `comment-page-2/`, `feed/` redirect to page 1. Remove it (core `redirect_canonical` already covers the legacy case) or compare against `$wp->request` with pagination stripped.
+- [x] **Permalink toggle flushes stale rules.** `inc/helpers/permalink.php:176-181` flushes before the new rules are registered; links 404 until Permalinks are re-saved. Set the deferred flush flag instead.
+- [x] **Test suite cannot boot.** `tests/bootstrap.php` lacks `add_action`/`add_filter`/`apply_filters` stubs; `inc/helpers/navigation.php:263` fatals on load. Add stubs, then fix the 2 real failures below.
 
 ## P1 — Features quietly fail
 
 - [ ] **Prev/Next navigation misuses `get_adjacent_post`.** `inc/helpers/navigation.php:153` passes post IDs as excluded *term* IDs; hidden-tag neighbours cause 10 wasted queries then no nav.
 - [ ] **Hidden posts still appear in widgets.** `inc/hooks/actions.php:635` `doing_action('dynamic_sidebar')` is never true during widget render.
-- [ ] **Stanza count regex merges paragraphs.** `inc/helpers/analytics.php:304` → use `/<p(?:\s[^>]*)?>(.*?)<\/p>/si`. Fixes two failing tests in `tests/AnalyticsTest.php:165,231`.
+- [x] **Stanza count regex merges paragraphs.** `inc/helpers/analytics.php:304` → use `/<p(?:\s[^>]*)?>(.*?)<\/p>/si`. Fixes two failing tests in `tests/AnalyticsTest.php:165,231`.
 - [ ] **Masonry + infinite scroll overlap.** `assets/js/frontend.js:298-304, 381-386` lays out items on the `load` event before they are appended; use `append`. Also guard the null `msnry` race with `document.fonts.ready`.
 - [ ] **Undefined tokens `--bwp-ink` / `--bwp-paper`.** `assets/css/frontend.css:1042, 2542` — back-to-top button and "Copied!" tooltip render transparent. Use `--bwp-text` / `--bwp-bg`.
-- [ ] **Stray `</div>` in meta box.** `inc/admin/meta-boxes.php:344, 601` closes the postbox early and pushes later groups outside `.bwp-metabox`.
+- [x] **Stray `</div>` in meta box.** `inc/admin/meta-boxes.php:344, 601` closes the postbox early and pushes later groups outside `.bwp-metabox`.
 - [ ] **Front-end CSS leaks into wp-admin.** `inc/setup/enqueue.php:367-372` enqueues unscoped `frontend.css` via `enqueue_block_editor_assets`; use the existing `add_editor_style()` (`theme-support.php:49`) and set `apiVersion: 3` in `assets/js/blocks.js:157,230,293`.
 - [ ] **Dead `body.bwp-time-night` rules.** `assets/css/frontend.css:945,952,1064,1073,2109,2118` — the class is only ever set on `<html>`.
 - [ ] **Colophon double-escapes separators.** `inc/helpers/colophon.php:113,165,180,193,206,236,249` — `esc_html(implode(' &middot; ', …))` prints literal `&middot;`.
