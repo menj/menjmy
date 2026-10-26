@@ -69,6 +69,7 @@
     --bwp-font-size:     1.125rem;
     --bwp-lh:            1.75;
     --bwp-measure:       40em;
+    --bwp-gutter:        clamp(1rem, 3.5vw, 4rem); /* one page gutter for header, content and footer */
 
     /* Legacy aliases used by form stylesheets */
     --bwp-teal:        #1f3fa8;
@@ -269,7 +270,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--bwp-pill); }
        viewport between fluid gutters; body text keeps its own measure */
     max-width: none;
     margin: 0 auto;
-    padding: 0 clamp(1rem, 3.5vw, 4rem) 1rem;
+    padding: 0 var(--bwp-gutter) 1rem;
     animation: bwp-in .35s ease both;
 }
 @keyframes bwp-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
@@ -1006,15 +1007,15 @@ body.bwp-archive-masonry .bwp-archive-list__item { width: 49%; margin-bottom: .7
     --f-gold:  #e0b344;
     --f-line:  rgba(246, 241, 228, .16);
     /* a rounded panel inside the page gutters, not a hard-edged band */
-    max-width: calc(76rem + 2 * clamp(1.25rem, 4vw, 3.5rem));
-    margin: 4rem auto 1.25rem;
+    max-width: none;
+    margin: 3rem var(--bwp-gutter) 1.25rem;
     padding: 3rem clamp(1.5rem, 4vw, 3.5rem) 1.5rem;
     border-radius: var(--bwp-radius-lg);
     background: #1a2a6c;
     color: var(--f-ink);
 }
 @media screen and (min-width: 52em) { .bwp-site-footer { border-radius: 40px; } }
-.bwp-site-footer__inner { max-width: 76rem; }
+.bwp-site-footer__inner { max-width: none; }
 .bwp-site-footer a { color: var(--f-ink); }
 .bwp-site-footer__inner {
     margin: 0 auto;
