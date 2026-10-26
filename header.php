@@ -79,24 +79,26 @@
         </nav>
         <?php endif; ?>
 
-        <?php if ( is_single() ) : ?>
-            <?php
-            $chapter_blurb = '';
-            $cats = get_the_category();
-            if ( ! empty( $cats ) && ! is_wp_error( $cats ) ) {
-                foreach ( $cats as $cat ) {
-                    $desc = term_description( $cat->term_id, 'category' );
-                    if ( ! empty( $desc ) ) {
-                        $chapter_blurb = $desc;
-                        break;
-                    }
+    </header>
+
+    <?php if ( is_single() ) : ?>
+        <?php
+        $chapter_blurb = '';
+        $cats = get_the_category();
+        if ( ! empty( $cats ) && ! is_wp_error( $cats ) ) {
+            foreach ( $cats as $cat ) {
+                $desc = term_description( $cat->term_id, 'category' );
+                if ( ! empty( $desc ) ) {
+                $chapter_blurb = $desc;
+                break;
                 }
             }
-            ?>
-            <?php if ( ! empty( $chapter_blurb ) ) : ?>
-                <div class="bwp-chapter-blurb">
-                    <?php echo wp_kses_post( $chapter_blurb ); ?>
-                </div>
-            <?php endif; ?>
-        <?php endif; ?>
-    </header>
+        }
+        ?>
+        <?php if ( ! empty( $chapter_blurb ) ) : ?>
+            <div class="bwp-chapter-blurb">
+                <?php echo wp_kses_post( $chapter_blurb ); ?>
+            </div>
+    <?php endif; ?>
+    <?php endif; ?>
+
