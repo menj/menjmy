@@ -394,7 +394,7 @@
  *
  * If the .bwp-social list contains more than BWP_SOCIAL_LIMIT items,
  * this block:
- *   1. Adds .bwp-social--collapsible to the <ul> (CSS hides items 7+)
+ *   1. Adds .bwp-social--collapsible to the <ul> (CSS hides items 9+)
  *   2. Appends a <li> containing a <button class="bwp-social__toggle">
  *      showing "+N" where N = number of hidden items
  *   3. On click: toggles .bwp-social--expanded; button label becomes "×"
@@ -409,7 +409,7 @@
 ( function () {
     'use strict';
 
-    var BWP_SOCIAL_LIMIT = 6;
+    var BWP_SOCIAL_LIMIT = 8;
 
     document.addEventListener( 'DOMContentLoaded', function () {
         var list = document.querySelector( '.bwp-social' );

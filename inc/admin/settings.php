@@ -21,6 +21,8 @@ function book_wp_register_settings() {
         'book_wp_author_name'     => 'sanitize_text_field',
         'book_wp_anthology_name'  => 'sanitize_text_field',
         'book_wp_jawi_name'       => 'sanitize_text_field',
+        'book_wp_footer_quote'    => 'sanitize_textarea_field',
+        'book_wp_footer_quote_sub' => 'sanitize_text_field',
         'book_wp_front_blurb'     => 'wp_kses_post',
         'book_wp_copyright'       => 'wp_kses_post',
         'book_wp_show_copyright'    => 'book_wp_cb',
@@ -58,6 +60,14 @@ function book_wp_register_settings() {
         'book_wp_night_toggle'    => 'book_wp_cb',
         'book_wp_comments'        => 'sanitize_text_field',
         'book_wp_social_twitter'   => 'esc_url_raw',
+        'book_wp_social_viaf' => 'esc_url_raw',
+        'book_wp_social_academia' => 'esc_url_raw',
+        'book_wp_social_wikidata' => 'esc_url_raw',
+        'book_wp_social_substack' => 'esc_url_raw',
+        'book_wp_social_whatsapp' => 'esc_url_raw',
+        'book_wp_social_telegram' => 'esc_url_raw',
+        'book_wp_social_tiktok' => 'esc_url_raw',
+        'book_wp_social_bluesky' => 'esc_url_raw',
         'book_wp_social_facebook'  => 'esc_url_raw',
         'book_wp_social_instagram' => 'esc_url_raw',
         'book_wp_social_threads'   => 'esc_url_raw',
@@ -137,6 +147,8 @@ function book_wp_handle_tab_save() {
             'book_wp_author_name'    => 'sanitize_text_field',
             'book_wp_anthology_name' => 'sanitize_text_field',
             'book_wp_jawi_name'      => 'sanitize_text_field',
+            'book_wp_footer_quote'   => 'sanitize_textarea_field',
+            'book_wp_footer_quote_sub' => 'sanitize_text_field',
             'book_wp_front_blurb'         => 'wp_kses_post',
             'book_wp_copyright'           => 'wp_kses_post',
             'book_wp_show_copyright'      => 'book_wp_cb',
@@ -191,6 +203,14 @@ function book_wp_handle_tab_save() {
         ),
         'social' => array(
             'book_wp_social_twitter'   => 'esc_url_raw',
+            'book_wp_social_viaf' => 'esc_url_raw',
+            'book_wp_social_academia' => 'esc_url_raw',
+            'book_wp_social_wikidata' => 'esc_url_raw',
+            'book_wp_social_substack' => 'esc_url_raw',
+            'book_wp_social_whatsapp' => 'esc_url_raw',
+            'book_wp_social_telegram' => 'esc_url_raw',
+            'book_wp_social_tiktok' => 'esc_url_raw',
+            'book_wp_social_bluesky' => 'esc_url_raw',
             'book_wp_social_facebook'  => 'esc_url_raw',
             'book_wp_social_instagram' => 'esc_url_raw',
             'book_wp_social_threads'   => 'esc_url_raw',
@@ -433,7 +453,25 @@ function bwp_tab_general() {
 
         <div class="bwp-field">
             <label class="bwp-field__label" for="book_wp_front_blurb"><?php esc_html_e( 'Front Page Blurb', 'book-wp' ); ?></label>
+            <div class="bwp-field bwp-field--full">
+            <label class="bwp-field__label" for="book_wp_footer_quote"><?php esc_html_e( 'Footer Sign-off', 'book-wp' ); ?></label>
             <div class="bwp-field__control">
+                <input type="text" name="book_wp_footer_quote" id="book_wp_footer_quote"
+                       value="<?php echo esc_attr( get_option( 'book_wp_footer_quote', book_wp_default_footer_quote() ) ); ?>">
+                <p class="bwp-field__hint"><?php esc_html_e( 'One italic line that closes every page, e.g. “Yang tampak hanyalah permukaan; yang membentuk ialah sedar.” Leave blank to hide the sign-off.', 'book-wp' ); ?></p>
+            </div>
+        </div>
+
+        <div class="bwp-field bwp-field--full">
+            <label class="bwp-field__label" for="book_wp_footer_quote_sub"><?php esc_html_e( 'Sign-off Second Line', 'book-wp' ); ?></label>
+            <div class="bwp-field__control">
+                <input type="text" name="book_wp_footer_quote_sub" id="book_wp_footer_quote_sub"
+                       value="<?php echo esc_attr( get_option( 'book_wp_footer_quote_sub', book_wp_default_footer_quote_sub() ) ); ?>">
+                <p class="bwp-field__hint"><?php esc_html_e( 'Smaller supporting line beneath the sign-off. Optional.', 'book-wp' ); ?></p>
+            </div>
+        </div>
+
+        <div class="bwp-field__control">
                 <textarea name="book_wp_front_blurb" id="book_wp_front_blurb" rows="3"><?php echo esc_textarea( get_option( 'book_wp_front_blurb', '' ) ); ?></textarea>
             </div>
             <span class="bwp-field__hint"><?php echo wp_kses( __( 'Introductory text displayed above the Table of Contents. HTML is supported — e.g. <code>&lt;em&gt;, &lt;strong&gt;, &lt;a href=""&gt;</code>.', 'book-wp' ), array( 'code' => array() ) ); ?></span>

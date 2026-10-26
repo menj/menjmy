@@ -1,0 +1,5 @@
+Minimalist Social & Platform Icons Pack — GPL (compiled set and traced marks).
+Most marks derive from CC0 sources. Exceptions: linkedin.svg and scribd.svg
+originate from Font Awesome Free (https://fontawesome.com), CC BY 4.0 — the
+theme prints the required credit in the footer when either is in use.
+Brand names and logos remain trademarks of their owners.

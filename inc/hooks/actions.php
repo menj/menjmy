@@ -283,6 +283,54 @@ function book_wp_cache_word_count( $post_id ) {
 
 add_action( 'wp_head', 'book_wp_structured_data' );
 
+/**
+ * Author node reused across the site graph and every CreativeWork.
+ * Social profile URLs from the Social tab are declared as sameAs.
+ */
+function book_wp_schema_author() {
+    $name   = get_option( 'book_wp_author_name', '' );
+    $name   = $name ? $name : get_bloginfo( 'name' );
+    $person = array(
+        '@type' => 'Person',
+        '@id'   => home_url( '/#author' ),
+        'name'  => $name,
+        'url'   => home_url( '/' ),
+    );
+    $same_as = function_exists( 'book_wp_social_same_as' ) ? book_wp_social_same_as() : array();
+    if ( $same_as ) $person['sameAs'] = $same_as;
+    return $person;
+}
+
+/**
+ * Site-wide graph (WebSite + Person with sameAs) on every page, printed once.
+ */
+add_action( 'wp_head', 'book_wp_site_structured_data', 6 );
+
+function book_wp_site_structured_data() {
+    if ( '1' !== get_option( 'book_wp_structured_data', '1' ) ) return;
+
+    $anthology = get_option( 'book_wp_anthology_name', '' );
+    $graph = array(
+        '@context' => 'https://schema.org',
+        '@graph'   => array(
+            array(
+                '@type'       => 'WebSite',
+                '@id'         => home_url( '/#website' ),
+                'name'        => $anthology ? $anthology : get_bloginfo( 'name' ),
+                'alternateName' => get_bloginfo( 'description' ),
+                'url'         => home_url( '/' ),
+                'inLanguage'  => get_bloginfo( 'language' ),
+                'author'      => array( '@id' => home_url( '/#author' ) ),
+                'publisher'   => array( '@id' => home_url( '/#author' ) ),
+            ),
+            book_wp_schema_author(),
+        ),
+    );
+    echo '<script type="application/ld+json">'
+        . wp_json_encode( $graph, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES )
+        . "</script>\n";
+}
+
 function book_wp_structured_data() {
     if ( ! is_single() ) return;
     if ( '1' !== get_option( 'book_wp_structured_data', '1' ) ) return;
@@ -293,7 +341,7 @@ function book_wp_structured_data() {
         '@context'      => 'https://schema.org',
         '@type'         => 'CreativeWork',
         'name'          => get_the_title(),
-        'author'        => array( '@type' => 'Person', 'name' => get_the_author() ),
+        'author'        => book_wp_schema_author(),
         'datePublished' => get_the_date( 'c' ),
         'url'           => get_permalink(),
         'inLanguage'    => substr( get_locale(), 0, 2 ),
@@ -314,8 +362,19 @@ function book_wp_structured_data() {
     $source = get_post_meta( $post->ID, 'book_wp_source', true );
     if ( $source ) $schema['isPartOf'] = array( '@type' => 'CreativeWork', 'name' => $source );
 
-    $lang = get_post_meta( $post->ID, 'book_wp_original_lang', true );
-    if ( $lang ) $schema['translationOfWork'] = array( '@type' => 'CreativeWork', 'inLanguage' => $lang );
+    $lang   = get_post_meta( $post->ID, 'book_wp_original_lang', true );
+    $stitle = get_post_meta( $post->ID, 'book_wp_source_title', true );
+    $sauth  = get_post_meta( $post->ID, 'book_wp_source_author', true );
+    $syear  = get_post_meta( $post->ID, 'book_wp_source_year', true );
+    if ( $lang || $stitle || $sauth ) {
+        $orig = array( '@type' => 'CreativeWork' );
+        if ( $stitle ) $orig['name'] = $stitle;
+        if ( $sauth )  $orig['author'] = array( '@type' => 'Person', 'name' => $sauth );
+        if ( $syear )  $orig['datePublished'] = $syear;
+        if ( $lang )   $orig['inLanguage'] = $lang;
+        $schema['translationOfWork'] = $orig;
+        $schema['translator'] = array( '@id' => home_url( '/#author' ) );
+    }
 
     $hidden_slugs = book_wp_hidden_tag_slugs();
     $all_tags     = get_the_tags( $post->ID );

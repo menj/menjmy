@@ -166,3 +166,12 @@ function book_wp_ornament( $style = '' ) {
     if ( empty( $svg ) ) return '';
     return '<div class="bwp-ornament bwp-ornament--' . esc_attr( $style ) . '" aria-hidden="true">' . $svg . '</div>';
 }
+
+/* ── Footer sign-off defaults (Di Bawah Permukaan, Mukadimah) ─────────── */
+
+function book_wp_default_footer_quote() {
+    return 'Yang tampak hanyalah permukaan; yang membentuk ialah sedar.';
+}
+function book_wp_default_footer_quote_sub() {
+    return 'Di bawahnya arus yang bekerja, mengubah arah, meninggalkan endapan; di sini bahasa berjalan perlahan, menyentuh yang halus, mengendap pada yang dalam.';
+}
