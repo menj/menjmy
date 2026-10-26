@@ -911,8 +911,13 @@ body.bwp-archive-masonry .bwp-archive-list__item { width: 49%; margin-bottom: .7
     display: flex; flex-direction: column; align-items: stretch; gap: 2.25rem;
 }
 
-/* 1 · sign-off */
+/* 1 · sign-off | identity */
+.bwp-site-footer__top { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 2rem 3rem; align-items: end; }
 .bwp-site-footer__sign { display: flex; flex-direction: column; gap: .7rem; max-width: 38em; }
+.bwp-site-footer__identity { display: flex; flex-direction: column; align-items: flex-end; text-align: right; gap: .2rem; }
+.bwp-site-footer__identity .bwp-site-footer__jawi { font-size: clamp(2.2rem, 3.4vw, 3rem); line-height: 1.2; margin: 0 0 .2rem; text-align: right; }
+.bwp-site-footer__identity .bwp-site-footer__anthology { font-size: clamp(1.6rem, 2.4vw, 2.2rem); line-height: 1; }
+.bwp-site-footer__tagline { font-family: var(--bwp-font-ui); font-size: .64rem; letter-spacing: .2em; text-transform: uppercase; color: var(--f-dim); margin-top: .5rem; }
 .bwp-site-footer__lead {
     margin: 0;
     font-family: var(--bwp-font-display); font-style: italic; font-weight: 300;
@@ -927,6 +932,8 @@ body.bwp-archive-masonry .bwp-archive-list__item { width: 49%; margin-bottom: .7
     padding-top: 2rem; border-top: 1px solid var(--f-line);
 }
 .bwp-site-footer__lockup { display: inline-flex; align-items: center; gap: .9rem; }
+.bwp-site-footer__author { font-family: var(--bwp-font-display); font-size: 1.2rem; line-height: 1.05; }
+.bwp-site-footer__role { font-family: var(--bwp-font-ui); font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: var(--f-dim); margin-top: .25rem; }
 .bwp-site-footer__mark { width: 44px; height: 44px; flex: none; border-radius: var(--bwp-pill); }
 .bwp-site-footer__names { display: flex; flex-direction: column; }
 .bwp-site-footer__anthology { font-family: var(--bwp-font-display); font-size: 1.45rem; line-height: 1; }
@@ -970,6 +977,9 @@ body.bwp-archive-masonry .bwp-archive-list__item { width: 49%; margin-bottom: .7
     .bwp-site-footer { padding-top: 2.5rem; }
     .bwp-site-footer__inner { gap: 1.75rem; }
     .bwp-site-footer__row { padding-top: 1.5rem; }
+    .bwp-site-footer__top { grid-template-columns: 1fr; }
+    .bwp-site-footer__identity { align-items: flex-start; text-align: left; }
+    .bwp-site-footer__identity .bwp-site-footer__jawi { text-align: left; }
     .bwp-site-footer__bottom { grid-template-columns: 1fr; }
     .bwp-site-footer__credit { text-align: left; }
     .bwp-social { justify-content: flex-start; }

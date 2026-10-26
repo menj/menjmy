@@ -35,29 +35,39 @@ $bwp_tagline   = get_bloginfo( 'description' );
     <footer class="bwp-site-footer" role="contentinfo">
         <div class="bwp-site-footer__inner">
 
-            <?php if ( $bwp_quote ) : ?>
-            <div class="bwp-site-footer__sign">
-                <p class="bwp-site-footer__lead"><?php echo esc_html( $bwp_quote ); ?></p>
-                <?php if ( $bwp_quote_sub ) : ?>
-                <p class="bwp-site-footer__sub"><?php echo esc_html( $bwp_quote_sub ); ?></p>
+            <div class="bwp-site-footer__top">
+                <?php if ( $bwp_quote ) : ?>
+                <div class="bwp-site-footer__sign">
+                    <p class="bwp-site-footer__lead"><?php echo esc_html( $bwp_quote ); ?></p>
+                    <?php if ( $bwp_quote_sub ) : ?>
+                    <p class="bwp-site-footer__sub"><?php echo esc_html( $bwp_quote_sub ); ?></p>
+                    <?php endif; ?>
+                </div>
                 <?php endif; ?>
+
+                <div class="bwp-site-footer__identity">
+                    <?php if ( $bwp_jawi ) : ?>
+                    <span class="bwp-site-footer__jawi" dir="rtl" lang="ms-Arab"><?php echo esc_html( $bwp_jawi ); ?></span>
+                    <?php endif; ?>
+                    <a class="bwp-site-footer__anthology" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php echo esc_html( $bwp_anthology ); ?></a>
+                    <?php if ( $bwp_tagline ) : ?>
+                    <span class="bwp-site-footer__tagline"><?php echo esc_html( $bwp_tagline ); ?></span>
+                    <?php endif; ?>
+                </div>
             </div>
-            <?php endif; ?>
 
             <div class="bwp-site-footer__row">
-                <a class="bwp-site-footer__lockup" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+                <div class="bwp-site-footer__lockup">
                     <?php if ( has_custom_logo() ) : ?>
                         <?php echo wp_get_attachment_image( get_theme_mod( 'custom_logo' ), 'thumbnail', false, array( 'class' => 'bwp-site-footer__mark', 'alt' => '' ) ); ?>
                     <?php else : ?>
                         <img class="bwp-site-footer__mark" src="<?php echo esc_url( BOOK_WP_URI . '/assets/img/brand/mark.svg' ); ?>" alt="" width="44" height="44" loading="lazy" decoding="async">
                     <?php endif; ?>
                     <span class="bwp-site-footer__names">
-                        <span class="bwp-site-footer__anthology"><?php echo esc_html( $bwp_anthology ); ?></span>
-                        <?php if ( $bwp_jawi ) : ?>
-                        <span class="bwp-site-footer__jawi" dir="rtl" lang="ms-Arab"><?php echo esc_html( $bwp_jawi ); ?></span>
-                        <?php endif; ?>
+                        <span class="bwp-site-footer__author"><?php echo esc_html( $bwp_author ); ?></span>
+                        <span class="bwp-site-footer__role"><?php esc_html_e( 'Penulis & penyusun', 'book-wp' ); ?></span>
                     </span>
-                </a>
+                </div>
 
                 <?php if ( has_nav_menu( 'footer' ) ) : ?>
                 <nav class="bwp-footer-nav" aria-label="<?php esc_attr_e( 'Footer Menu', 'book-wp' ); ?>">
@@ -77,7 +87,7 @@ $bwp_tagline   = get_bloginfo( 'description' );
                     <?php if ( ! empty( $bwp_copyright ) && '1' === get_option( 'book_wp_show_copyright', '1' ) ) : ?>
                         <?php echo wp_kses_post( $bwp_copyright ); ?>
                     <?php else : ?>
-                        &copy; <?php echo esc_html( gmdate( 'Y' ) . ' ' . $bwp_author ); ?><?php if ( $bwp_tagline ) echo ' &middot; ' . esc_html( $bwp_tagline ); ?>
+                        &copy; <?php echo esc_html( gmdate( 'Y' ) . ' ' . $bwp_author ); ?> &middot; <?php esc_html_e( 'Hakcipta terpelihara', 'book-wp' ); ?>
                     <?php endif; ?>
                 </p>
 
