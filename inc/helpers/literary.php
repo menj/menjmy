@@ -366,3 +366,23 @@ function book_wp_work_cover( $post_id = 0 ) {
     return array( 'src' => $src, 'credit' => (string) get_the_post_thumbnail_caption( $post_id ), 'url' => '' );
 }
 
+/**
+ * Author card for a side column: portrait, name, role and social links.
+ * Used on static pages, which have no colophon to fill the column.
+ */
+function book_wp_author_card() {
+    $author = get_option( 'book_wp_author_name', '' );
+    $author = $author ? $author : get_bloginfo( 'name' );
+    $tag    = get_bloginfo( 'description' );
+    $html   = '<aside class="bwp-author-card" aria-label="' . esc_attr__( 'About the author', 'book-wp' ) . '">';
+    $html  .= '<div class="bwp-author-card__head">' . book_wp_author_portrait( 'md' );
+    $html  .= '<span class="bwp-author-card__names"><span class="bwp-author-card__name">' . esc_html( $author ) . '</span>';
+    $html  .= '<span class="bwp-author-card__role">' . esc_html__( 'Penulis & penyusun', 'book-wp' ) . '</span></span></div>';
+    if ( $tag ) $html .= '<p class="bwp-author-card__tagline">' . esc_html( $tag ) . '</p>';
+    if ( function_exists( 'book_wp_social_icons' ) ) {
+        $social = book_wp_social_icons();
+        if ( $social ) $html .= '<div class="bwp-author-card__social">' . $social . '</div>';
+    }
+    return $html . '</aside>';
+}
+

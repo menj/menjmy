@@ -15,10 +15,15 @@
             </div>
             <h1 class="bwp-work__title"><?php the_title(); ?></h1>
         </header>
+        <div class="bwp-work__layout">
+        <div class="bwp-work__main">
         <div class="bwp-work__content">
             <?php the_content(); ?>
         </div>
         <?php edit_post_link( esc_html( __( 'Edit', 'book-wp' ) ), '<p class="bwp-edit-link">', '</p>' ); ?>
+        </div>
+        <aside class="bwp-work__aside"><?php echo book_wp_author_card(); // phpcs:ignore ?></aside>
+        </div>
     </article>
 
 <?php endwhile; endif; ?>

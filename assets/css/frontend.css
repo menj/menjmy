@@ -716,7 +716,8 @@ body.bwp-toc-masonry .bwp-toc__item { width: 49%; margin-bottom: .75rem; }
         gap: 0 clamp(2rem, 4vw, 4rem);
         align-items: start;
     }
-    .bwp-work__main { --bwp-measure: 44em; min-width: 0; }
+    /* the text starts where the title does: inset by the opening panel's own padding */
+    .bwp-work__main { --bwp-measure: 44em; min-width: 0; padding-left: clamp(1.25rem, 3.5vw, 3rem); }
     /* per-form sheets centre .bwp-work__content with margin-left:auto; this outranks them */
     body[class] .bwp-work__layout .bwp-work__main > * { margin-left: 0; }
     .bwp-work__aside { position: sticky; top: 1.25rem; }
@@ -726,12 +727,25 @@ body.bwp-toc-masonry .bwp-toc__item { width: 49%; margin-bottom: .75rem; }
     .bwp-work__aside .bwp-related { margin-top: 1.25rem; }
     .bwp-work__main .bwp-tags,
     .bwp-work__main .bwp-share { justify-content: flex-start; }
-    /* pages: no aside, so the text takes a wider measure from the left edge */
-    .bwp-page .bwp-work__content { --bwp-measure: 46em; max-width: var(--bwp-measure); margin-left: 0; }
 }
 /* tighter vertical rhythm throughout */
 .bwp-tags { margin-top: 1.75rem; }
 .bwp-featured { margin-bottom: 2rem; }
+
+.bwp-author-card {
+    padding: 1.25rem 1.4rem 1.3rem; border-radius: var(--bwp-radius-lg);
+    background: var(--bwp-bg-subtle); border: 1px solid var(--bwp-border);
+}
+.bwp-author-card__head { display: flex; align-items: center; gap: 1rem; }
+.bwp-author-card .bwp-portrait { flex: none; }
+.bwp-author-card__names { display: flex; flex-direction: column; gap: .25rem; min-width: 0; }
+.bwp-author-card__name { font-family: var(--bwp-font-display); font-size: 1.15rem; line-height: 1.1; }
+.bwp-author-card__role { font-family: var(--bwp-font-ui); font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: var(--bwp-muted); }
+.bwp-author-card__tagline { margin: 1rem 0 0; font-style: italic; color: var(--bwp-text-mid); font-size: 1rem; line-height: 1.5; }
+.bwp-author-card__social { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--bwp-border); }
+.bwp-author-card .bwp-social { justify-content: flex-start; }
+.bwp-work__aside .bwp-author-card { margin-top: 1.5rem; }
+@media screen and (min-width: 64em) { .bwp-work__aside .bwp-author-card { margin-top: 0; } }
 
 /* analytics bar → chips */
 .bwp-analytics { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; }
