@@ -481,7 +481,7 @@ function bwp_tab_general() {
             </div>
         </div>
 
-        <?php bwp_toggle( 'book_wp_show_featured_work', __( 'Karya Terbaru block', 'book-wp' ), __( 'Show the newest (or featured) work as an opening page above the table of contents.', 'book-wp' ), '1' ); ?>
+        <?php bwp_toggle( 'book_wp_show_featured_work', __( 'Karya Terbaharu block', 'book-wp' ), __( 'Show the newest (or featured) work as an opening page above the table of contents.', 'book-wp' ), '1' ); ?>
 
         <div class="bwp-field bwp-field--full">
             <label class="bwp-field__label" for="book_wp_footer_quote"><?php esc_html_e( 'Footer Sign-off', 'book-wp' ); ?></label>

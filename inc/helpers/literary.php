@@ -224,7 +224,7 @@ function book_wp_featured_work() {
     $dateline = implode( ', ', array_filter( array( $loc, $date ? $date : $year ) ) );
 
     $html  = '<section class="bwp-featured" aria-labelledby="bwp-featured-title">';
-    $html .= '<p class="bwp-featured__kicker">' . ( $pinned ? esc_html__( 'Karya pilihan', 'book-wp' ) : esc_html__( 'Karya terbaru', 'book-wp' ) ) . '</p>';
+    $html .= '<p class="bwp-featured__kicker">' . ( $pinned ? esc_html__( 'Karya pilihan', 'book-wp' ) : esc_html__( 'Karya terbaharu', 'book-wp' ) ) . '</p>';
     $html .= '<div class="bwp-featured__grid">';
     $html .= '<div class="bwp-featured__head">';
     $html .= '<div class="bwp-analytics">';

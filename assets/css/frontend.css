@@ -363,11 +363,14 @@ a:focus-visible, button:focus-visible { border-radius: var(--bwp-pill); }
     color: var(--bwp-link); opacity: .055;
     pointer-events: none; user-select: none; white-space: nowrap;
 }
+.bwp-book-title { container-type: inline-size; }
 .bwp-book-title__name {
     grid-column: 1 / span 12;
-    font-size: clamp(2.8rem, 8.5vw, 7.5rem);
+    /* one line at every width: sized against the hero's own width */
+    font-size: clamp(2rem, 11.2cqw, 7.2rem);
     line-height: .92; letter-spacing: -.02em;
     margin: 0;
+    white-space: nowrap;
     font-variation-settings: 'opsz' 144, 'SOFT' 60;
     position: relative;
 }
@@ -386,7 +389,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--bwp-pill); }
 }
 .bwp-book-title__meta span + span::before { content: '·'; margin: 0 .6em; color: var(--bwp-accent); }
 @media screen and (min-width: 52em) {
-    .bwp-book-title__name { grid-column: 1 / span 10; }
+    .bwp-book-title__name { grid-column: 1 / span 12; }
     .bwp-book-title__desc { grid-column: 1 / span 7; grid-row: 2; }
     .bwp-book-title__meta { grid-column: 1 / span 7; grid-row: 3; }
     .bwp-book-title__jawi { right: 0; top: 50%; transform: translateY(-58%); font-size: clamp(6rem, 12vw, 10.5rem); }
@@ -1220,7 +1223,6 @@ html.bwp-night .bwp-badge--karmina, body.bwp-night .bwp-badge--karmina { color: 
     .bwp-nav__list .sub-menu a { color: var(--h-ink); }
 
     .bwp-book-title { padding-top: .5rem; }
-    .bwp-book-title__name { font-size: clamp(2.6rem, 13vw, 3.6rem); }
     .bwp-book-title__jawi { font-size: 7rem; top: -.2em; }
     .bwp-work__title { font-size: clamp(2.1rem, 10vw, 3rem); }
     .bwp-work__opening[data-jawi]::before { font-size: 6rem; top: -.3em; }
