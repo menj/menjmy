@@ -14,13 +14,12 @@
     $forms      = ( $forms && ! is_wp_error( $forms ) ) ? $forms : array();
     ?>
 
-    <?php /* ── Half-title: anthology name, tagline, edition line ────────── */ ?>
+    <?php /* ── Half-title: anthology name and edition line (tagline lives in the footer) ────────── */ ?>
     <div class="bwp-book-title">
         <?php if ( $jawi_name ) : ?>
             <span class="bwp-book-title__jawi" aria-hidden="true" dir="rtl"><?php echo esc_html( $jawi_name ); ?></span>
         <?php endif; ?>
         <h1 class="bwp-book-title__name"><?php echo esc_html( $anthology ? $anthology : get_bloginfo( 'name' ) ); ?></h1>
-        <div class="bwp-book-title__desc"><?php bloginfo( 'description' ); ?></div>
         <p class="bwp-book-title__meta">
             <span><?php echo esc_html( sprintf( _n( '%s work', '%s works', $published, 'book-wp' ), number_format_i18n( $published ) ) ); ?></span>
             <?php if ( $jalur_cats ) : ?><span><?php echo esc_html( sprintf( _n( '%s strand', '%s strands', count( $jalur_cats ), 'book-wp' ), number_format_i18n( count( $jalur_cats ) ) ) ); ?></span><?php endif; ?>

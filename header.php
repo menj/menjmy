@@ -37,7 +37,7 @@
 <div class="bwp-page-wrap">
 
 
-    <header class="bwp-site-header" role="banner">
+    <header class="bwp-site-header<?php echo is_front_page() ? ' bwp-site-header--front' : ''; ?>" role="banner">
 
         <?php
         $bwp_author = get_option( 'book_wp_author_name', '' );
@@ -48,6 +48,8 @@
         <?php
         $bwp_site_name = get_option( 'book_wp_anthology_name', '' );
         $bwp_site_name = $bwp_site_name ? $bwp_site_name : get_bloginfo( 'name' );
+        // On the front page the half-title H1 already sets the name, so the
+        // pill shows the brandmark alone and keeps the name for screen readers.
         ?>
         <a class="bwp-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
             <?php if ( has_custom_logo() ) : ?>
