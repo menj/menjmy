@@ -681,7 +681,7 @@ body.bwp-toc-masonry .bwp-toc__item { width: 49%; margin-bottom: .75rem; }
     font-family: var(--bwp-font-brand);
     font-size: clamp(2rem, 4.6vw, 4.4rem);
     line-height: 1.02; letter-spacing: 0; font-weight: 400;
-    max-width: 22ch; text-wrap: balance;
+    text-wrap: pretty;
 }
 .bwp-work__meta {
     display: flex; flex-wrap: wrap; align-items: center; gap: .7rem 1rem;
@@ -696,6 +696,7 @@ body.bwp-toc-masonry .bwp-toc__item { width: 49%; margin-bottom: .75rem; }
 .bwp-opening--page { gap: .9rem; }
 @media screen and (max-width: 40em) {
     .bwp-opening { border-radius: 28px; gap: .9rem; }
+    .bwp-work__title, .bwp-archive-header__title { font-size: 1.6rem; }
     .bwp-opening__kicker { font-size: .58rem; letter-spacing: .18em; }
     .bwp-opening__seal { font-size: 1.1rem; }
 }
