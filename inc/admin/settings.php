@@ -534,9 +534,6 @@ function bwp_tab_general() {
 
         <?php bwp_toggle( 'book_wp_show_chapter_blurb', __( 'Strand blurb on works', 'book-wp' ), __( 'Show the strand description (or the blurb above) as a line in each work\'s title panel.', 'book-wp' ), '0' ); ?>
 
-            <span class="bwp-field__hint"><?php echo wp_kses( __( 'Introductory text displayed above the Table of Contents. HTML is supported — e.g. <code>&lt;em&gt;, &lt;strong&gt;, &lt;a href=""&gt;</code>.', 'book-wp' ), array( 'code' => array() ) ); ?></span>
-        </div>
-
         <div class="bwp-field">
             <label class="bwp-field__label" for="book_wp_copyright"><?php esc_html_e( 'Copyright', 'book-wp' ); ?></label>
             <div class="bwp-field__control">

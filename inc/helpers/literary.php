@@ -84,8 +84,8 @@ function book_wp_header_section_label() {
         $parts = array();
         $label = book_wp_get_form_label();
         if ( $label ) $parts[] = $label;
-        $cats = get_the_category();
-        if ( $cats && ! is_wp_error( $cats ) && 'uncategorized' !== $cats[0]->slug ) $parts[] = $cats[0]->name;
+        $cat = book_wp_work_strand();
+        if ( $cat ) $parts[] = $cat->name;
         return implode( ' · ', $parts );
     }
     if ( is_category() )  return __( 'Jalur', 'book-wp' ) . ' · ' . single_cat_title( '', false );
@@ -233,8 +233,7 @@ function book_wp_featured_work() {
     $post = $q->posts[0];
     $id   = $post->ID;
     $slug = book_wp_get_form_slug( $id );
-    $cats = get_the_category( $id );
-    $cat  = ( $cats && 'uncategorized' !== $cats[0]->slug ) ? $cats[0] : null;
+    $cat  = book_wp_work_strand( $id );
 
     // First passage: first non-empty paragraph, line breaks kept for verse.
     $content = apply_filters( 'the_content', $post->post_content );
@@ -387,27 +386,39 @@ function book_wp_author_card() {
 }
 
 /**
- * Strand blurb: the category's own description, else the global "Strand
- * Blurb" option. For a work, the first non-uncategorized category is used;
- * for an archive, pass the term.
+ * The strand (category) a work is filed under: its first category that is
+ * not "Uncategorized". The header kicker, the featured block and the strand
+ * blurb all read it from here so they always name the same strand.
  *
- * @param int|WP_Term $subject Post ID or term.
+ * @param int $post_id Post ID; 0 for the current post.
+ * @return object|null Category term, or null when the work has no strand.
+ */
+function book_wp_work_strand( $post_id = 0 ) {
+    $cats = get_the_category( $post_id ? (int) $post_id : get_the_ID() );
+    if ( ! is_array( $cats ) ) return null;
+    foreach ( $cats as $cat ) {
+        if ( 'uncategorized' !== $cat->slug ) return $cat;
+    }
+    return null;
+}
+
+/**
+ * Strand blurb: the category's own description, else the global "Strand
+ * Blurb" option. For a work, its strand (book_wp_work_strand) is used; for
+ * an archive, pass the term.
+ *
+ * @param int|object $subject Post ID or category term.
  * @return string Plain text.
  */
 function book_wp_strand_blurb( $subject = 0 ) {
-    $term = null;
-    if ( $subject instanceof WP_Term ) {
-        $term = $subject;
-    } else {
-        $post_id = $subject ? (int) $subject : get_the_ID();
-        $cats    = get_the_category( $post_id );
-        if ( $cats && ! is_wp_error( $cats ) ) {
-            foreach ( $cats as $cat ) {
-                if ( 'uncategorized' !== $cat->slug ) { $term = $cat; break; }
-            }
-        }
+    $term = is_object( $subject ) ? $subject : book_wp_work_strand( (int) $subject );
+    $text = '';
+    if ( $term && ! empty( $term->description ) ) {
+        $text = wp_strip_all_tags( (string) $term->description );
     }
-    $text = ( $term && ! empty( $term->description ) ) ? $term->description : get_option( 'book_wp_chapter_blurb', '' );
-    return trim( wp_strip_all_tags( (string) $text ) );
+    if ( '' === $text ) {
+        $text = wp_strip_all_tags( (string) get_option( 'book_wp_chapter_blurb', '' ) );
+    }
+    return $text;
 }
 
