@@ -61,6 +61,10 @@ $bwp_copyright = get_option( 'book_wp_copyright', '' );
 
                 <p class="bwp-site-footer__author"><?php echo esc_html( $bwp_author ); ?></p>
 
+                <?php $bwp_jawi = get_option( 'book_wp_jawi_name', '' ); if ( $bwp_jawi ) : ?>
+                <p class="bwp-site-footer__jawi" dir="rtl" lang="ms-Arab"><?php echo esc_html( $bwp_jawi ); ?></p>
+                <?php endif; ?>
+
                 <?php if ( ! empty( $bwp_copyright ) && '1' === get_option( 'book_wp_show_copyright', '1' ) ) : ?>
                 <p class="bwp-site-footer__copyright"><?php echo wp_kses_post( $bwp_copyright ); ?></p>
                 <?php endif; ?>
@@ -68,9 +72,7 @@ $bwp_copyright = get_option( 'book_wp_copyright', '' );
             </div><!-- .bwp-site-footer__colophon -->
 
             <p class="bwp-site-footer__credit">
-                <a href="https://github.com/menj/book-wp">Book&nbsp;WP</a>
-                <?php esc_html_e( 'by', 'book-wp' ); ?>
-                <a href="https://github.com/menj">MENJ</a>
+                <span><a href="https://github.com/menj/menjmy">Sasterawan</a> <?php esc_html_e( 'by', 'book-wp' ); ?> <a href="https://github.com/menj">MENJ</a></span>
             </p>
 
         </div><!-- .bwp-site-footer__inner -->

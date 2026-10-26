@@ -45,8 +45,82 @@ function book_wp_form_label( $slug ) {
         'ratapan' => __( 'Lamentations',  'book-wp' ),
         'esei'    => __( 'Essay',         'book-wp' ),
         'memoir'  => __( 'Memoir',        'book-wp' ),
+        'terjemahan' => __( 'Translation', 'book-wp' ),
     );
     return isset( $labels[ $slug ] ) ? $labels[ $slug ] : $slug;
+}
+
+/**
+ * Jawi spelling of a literary form, used as the faint watermark behind a
+ * work's opening. Decorative only (aria-hidden via CSS generated content).
+ *
+ * @param  string $slug Literary form slug.
+ * @return string       Jawi string, or '' when unknown.
+ */
+function book_wp_form_jawi( $slug ) {
+    $jawi = array(
+        'puisi'      => 'ڤويسي',
+        'syair'      => 'شعير',
+        'karmina'    => 'كرمينا',
+        'hikayat'    => 'حكايت',
+        'cerpen'     => 'چرڤين',
+        'novel'      => 'نوۏيل',
+        'nukilan'    => 'نوكيلن',
+        'ratapan'    => 'راتڤن',
+        'esei'       => 'ايسي',
+        'memoir'     => 'ميموار',
+        'terjemahan' => 'ترجمهن',
+    );
+    $jawi = apply_filters( 'book_wp_form_jawi', $jawi );
+    return isset( $jawi[ $slug ] ) ? $jawi[ $slug ] : '';
+}
+
+/**
+ * Short context label for the centre of the site header:
+ * "Puisi · Sanggahan" on a work, the archive type on archives, the tagline at home.
+ */
+function book_wp_header_section_label() {
+    if ( is_singular( 'post' ) ) {
+        $parts = array();
+        $label = book_wp_get_form_label();
+        if ( $label ) $parts[] = $label;
+        $cats = get_the_category();
+        if ( $cats && ! is_wp_error( $cats ) && 'uncategorized' !== $cats[0]->slug ) $parts[] = $cats[0]->name;
+        return implode( ' · ', $parts );
+    }
+    if ( is_category() )  return __( 'Jalur', 'book-wp' ) . ' · ' . single_cat_title( '', false );
+    if ( is_tax( 'literary_form' ) ) return __( 'Form', 'book-wp' ) . ' · ' . single_term_title( '', false );
+    if ( is_tag() )       return __( 'Tag', 'book-wp' ) . ' · ' . single_tag_title( '', false );
+    if ( is_search() )    return __( 'Search', 'book-wp' );
+    if ( is_page() )      return get_the_title();
+    if ( is_home() || is_front_page() ) return get_bloginfo( 'description' );
+    return '';
+}
+
+/**
+ * Translation apparatus shown above a translated work: source title, author,
+ * year and language, plus the translator's note.
+ */
+function book_wp_terjemahan_block( $post_id = 0 ) {
+    if ( ! $post_id ) $post_id = get_the_ID();
+    $title  = get_post_meta( $post_id, 'book_wp_source_title',  true );
+    $author = get_post_meta( $post_id, 'book_wp_source_author', true );
+    $year   = get_post_meta( $post_id, 'book_wp_source_year',   true );
+    $lang   = get_post_meta( $post_id, 'book_wp_original_lang', true );
+    $note   = get_post_meta( $post_id, 'book_wp_translator_note', true );
+    if ( ! $title && ! $author && ! $note ) return '';
+
+    $src = array_filter( array(
+        $title  ? '“' . $title . '”' : '',
+        $author,
+        $year,
+        $lang ? sprintf( __( 'from %s', 'book-wp' ), $lang ) : '',
+    ) );
+    $html  = '<div class="bwp-terjemahan">';
+    $html .= '<span class="bwp-terjemahan__label">' . esc_html__( 'Translated from', 'book-wp' ) . '</span>';
+    if ( $src )  $html .= '<p class="bwp-terjemahan__source">' . esc_html( implode( ' · ', $src ) ) . '</p>';
+    if ( $note ) $html .= '<p class="bwp-terjemahan__note">' . esc_html__( "Translator's note", 'book-wp' ) . ': ' . esc_html( $note ) . '</p>';
+    return $html . '</div>';
 }
 
 function book_wp_is_poetry( $post_id = 0 ) {
@@ -69,6 +143,7 @@ function book_wp_form_description( $slug ) {
         'ratapan' => __( 'Ratapan are poetic expressions of grief or suffering, often connected to loss, longing, or mourning.', 'book-wp' ),
         'esei'    => __( "An essay is a non-fiction prose work presenting the author's argument, analysis, or personal reflection on a subject.", 'book-wp' ),
         'memoir'  => __( "Autobiografi or memoir is the author's personal account of their own lived experience, written in the first person.", 'book-wp' ),
+        'terjemahan' => __( 'Terjemahan are works carried from another language into Malay — poems and short stories alike — each with its source and a translator\'s note.', 'book-wp' ),
     );
     return isset( $desc[ $slug ] ) ? $desc[ $slug ] : '';
 }

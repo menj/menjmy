@@ -41,6 +41,7 @@ function book_wp_register_taxonomy() {
         'ratapan' => 'Ratapan',
         'esei'    => 'Esei',
         'memoir'  => 'Memoir',
+        'terjemahan' => 'Terjemahan',
     );
 
     // Term migrations: old_slug => array( 'slug' => new_slug, 'name' => new_name ).
@@ -50,7 +51,7 @@ function book_wp_register_taxonomy() {
         'autobiografi' => array( 'slug' => 'memoir', 'name' => 'Memoir' ), // 3.3.4: slug migration (3.3.3 flag already consumed by name change)
     );
 
-    $terms_version = '3.3.4';
+    $terms_version = '4.0.0';
     if ( get_option( 'book_wp_terms_version' ) !== $terms_version ) {
         // Insert any terms that don't exist yet.
         foreach ( $default_terms as $slug => $name ) {

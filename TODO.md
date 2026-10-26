@@ -17,10 +17,10 @@ Prioritised from the codebase review (v3.5.1). Each item names the file and line
 - [ ] **Hidden posts still appear in widgets.** `inc/hooks/actions.php:635` `doing_action('dynamic_sidebar')` is never true during widget render.
 - [x] **Stanza count regex merges paragraphs.** `inc/helpers/analytics.php:304` → use `/<p(?:\s[^>]*)?>(.*?)<\/p>/si`. Fixes two failing tests in `tests/AnalyticsTest.php:165,231`.
 - [ ] **Masonry + infinite scroll overlap.** `assets/js/frontend.js:298-304, 381-386` lays out items on the `load` event before they are appended; use `append`. Also guard the null `msnry` race with `document.fonts.ready`.
-- [ ] **Undefined tokens `--bwp-ink` / `--bwp-paper`.** `assets/css/frontend.css:1042, 2542` — back-to-top button and "Copied!" tooltip render transparent. Use `--bwp-text` / `--bwp-bg`.
+- [x] **Undefined tokens `--bwp-ink` / `--bwp-paper`.** `assets/css/frontend.css:1042, 2542` — back-to-top button and "Copied!" tooltip render transparent. Use `--bwp-text` / `--bwp-bg`.
 - [x] **Stray `</div>` in meta box.** `inc/admin/meta-boxes.php:344, 601` closes the postbox early and pushes later groups outside `.bwp-metabox`.
 - [ ] **Front-end CSS leaks into wp-admin.** `inc/setup/enqueue.php:367-372` enqueues unscoped `frontend.css` via `enqueue_block_editor_assets`; use the existing `add_editor_style()` (`theme-support.php:49`) and set `apiVersion: 3` in `assets/js/blocks.js:157,230,293`.
-- [ ] **Dead `body.bwp-time-night` rules.** `assets/css/frontend.css:945,952,1064,1073,2109,2118` — the class is only ever set on `<html>`.
+- [x] **Dead `body.bwp-time-night` rules.** `assets/css/frontend.css:945,952,1064,1073,2109,2118` — the class is only ever set on `<html>`.
 - [ ] **Colophon double-escapes separators.** `inc/helpers/colophon.php:113,165,180,193,206,236,249` — `esc_html(implode(' &middot; ', …))` prints literal `&middot;`.
 - [ ] **Word counts are ASCII-only.** `inc/helpers/analytics.php:240,251`, `inc/hooks/actions.php:277,304` — `str_word_count` reports 0 words for Jawi/Arabic; use `preg_match_all('/\p{L}[\p{L}\p{Mn}\'’-]*/u')`.
 - [ ] **Global arrow-key handler hijacks browser shortcuts.** `assets/js/frontend.js:77-113` — ignore events with modifiers, contenteditable and media targets; stop `preventDefault` on ↑/↓.
@@ -33,7 +33,7 @@ Prioritised from the codebase review (v3.5.1). Each item names the file and line
 - [ ] **Register all options.** `book_wp_share_row`, `book_wp_back_to_top` are saved (`settings.php:179-180`) but missing from `register_setting` (`:20-82`). Whitelist select/radio values at save time.
 - [ ] **Remember active settings tab** (user meta) and warn on unsaved changes when switching tabs. Add an error state to the save notice (`settings.php:305-310`).
 - [ ] **Promote `.bwp-section__label` from `<p>` to headings** (`settings.php:403,579`); drop redundant `aria-label` on tab links (`:323`); update `aria-selected` in the tag combobox (`assets/js/admin-settings.js:204-237`).
-- [ ] **Local fonts by default.** `inc/setup/enqueue.php:25-54,106-124` loads Google Fonts with `book_wp_remote_fonts` on; self-host the woff2 files under `assets/fonts/` for privacy and design stability.
+- [x] **Local fonts by default.** `inc/setup/enqueue.php:25-54,106-124` loads Google Fonts with `book_wp_remote_fonts` on; self-host the woff2 files under `assets/fonts/` for privacy and design stability.
 - [ ] **Night-mode localStorage expiry.** `assets/js/time-theme.js:95` writes `'0'` instead of `removeItem`, permanently disabling the OS dark-mode fallback.
 - [ ] **Smooth-scroll restore jank.** `assets/js/frontend.js:189-196` — pass `behavior: 'auto'`.
 - [ ] **i18n sweep.** Untranslated strings in `meta-boxes.php:36-150,169,177,242-246,448`, `settings.php:254,280-285,299-300,332,352`, `admin-settings.js:192,201,228`, `frontend.js:433,443,448`. Add `wp_set_script_translations` for admin JS; generate the `-{md5}.json` files WordPress expects for `blocks.js`.
@@ -58,13 +58,13 @@ Prioritised from the codebase review (v3.5.1). Each item names the file and line
 
 Static renders of the real CSS (28 screenshots in `docs/design-review/`, 1440px and 390px, all four schemes). Scores out of 10: aesthetic 8, scheme consistency 8, contrast 7, hierarchy 7, admin UI 7, typographic rhythm 6, responsive 6, token system 6, reading affordances 5.
 
-- [ ] **Back-to-top and copy tooltip are invisible on every scheme.** Alias `--bwp-ink`/`--bwp-paper` to `--bwp-text`/`--bwp-bg` in `:root` (`assets/css/frontend.css:25`); `--bwp-heading` is also undefined in `templates/single-puisi-generic.php:99`.
-- [ ] **Prose measure too wide.** Cerpen ≈84ch and esei 40em exceed the 75ch ceiling; default page wrap 48em ≈90ch. Cap at 34em (`assets/css/forms/cerpen.css:19`), 36em (`forms/esei.css:19`) and add a `.bwp-work__content{max-width:36em}` fallback at `frontend.css:584`. Poem column (≈58ch) is right.
-- [ ] **Cerpen title stacks four rules within 80px** (title border, `::after` accent, analytics top and bottom borders). Drop `forms/cerpen.css:29` or `:37-43`, and the `.bwp-analytics` border-top at `frontend.css:472`.
-- [ ] **Fixed controls overlap the text column at 390px.** Shrink and re-corner the night toggle and back-to-top in `@media (max-width:36em)` (`frontend.css:2383, 2528`); the two buttons also share the same corner.
+- [x] **Back-to-top and copy tooltip are invisible on every scheme.** Alias `--bwp-ink`/`--bwp-paper` to `--bwp-text`/`--bwp-bg` in `:root` (`assets/css/frontend.css:25`); `--bwp-heading` is also undefined in `templates/single-puisi-generic.php:99`.
+- [x] **Prose measure too wide.** Cerpen ≈84ch and esei 40em exceed the 75ch ceiling; default page wrap 48em ≈90ch. Cap at 34em (`assets/css/forms/cerpen.css:19`), 36em (`forms/esei.css:19`) and add a `.bwp-work__content{max-width:36em}` fallback at `frontend.css:584`. Poem column (≈58ch) is right.
+- [x] **Cerpen title stacks four rules within 80px** (title border, `::after` accent, analytics top and bottom borders). Drop `forms/cerpen.css:29` or `:37-43`, and the `.bwp-analytics` border-top at `frontend.css:472`.
+- [x] **Fixed controls overlap the text column at 390px.** Shrink and re-corner the night toggle and back-to-top in `@media (max-width:36em)` (`frontend.css:2383, 2528`); the two buttons also share the same corner.
 - [ ] **Contrast floors.** Dusk muted ink is 4.53:1 at 13px uppercase; raise to ≈`#5a544c` (`schemes/dusk.css:19`). Footer credit at opacity .55 (2.1–2.9:1) and `.bwp-colophon__line--meta` opacity .7 (`literary.css:41`) fail AA; replace opacity dimming with a `--bwp-muted-faint` token. Night-scheme link vs text is 1.47:1, so keep underlines.
-- [ ] **Single-source the night palette.** It is duplicated at `frontend.css:1115`, `:1140` and `schemes/night.css:19`; make toggle, scheme and OS media query consume one block.
-- [ ] **Mobile nav wraps to two rows with a 1em gap** and the 2.8em hero title breaks to three lines at 390px; tighten the row gap and use `clamp()` for the title.
+- [x] **Single-source the night palette.** It is duplicated at `frontend.css:1115`, `:1140` and `schemes/night.css:19`; make toggle, scheme and OS media query consume one block.
+- [x] **Mobile nav wraps to two rows with a 1em gap** and the 2.8em hero title breaks to three lines at 390px; tighten the row gap and use `clamp()` for the title.
 - [ ] **Admin polish.** General-tab hints render under the label because `.bwp-field__hint` sits outside `.bwp-field__control` (`settings.php:449-476`); "Show Copyright" is a bare checkbox next to styled toggles (`:478-487`); drop-cap font cards all show the same glyph because `assets/css/dropcap/*.css` is not enqueued in admin; the "Georgia / Default" card is mislabelled, the front end defaults to EB Garamond (`frontend.css:46`).
 - [ ] **Token architecture.** Add a semantic layer (`--bwp-surface-raised`, `--bwp-on-accent`), retire legacy aliases leaking into form CSS (`esei.css:33`, `cerpen.css:76`), and make `theme.json` read the active scheme.
 - [ ] **User-configurable colours.** Add paper / ink / accent colour pickers on the Typography tab that emit `body.bwp-scheme-custom{…}` with WCAG validation at save time, so the colour scheme is genuinely variable rather than a fixed set of presets.

@@ -36,25 +36,35 @@
 
 <div class="bwp-page-wrap">
 
+
     <header class="bwp-site-header" role="banner">
 
         <?php
         $bwp_author = get_option( 'book_wp_author_name', '' );
         $bwp_author = $bwp_author ? $bwp_author : get_bloginfo( 'name' );
+        // Author name stays the H2 landmark on every view; the H1 belongs to
+        // each template (anthology title, work title, archive title).
         ?>
-        <?php
-        // Author name is always H2 across every page type.
-        // H1 is owned by each template (anthology title, post title,
-        // archive title, etc.). H2 is reserved for the author name here
-        // in the site header, making it the consistent second-level
-        // landmark in the document outline on all views.
-        ?>
-        <h2 class="bwp-site-header__title">
-            <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php echo esc_html( $bwp_author ); ?></a>
-        </h2>
+        <a class="bwp-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+            <?php if ( has_custom_logo() ) : ?>
+                <?php echo wp_get_attachment_image( get_theme_mod( 'custom_logo' ), 'thumbnail', false, array( 'class' => 'bwp-brand__mark', 'alt' => '' ) ); ?>
+            <?php else : ?>
+                <img class="bwp-brand__mark" src="<?php echo esc_url( BOOK_WP_URI . '/assets/img/brand/mark.svg' ); ?>" alt="" width="40" height="40" decoding="async">
+            <?php endif; ?>
+            <h2 class="bwp-site-header__title"><?php echo esc_html( $bwp_author ); ?></h2>
+        </a>
+
+        <?php $bwp_section = book_wp_header_section_label(); ?>
+        <?php if ( $bwp_section ) : ?>
+            <p class="bwp-site-header__section"><?php echo esc_html( $bwp_section ); ?></p>
+        <?php endif; ?>
 
         <?php if ( has_nav_menu( 'primary' ) ) : ?>
-        <nav class="bwp-nav" aria-label="<?php esc_attr_e( 'Primary Menu', 'book-wp' ); ?>">
+        <button class="bwp-nav-toggle" type="button" aria-expanded="false" aria-controls="bwp-nav">
+            <span class="bwp-nav-toggle__label"><?php esc_html_e( 'Menu', 'book-wp' ); ?></span>
+            <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+        <nav class="bwp-nav" id="bwp-nav" aria-label="<?php esc_attr_e( 'Primary Menu', 'book-wp' ); ?>">
             <?php wp_nav_menu( array(
                 'theme_location' => 'primary',
                 'menu_class'     => 'bwp-nav__list',

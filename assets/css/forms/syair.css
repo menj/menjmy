@@ -11,8 +11,6 @@
  */
 
 /* ── Layout ──────────────────────────────────────────────── */
-
-body.bwp-form-syair .bwp-page-wrap   { max-width: 32em; }
 body.bwp-form-syair .bwp-work__content {
     max-width: 26em;
     margin-left: auto;
@@ -21,30 +19,11 @@ body.bwp-form-syair .bwp-work__content {
 
 /* ── Title: centred, Cinzel normal ───────────────────────── */
 
-body.bwp-form-syair .bwp-work__title {
-    font-family:    var(--bwp-font-display, 'Cinzel', Georgia, serif);
-    font-size:      1.8em;
-    font-weight:    400;
-    font-style:     normal;
-    text-align:     center;
-    letter-spacing: .04em;
-    line-height:    1.25;
-}
-
-body.bwp-form-syair .bwp-work__title::after {
-    content:    '';
-    display:    block;
-    width:      8em;
-    height:     1px;
-    background: linear-gradient(90deg, transparent, var(--bwp-gold-dim, #a8893a), transparent);
-    margin:     .75em auto 0;
-}
-
 /* ── Body: quatrains breathe as units ───────────────────── */
 
 body.bwp-form-syair .bwp-work__content {
     font-size:  1.06em;
-    line-height: 2.0;
+    line-height: 1.7;
     text-align: left;
 }
 
@@ -78,38 +57,17 @@ body.bwp-form-syair .bwp-ornament {
 
 /* ── Epigraph ────────────────────────────────────────────── */
 
-body.bwp-form-syair .bwp-epigraph {
-    max-width:    22em;
-    margin-left:  auto;
-    margin-right: auto;
-    text-align:   center;
-    border-left:  none;
-    border-top:   1px solid var(--bwp-border);
-    border-bottom: 1px solid var(--bwp-border);
-    padding:      .75em 0;
-    font-size:    .9em;
-    font-style:   italic;
-}
-
-body.bwp-form-syair .bwp-epigraph::before { display: none; }
-
 /* ── Colophon ────────────────────────────────────────────── */
 
-body.bwp-form-syair .bwp-colophon { margin-top: 2em; text-align: center; }
-
 /* ── Analytics: centred ──────────────────────────────────── */
-
-body.bwp-form-syair .bwp-analytics { justify-content: center; }
 
 /* ── Responsive ──────────────────────────────────────────── */
 
 @media screen and (min-width: 52em) {
-    body.bwp-form-syair .bwp-work__title   { font-size: clamp(1.7rem, 1.1rem + 2.4vw, 2.2rem); }
-    body.bwp-form-syair .bwp-work__content { font-size: 1.12em; line-height: 2.1; }
+    body.bwp-form-syair .bwp-work__content { font-size: 1.12em; line-height: 1.75; }
 }
 
 @media print {
-    body.bwp-form-syair .bwp-work__title   { text-align: center; }
     body.bwp-form-syair .bwp-work__content { line-height: 1.85; }
 }
 
@@ -117,14 +75,3 @@ body.bwp-form-syair .bwp-analytics { justify-content: center; }
 /* Narrow column needs tighter gap and smaller item text so   */
 /* badge · category · read time · words · lines · stanzas    */
 /* all fit on a single row without wrapping.                  */
-
-body.bwp-form-syair .bwp-analytics {
-    gap:             .2em .55em;
-    justify-content: center;
-}
-
-body.bwp-form-syair .bwp-analytics__item,
-body.bwp-form-syair .bwp-analytics__cat {
-    font-size:      .68em;
-    letter-spacing: .07em;
-}

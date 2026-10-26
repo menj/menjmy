@@ -1,3 +1,44 @@
+## [4.0.0] — Sasterawan: Malaysiana Redesign
+
+### Changed
+- Theme renamed **Sasterawan**, tailored for https://menj.my (Di Bawah Permukaan).
+- Front end rebuilt from scratch (`assets/css/frontend.css`): editorial,
+  asymmetric openings with oversized Fraunces display type set off-axis, a
+  nila/kunyit/kapas palette, 999px pills for navigation, badges, chips and
+  buttons, 20–28px card radii, and a self-hosted Jawi face (Dubidam Arabic)
+  for the anthology watermark, per-form watermarks and the footer signature.
+- New site header: brand mark + author, centred context label
+  ("Puisi · Sanggahan"), pill navigation with a phone disclosure button.
+- Front page: hero with Jawi watermark, **jalur tema** pills generated from
+  categories, table of contents as two-column cards.
+- Single works: opening grid (form badge + chips left, title right), rounded
+  ink-tile drop cap, colophon as a pill card, previous/next as pill cards.
+- Night mode and the Night scheme now share one Malam palette; Cream and Dusk
+  re-ink correctly at clock-night and under the reader toggle.
+- Per-form stylesheets no longer set page width or title treatment; they
+  keep typography only.
+- Display font Cinzel replaced by Fraunces; Noto Naskh Arabic loaded for
+  Jawi fallback.
+
+### Added
+- **Terjemahan** literary form (translations into Malay, e.g. Poe) with
+  source title, author, year, language and translator's note fields and an
+  apparatus block above the work.
+- `book_wp_jawi_name` option (General tab): anthology name in Jawi.
+- Brand assets under `assets/img/brand/` (mark, inverse, mono, favicon,
+  wordmark, lockup) and a favicon fallback when no Site Icon is set.
+- `book_wp_form_jawi()`, `book_wp_header_section_label()`,
+  `book_wp_terjemahan_block()` helpers.
+
+### Fixed
+- Meta box no longer loses edits when a field name appears in several form
+  groups; stray `</div>` removed.
+- Legacy-slug redirect leaves paged posts, comment pages, feeds and previews
+  alone; permalink toggle defers its rewrite flush.
+- Stanza counter no longer merges bare paragraphs.
+- Test bootstrap loads without WordPress (plugin API stubs); 120 tests pass.
+- Back-to-top and copy tooltip use defined colour tokens.
+
 ## [3.5.1] — Maintenance Hardening, Tooling & Font Privacy
 
 ### Fixed

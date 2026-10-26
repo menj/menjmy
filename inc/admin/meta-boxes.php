@@ -598,6 +598,39 @@ function book_wp_render_meta_box( $post ) {
         ); ?>
     </div>
 
+    <?php /* ════════════════════════════════════════════════════
+       TERJEMAHAN — works translated into Malay (Poe, etc.)
+    ════════════════════════════════════════════════════ */ ?>
+
+    <div class="bwp-mf-section bwp-mf-group" data-show-for="terjemahan"><?php book_wp_mf_set_group( 'terjemahan' ); ?>
+        <h4 class="bwp-mf-heading"><?php esc_html_e( 'Terjemahan — Source Work', 'book-wp' ); ?></h4>
+
+        <?php book_wp_mf_text( $post, 'book_wp_source_title',
+            __( 'Original Title', 'book-wp' ),
+            'e.g. The Raven &middot; The Tell-Tale Heart'
+        ); ?>
+
+        <?php book_wp_mf_text( $post, 'book_wp_source_author',
+            __( 'Original Author', 'book-wp' ),
+            'e.g. Edgar Allan Poe'
+        ); ?>
+
+        <?php book_wp_mf_text( $post, 'book_wp_source_year',
+            __( 'Year of Original', 'book-wp' ),
+            'e.g. 1845'
+        ); ?>
+
+        <?php book_wp_mf_text( $post, 'book_wp_original_lang',
+            __( 'Source Language', 'book-wp' ),
+            'e.g. Bahasa Inggeris'
+        ); ?>
+
+        <?php book_wp_mf_textarea( $post, 'book_wp_translator_note',
+            __( "Translator's Note", 'book-wp' ),
+            'Choices of rhyme, register, or what could not be carried across.'
+        ); ?>
+    </div>
+
     </div><!-- .bwp-metabox -->
 
 
@@ -795,6 +828,8 @@ function book_wp_save_meta( $post_id ) {
         // Autobiografi — sole author
         'book_wp_key_figures', 'book_wp_memoir_tone',
         'book_wp_memory_type', 'book_wp_period_covered', 'book_wp_verification_note',
+        // Terjemahan — source work
+        'book_wp_source_title', 'book_wp_source_author', 'book_wp_source_year',
     );
 
     foreach ( $text_fields as $k ) {
@@ -806,6 +841,7 @@ function book_wp_save_meta( $post_id ) {
     $textarea_fields = array(
         'book_wp_epigraph', 'book_wp_notes',
         'book_wp_thesis', 'book_wp_abstract', 'book_wp_annotation',
+        'book_wp_translator_note',
     );
     foreach ( $textarea_fields as $k ) {
         if ( isset( $input[ $k ] ) ) {

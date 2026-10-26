@@ -8,19 +8,25 @@
     <article <?php post_class( 'bwp-single' ); ?> id="post-<?php the_ID(); ?>">
 
         <?php
-        // "PETIKAN DARIPADA" — shown above the title only when the post is
-        // in the hikayat form AND the citation toggle is checked in the meta box.
         $form_slug_single = book_wp_get_form_slug();
-        if ( 'hikayat' === $form_slug_single
-            && '1' === get_post_meta( get_the_ID(), 'book_wp_hikayat_is_citation', true ) ) :
+        $jawi_form        = book_wp_form_jawi( $form_slug_single );
         ?>
-            <p class="bwp-citation-label"><?php esc_html_e( 'Cited from', 'book-wp' ); ?></p>
-        <?php endif; ?>
-        <h1 class="bwp-work__title"><?php the_title(); ?></h1>
-
-        <?php if ( '1' === get_option( 'book_wp_show_analytics', '1' ) ) : ?>
-            <?php echo book_wp_analytics_bar(); // phpcs:ignore ?>
-        <?php endif; ?>
+        <header class="bwp-work__opening"<?php if ( $jawi_form ) echo ' data-jawi="' . esc_attr( $jawi_form ) . '"'; ?>>
+            <div class="bwp-work__meta">
+                <?php
+                // "PETIKAN DARIPADA" — shown only when the post is a hikayat
+                // AND the citation toggle is checked in the meta box.
+                if ( 'hikayat' === $form_slug_single
+                    && '1' === get_post_meta( get_the_ID(), 'book_wp_hikayat_is_citation', true ) ) :
+                ?>
+                    <p class="bwp-citation-label"><?php esc_html_e( 'Cited from', 'book-wp' ); ?></p>
+                <?php endif; ?>
+                <?php if ( '1' === get_option( 'book_wp_show_analytics', '1' ) ) : ?>
+                    <?php echo book_wp_analytics_bar(); // phpcs:ignore ?>
+                <?php endif; ?>
+            </div>
+            <h1 class="bwp-work__title"><?php the_title(); ?></h1>
+        </header>
 
         <?php
         // Nota Penulis — shown between analytics bar and body content,
@@ -37,6 +43,8 @@
         <?php echo book_wp_dedication(); // phpcs:ignore ?>
 
         <?php echo book_wp_epigraph(); // phpcs:ignore ?>
+
+        <?php echo book_wp_terjemahan_block(); // phpcs:ignore ?>
 
         <?php echo book_wp_featured_image(); // phpcs:ignore ?>
 

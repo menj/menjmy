@@ -3,13 +3,43 @@
 
 <main id="bwp-main" class="bwp-main">
 
-    <?php $anthology = get_option( 'book_wp_anthology_name', '' ); ?>
+    <?php
+    $anthology = get_option( 'book_wp_anthology_name', '' );
+    $jawi_name = get_option( 'book_wp_jawi_name', '' );
+    $counts    = wp_count_posts( 'post' );
+    $published = isset( $counts->publish ) ? (int) $counts->publish : 0;
+    ?>
     <div class="bwp-book-title">
+        <?php if ( $jawi_name ) : ?>
+            <span class="bwp-book-title__jawi" aria-hidden="true" dir="rtl"><?php echo esc_html( $jawi_name ); ?></span>
+        <?php endif; ?>
         <?php if ( ! empty( $anthology ) ) : ?>
             <h1 class="bwp-book-title__name"><?php echo esc_html( $anthology ); ?></h1>
+        <?php else : ?>
+            <h1 class="bwp-book-title__name"><?php bloginfo( 'name' ); ?></h1>
         <?php endif; ?>
         <div class="bwp-book-title__desc"><?php bloginfo( 'description' ); ?></div>
+        <div class="bwp-book-title__meta">
+            <span><?php echo esc_html( sprintf( _n( '%s work', '%s works', $published, 'book-wp' ), number_format_i18n( $published ) ) ); ?></span>
+        </div>
     </div>
+
+    <?php
+    // Jalur tema — every non-empty category as a pill, counts included.
+    $jalur_cats = get_categories( array( 'hide_empty' => true, 'orderby' => 'name', 'order' => 'ASC' ) );
+    $jalur_cats = array_filter( $jalur_cats, function( $c ) { return 'uncategorized' !== $c->slug; } );
+    if ( ! empty( $jalur_cats ) ) :
+    ?>
+    <nav class="bwp-jalur" aria-label="<?php esc_attr_e( 'Thematic strands', 'book-wp' ); ?>">
+        <span class="bwp-jalur__label"><?php esc_html_e( 'Jalur', 'book-wp' ); ?></span>
+        <?php foreach ( $jalur_cats as $jc ) : ?>
+            <a class="bwp-jalur__link" href="<?php echo esc_url( get_category_link( $jc->term_id ) ); ?>">
+                <?php echo esc_html( $jc->name ); ?>
+                <span class="bwp-jalur__count"><?php echo (int) $jc->count; ?></span>
+            </a>
+        <?php endforeach; ?>
+    </nav>
+    <?php endif; ?>
 
     <?php
     $front_blurb = get_option( 'book_wp_front_blurb', '' );
@@ -20,7 +50,9 @@
         </div>
     <?php endif; ?>
 
-    <h3 class="bwp-toc-header"><?php echo esc_html( __( 'Table of Contents', 'book-wp' ) ); ?></h3>
+    <h2 class="bwp-toc-header"><?php echo esc_html( __( 'Table of Contents', 'book-wp' ) ); ?></h2>
+
+    <div class="bwp-toc-wrap">
 
     <?php
     $grouping    = get_option( 'book_wp_toc_grouping', 'none' );
@@ -330,6 +362,8 @@
             </ul>
         <?php endif; ?>
     <?php endif; ?>
+
+    </div><!-- .bwp-toc-wrap -->
 
     <?php echo book_wp_ornament( 'fleuron' ); // phpcs:ignore ?>
 

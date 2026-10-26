@@ -1,0 +1,38 @@
+/**
+ * Sasterawan — Jawi face (Dubidam Arabic, self-hosted)
+ *
+ * Supplied by the site owner; served from the theme so no third-party
+ * request is made. Used for Jawi accents: the anthology name watermark,
+ * per-form watermarks behind work openings, and the footer signature.
+ * Latin text never uses this face — see --bwp-font-jawi in frontend.css.
+ */
+
+@font-face {
+    font-family: 'Dubidam Arabic';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url('../../fonts/jawi/DubidamArabic-Light.woff2') format('woff2'),
+         url('../../fonts/jawi/DubidamArabic-Light.woff') format('woff');
+    unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+@font-face {
+    font-family: 'Dubidam Arabic';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../../fonts/jawi/DubidamArabic-Regular.woff2') format('woff2'),
+         url('../../fonts/jawi/DubidamArabic-Regular.woff') format('woff');
+    unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+@font-face {
+    font-family: 'Dubidam Arabic';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../../fonts/jawi/DubidamArabic-Bold.woff2') format('woff2'),
+         url('../../fonts/jawi/DubidamArabic-Bold.woff') format('woff');
+    unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+
+:root { --bwp-font-jawi: 'Dubidam Arabic', 'Noto Naskh Arabic', 'Amiri', serif; }

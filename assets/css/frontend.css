@@ -1,61 +1,77 @@
 /**
- * Sasterawan — Frontend Stylesheet v3.1.0
+ * Sasterawan — Front-end design system
  *
- * Refined literary minimalism. Designed for reading.
- * Warm ink-on-paper palette, strong typographic hierarchy,
- * Lora (body) + Jost (UI), SVG ornaments, layered spacing.
+ * Editorial, asymmetric layout (oversized display type set off-axis, generous
+ * margins, pull-quote rhythm) in a Malaysiana palette: nila (indigo) ink,
+ * kunyit (turmeric) gold thread, kapas (cotton) paper. Rounded corners and
+ * 999px pills throughout; awan larat scrollwork and pucuk rebung triangles
+ * as the only ornament. Built for https://menj.my — Di Bawah Permukaan.
  *
- * @package Book_WP
+ * Layers that load after this file and may override tokens:
+ *   fonts/jawi.css       self-hosted Jawi face (Dubidam Arabic)
+ *   times/times.css      ink by time of day (on <html>)
+ *   schemes/*.css        paper by user-chosen scheme (on <body>)
+ *   forms/*.css          per-literary-form typography
+ *   fonts/*.css          optional body-font override
+ *
+ * Fonts: Fraunces (display), EB Garamond (body), Jost (UI) via Google Fonts
+ * when remote fonts are enabled — see inc/setup/enqueue.php.
  */
 
 /* ═══════════════════════════════════════════════════════════
-   GOOGLE FONTS
-   Cinzel, EB Garamond, and Jost are loaded via wp_enqueue_style()
-   in inc/setup/enqueue.php — NOT via @import here.
-   @import creates a serialised fetch chain that blocks rendering;
-   wp_enqueue_style() allows the browser to initiate the request
-   in parallel with this stylesheet. (CWV-01)
-   ═══════════════════════════════════════════════════════════ */
-
-/* ═══════════════════════════════════════════════════════════
-   CUSTOM PROPERTIES
+   TOKENS
    ═══════════════════════════════════════════════════════════ */
 
 :root {
-    /* Palette — ink on white, high contrast */
-    --bwp-bg:           #ffffff;
-    --bwp-bg-subtle:    #f5f5f5;
-    --bwp-text:         #111111;
-    --bwp-text-mid:     #333333;
-    --bwp-muted:        #666666;
-    --bwp-accent:       #1B3C53;
-    --bwp-link:         #1B3C53;
-    --bwp-link-hover:   #2E6A8E;
-    --bwp-border:       #cccccc;
-    --bwp-border-faint: #e2e2e2;
-    --bwp-border-ink:   #767676;
-    --bwp-ornament:     #999999;
-    --bwp-stone:        #cccccc;
-    --bwp-ui-border:    #767676;   /* UI component boundaries — meets 3:1 on all scheme backgrounds */    --bwp-progress:      #111111;
+    /* Paper & ink */
+    --bwp-bg:            #f6f1e4;   /* kapas */
+    --bwp-bg-subtle:     #ebe3cf;   /* kapas gelap — raised surface */
+    --bwp-bg-raised:     #fffdf7;   /* cards */
+    --bwp-text:          #1a1f3a;
+    --bwp-text-mid:      #2f3550;
+    --bwp-muted:         #6b5b2e;   /* 5.9:1 on kapas */
+    --bwp-accent:        #c9971c;   /* kunyit — thread, never body text */
+    --bwp-link:          #1a2a6c;   /* nila */
+    --bwp-link-hover:    #2d4a8a;
+    --bwp-border:        #d9d0b8;
+    --bwp-border-faint:  #e8e2d4;
+    --bwp-border-ink:    #1a1f3a;
+    --bwp-ui-border:     #a89878;   /* 3:1 for control outlines */
+    --bwp-ornament:      #c9971c;
+    --bwp-stone:         #c7bd9f;
+    --bwp-progress:      #c9971c;
+    --bwp-badge:         #8b2635;   /* manggis — default form badge */
+    --bwp-badge-ink:     #fbf4ea;
+    --bwp-on-accent:     #1a1f3a;
+    --bwp-on-ink:        #f6f1e4;
 
-    --bwp-radius:  6px;
-    --bwp-shadow:  0 2px 6px rgba(0,0,0,.08);
-    --bwp-shadow-lg: 0 4px 12px rgba(0,0,0,.10);
+    /* Shape */
+    --bwp-radius-sm:  12px;
+    --bwp-radius:     20px;
+    --bwp-radius-lg:  28px;
+    --bwp-pill:       999px;
+    --bwp-shadow:     0 2px 8px rgba(26,31,58,.08);
+    --bwp-shadow-lg:  0 10px 30px rgba(26,31,58,.12);
 
-    /* Type — EB Garamond body at 18px, Cinzel display, Jost UI */
-    --bwp-font:      'EB Garamond', Georgia, 'Times New Roman', serif;
-    --bwp-font-ui:   'Jost', system-ui, sans-serif;
-    --bwp-font-display: 'Cinzel', Georgia, serif;
-    --bwp-font-size: 1.125rem;
-    --bwp-lh:        1.9;
+    /* Type */
+    --bwp-font:          'EB Garamond', Georgia, 'Times New Roman', serif;
+    --bwp-font-display:  'Fraunces', 'EB Garamond', Georgia, serif;
+    --bwp-font-ui:       'Jost', system-ui, sans-serif;
+    --bwp-font-jawi:     'Noto Naskh Arabic', 'Amiri', 'Scheherazade New', serif;
+    --bwp-font-mono:     'Special Elite', 'Courier New', monospace;
+    --bwp-font-size:     1.125rem;
+    --bwp-lh:            1.75;
+    --bwp-measure:       36em;
 
-    /* Sastera compatibility aliases */
-    --bwp-teal:           #1B3C53;
-    --bwp-teal-deep:      #0f2a38;
-    --bwp-gold:           #9a8060;
-    --bwp-gold-dim:       #7a6448;
-    --bwp-gold-light:     #b8a080;
-    --bwp-cream:          #f7f5f0;
+    /* Legacy aliases used by form stylesheets */
+    --bwp-teal:        #1a2a6c;
+    --bwp-teal-deep:   #10183f;
+    --bwp-gold:        #c9971c;
+    --bwp-gold-dim:    #9a7416;
+    --bwp-gold-light:  #e3c46a;
+    --bwp-cream:       #f6f1e4;
+    --bwp-ink:         var(--bwp-text);
+    --bwp-paper:       var(--bwp-bg);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -77,62 +93,51 @@ body {
     font-family: var(--bwp-font);
     font-size: var(--bwp-font-size);
     line-height: var(--bwp-lh);
+    font-feature-settings: 'kern', 'liga', 'onum';
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    /* animation removed from body — body opacity:0 at T=0 delays Chrome's LCP
-       timer because the LCP element is invisible until the animation fires.
-       Fade now lives on .bwp-page-wrap instead. (CWV-03) */
+    transition: background-color .25s ease, color .25s ease;
 }
 
-@keyframes bwp-in {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+a { color: var(--bwp-link); text-decoration: none; transition: color .18s; }
+a:hover { color: var(--bwp-link-hover); }
+img { max-width: 100%; height: auto; display: block; }
+iframe, video, embed, object, svg { max-width: 100%; }
+.bwp-work__content table { display: block; max-width: 100%; overflow-x: auto; }
+
+h1, h2, h3, h4 {
+    font-family: var(--bwp-font-display);
+    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: -.005em;
+    margin: 0 0 .5em;
+    color: var(--bwp-text);
 }
+
+::selection { background: var(--bwp-accent); color: var(--bwp-on-accent); }
 
 /* ═══════════════════════════════════════════════════════════
-   ACCESSIBILITY UTILITIES
+   ACCESSIBILITY
    ═══════════════════════════════════════════════════════════ */
 
-/* Skip to content link — visually hidden until focused */
 .bwp-skip-link {
-    position: absolute;
-    top: -100%;
-    left: 1em;
-    z-index: 9999;
-    padding: .5em 1em;
-    background: var(--bwp-text);
-    color: var(--bwp-bg);
-    font-family: var(--bwp-font-ui);
-    font-size: .85rem;
-    text-decoration: none;
-    border-radius: 0 0 4px 4px;
-    transition: top .1s;
+    position: absolute; left: 1rem; top: -4rem;
+    padding: .7em 1.2em;
+    background: var(--bwp-text); color: var(--bwp-on-ink);
+    border-radius: var(--bwp-pill);
+    font-family: var(--bwp-font-ui); font-size: .9rem;
+    z-index: 1000;
+    transition: top .15s;
 }
-.bwp-skip-link:focus { top: 0; outline: 3px solid var(--bwp-link); outline-offset: 2px; }
+.bwp-skip-link:focus { top: 1rem; color: var(--bwp-on-ink); outline: 2px solid var(--bwp-accent); outline-offset: 2px; }
 
-/* Screen-reader only text — visually hidden but available to AT */
-.bwp-screen-reader-text {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0,0,0,0);
-    white-space: nowrap;
-    border: 0;
+.bwp-screen-reader-text, .screen-reader-text {
+    position: absolute !important; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }
 
-/* Global focus-visible — 2.4.11 (AA, WCAG 2.2) and 2.4.7 */
-:focus-visible {
-    outline: 3px solid var(--bwp-link);
-    outline-offset: 2px;
-    border-radius: 2px;
-}
-
-/* ═══════════════════════════════════════════════════════════
-   REDUCED MOTION
-   ═══════════════════════════════════════════════════════════ */
+:focus-visible { outline: 2px solid var(--bwp-link); outline-offset: 3px; border-radius: 4px; }
+a:focus-visible, button:focus-visible { border-radius: var(--bwp-pill); }
 
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
@@ -143,584 +148,482 @@ body {
     }
 }
 
-a { color: var(--bwp-link); text-decoration: none; transition: color .18s; }
-a:hover { color: var(--bwp-link-hover); }
-img { max-width: 100%; height: auto; display: block; }
-iframe, video, embed, object, svg { max-width: 100%; }
-.bwp-work__content table { display: block; max-width: 100%; overflow-x: auto; }
+/* ═══════════════════════════════════════════════════════════
+   PILL PRIMITIVES
+   One vocabulary reused by nav, badges, tags, chips, buttons.
+   ═══════════════════════════════════════════════════════════ */
 
+.bwp-pill,
+.bwp-badge,
+.bwp-tag,
+.bwp-analytics__item,
+.bwp-toc__cat,
+.bwp-toc__year,
+.bwp-related__item a,
+.bwp-archive-list__meta > span,
+.bwp-page-links span,
+.bwp-page-links a,
+.nav-links .page-numbers,
+.bwp-nav__list a,
+.bwp-footer-nav__list a {
+    display: inline-flex; align-items: center; gap: .45em;
+    font-family: var(--bwp-font-ui);
+    font-size: .68rem; font-weight: 500;
+    letter-spacing: .1em; text-transform: uppercase;
+    line-height: 1;
+    padding: .55em .95em;
+    border-radius: var(--bwp-pill);
+    border: 1px solid var(--bwp-border);
+    color: var(--bwp-text);
+    background: transparent;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+/* filled variants */
+.bwp-badge {
+    background: var(--bwp-badge); color: var(--bwp-badge-ink);
+    border-color: transparent; font-weight: 600;
+}
+.bwp-badge--sm { font-size: .6rem; padding: .45em .8em; }
+
+/* per-form badge colours */
+.bwp-badge--puisi      { background: #1a2a6c; }
+.bwp-badge--syair      { background: #8b2635; }
+.bwp-badge--karmina    { background: #c9971c; color: #1a1f3a; }
+.bwp-badge--hikayat    { background: #6b4a2e; }
+.bwp-badge--cerpen     { background: #2d5a6e; }
+.bwp-badge--novel      { background: #1f4d3f; }
+.bwp-badge--nukilan    { background: #5a4a7a; }
+.bwp-badge--ratapan    { background: #3a3f5c; }
+.bwp-badge--esei       { background: #4a4a4a; }
+.bwp-badge--memoir     { background: #8b6b4a; }
+.bwp-badge--terjemahan { background: #2f5d50; }
+
+.bwp-tag {
+    background: var(--bwp-bg-subtle); border-color: transparent;
+}
+.bwp-tag:hover { background: var(--bwp-text); color: var(--bwp-on-ink); }
+.bwp-tag--lg { font-size: .9rem; padding: .6em 1.2em; text-transform: none; letter-spacing: .02em; font-family: var(--bwp-font-display); }
+
+.bwp-analytics__item,
+.bwp-toc__cat,
+.bwp-toc__year,
+.bwp-archive-list__meta > span {
+    color: var(--bwp-muted);
+}
+
+/* buttons */
+.bwp-btn,
+.bwp-search-form__btn,
+.bwp-share__btn,
+.comment-respond .submit {
+    display: inline-flex; align-items: center; justify-content: center; gap: .5em;
+    font-family: var(--bwp-font-ui); font-size: .72rem; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+    min-height: 44px; padding: 0 1.4em;
+    border-radius: var(--bwp-pill); border: none;
+    background: var(--bwp-text); color: var(--bwp-on-ink);
+    cursor: pointer;
+    transition: background .18s, color .18s, transform .18s;
+}
+.bwp-btn:hover,
+.bwp-search-form__btn:hover,
+.bwp-share__btn:hover,
+.comment-respond .submit:hover { background: var(--bwp-link); color: var(--bwp-on-ink); }
+.bwp-btn--accent { background: var(--bwp-accent); color: var(--bwp-on-accent); }
+.bwp-btn--ghost  { background: transparent; color: var(--bwp-text); border: 1px solid var(--bwp-ui-border); }
+
+/* inputs */
+.bwp-search-form__input,
+.bwp-cf-input,
+.bwp-cf-textarea {
+    font-family: var(--bwp-font); font-size: 1rem;
+    color: var(--bwp-text); background: var(--bwp-bg-raised);
+    border: 1px solid var(--bwp-ui-border);
+    border-radius: var(--bwp-pill);
+    padding: .7em 1.2em; min-height: 44px;
+    width: 100%;
+}
+.bwp-cf-textarea { border-radius: var(--bwp-radius); resize: vertical; }
+.bwp-search-form__input:focus,
+.bwp-cf-input:focus,
+.bwp-cf-textarea:focus { outline: 2px solid var(--bwp-link); outline-offset: 1px; border-color: transparent; }
 
 /* ═══════════════════════════════════════════════════════════
-   MAIN CONTENT LANDMARK
+   PAGE FRAME
    ═══════════════════════════════════════════════════════════ */
+
+.bwp-page-wrap {
+    max-width: 76rem;
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 4vw, 3.5rem) 5rem;
+    animation: bwp-in .35s ease both;
+}
+@keyframes bwp-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
 .bwp-main { display: block; }
 
 /* ═══════════════════════════════════════════════════════════
-   PAGE WRAP
-   ═══════════════════════════════════════════════════════════ */
-
-.bwp-page-wrap {
-    max-width: 40em;
-    margin: 0 auto;
-    padding: 3em 2em 6em;
-    /* Page-level fade-in lives here rather than on body so the LCP element
-       is never at opacity:0 from body's perspective. Chrome's LCP timer
-       starts when the element is visually available; a body opacity:0 keeps
-       the LCP candidate invisible and delays the score. (CWV-03) */
-    animation: bwp-in .35s ease both;
-}
-
-/* ═══════════════════════════════════════════════════════════
-   SITE HEADER — masthead unit (title + nav = one typographic block)
+   SITE HEADER — editorial top bar
+   brand | section label | nav (pills)
    ═══════════════════════════════════════════════════════════ */
 
 .bwp-site-header {
-    text-align: center;
-    margin-bottom: 3em;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: "brand section nav" "blurb blurb blurb";
+    align-items: center;
+    gap: .75rem 1.5rem;
+    padding: 1.1rem 0 1rem;
+    margin-bottom: clamp(2rem, 5vw, 3.5rem);
+    border-bottom: 1px solid var(--bwp-border);
 }
 
-.bwp-site-footer__logo { margin-bottom: 1em; }
-/* height constrained; width: auto preserves ratio. max-height alone with
-   width: auto does not override WP's explicit width attribute — the browser
-   then resizes the element when the image loads, causing a layout shift.
-   Explicit height + width: auto prevents that reflow. (CWV-04) */
-.bwp-site-footer__logo img { height: 60px; width: auto; }
-
-/* Author name — Cinzel at display scale.
-   Sits above the nav strip; together they form the masthead. */
+.bwp-brand { grid-area: brand; display: inline-flex; align-items: center; gap: .7rem; color: var(--bwp-text); }
+.bwp-brand:hover { color: var(--bwp-link); }
+.bwp-brand__mark { width: 40px; height: 40px; flex: none; border-radius: var(--bwp-pill); }
 .bwp-site-header__title {
+    margin: 0;
     font-family: var(--bwp-font-display);
-    font-size: 1.1rem;
-    font-weight: 400;
-    letter-spacing: .22em;
-    text-transform: uppercase;
-    color: var(--bwp-text);
-    margin: 0 0 1.1em;
-    line-height: 1.1;
-}
-.bwp-site-header__title a {
-    color: inherit;
-    text-decoration: none;
-    border: none;
-}
-.bwp-site-header__title a:hover { color: var(--bwp-muted); }
-
-/* Primary nav strip — the lower half of the masthead unit.
-   3px rule above (separates name from nav),
-   4px rule below (grounds the whole block before content). */
-.bwp-nav {
-    border-top:    3px solid var(--bwp-text);
-    border-bottom: 4px solid var(--bwp-text);
-    padding: .45em 0;
-    margin-bottom: 0;
+    font-size: 1.2rem; font-weight: 500;
+    letter-spacing: 0; text-transform: none;
+    line-height: 1.1; color: inherit;
 }
 
-.bwp-nav__list {
-    list-style: none;
-    margin:  0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0 1.8em;
-}
-
-.bwp-nav__list li { margin: 0; }
-
-.bwp-nav__list a {
-    font-family:     var(--bwp-font-ui);
-    font-size:       .72rem;
-    font-weight:     400;
-    letter-spacing:  .1em;
-    text-transform:  uppercase;
-    color:           var(--bwp-text);
-    text-decoration: none;
-    border:          none;
-    padding:         .4em 0; /* Increased from .15em — meets SC 2.5.8 24px minimum on mobile */
-    display:         inline-block;
-    transition:      color .15s;
-}
-.bwp-nav__list a:hover,
-.bwp-nav__list .current-menu-item > a,
-.bwp-nav__list .current_page_item > a {
-    color: var(--bwp-muted);
-}
-
-/* Dropdown sub-menus — two levels only */
-.bwp-nav__list .sub-menu {
-    display:          none;
-    position:         absolute;
-    top:              100%;
-    left:             50%;
-    transform:        translateX(-50%);
-    background:       var(--bwp-bg);
-    border:           1px solid var(--bwp-border);
-    padding:          .4em 0;
-    min-width:        10em;
-    text-align:       left;
-    list-style:       none;
-    z-index:          100;
-}
-.bwp-nav__list li { position: relative; }
-.bwp-nav__list li:hover > .sub-menu,
-/* :focus-within exposes sub-menus to keyboard users tabbing into child items.
-   Without this, sub-menu links are unreachable without a pointer. (W-01 / SC 2.1.1) */
-.bwp-nav__list li:focus-within > .sub-menu,
-/* M-12: Touch sub-menu reveal. JS sets data-touch-open="1" on first tap of a
-   parent item, allowing the sub-menu to show before the link navigates. */
-.bwp-nav__list li[data-touch-open="1"] > .sub-menu { display: block; }
-.bwp-nav__list .sub-menu a {
-    display:     block;
-    padding:     .35em .9em;
-    font-size:   .68rem;
-}
-
-/* Back link retired — nav provides home route.
-   Selector kept (display:none) in case markup lingers in child themes. */
-.bwp-back-link { display: none; }
-
-.bwp-chapter-blurb {
-    font-style: italic;
+.bwp-site-header__section {
+    grid-area: section;
+    margin: 0;
     text-align: center;
-    max-width: 24em;
-    margin: .9em auto 0;
+    font-family: var(--bwp-font-ui);
+    font-size: .68rem; letter-spacing: .2em; text-transform: uppercase;
     color: var(--bwp-muted);
-    font-size: .88em;
-    line-height: 1.55;
 }
-.bwp-chapter-blurb p { text-indent: 0; margin-top: .2em; }
+
+.bwp-nav-toggle { display: none; }
+
+.bwp-nav { grid-area: nav; }
+.bwp-nav__list {
+    list-style: none; margin: 0; padding: 4px;
+    display: flex; flex-wrap: wrap; gap: 2px;
+    background: var(--bwp-bg-subtle);
+    border-radius: var(--bwp-pill);
+}
+.bwp-nav__list li { margin: 0; position: relative; }
+.bwp-nav__list a {
+    border-color: transparent;
+    padding: .75em 1.1em;
+    min-height: 36px;
+    transition: background .15s, color .15s;
+}
+.bwp-nav__list a:hover { background: var(--bwp-bg-raised); color: var(--bwp-link); }
+.bwp-nav__list .current-menu-item > a,
+.bwp-nav__list .current_page_item > a,
+.bwp-nav__list .current-menu-ancestor > a {
+    background: var(--bwp-text); color: var(--bwp-on-ink);
+}
+
+/* dropdowns */
+.bwp-nav__list .sub-menu {
+    display: none; position: absolute; top: calc(100% + 6px); left: 0;
+    min-width: 12em; margin: 0; padding: 6px; list-style: none;
+    background: var(--bwp-bg-raised); border: 1px solid var(--bwp-border);
+    border-radius: var(--bwp-radius); box-shadow: var(--bwp-shadow-lg);
+    z-index: 50;
+}
+.bwp-nav__list li:hover > .sub-menu,
+.bwp-nav__list li:focus-within > .sub-menu,
+.bwp-nav__list li[data-touch-open="1"] > .sub-menu { display: block; }
+.bwp-nav__list .sub-menu a { display: flex; width: 100%; white-space: normal; }
+
+/* category blurb under the header on single works */
+.bwp-chapter-blurb {
+    grid-area: blurb;
+    max-width: var(--bwp-measure);
+    margin: 0 auto;
+    font-style: italic; font-size: 1rem; text-align: center;
+    color: var(--bwp-muted);
+}
+.bwp-chapter-blurb p { margin: 0; }
 
 /* ═══════════════════════════════════════════════════════════
-   BOOK TITLE — front-page hero
+   FRONT PAGE — hero + jalur pills + table of contents
    ═══════════════════════════════════════════════════════════ */
 
 .bwp-book-title {
-    text-align: center;
-    padding: 4em 2em 3em;
-    margin: 0 -2em 3.5em;         /* bleed to page-wrap edges */
-    background: var(--bwp-bg-subtle);
-    border-bottom: 1px solid var(--bwp-border);
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1rem 1.5rem;
+    align-items: end;
+    padding: clamp(1rem, 3vw, 2.5rem) 0 clamp(1.5rem, 3vw, 2.5rem);
+    margin-bottom: 1.75rem;
+    border-bottom: 1px solid var(--bwp-text);
+    overflow: hidden;
 }
-
+.bwp-book-title__jawi {
+    position: absolute; right: -.05em; top: 0;
+    font-family: var(--bwp-font-jawi);
+    font-size: clamp(6rem, 15vw, 12rem); line-height: 1.1;
+    color: var(--bwp-link); opacity: .055;
+    pointer-events: none; user-select: none; white-space: nowrap;
+}
 .bwp-book-title__name {
-    font-family: var(--bwp-font-display);
-    font-size: clamp(2rem, 1.2rem + 3.6vw, 3.4rem);
-    font-weight: 400;
-    line-height: 1.12;
-    letter-spacing: .04em;
-    margin: 0 0 .45em;
-    color: var(--bwp-text);
-    padding-bottom: .45em;
-    border-bottom: 2px solid var(--bwp-border-ink);
-    display: inline-block;
+    grid-column: 1 / span 12;
+    font-size: clamp(2.8rem, 8.5vw, 7.5rem);
+    line-height: .92; letter-spacing: -.02em;
+    margin: 0;
+    font-variation-settings: 'opsz' 144, 'SOFT' 60;
+    position: relative;
 }
-
+.bwp-book-title__name em { font-style: italic; font-weight: 300; }
 .bwp-book-title__desc {
-    font-family: var(--bwp-font);
-    font-style: italic;
-    font-size: 1.15em;
-    color: var(--bwp-muted);
-    margin-top: .6em;
-    line-height: 1.4;
+    grid-column: 1 / span 12;
+    font-family: var(--bwp-font-display);
+    font-style: italic; font-size: clamp(1.15rem, 2vw, 1.5rem);
+    color: var(--bwp-muted); position: relative;
+}
+.bwp-book-title__meta {
+    grid-column: 1 / span 12;
+    display: flex; flex-wrap: wrap; gap: .4rem; position: relative;
+    font-family: var(--bwp-font-ui); font-size: .68rem;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--bwp-muted);
+}
+@media screen and (min-width: 52em) {
+    .bwp-book-title__name { grid-column: 3 / span 10; text-align: right; }
+    .bwp-book-title__desc { grid-column: 1 / span 6; grid-row: 2; }
+    .bwp-book-title__meta { grid-column: 8 / span 5; grid-row: 2; justify-self: end; }
 }
 
-/* ═══════════════════════════════════════════════════════════
-   FRONT BLURB
-   ═══════════════════════════════════════════════════════════ */
+/* jalur tema — categories as pills, generated by index.php */
+.bwp-jalur {
+    display: flex; flex-wrap: wrap; gap: .4rem; align-items: center;
+    margin: 0 0 2.5rem;
+    padding: 0; list-style: none;
+}
+.bwp-jalur__label {
+    font-family: var(--bwp-font-ui); font-size: .62rem; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--bwp-muted); margin-right: .4rem;
+}
+.bwp-jalur__link {
+    display: inline-flex; align-items: center; gap: .5em;
+    font-family: var(--bwp-font-ui); font-size: .7rem; font-weight: 500;
+    letter-spacing: .08em; text-transform: uppercase;
+    padding: .7em 1.1em; min-height: 36px;
+    border-radius: var(--bwp-pill);
+    background: var(--bwp-bg-subtle); color: var(--bwp-text);
+    transition: background .15s, color .15s;
+}
+.bwp-jalur__link:hover { background: var(--bwp-text); color: var(--bwp-on-ink); }
+.bwp-jalur__count {
+    font-size: .62rem; padding: .25em .6em; border-radius: var(--bwp-pill);
+    background: var(--bwp-bg-raised); color: var(--bwp-muted);
+}
+.bwp-jalur__link:hover .bwp-jalur__count { background: rgba(255,255,255,.15); color: inherit; }
 
 .bwp-front-blurb {
-    max-width: 34em;
-    margin: 0 auto 2.5em;
-    text-align: center;
-    font-size: 1.04em;
-    line-height: 1.65;
-    color: var(--bwp-text-mid);
+    max-width: 44em;
+    margin: 0 0 2.5rem;
+    font-size: 1.25rem; line-height: 1.6; color: var(--bwp-text-mid);
 }
-.bwp-front-blurb p { text-indent: 0; margin-top: .8em; }
+.bwp-front-blurb p { margin: 0 0 .8em; }
+.bwp-front-blurb p:last-child { margin-bottom: 0; }
+
+.bwp-toc-header {
+    display: flex; align-items: center; gap: 1rem;
+    font-size: 1.5rem; margin: 0 0 1.25rem;
+}
+.bwp-toc-header::after {
+    content: ''; flex: 1 1 0; height: 1px; background: var(--bwp-border);
+}
+
+/* grouped TOC → cards in two columns on wide screens */
+@media screen and (min-width: 52em) {
+    .bwp-toc-wrap { columns: 2; column-gap: 1.25rem; }
+}
+.bwp-toc-group {
+    background: var(--bwp-bg-raised);
+    border: 1px solid var(--bwp-border-faint);
+    border-radius: var(--bwp-radius-lg);
+    padding: 1.4rem 1.5rem 1rem;
+    margin-bottom: 1.25rem;
+    break-inside: avoid;
+}
+.bwp-toc-group__heading {
+    display: flex; align-items: center; gap: .7rem;
+    font-size: 1.35rem; margin: 0 0 .6rem;
+}
+.bwp-toc-group__label { flex: none; }
+.bwp-toc-group__heading::after {
+    content: ''; order: 2; flex: 1 1 0; height: 1px; background: var(--bwp-border-faint);
+}
+.bwp-toc-group__count {
+    order: 3; flex: none;
+    font-family: var(--bwp-font-ui); font-size: .62rem; letter-spacing: .12em;
+    padding: .35em .8em; border-radius: var(--bwp-pill);
+    border: 1px solid var(--bwp-border); color: var(--bwp-muted);
+}
+.bwp-toc-group__desc {
+    margin: -.2rem 0 .9rem; font-style: italic; font-size: .98rem; color: var(--bwp-muted);
+}
+
+.bwp-toc { list-style: none; margin: 0; padding: 0; }
+.bwp-toc__item { border-top: 1px solid var(--bwp-border-faint); }
+.bwp-toc__item:first-child { border-top: none; }
+.bwp-toc__link {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: .35rem .6rem;
+    padding: .75rem .6rem;
+    margin: 0 -.6rem;
+    border-radius: var(--bwp-radius-sm);
+    color: var(--bwp-text);
+    transition: background .15s;
+}
+.bwp-toc__link:hover { background: var(--bwp-bg-subtle); color: var(--bwp-text); }
+.bwp-toc__title { font-family: var(--bwp-font-display); font-size: 1.18rem; line-height: 1.2; flex: 1 1 12em; min-width: 0; }
+.bwp-toc__year { margin-left: auto; }
+.bwp-toc__excerpt {
+    display: block; padding: 0 .6rem .8rem; margin-top: -.3rem;
+    font-style: italic; font-size: .95rem; color: var(--bwp-muted);
+}
+.bwp-toc__thumb { width: 72px; height: 72px; object-fit: cover; border-radius: var(--bwp-radius-sm); flex: none; }
+.bwp-toc__body { display: flex; flex-wrap: wrap; align-items: baseline; gap: .35rem .6rem; flex: 1 1 0; min-width: 0; }
+.bwp-toc__item--has-thumb .bwp-toc__excerpt { padding-left: calc(72px + 1.2rem); }
+
+/* flat TOC layouts */
+body.bwp-toc-grid .bwp-toc { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+body.bwp-toc-grid .bwp-toc__item,
+body.bwp-toc-masonry .bwp-toc__item {
+    border: 1px solid var(--bwp-border-faint); border-radius: var(--bwp-radius);
+    background: var(--bwp-bg-raised); padding: .4rem .8rem;
+}
+body.bwp-toc-masonry .bwp-toc { position: relative; }
+body.bwp-toc-masonry .bwp-toc__item { width: 49%; margin-bottom: .75rem; }
+@media (max-width: 36em) {
+    body.bwp-toc-grid .bwp-toc { grid-template-columns: 1fr; }
+    body.bwp-toc-masonry .bwp-toc__item { width: 100%; }
+}
+
+/* pagination */
+.nav-links, .bwp-page-links { display: flex; flex-wrap: wrap; gap: .4rem; justify-content: center; margin: 2rem auto; }
+.nav-links .page-numbers.current, .bwp-page-links > span { background: var(--bwp-text); color: var(--bwp-on-ink); border-color: transparent; }
+.nav-links a.page-numbers:hover, .bwp-page-links a:hover { background: var(--bwp-bg-subtle); }
+.nav-links .page-numbers { min-height: 40px; min-width: 40px; justify-content: center; }
+.bwp-inf-status {
+    text-align: center; font-family: var(--bwp-font-ui); font-size: .72rem;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--bwp-muted);
+    padding: 1.5rem 0 2rem; min-height: 2em;
+}
 
 /* ═══════════════════════════════════════════════════════════
-   ORNAMENTS — SVG-based, no font dependency
+   ORNAMENTS — awan larat (scroll) and pucuk rebung (triangles)
    ═══════════════════════════════════════════════════════════ */
 
 .bwp-ornament {
-    text-align: center;
-    margin: 1.8em 0;
-    user-select: none;
-    line-height: 1;
-    color: var(--bwp-ornament);
+    display: flex; justify-content: center; align-items: center; gap: 1rem;
+    margin: 2.5rem auto; color: var(--bwp-ornament);
+    font-size: 1rem; line-height: 1;
 }
-
-.bwp-ornament--fleuron,
-.bwp-ornament--asterism,
-.bwp-ornament--dinkus,
-.bwp-ornament--leaf,
-.bwp-ornament--flower,
-.bwp-ornament--diamond,
-.bwp-ornament--dash {
-    font-size: 1.35em;
-    letter-spacing: .3em;
-    opacity: .55;
+.bwp-ornament::before, .bwp-ornament::after {
+    content: ''; width: 5rem; max-width: 20vw; height: 1px; background: var(--bwp-border);
 }
-
-.bwp-ornament svg {
-    display: inline-block;
-    height: 1.3em;
-    width: auto;
-    fill: currentColor;
-    opacity: .6;
-    vertical-align: middle;
-}
+.bwp-ornament svg { width: auto; height: 1.2em; }
+.bwp-rule { border: 0; height: 1px; background: var(--bwp-border); margin: 2.5rem auto; max-width: var(--bwp-measure); }
 
 /* ═══════════════════════════════════════════════════════════
-   TABLE OF CONTENTS
+   SINGLE WORK — asymmetric opening, then a reading column
    ═══════════════════════════════════════════════════════════ */
 
-.bwp-toc-header {
-    font-family: var(--bwp-font-display);
-    font-size: 1.5rem;
-    font-weight: 400;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: var(--bwp-text);
-    text-align: center;
-    margin: 0 0 1em;
-    padding: .5em 0 .5em;
-    border-bottom: 1px solid var(--bwp-border);
-}
+.bwp-single { position: relative; }
 
-.bwp-toc {
-    list-style: none;
-    margin: 0 0 2.5em;
-    padding: 0;
-    text-align: left;
-}
-
-.bwp-toc__item {
-    border-bottom: 1px solid var(--bwp-border);
-    transition: background .14s;
-}
-.bwp-toc__item:first-child { border-top: 1px solid var(--bwp-border); }
-.bwp-toc__item:hover { background: var(--bwp-bg-subtle); }
-
-.bwp-toc__link {
-    display: flex;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: .4em;
-    padding: .95em .6em;
-    color: var(--bwp-text);
-    transition: color .18s, padding-left .18s;
-}
-.bwp-toc__link:hover { color: var(--bwp-link); padding-left: 1em; }
-
-.bwp-toc__title {
-    font-family: var(--bwp-font);
-    font-size: 1.05em;
-    line-height: 1.3;
-    flex: 1;
-    overflow-wrap: break-word;
-}
-
-.bwp-toc__year {
-    font-family: var(--bwp-font-ui);
-    font-size: .7em;
-    font-style: italic;
-    color: var(--bwp-muted);
-    white-space: nowrap;
-    margin-left: auto;
-}
-
-.bwp-toc__excerpt {
-    display: block;
-    width: 100%;
-    font-size: .79em;
-    font-style: italic;
-    color: var(--bwp-muted);
-    margin-top: .05em;
-    padding-left: .5em;
-}
-
-/* ── TOC thumbnail (grouping = None only) ─────────────────────────────────
-   .bwp-toc__item--has-thumb modifier switches the link to centre-align
-   so the thumbnail and text block sit flush on the vertical axis.
-   .bwp-toc__body wraps title, badge, and year as a flex column inside the link.
-   ─────────────────────────────────────────────────────────────────────── */
-
-.bwp-toc__item--has-thumb .bwp-toc__link {
-    align-items: center;
-    gap:         .75em;
-}
-
-.bwp-toc__thumb {
-    flex-shrink: 0;
-    width:       80px;
-    height:      80px;
-    object-fit:  cover;
-    border-radius: var(--bwp-radius);
-    display:     block;
-}
-
-.bwp-toc__body {
-    flex:        1;
-    display:     flex;
-    flex-wrap:   wrap;
-    align-items: baseline;
-    gap:         .4em;
-    min-width:   0; /* prevent flex blowout on long titles */
-}
-
-/* Excerpt sits below the link row — full width regardless of thumbnail */
-.bwp-toc__item--has-thumb .bwp-toc__excerpt {
-    padding-left: calc( 80px + .75em ); /* align with text, not thumbnail edge */
-}
-
-.bwp-toc-group { margin-bottom: 2.5em; }
-
-.bwp-toc-group__heading {
-    display: flex;
-    align-items: center;
-    gap: .6em;
-    font-family: var(--bwp-font-display);
-    font-size: 1rem;
-    font-weight: 400;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    color: var(--bwp-muted);
-    margin-bottom: .5em;
-    padding-bottom: .4em;
-    border-bottom: 1px solid var(--bwp-border-faint);
-}
-
-.bwp-toc-group__count {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 1.6em;
-    height: 1.4em;
-    font-size: .68em;
-    font-weight: 400;
-    border-radius: 0;
-    border: 1px solid var(--bwp-border-ink);
-    background: transparent;
-    color: var(--bwp-muted);
-    padding: 0 .35em;
-}
-
-.bwp-toc-group__desc {
-    font-style: italic;
-    font-size: .83em;
-    color: var(--bwp-muted);
-    margin: -.1em 0 .6em;
-    line-height: 1.45;
-}
-
-.bwp-toc__cat {
-    font-family: var(--bwp-font-ui);
-    font-size: .62em;
-    text-transform: uppercase;
-    letter-spacing: .07em;
-    color: var(--bwp-muted);
-    border: 1px solid var(--bwp-border);
-    padding: .1em .5em;
-    border-radius: 2em;
-    white-space: nowrap;
-}
-
-/* ═══════════════════════════════════════════════════════════
-   BADGES
-   ═══════════════════════════════════════════════════════════ */
-
-.bwp-badge {
-    display: inline-flex;
-    align-items: center;
-    padding: .15em .6em;
-    font-family: var(--bwp-font-display);
-    font-size: .65em;
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: .1em;
-    border-radius: 2em; /* pill — matches tag pill register */
-    border: 1px solid var(--bwp-border);
-    color: var(--bwp-muted);
-    background: transparent;
-    white-space: nowrap;
-    vertical-align: middle;
-    line-height: 1.55;
-}
-.bwp-badge--sm      { font-size: .58em; padding: .12em .5em; }
-.bwp-badge--puisi   { border-color: var(--bwp-accent); color: var(--bwp-accent); }
-.bwp-badge--nukilan { border-color: var(--bwp-border-ink); color: var(--bwp-text-mid); }
-.bwp-badge--ratapan { border-color: var(--bwp-border-ink); color: var(--bwp-text-mid); }
-
-/* ═══════════════════════════════════════════════════════════
-   ANALYTICS BAR
-   ═══════════════════════════════════════════════════════════ */
-
-.bwp-analytics {
-    display:         flex;
-    flex-wrap:       wrap;
-    align-items:     center;
-    justify-content: flex-start;
-    gap:             .3em .9em;
-    margin-bottom:   2em;
-    padding:         .65em 0;
-    border-top:      1px solid var(--bwp-border-faint);
-    border-bottom:   1px solid var(--bwp-border-faint);
-}
-
-.bwp-analytics__item {
-    font-family: var(--bwp-font-ui);
-    font-size: .75em;
-    text-transform: uppercase;
-    letter-spacing: .09em;
-    color: var(--bwp-muted);
-}
-
-.bwp-analytics__cat {
-    font-family: var(--bwp-font-ui);
-    font-size: .75em;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: .09em;
-    color: var(--bwp-accent);
-}
-
-/* ═══════════════════════════════════════════════════════════
-   NOTA PENULIS
-   Full-width banner between analytics bar and body content.
-   Stretches across the full page wrap — no column constraint.
-   ═══════════════════════════════════════════════════════════ */
-
-.bwp-author-note {
-    width:         100%;
-    box-sizing:    border-box;
-    padding:       1.1em 1.5em;
-    margin-bottom: 2em;
-    background:    var(--bwp-bg-subtle);
-    border-top:    2px solid var(--bwp-border);
-    border-bottom: 1px solid var(--bwp-border-faint);
-}
-
-.bwp-author-note__heading {
-    font-family:    var(--bwp-font-ui);
-    font-size:      .7em;
-    font-weight:    600;
-    text-transform: uppercase;
-    letter-spacing: .13em;
-    color:          var(--bwp-muted);
-    margin:         0 0 .45em;
-    padding:        0;
-}
-
-.bwp-author-note__text {
-    font-family: var(--bwp-font);
-    font-size:   .92em;
-    font-style:  italic;
-    line-height: 1.65;
-    color:       var(--bwp-text-mid);
-    margin:      0;
-}
-
-/* ═══════════════════════════════════════════════════════════
-   EPIGRAPH
-   ═══════════════════════════════════════════════════════════ */
-
-.bwp-epigraph {
-    max-width: 28em;
-    margin: 0 auto 2em;
-    padding: 1em 0 1em 1.6em;
-    border-left: 2px solid var(--bwp-stone);
-    font-style: italic;
-    font-size: .95em;
-    line-height: 1.7;
-    color: var(--bwp-text-mid);
-    background: none;
-}
-.bwp-epigraph__text p { text-indent: 0; margin: .25em 0; }
-.bwp-epigraph__source {
-    display: block;
-    margin-top: .7em;
-    font-family: var(--bwp-font-ui);
-    font-size: .8em;
-    font-style: normal;
-    letter-spacing: .03em;
-    color: var(--bwp-muted);
-}
-
-/* ═══════════════════════════════════════════════════════════
-   DEDICATION
-   ═══════════════════════════════════════════════════════════ */
-
-.bwp-dedication {
-    text-align: center;
-    font-style: italic;
-    font-size: .93em;
-    color: var(--bwp-muted);
-    margin-bottom: 2em;
-    letter-spacing: .01em;
-    padding-bottom: .6em;
-}
-.bwp-dedication::after {
-    content: '';
-    display: block;
-    width: 2em;
-    height: 1px;
-    background: var(--bwp-border);
-    margin: .7em auto 0;
-}
-
-/* ═══════════════════════════════════════════════════════════
-   FEATURED IMAGE
-   ═══════════════════════════════════════════════════════════ */
-
-.bwp-featured-image {
-    margin: 0 0 2em;
-    /* aspect-ratio reserves vertical space before the image loads,
-       preventing a CLS event when the image dimensions are known.
-       WordPress injects width/height on the <img> automatically
-       from attachment metadata; aspect-ratio on the <figure> acts
-       as a belt-and-braces fallback for missing metadata.
-       MUST match add_image_size( 'book-wp-cover', 800, 400 ) — 2:1.
-       If the registered crop dimensions ever change, update this
-       value in the same commit. (CWV-02) */
-    aspect-ratio: 2 / 1;
+.bwp-work__opening {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1rem 1.5rem;
+    align-items: end;
+    padding-bottom: 1.75rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--bwp-text);
     overflow: hidden;
 }
-.bwp-featured-image__img {
-    border-radius: 6px; /* explicit — independent of --bwp-radius token */
-    box-shadow: var(--bwp-shadow-lg);
-    width: 100%;
-    height: auto;
+/* Jawi watermark from data-jawi on the opening */
+.bwp-work__opening[data-jawi]::before {
+    content: attr(data-jawi);
+    position: absolute; left: -.05em; top: 0;
+    font-family: var(--bwp-font-jawi);
+    font-size: clamp(6rem, 14vw, 11rem); line-height: 1.1;
+    color: var(--bwp-link); opacity: .06;
+    pointer-events: none; user-select: none; white-space: nowrap;
+    direction: rtl;
 }
-.bwp-featured-image__caption {
-    font-family: var(--bwp-font-ui);
-    font-size: .75em;
-    font-style: italic;
-    color: var(--bwp-muted);
-    margin-top: .5em;
-    text-align: center;
+.bwp-work__meta { grid-column: 1 / span 12; display: flex; flex-direction: column; gap: .7rem; position: relative; }
+.bwp-citation-label {
+    margin: 0;
+    font-family: var(--bwp-font-ui); font-size: .66rem; letter-spacing: .2em;
+    text-transform: uppercase; color: var(--bwp-muted);
 }
-
-/* ═══════════════════════════════════════════════════════════
-   WORK TITLE & CONTENT
-   ═══════════════════════════════════════════════════════════ */
-
 .bwp-work__title {
-    font-family: var(--bwp-font-display);
-    font-size: clamp(1.7rem, 1.1rem + 2.4vw, 2.6rem); /* fluid: ~27px at 390px → 41.6px at 1000px+ */
-    font-weight: 400;
-    text-align: left;
-    line-height: 1.15;
-    margin: 0 0 .8em;
-    letter-spacing: .03em;
-    color: var(--bwp-text);
+    grid-column: 1 / span 12;
+    position: relative;
+    margin: 0;
+    font-size: clamp(2.4rem, 7vw, 6.25rem);
+    line-height: .95; letter-spacing: -.02em;
+    font-variation-settings: 'opsz' 144, 'SOFT' 50;
+    text-wrap: balance;
+}
+@media screen and (min-width: 52em) {
+    .bwp-work__meta  { grid-column: 1 / span 4; align-self: end; }
+    .bwp-work__title { grid-column: 5 / span 8; text-align: right; }
 }
 
-.bwp-work__content { line-height: var(--bwp-lh); color: var(--bwp-text-mid); overflow-wrap: break-word; }
-.bwp-work__content p { margin: 0; }
-.bwp-work__content p + p { text-indent: 2.4em; }
+/* analytics bar → chips */
+.bwp-analytics { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; }
+.bwp-analytics__cat { background: var(--bwp-bg-subtle); border-color: transparent; color: var(--bwp-text); }
 
+/* reading column */
+.bwp-author-note,
+.bwp-dedication,
+.bwp-epigraph,
+.bwp-featured-image,
+.bwp-terjemahan,
+.bwp-work__content,
+.bwp-tags,
+.bwp-share,
+.bwp-colophon,
+.bwp-related,
+.bwp-work-nav,
+.bwp-comments,
+.bwp-page-links,
+.bwp-foreword__content,
+.bwp-colophon-page__content,
+.bwp-edit-link,
+.bwp-sidebar,
+.bwp-footer-widgets {
+    max-width: var(--bwp-measure);
+    margin-left: auto; margin-right: auto;
+}
+
+.bwp-work__content {
+    font-size: 1.2rem;
+    line-height: var(--bwp-lh);
+    color: var(--bwp-text-mid);
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+.bwp-work__content p { margin: 0 0 1.1em; }
+.bwp-work__content h2, .bwp-work__content h3 { margin-top: 1.8em; }
+.bwp-work__content blockquote {
+    margin: 1.6em 0; padding: 1.2em 1.5em;
+    border-radius: var(--bwp-radius);
+    background: var(--bwp-bg-subtle);
+    font-family: var(--bwp-font-display); font-style: italic; font-size: 1.15em; line-height: 1.4;
+}
+.bwp-work__content a { text-decoration: underline; text-underline-offset: .18em; text-decoration-thickness: 1px; text-decoration-color: var(--bwp-accent); }
+.bwp-work__content figure { margin: 1.6em 0; }
+.bwp-work__content img { border-radius: var(--bwp-radius); }
+.bwp-work__content hr { border: 0; height: 22px; margin: 2.5em auto; width: 200px; background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='22' viewBox='0 0 200 22'><path d='M4 12c10-12 20-12 30 0s20 12 30 0 20-12 30 0 20 12 30 0 20-12 30 0' fill='none' stroke='%23c9971c' stroke-width='1.3'/></svg>") center / contain no-repeat; }
+
+/* drop cap — rounded ink tile */
 .bwp-dropcap-cerpen.bwp-form-cerpen   .bwp-work__content > p:first-of-type::first-letter,
 .bwp-dropcap-novel.bwp-form-novel     .bwp-work__content > p:first-of-type::first-letter,
 .bwp-dropcap-hikayat.bwp-form-hikayat .bwp-work__content > p:first-of-type::first-letter,
@@ -729,1773 +632,476 @@ iframe, video, embed, object, svg { max-width: 100%; }
 .bwp-dropcap-nukilan.bwp-form-nukilan .bwp-work__content > p:first-of-type::first-letter,
 .bwp-dropcap-force-on                 .bwp-work__content > p:first-of-type::first-letter {
     float: left;
-    font-family: var(--bwp-dropcap-font, inherit);
-    font-size: 3.5em;
-    line-height: .84;
-    padding-right: .07em;
-    margin-top: .05em;
-    font-weight: 400;
-    color: var(--bwp-text);
+    font-family: var(--bwp-dropcap-font, var(--bwp-font-display));
+    font-weight: 500;
+    font-size: 3.6em; line-height: .8;
+    padding: .18em .2em .1em .18em;
+    margin: .1em .35em 0 0;
+    border-radius: .3em .3em .3em .08em;
+    background: var(--bwp-link); color: var(--bwp-on-ink);
 }
-
-/* Per-post force-off overrides everything including form setting */
 .bwp-dropcap-force-off .bwp-work__content > p:first-of-type::first-letter {
-    float: none;
-    font-size: inherit;
-    line-height: inherit;
-    padding-right: 0;
-    margin-top: 0;
+    float: none; font-size: inherit; padding: 0; margin: 0; background: none; color: inherit; border-radius: 0;
 }
 
-.bwp-form-puisi .bwp-work__content p + p,
-.bwp-form-syair .bwp-work__content p + p,
-.bwp-form-karmina .bwp-work__content p + p,
-.bwp-form-ratapan .bwp-work__content p + p { text-indent: 0; }
-
-/* ── Poetry — core typographic rules ──────────────────────────────────── */
-
-/* Ragged-right always — never justify verse, never hyphenate mid-line */
-.bwp-form-puisi .bwp-work__content,
-.bwp-form-syair .bwp-work__content,
-.bwp-form-karmina .bwp-work__content,
-.bwp-form-ratapan .bwp-work__content {
-    text-align: left;
-    hyphens: none;
-    -webkit-hyphens: none;
-    -ms-hyphens: none;
+/* apparatus blocks */
+.bwp-author-note {
+    margin-bottom: 1.75rem; padding: 1.1rem 1.4rem;
+    background: var(--bwp-bg-subtle); border-radius: var(--bwp-radius);
 }
-
-/* Narrower reading column — verse needs less width than prose */
-.bwp-form-puisi .bwp-work__content,
-.bwp-form-syair .bwp-work__content,
-.bwp-form-karmina .bwp-work__content,
-.bwp-form-ratapan .bwp-work__content {
-    max-width: 32rem;
-    margin-left: auto;
-    margin-right: auto;
+.bwp-author-note__heading {
+    margin: 0 0 .35rem; font-family: var(--bwp-font-ui); font-size: .62rem;
+    font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--bwp-muted);
 }
+.bwp-author-note__text { font-style: italic; color: var(--bwp-text-mid); }
+.bwp-author-note__text p { margin: 0; }
 
-/* ── Per-form indent conventions ──────────────────────────────────────── */
+.bwp-dedication { text-align: center; font-style: italic; color: var(--bwp-muted); margin-bottom: 1.5rem; }
 
-/* Karmina — 2-line couplet, centred is the classical print convention */
-.bwp-form-karmina .bwp-work__content {
-    text-align: center;
-}
-
-/* Syair — 4-line stanza, classical Malay collections use a slight indent
-   to distinguish the verse column from surrounding prose margins */
-.bwp-form-syair .bwp-work__content {
-    padding-left: 2em;
-}
-
-/* ── Poetry line height — independent from prose (--bwp-lh) ───────────── */
-
-.bwp-poetry-lh-tight.bwp-form-puisi .bwp-work__content,
-.bwp-poetry-lh-tight.bwp-form-syair .bwp-work__content,
-.bwp-poetry-lh-tight.bwp-form-karmina .bwp-work__content,
-.bwp-poetry-lh-tight.bwp-form-ratapan .bwp-work__content { line-height: 1.55; }
-
-.bwp-poetry-lh-normal.bwp-form-puisi .bwp-work__content,
-.bwp-poetry-lh-normal.bwp-form-syair .bwp-work__content,
-.bwp-poetry-lh-normal.bwp-form-karmina .bwp-work__content,
-.bwp-poetry-lh-normal.bwp-form-ratapan .bwp-work__content { line-height: 1.65; }
-
-.bwp-poetry-lh-loose.bwp-form-puisi .bwp-work__content,
-.bwp-poetry-lh-loose.bwp-form-syair .bwp-work__content,
-.bwp-poetry-lh-loose.bwp-form-karmina .bwp-work__content,
-.bwp-poetry-lh-loose.bwp-form-ratapan .bwp-work__content { line-height: 1.8; }
-
-/* ── Stanza spacing — the breath between stanzas ─────────────────────── */
-
-.bwp-stanza-tight.bwp-form-puisi .bwp-work__content p + p,
-.bwp-stanza-tight.bwp-form-syair .bwp-work__content p + p,
-.bwp-stanza-tight.bwp-form-karmina .bwp-work__content p + p,
-.bwp-stanza-tight.bwp-form-ratapan .bwp-work__content p + p { margin-top: .7em; }
-
-.bwp-stanza-comfortable.bwp-form-puisi .bwp-work__content p + p,
-.bwp-stanza-comfortable.bwp-form-syair .bwp-work__content p + p,
-.bwp-stanza-comfortable.bwp-form-karmina .bwp-work__content p + p,
-.bwp-stanza-comfortable.bwp-form-ratapan .bwp-work__content p + p { margin-top: 1.6em; }
-
-.bwp-stanza-spacious.bwp-form-puisi .bwp-work__content p + p,
-.bwp-stanza-spacious.bwp-form-syair .bwp-work__content p + p,
-.bwp-stanza-spacious.bwp-form-karmina .bwp-work__content p + p,
-.bwp-stanza-spacious.bwp-form-ratapan .bwp-work__content p + p { margin-top: 2.6em; }
-
-/* ── Poetry alignment ─────────────────────────────────────────────────── */
-
-.bwp-poetry-centred.bwp-form-puisi .bwp-work__content,
-.bwp-poetry-centred.bwp-form-syair .bwp-work__content,
-.bwp-poetry-centred.bwp-form-karmina .bwp-work__content,
-.bwp-poetry-centred.bwp-form-ratapan .bwp-work__content { text-align: center; }
-
-/* ── Stanza numbering ─────────────────────────────────────────────────── */
-
-.bwp-stanza-nums.bwp-form-puisi .bwp-work__content,
-.bwp-stanza-nums.bwp-form-syair .bwp-work__content,
-.bwp-stanza-nums.bwp-form-karmina .bwp-work__content,
-.bwp-stanza-nums.bwp-form-ratapan .bwp-work__content { counter-reset: stanza; }
-
-.bwp-stanza-nums.bwp-form-puisi .bwp-work__content > p,
-.bwp-stanza-nums.bwp-form-syair .bwp-work__content > p,
-.bwp-stanza-nums.bwp-form-karmina .bwp-work__content > p,
-.bwp-stanza-nums.bwp-form-ratapan .bwp-work__content > p {
-    counter-increment: stanza;
-    position: relative;
-    padding-left: 2.5em;
-}
-.bwp-stanza-nums.bwp-form-puisi .bwp-work__content > p::before,
-.bwp-stanza-nums.bwp-form-syair .bwp-work__content > p::before,
-.bwp-stanza-nums.bwp-form-karmina .bwp-work__content > p::before,
-.bwp-stanza-nums.bwp-form-ratapan .bwp-work__content > p::before {
-    content: counter(stanza);
-    position: absolute;
-    left: 0; top: 0;
-    font-family: var(--bwp-font-ui);
-    font-size: .7em;
-    color: var(--bwp-muted);
-    width: 2em;
-    text-align: right;
-}
-
-/* ── [verse] shortcode — num outdented into left margin ──────────────── */
-
-.bwp-work__content blockquote {
-    margin: 1.5em 0 1.5em 1.5em;
-    font-style: italic;
-    border-left: 2px solid var(--bwp-stone);
-    padding-left: 1em;
+.bwp-epigraph {
+    text-align: center; margin-bottom: 2.25rem; max-width: 28em;
+    font-family: var(--bwp-font-display); font-style: italic; font-size: 1.2rem; line-height: 1.5;
     color: var(--bwp-text-mid);
 }
-.bwp-work__content h2, .bwp-work__content h3, .bwp-work__content h4 {
-    margin: 2em 0 .6em;
-    font-weight: 400;
-    line-height: 1.25;
-}
-.bwp-work__content h2 { font-size: 1.5em; }
-.bwp-work__content h3 { font-size: 1.22em; }
-.bwp-work__content h4 { font-size: 1.05em; font-style: italic; }
-.bwp-work__content ul, .bwp-work__content ol { margin: 1em 0; padding-left: 2em; }
-.bwp-work__content li { list-style-type: disc; }
-
-/* Accessibility — underline links within all prose/text-bearing contexts.
-   SC 1.4.1: when colour is the only visual differentiator between link text and
-   surrounding body text, the colour contrast between the two must be ≥ 3:1.
-   Link #1B3C53 vs body text #111111 is ~1.6:1 — well below threshold. Underline
-   removes the dependency on colour entirely. (W-09)
-   Selectors: post body, comments, chapter blurb, front-page book blurb,
-   footer widgets (arbitrary widget HTML may contain inline links). */
-.bwp-work__content a,
-.bwp-comment__content a,
-.bwp-chapter-blurb a,
-.bwp-book-blurb a,
-.bwp-footer-widget a { text-decoration: underline; }
-
-/* ═══════════════════════════════════════════════════════════
-   TAGS — displayed between work content and colophon
-   ═══════════════════════════════════════════════════════════ */
-
-.bwp-tags {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: .4em .5em;
-    margin: 2em 0 0;
-    padding: 1.5em 0 0;
-    border-top: 1px solid var(--bwp-border-faint);
+.bwp-epigraph__text { margin: 0; }
+.bwp-epigraph__source {
+    display: block; margin-top: .5rem;
+    font-family: var(--bwp-font-ui); font-style: normal; font-size: .66rem;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--bwp-muted);
 }
 
-/* § glyph — full-width flex row above the pills */
-.bwp-tags::before {
-    content: '§';
-    display: block;
-    width: 100%;
-    text-align: center;
-    font-family: var(--bwp-font-display);
-    font-size: .72em;
-    letter-spacing: .12em;
-    color: var(--bwp-muted);
-    margin-bottom: .5em;
-    opacity: .7;
+.bwp-featured-image { margin-bottom: 2rem; }
+.bwp-featured-image img { width: 100%; border-radius: var(--bwp-radius-lg); }
+.bwp-featured-image__caption { margin-top: .5rem; font-size: .9rem; font-style: italic; color: var(--bwp-muted); text-align: center; }
+
+/* translation apparatus */
+.bwp-terjemahan {
+    display: flex; flex-direction: column; gap: .6rem;
+    margin-bottom: 2rem; padding: 1.1rem 1.4rem;
+    border: 1px dashed var(--bwp-accent); border-radius: var(--bwp-radius);
 }
-
-.bwp-tag {
-    display: inline-block;
-    padding: .2em .75em;
-    font-family: var(--bwp-font-ui);
-    font-size: .7rem;
-    font-weight: 600;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: var(--bwp-muted);
-    border: 1px solid var(--bwp-border);
-    border-radius: 20px;
-    text-decoration: none;
-    transition: color .15s, border-color .15s, background .15s;
+.bwp-terjemahan__label {
+    font-family: var(--bwp-font-ui); font-size: .62rem; font-weight: 600;
+    letter-spacing: .2em; text-transform: uppercase; color: var(--bwp-muted);
 }
+.bwp-terjemahan__source { margin: 0; font-family: var(--bwp-font-mono); font-size: .9rem; color: var(--bwp-text-mid); }
+.bwp-terjemahan__note { margin: 0; font-style: italic; font-size: 1rem; color: var(--bwp-text-mid); }
 
-.bwp-tag:hover {
-    color: var(--bwp-text);
-    border-color: var(--bwp-text);
-    background: var(--bwp-bg-subtle);
-    text-decoration: none;
-}
+/* tags */
+.bwp-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: .4rem; margin-top: 2.5rem; }
 
-/* Night mode */
-body.bwp-night .bwp-tag,
-body.bwp-scheme-night .bwp-tag,
-body.bwp-time-night .bwp-tag {
-    color: var(--bwp-muted);
-    border-color: var(--bwp-border);
-}
-
-body.bwp-night .bwp-tag:hover,
-body.bwp-scheme-night .bwp-tag:hover,
-body.bwp-time-night .bwp-tag:hover {
-    color: var(--bwp-text);
-    border-color: var(--bwp-muted);
-    background: transparent;
-}
-
-/* Large pill variant — tag archive header */
-.bwp-tag--lg {
-    font-size: .85rem;
-    padding: .35em 1.25em;
-    border-radius: 30px;
-    pointer-events: none;
-    cursor: default;
-    letter-spacing: .09em;
-}
-
-/* "TAGGED WITH" label above tag archive title — mirrors .bwp-colophon__karmina-label */
-.bwp-archive-header__taxlabel {
-    font-family:    var(--bwp-font-display);
-    font-size:      .68em;
-    text-transform: uppercase;
-    letter-spacing: .12em;
-    color:          var(--bwp-muted);
-    margin:         0 0 .6em;
-}
-
-/* ── Share row ─────────────────────────────────────────────────────────── */
-
-.bwp-share {
-    display: flex;
-    align-items: center;
-    gap: .4rem;
-    margin: 2rem 0 0;
-    padding: 1.25rem 0 0;
-    border-top: 1px solid var(--bwp-border);
-    flex-wrap: wrap;
-}
-
-.bwp-share__label {
-    font-family:    var(--bwp-font-ui);
-    font-size:      .66rem;
-    font-weight:    600;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color:          var(--bwp-muted);
-    margin-right:   .2rem;
-}
-
-.bwp-share__btn {
-    display:         inline-flex;
-    align-items:     center;
-    justify-content: center;
-    width:           44px;   /* icon-only: fixed square, SC 2.5.8 target size */
-    height:          44px;
-    padding:         0;
-    color:           var(--bwp-muted);
-    border:          1px solid var(--bwp-border);
-    border-radius:   var(--bwp-radius);
-    background:      transparent;
-    cursor:          pointer;
-    text-decoration: none;
-    transition:      color .15s, border-color .15s, background .15s;
-    line-height:     1;
-}
-
-.bwp-share__btn:hover,
-.bwp-share__btn:focus-visible {
-    color:       var(--bwp-text);
-    border-color: var(--bwp-text);
-    background:  var(--bwp-bg-subtle);
-    text-decoration: none;
-}
-
-.bwp-share__btn svg { flex-shrink: 0; }
-
-/* Copied confirmation state */
-.bwp-share__copy--copied {
-    color:        var(--bwp-accent);
-    border-color: var(--bwp-accent);
-}
-
-/* Floating "Copied!" tooltip — injected by JS, positioned above the button */
-.bwp-share__btn { position: relative; }
-
+/* share row */
+.bwp-share { display: flex; flex-wrap: wrap; gap: .4rem; justify-content: center; align-items: center; margin-top: 1.5rem; }
+.bwp-share__label { font-family: var(--bwp-font-ui); font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: var(--bwp-muted); margin-right: .3rem; }
+.bwp-share__btn { background: transparent; color: var(--bwp-text); border: 1px solid var(--bwp-border); min-height: 40px; padding: 0 1em; font-size: .66rem; }
+.bwp-share__btn:hover { background: var(--bwp-text); color: var(--bwp-on-ink); }
 .bwp-copy-tip {
-    position:        absolute;
-    bottom:          calc( 100% + 6px );
-    left:            50%;
-    transform:       translateX( -50% ) translateY( 4px );
-    white-space:     nowrap;
-    background:      var(--bwp-text);
-    color:           var(--bwp-bg);
-    font-family:     var(--bwp-font-ui);
-    font-size:       .65rem;
-    font-weight:     500;
-    letter-spacing:  .04em;
-    padding:         .2em .5em;
-    border-radius:   var(--bwp-radius);
-    pointer-events:  none;
-    opacity:         0;
-    transition:      opacity .15s ease, transform .15s ease;
-    z-index:         100;
+    position: fixed; left: 50%; bottom: 5.5rem; transform: translate(-50%, 10px);
+    padding: .6em 1.2em; border-radius: var(--bwp-pill);
+    background: var(--bwp-text); color: var(--bwp-bg);
+    font-family: var(--bwp-font-ui); font-size: .75rem; letter-spacing: .08em;
+    opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; z-index: 120;
 }
+.bwp-copy-tip--visible { opacity: 1; transform: translate(-50%, 0); }
 
-.bwp-copy-tip--visible {
-    opacity:   1;
-    transform: translateX( -50% ) translateY( 0 );
-}
-
-/* Night mode */
-body.bwp-night .bwp-share__btn,
-body.bwp-scheme-night .bwp-share__btn,
-body.bwp-time-night .bwp-share__btn {
-    color:        var(--bwp-muted);
-    border-color: var(--bwp-border);
-}
-
-body.bwp-night .bwp-share__btn:hover,
-body.bwp-night .bwp-share__btn:focus-visible,
-body.bwp-scheme-night .bwp-share__btn:hover,
-body.bwp-scheme-night .bwp-share__btn:focus-visible,
-body.bwp-time-night .bwp-share__btn:hover,
-body.bwp-time-night .bwp-share__btn:focus-visible {
-    color:        var(--bwp-text);
-    border-color: var(--bwp-muted);
-    background:   transparent;
-}
-
-/* Tag archive h1 — neutralised so the pill carries the visual weight */
-.bwp-archive-header--tag .bwp-archive-header__title,
-.bwp-archive-header--search .bwp-archive-header__title {
-    font-size:      1rem;
-    font-weight:    400;
-    letter-spacing: 0;
-    margin:         0 0 .3em;
-}
-
-/* ═══════════════════════════════════════════════════════════
-   COLOPHON
-   ═══════════════════════════════════════════════════════════ */
-
+/* colophon → card of pills */
 .bwp-colophon {
-    margin-top: 4em;
-    padding-top: 0;     /* ornament provides the visual break — no border needed */
-    text-align: center;
-    color: var(--bwp-muted);
-    font-size: .84em;
-}
-/* Colophon ornament — always centred, independent of form ornament override */
-.bwp-colophon .bwp-ornament {
-    text-align: center !important;
-    font-size: 1.3em;
-    letter-spacing: .35em;
-    opacity: .5;
-    margin: 0 0 1.8em;
-}
-
-.bwp-colophon__line {
-    font-family: var(--bwp-font-ui);
-    font-size: .9em;
-    letter-spacing: .03em;
-    margin: .25em 0;
-}
-.bwp-colophon__line em { font-family: var(--bwp-font); font-style: italic; }
-.bwp-colophon__notes {
-    max-width: 27em;
-    margin: 1.4em auto 1.6em;
-    padding: 1.1em 1.4em;
-    background: var(--bwp-bg-subtle);
-    border-top: 2px solid var(--bwp-border);
+    margin-top: 2.5rem; padding: 1.4rem 1.6rem;
+    background: var(--bwp-bg-subtle); border-radius: var(--bwp-radius-lg);
     text-align: left;
-    font-size: .93em;
-    line-height: 1.65;
-    color: var(--bwp-text-mid);
-    border-radius: 0 0 var(--bwp-radius) var(--bwp-radius);
 }
-.bwp-colophon__notes-heading {
-    font-family: var(--bwp-font-ui);
-    font-weight: 600;
-    font-size: .7em;
-    text-transform: uppercase;
-    letter-spacing: .13em;
-    color: var(--bwp-muted);
-    margin: 0 0 .5em;
+.bwp-colophon .bwp-ornament { margin: 0 0 .9rem; justify-content: flex-start; }
+.bwp-colophon .bwp-ornament::before { display: none; }
+.bwp-colophon__line {
+    display: inline-flex; align-items: center; gap: .4em;
+    margin: 0 .3rem .4rem 0;
+    padding: .5em .95em;
+    border-radius: var(--bwp-pill);
+    background: var(--bwp-bg-raised);
+    font-family: var(--bwp-font-ui); font-size: .7rem; letter-spacing: .06em;
+    color: var(--bwp-text);
 }
+.bwp-colophon__line em { font-family: var(--bwp-font); font-style: italic; font-size: 1.05em; letter-spacing: 0; }
+.bwp-colophon__line--dateline { font-family: var(--bwp-font-display); font-size: 1.05rem; letter-spacing: 0; font-style: italic; background: transparent; padding-left: 0; display: flex; width: 100%; }
+.bwp-colophon__notes {
+    margin: .8rem 0 0; padding: .9rem 1.1rem;
+    background: var(--bwp-bg-raised); border-radius: var(--bwp-radius);
+    font-size: .98rem; line-height: 1.6; color: var(--bwp-text-mid);
+}
+.bwp-colophon__notes-heading { margin: 0 0 .3rem; font-family: var(--bwp-font-ui); font-size: .62rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--bwp-muted); }
 .bwp-colophon__notes-text { font-style: italic; }
 
-/* ═══════════════════════════════════════════════════════════
-   RELATED WORKS
-   ═══════════════════════════════════════════════════════════ */
-
-.bwp-related {
-    margin-top: 2.5em;
-    padding: 1.4em 1.5em;
-    background: var(--bwp-bg-subtle);
-    border: 1px solid var(--bwp-border-faint);
-    border-radius: var(--bwp-radius);
-}
+/* related works */
+.bwp-related { margin-top: 1.5rem; }
 .bwp-related__heading {
-    font-family: var(--bwp-font-ui);
-    font-size: .63em;
-    text-transform: uppercase;
-    letter-spacing: .14em;
-    color: var(--bwp-muted);
-    font-weight: 600;
-    margin: 0 0 .9em;
+    font-family: var(--bwp-font-ui); font-size: .62rem; font-weight: 600;
+    letter-spacing: .2em; text-transform: uppercase; color: var(--bwp-muted); margin: 0 0 .7rem;
 }
-.bwp-related__list {
-    list-style: none;
-    margin: 0; padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(12em, 1fr));
-    gap: .4em;
-}
+.bwp-related__list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem; }
 .bwp-related__item a {
-    display: block;
-    padding: .55em .7em;
-    border-radius: var(--bwp-radius);
-    border: 1px solid transparent;
-    transition: background .14s, border-color .14s;
+    font-family: var(--bwp-font-display); font-size: 1rem; letter-spacing: 0; text-transform: none;
+    padding: .55em 1.1em; background: var(--bwp-bg-subtle); border-color: transparent; white-space: normal;
 }
-.bwp-related__item a:hover {
-    background: var(--bwp-bg);
-    border-color: var(--bwp-border-faint);
-}
-.bwp-related__title { font-family: var(--bwp-font); font-size: .94em; color: var(--bwp-text); display: block; }
-.bwp-related__year  { font-family: var(--bwp-font-ui); font-size: .74em; color: var(--bwp-muted); font-style: italic; }
+.bwp-related__item a:hover { background: var(--bwp-text); color: var(--bwp-on-ink); }
+.bwp-related__year { font-family: var(--bwp-font-ui); font-size: .66rem; color: var(--bwp-muted); }
+.bwp-related__item a:hover .bwp-related__year { color: inherit; opacity: .8; }
 
-/* ═══════════════════════════════════════════════════════════
-   WORK NAVIGATION
-   ═══════════════════════════════════════════════════════════ */
-
+/* previous / next → pill cards */
 .bwp-work-nav {
-    display: flex;
-    justify-content: space-between;
-    gap: 1em;
-    margin-top: 4em;
-    padding-top: 1.4em;
-    border-top: 1px solid var(--bwp-border);
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem;
+    margin-top: 2rem;
 }
 .bwp-work-nav__link {
-    display: flex;
-    flex-direction: column;
-    max-width: 48%;
-    text-decoration: none;
-    transition: opacity .18s;
+    display: flex; flex-direction: column; gap: .25rem;
+    padding: .9rem 1.4rem;
+    border: 1px solid var(--bwp-border); border-radius: var(--bwp-radius-lg);
+    color: var(--bwp-text); transition: background .15s, border-color .15s;
 }
-.bwp-work-nav__link:hover { opacity: .7; }
-.bwp-work-nav__link--next { text-align: right; margin-left: auto; }
-.bwp-work-nav__arrow { font-size: 1.1em; color: var(--bwp-ornament); line-height: 1; margin-bottom: .2em; }
-.bwp-work-nav__label {
-    font-family: var(--bwp-font-ui);
-    font-size: .65em;
-    text-transform: uppercase;
-    letter-spacing: .1em;
-    color: var(--bwp-muted);
-}
-.bwp-work-nav__title {
-    font-family: var(--bwp-font);
-    font-size: .94em;
-    margin-top: .15em;
-    color: var(--bwp-link);
-    line-height: 1.3;
-    overflow-wrap: break-word;
+.bwp-work-nav__link:hover { background: var(--bwp-bg-subtle); border-color: transparent; color: var(--bwp-text); }
+.bwp-work-nav__link--next { text-align: right; align-items: flex-end; grid-column: 2; }
+.bwp-work-nav__arrow { color: var(--bwp-accent); font-size: 1rem; line-height: 1; }
+.bwp-work-nav__label { font-family: var(--bwp-font-ui); font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: var(--bwp-muted); }
+.bwp-work-nav__title { font-family: var(--bwp-font-display); font-size: 1.1rem; line-height: 1.2; }
+@media (max-width: 36em) {
+    .bwp-work-nav { grid-template-columns: 1fr; }
+    .bwp-work-nav__link--next { grid-column: 1; }
 }
 
+/* pages (page.php, foreword, colophon page) */
+.bwp-edit-link { text-align: center; margin-top: 2rem; }
+.bwp-edit-link a { font-family: var(--bwp-font-ui); font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; }
+
 /* ═══════════════════════════════════════════════════════════
-   SHORTCODES
+   SHORTCODES & BLOCKS
    ═══════════════════════════════════════════════════════════ */
 
 .bwp-petikan {
-    margin: 2em 0;
-    padding: 1em 0 1em 1.6em;
-    border-left: 2px solid var(--bwp-stone);
-    font-style: italic;
-    color: var(--bwp-text-mid);
-    background: none;
+    margin: 1.8em 0; padding: 1.3em 1.6em;
+    border-radius: var(--bwp-radius-lg); background: var(--bwp-bg-raised); border: 1px solid var(--bwp-border-faint);
+    font-family: var(--bwp-font-display); font-style: italic; font-size: 1.15em; line-height: 1.45;
 }
-.bwp-petikan__text p { text-indent: 0; margin: .3em 0; }
-.bwp-petikan__source {
-    display: block;
-    margin-top: .6em;
-    font-family: var(--bwp-font-ui);
-    font-size: .79em;
-    font-style: normal;
-    letter-spacing: .03em;
-    color: var(--bwp-muted);
-}
+.bwp-petikan__source { display: block; margin-top: .7em; font-family: var(--bwp-font-ui); font-style: normal; font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; color: var(--bwp-muted); }
 
-/* ── [verse] shortcode — num outdented into left margin ──────────────── */
-
-.bwp-bait { display: flex; gap: 0; margin: .5em 0; }
-.bwp-bait__num {
-    flex-shrink: 0;
-    font-family: var(--bwp-font-ui);
-    font-size: .68em;
-    color: var(--bwp-muted);
-    font-style: normal;
-    min-width: 2.4em;
-    text-align: right;
-    padding-top: .28em;
-    padding-right: .9em;
-    margin-left: -2.4em;   /* pulls the number into the left margin */
-    user-select: none;
-    letter-spacing: .04em;
-}
-.bwp-bait__text { flex: 1; }
-
-.bwp-istilah {
-    position: relative;
-    border-bottom: 1px dotted var(--bwp-ornament);
-    cursor: help;
-}
+.bwp-istilah { border-bottom: 1px dotted var(--bwp-accent); cursor: help; position: relative; }
 .bwp-istilah__tip {
-    display: none;
-    position: absolute;
-    bottom: 100%; left: 50%;
-    transform: translateX(-50%);
-    background: var(--bwp-text);
-    color: var(--bwp-bg);
-    padding: .3em .65em;
-    border-radius: var(--bwp-radius);
-    font-family: var(--bwp-font-ui);
-    font-size: .76em;
-    font-style: normal;
-    white-space: nowrap;
-    z-index: 10;
-    margin-bottom: .3rem;
-    box-shadow: var(--bwp-shadow);
+    position: absolute; left: 50%; bottom: calc(100% + 8px); transform: translateX(-50%);
+    width: max-content; max-width: 18em; padding: .6em .9em;
+    background: var(--bwp-text); color: var(--bwp-bg);
+    font-family: var(--bwp-font-ui); font-size: .78rem; line-height: 1.4; text-align: left;
+    border-radius: var(--bwp-radius-sm); box-shadow: var(--bwp-shadow-lg);
+    opacity: 0; pointer-events: none; transition: opacity .15s; z-index: 30; white-space: normal;
 }
-.bwp-istilah:hover .bwp-istilah__tip,
-.bwp-istilah:focus .bwp-istilah__tip { display: block; }
+.bwp-istilah:hover .bwp-istilah__tip, .bwp-istilah:focus .bwp-istilah__tip { opacity: 1; }
 
-/* ═══════════════════════════════════════════════════════════
-   READING PROGRESS BAR
-   ═══════════════════════════════════════════════════════════ */
-
-.bwp-progress {
-    position: fixed; top: 0; left: 0;
-    width: 100%; height: 2px;
-    z-index: 9999; background: transparent;
+.bwp-bait { display: flex; gap: 1em; margin: 0 0 1em; }
+.bwp-bait__num {
+    flex: none; width: 2em; height: 2em; border-radius: var(--bwp-pill);
+    border: 1px solid var(--bwp-border); display: flex; align-items: center; justify-content: center;
+    font-family: var(--bwp-font-ui); font-size: .66rem; color: var(--bwp-muted);
 }
-.bwp-progress__bar {
-    height: 100%; width: 0;
-    background: var(--bwp-progress);
-    transition: width .08s linear;
+.bwp-vnum { font-family: var(--bwp-font-ui); font-size: .6em; vertical-align: super; color: var(--bwp-accent); margin-right: .3em; }
+
+.bwp-chapter { margin: 2.5em 0; }
+.bwp-chapter__num {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 2.4em; height: 2.4em; padding: 0 .8em; border-radius: var(--bwp-pill);
+    background: var(--bwp-link); color: var(--bwp-on-ink);
+    font-family: var(--bwp-font-display); font-size: 1rem; margin-bottom: .6em;
 }
-
-/* ═══════════════════════════════════════════════════════════
-   NIGHT TOGGLE
-   ═══════════════════════════════════════════════════════════ */
-
-.bwp-night-toggle {
-    position: fixed;
-    bottom: max(1.5em, env(safe-area-inset-bottom, 0px));
-    right:  max(1.5em, env(safe-area-inset-right, 0px));
-    width: 40px; height: 40px;
-    border: 1px solid var(--bwp-ui-border);
-    border-radius: 50%;
-    background: var(--bwp-bg);
-    color: var(--bwp-muted);
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: var(--bwp-shadow);
-    transition: background .2s, color .2s, box-shadow .2s;
-    z-index: 100;
-}
-.bwp-night-toggle:hover {
-    background: var(--bwp-bg-subtle);
-    color: var(--bwp-link);
-    box-shadow: var(--bwp-shadow-lg);
-}
-.bwp-night-toggle__moon { display: none; }
-body.bwp-night .bwp-night-toggle__sun  { display: none; }
-body.bwp-night .bwp-night-toggle__moon { display: block; }
-
-/* Night-mode variables applied via html.bwp-night (set synchronously by the
-   preload script in <head> before first paint) as well as the legacy
-   body.bwp-night class (applied by DOMContentLoaded JS on subsequent renders).
-   Both selectors must carry identical variables. */
-html.bwp-night body,
-body.bwp-night {
-    --bwp-bg:           #15141a;
-    --bwp-bg-subtle:    #1e1d24;
-    --bwp-text:         #dbd8d2;
-    --bwp-text-mid:     #bdb8b0;
-    --bwp-muted:        #9a9590;
-    --bwp-accent:       #aba49a;
-    --bwp-link:         #7eb5d3;
-    --bwp-link-hover:   #aad3eb;
-    --bwp-border:       #302e34;
-    --bwp-border-faint: #232129;
-    --bwp-border-ink:   #555250;
-    --bwp-ornament:     #48464a;
-    --bwp-stone:        #48464a;
-    --bwp-progress:     #7eb5d3;
-    --bwp-teal:         #6aaad4;
-    --bwp-teal-deep:    #4a8ab0;
-    --bwp-gold:         #8ab0c8;
-    --bwp-gold-dim:     #6a8aa0;
-    --bwp-gold-light:   #90a8b8;
-}
-
-/* Pure CSS fallback for users with no JS — applies night vars when OS prefers
-   dark and no explicit preference has been saved (indicated by absence of the
-   bwp-night-set attribute which JS adds on first toggle). */
-@media (prefers-color-scheme: dark) {
-    html:not([data-bwp-night="0"]) body:not(.bwp-scheme-cream):not(.bwp-scheme-dusk) {
-        --bwp-bg:           #15141a;
-        --bwp-bg-subtle:    #1e1d24;
-        --bwp-text:         #dbd8d2;
-        --bwp-text-mid:     #bdb8b0;
-        --bwp-muted:        #9a9590;
-        --bwp-accent:       #aba49a;
-        --bwp-link:         #7eb5d3;
-        --bwp-link-hover:   #aad3eb;
-        --bwp-border:       #302e34;
-        --bwp-border-faint: #232129;
-        --bwp-border-ink:   #555250;
-        --bwp-ornament:     #48464a;
-        --bwp-stone:        #48464a;
-        --bwp-progress:     #7eb5d3;
-        --bwp-teal:         #6aaad4;
-        --bwp-teal-deep:    #4a8ab0;
-        --bwp-gold:         #8ab0c8;
-        --bwp-gold-dim:     #6a8aa0;
-        --bwp-gold-light:   #90a8b8;
-    }
-}
-
-
-
-body.bwp-night .bwp-search-form__btn,
-body.bwp-night .bwp-sidebar .search-submit,
-body.bwp-night .bwp-footer-widget .search-submit {
-    color: #15141a; /* dark text on light link bg — meets contrast in night mode */
-}
+.bwp-chapter__title { display: block; font-family: var(--bwp-font-display); font-size: 1.6em; line-height: 1.1; margin-bottom: .6em; }
 
 /* ═══════════════════════════════════════════════════════════
    ARCHIVE / SEARCH / 404
    ═══════════════════════════════════════════════════════════ */
 
-.bwp-archive-header { text-align: center; margin-bottom: 2.5em; }
-.bwp-archive-header__title {
-    font-size: 1.9em; font-weight: 400;
-    margin: 0 0 .3em; letter-spacing: -.01em;
+.bwp-archive-header { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--bwp-text); }
+.bwp-archive-header .bwp-ornament { display: none; }
+.bwp-archive-header__taxlabel {
+    margin: 0 0 .5rem; font-family: var(--bwp-font-ui); font-size: .66rem;
+    letter-spacing: .2em; text-transform: uppercase; color: var(--bwp-muted);
 }
-.bwp-archive-header__desc {
-    max-width: 28em; margin: 0 auto;
-    font-style: italic; color: var(--bwp-muted);
-    font-size: .93em; line-height: 1.55;
+.bwp-archive-header__title { font-size: clamp(2.2rem, 6vw, 5rem); line-height: .95; letter-spacing: -.02em; margin: 0 0 .5rem; }
+.bwp-archive-header__desc { max-width: 40em; font-size: 1.1rem; font-style: italic; color: var(--bwp-muted); margin: 0; }
+
+.bwp-archive-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .75rem; }
+.bwp-archive-list__item {
+    padding: 1rem 1.3rem; border: 1px solid var(--bwp-border-faint); border-radius: var(--bwp-radius);
+    background: var(--bwp-bg-raised);
 }
-
-.bwp-archive-list { list-style: none; margin: 0; padding: 0; }
-.bwp-archive-list__item { padding: 1em 0; border-bottom: 1px solid var(--bwp-border-faint); }
-.bwp-archive-list__item:last-child { border-bottom: none; }
-.bwp-archive-list__title { font-family: var(--bwp-font); font-size: 1.06em; }
-.bwp-archive-list__meta {
-    font-family: var(--bwp-font-ui); font-size: .73em;
-    letter-spacing: .04em; color: var(--bwp-muted); margin-top: .2em;
-}
-
-/* ── Archive: Grid layout ─────────────────────────────────────────────────
-   Two-column CSS grid. No JS required. Cards are uniform height so CSS
-   grid and Masonry produce the same visual result — grid is the lighter
-   default for uniform cards.
-   ─────────────────────────────────────────────────────────────────────── */
-
-body.bwp-archive-grid .bwp-archive-list {
-    display:               grid;
-    grid-template-columns: repeat( auto-fill, minmax( 17em, 1fr ) );
-    gap:                   0;
-}
-
-body.bwp-archive-grid .bwp-archive-list__item {
-    padding:       1em 1em 1em 0;
-    border-bottom: 1px solid var(--bwp-border-faint);
-    border-right:  none;
-}
-
-/* ── Archive: Masonry layout ──────────────────────────────────────────────
-   Masonry positions items absolutely — the list must not be a block flow.
-   Width is set as a percentage so columns are fluid. Masonry reads
-   columnWidth from the first item (.bwp-archive-list__item) which is
-   set to 50% — giving two columns on most viewport widths.
-   ─────────────────────────────────────────────────────────────────────── */
-
-body.bwp-archive-masonry .bwp-archive-list {
-    position: relative; /* Masonry writes top/left on items */
-}
-
-body.bwp-archive-masonry .bwp-archive-list__item {
-    width:         50%;          /* 2-column default — Masonry uses this as columnWidth */
-    padding:       1em 1em 1em 0;
-    border-bottom: 1px solid var(--bwp-border-faint);
-    box-sizing:    border-box;
-}
-
-@media ( max-width: 36em ) {
+.bwp-archive-list__title { font-family: var(--bwp-font-display); font-size: 1.35rem; line-height: 1.15; color: var(--bwp-text); display: block; margin-bottom: .5rem; }
+.bwp-archive-list__title:hover { color: var(--bwp-link); }
+.bwp-archive-list__meta { display: flex; flex-wrap: wrap; gap: .35rem; align-items: center; }
+body.bwp-archive-grid .bwp-archive-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+body.bwp-archive-masonry .bwp-archive-list { display: block; position: relative; }
+body.bwp-archive-masonry .bwp-archive-list__item { width: 49%; margin-bottom: .75rem; }
+@media (max-width: 36em) {
+    body.bwp-archive-grid .bwp-archive-list { grid-template-columns: 1fr; }
     body.bwp-archive-masonry .bwp-archive-list__item { width: 100%; }
-    body.bwp-archive-grid    .bwp-archive-list {
-        grid-template-columns: 1fr;
-    }
 }
 
-/* ── Infinite Scroll status bar ───────────────────────────────────────────
-   Injected by JS after the archive list. Shows loading state and
-   last-page confirmation. Infinite Scroll adds .infinite-scroll-request,
-   .infinite-scroll-last, and .infinite-scroll-error classes.
-   ─────────────────────────────────────────────────────────────────────── */
+.bwp-empty-state, .bwp-404 { text-align: center; padding: 3rem 0; }
+.bwp-404__title { font-size: clamp(3rem, 10vw, 7rem); line-height: 1; }
+.bwp-404__desc { font-style: italic; color: var(--bwp-muted); }
 
-.bwp-inf-status {
-    text-align:  center;
-    font-family: var(--bwp-font-ui);
-    font-size:   .75em;
-    letter-spacing: .08em;
-    color:       var(--bwp-muted);
-    padding:     1.8em 0 2.4em;
-    min-height:  2em;
+/* search form */
+.bwp-search-form { display: flex; gap: .5rem; align-items: center; max-width: 32em; margin: 0 auto; }
+.bwp-search-form__input { flex: 1 1 0; min-width: 0; }
+.bwp-sidebar { margin-top: 3rem; }
+.bwp-sidebar .widget-title, .bwp-footer-widget__title {
+    font-family: var(--bwp-font-ui); font-size: .62rem; font-weight: 600; letter-spacing: .2em;
+    text-transform: uppercase; color: var(--bwp-muted); text-align: center; margin: 0 0 .8rem;
 }
-
-.bwp-inf-status.infinite-scroll-request::after {
-    content: '· · ·';
-    display: block;
-    animation: bwp-inf-pulse 1.2s ease-in-out infinite;
-}
-
-.bwp-inf-status.infinite-scroll-last::after {
-    content: '— ' attr(data-last-text, 'End of archive') ' —';
-    display: block;
-    opacity: .55;
-}
-
-.bwp-inf-status.infinite-scroll-error::after {
-    content: '—';
-    display: block;
-    opacity: .4;
-}
-
-@keyframes bwp-inf-pulse {
-    0%, 100% { opacity: .25; }
-    50%       { opacity:  1; }
-}
-
-/* ── TOC: Grid layout (grouping = None) ───────────────────────────────────
-   Two-column CSS grid. No JS. body.bwp-toc-grid applied by PHP body_class.
-   ─────────────────────────────────────────────────────────────────────── */
-
-body.bwp-toc-grid .bwp-toc {
-    display:               grid;
-    grid-template-columns: repeat( auto-fill, minmax( 18em, 1fr ) );
-    gap:                   0;
-}
-
-body.bwp-toc-grid .bwp-toc__item {
-    border-top:    none;          /* suppress the first-child rule */
-    border-bottom: 1px solid var(--bwp-border-faint);
-    padding:       0 .6em 0 0;
-}
-
-body.bwp-toc-grid .bwp-toc__item:first-child {
-    border-top: none;             /* override base :first-child rule */
-}
-
-/* Suppress the horizontal hover shift in grid/masonry — the link sits inside
-   a fixed-width cell; a padding-left shift causes reflow and looks broken. */
-body.bwp-toc-grid .bwp-toc__link:hover,
-body.bwp-toc-masonry .bwp-toc__link:hover {
-    padding-left: 0;
-}
-
-/* ── TOC: Masonry layout (grouping = None) ────────────────────────────────
-   JS positions items absolutely inside the relative container.
-   Item width 50% = two columns. Masonry reads columnWidth from items.
-   ─────────────────────────────────────────────────────────────────────── */
-
-body.bwp-toc-masonry .bwp-toc {
-    position: relative;           /* required — Masonry writes top/left */
-}
-
-body.bwp-toc-masonry .bwp-toc__item {
-    width:         50%;
-    border-top:    none;
-    border-bottom: 1px solid var(--bwp-border-faint);
-    box-sizing:    border-box;
-    padding:       0 .6em 0 0;
-}
-
-body.bwp-toc-masonry .bwp-toc__item:first-child {
-    border-top: none;
-}
-
-@media ( max-width: 36em ) {
-    body.bwp-toc-masonry .bwp-toc__item { width: 100%; }
-    body.bwp-toc-grid    .bwp-toc { grid-template-columns: 1fr; }
-}
-
-
-.bwp-empty-state { text-align: center; padding: 4em 0; color: var(--bwp-muted); font-style: italic; }
-
-.bwp-404 { text-align: center; padding: 4em 0; }
-.bwp-404__title {
-    font-size: 2em; font-weight: 400;
-    margin: .5em 0; letter-spacing: -.01em;
-}
-.bwp-404__desc { color: var(--bwp-muted); font-style: italic; }
-
-.bwp-search-form {
-    display: flex; max-width: 22em; margin: 1.5em auto 0;
-    border: 1px solid var(--bwp-ui-border);
-    border-radius: var(--bwp-radius);
-    overflow: hidden; box-shadow: var(--bwp-shadow);
-}
-.bwp-search-form__input {
-    flex: 1; padding: .6em .9em;
-    border: none; border-right: 1px solid var(--bwp-ui-border);
-    font-family: var(--bwp-font-ui); font-size: .9em;
-    background: var(--bwp-bg); color: var(--bwp-text);
-}
-.bwp-search-form__input:focus { background: var(--bwp-bg-subtle); }
-.bwp-search-form__btn {
-    padding: .6em 1em; border: none;
-    background: var(--bwp-link); color: #fff;
-    font-family: var(--bwp-font-ui); font-size: .78em;
-    font-weight: 500; letter-spacing: .07em;
-    text-transform: uppercase; cursor: pointer;
-    transition: background .18s;
-}
-.bwp-search-form__btn:hover { background: var(--bwp-link-hover); }
 
 /* ═══════════════════════════════════════════════════════════
-   COMMENTS / FOOTER / SIDEBAR
+   COMMENTS
    ═══════════════════════════════════════════════════════════ */
 
-/* ═══════════════════════════════════════════════════════════
-   COMMENTS — list and form
-   ═══════════════════════════════════════════════════════════ */
-
-/* Section wrapper */
-.bwp-comments {
-    margin-top: 3em;
-    padding-top: 2.5em;
-    border-top: 1px solid var(--bwp-border);
-}
-
-/* When prev/next nav is absent (disabled or no adjacent posts), tighten
-   the gap between the last article element and the comments section. */
-body.bwp-no-work-nav .bwp-comments {
-    margin-top: 2em;
-}
-
-/* Section heading */
-.bwp-comments__heading {
-    font-family:    var(--bwp-font-display);
-    font-weight:    400;
-    font-size:      .78rem;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    text-align:     center;
-    color:          var(--bwp-muted);
-    margin:         0 0 1.5em;
-}
-
-.bwp-comments__count {
-    color: var(--bwp-text);
-}
-
-/* ── Comment list ──────────────────────────────────────── */
-
-.bwp-comment-list {
-    list-style: none;
-    margin:     1.5em 0 0;
-    padding:    0;
-}
-
-/* Each comment item */
-.bwp-comment {
-    padding:       1.75em 0;
-    border-bottom: 1px solid var(--bwp-border-faint);
-}
-
-.bwp-comment:last-child {
-    border-bottom: none;
-}
-
-/* Nested replies — indent but keep readable */
-.bwp-comment-list .children {
-    list-style: none;
-    padding:    0 0 0 2.5em;
-    margin:     0;
-    border-left: 2px solid var(--bwp-border-faint);
-}
-
-/* Comment article body */
-.bwp-comment__body { /* no extra box — let header + content flow naturally */ }
-
-/* Header row: avatar | meta | actions */
-.bwp-comment__header {
-    display:     flex;
-    align-items: flex-start;
-    gap:         .875em;
-    margin-bottom: .75em;
-}
-
-/* Avatar */
-.bwp-comment__avatar { flex-shrink: 0; }
-
-.bwp-comment__avatar-img {
-    width:         48px;
-    height:        48px;
-    border-radius: 50%;
-    display:       block;
-    border:        1px solid var(--bwp-border-faint);
-}
-
-/* Name + date */
-.bwp-comment__meta {
-    flex:        1;
-    min-width:   0;
-    display:     flex;
-    flex-direction: column;
-    gap:         .1em;
-}
-
-.bwp-comment__author {
-    font-family:    var(--bwp-font-ui);
-    font-size:      .8125rem;
-    font-weight:    600;
-    color:          var(--bwp-text);
-    line-height:    1.3;
-}
-
-.bwp-comment__date {
-    font-family:    var(--bwp-font-ui);
-    font-size:      .72rem;
-    color:          var(--bwp-muted);
-    text-decoration: none;
-    line-height:    1.3;
-}
-
-.bwp-comment__date:hover { text-decoration: underline; }
-
-.bwp-comment__pending {
-    font-family: var(--bwp-font-ui);
-    font-size:   .72rem;
-    color:       var(--bwp-muted);
-    font-style:  italic;
-}
-
-/* Reply / Edit action links */
-.bwp-comment__actions {
-    display:     flex;
-    align-items: flex-start;
-    gap:         .6em;
-    flex-shrink: 0;
-}
-
-.bwp-comment__reply a,
-.bwp-comment__edit  a {
-    font-family:    var(--bwp-font-ui);
-    font-size:      .7rem;
-    font-weight:    600;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-    color:          var(--bwp-muted);
-    text-decoration: none;
-    padding:        .2em .6em;
-    border:         1px solid var(--bwp-border);
-    border-radius:  20px;
-    transition:     color .15s, border-color .15s;
-}
-
-.bwp-comment__reply a:hover,
-.bwp-comment__edit  a:hover {
-    color:        var(--bwp-accent);
-    border-color: var(--bwp-accent);
-}
-
-/* Comment body text */
-.bwp-comment__content {
-    font-size:   .9375rem;
-    line-height: 1.75;
-    color:       var(--bwp-text-mid);
-    padding-left: 3.375em;  /* aligns with text after the 48px avatar + gap */
-}
-
-.bwp-comment__content p { margin: 0 0 .6em; }
-.bwp-comment__content p:last-child { margin: 0; }
-
-/* Accessibility — underline links within comment content (WCAG 1.4.1) */
-.bwp-comment__content a { text-decoration: underline; }
-
-/* Comment navigation (older / newer) */
-.bwp-comment-nav {
-    display:         flex;
-    justify-content: space-between;
-    margin:          1.5em 0 0;
-    font-family:     var(--bwp-font-ui);
-    font-size:       .8rem;
-}
-
-.bwp-comment-nav a {
-    color:          var(--bwp-accent);
-    text-decoration: none;
-}
-
-.bwp-comment-nav a:hover { text-decoration: underline; }
-
-/* ── Comment form ──────────────────────────────────────── */
-
-.bwp-comment-form {
-    margin-top: 3em;
-    padding-top: 2em;
-    border-top: 1px solid var(--bwp-border-faint);
-}
-
-/* "Leave a comment" / "Reply to X" heading */
-#reply-title {
-    font-family:    var(--bwp-font-display);
-    font-weight:    400;
-    font-size:      .78rem;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    text-align:     center;
-    color:          var(--bwp-muted);
-    margin:         0 0 1.5em;
-}
-
-/* Cancel reply link */
-#cancel-comment-reply-link {
-    font-family:    var(--bwp-font-ui);
-    font-size:      .75rem;
-    font-weight:    400;
-    letter-spacing: .04em;
-    color:          var(--bwp-muted);
-    text-decoration: none;
-    margin-left:    .75em;
-}
-
-#cancel-comment-reply-link:hover { text-decoration: underline; }
-
-/* Logged-in notice */
-.bwp-comment-form .logged-in-as {
-    font-family: var(--bwp-font-ui);
-    font-size:   .8rem;
-    color:       var(--bwp-muted);
-    text-align:  center;
-    margin:      -.5em 0 1.25em;
-}
-
-.bwp-comment-form .logged-in-as a {
-    color: var(--bwp-accent);
-    text-decoration: none;
-}
-
-.bwp-comment-form .logged-in-as a:hover { text-decoration: underline; }
-
-/* Required field note */
-.bwp-cf-note {
-    font-family: var(--bwp-font-ui);
-    font-size:   .76rem;
-    color:       var(--bwp-muted);
-    text-align:  center;
-    margin:      -.25em 0 1.25em;
-}
-
-/* Two-column name / email row */
-.bwp-cf-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1em;
-}
-
-@media (max-width: 36em) {
-    .bwp-cf-row { grid-template-columns: 1fr; }
-}
-
-/* Individual field wrapper */
-.bwp-cf-field {
-    display:       flex;
-    flex-direction: column;
-    gap:           .3em;
-    margin-bottom: 1em;
-}
-
+.bwp-comments { margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid var(--bwp-border); }
+.bwp-comments__heading { display: flex; align-items: center; gap: .6rem; font-size: 1.5rem; margin-bottom: 1.25rem; }
+.bwp-comments__count { font-family: var(--bwp-font-ui); font-size: .62rem; letter-spacing: .12em; padding: .35em .8em; border-radius: var(--bwp-pill); border: 1px solid var(--bwp-border); color: var(--bwp-muted); }
+.bwp-comment-list, .bwp-comment-list .children { list-style: none; margin: 0; padding: 0; }
+.bwp-comment-list .children { margin-left: 2rem; }
+.bwp-comment__body { padding: 1rem 1.2rem; margin-bottom: .75rem; border-radius: var(--bwp-radius); background: var(--bwp-bg-raised); border: 1px solid var(--bwp-border-faint); }
+.bwp-comment__header { display: flex; align-items: center; gap: .8rem; margin-bottom: .6rem; }
+.bwp-comment__avatar img { width: 40px; height: 40px; border-radius: var(--bwp-pill); }
+.bwp-comment__author { font-family: var(--bwp-font-display); font-size: 1.05rem; }
+.bwp-comment__date { display: block; font-family: var(--bwp-font-ui); font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--bwp-muted); }
+.bwp-comment__content { font-size: 1.05rem; color: var(--bwp-text-mid); }
+.bwp-comment__content p:last-child { margin-bottom: 0; }
+.bwp-comment__actions { display: flex; gap: .5rem; margin-top: .5rem; font-family: var(--bwp-font-ui); font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; }
+.bwp-comment__pending { color: var(--bwp-muted); font-size: .9rem; }
+.bwp-comment-nav { display: flex; justify-content: space-between; font-family: var(--bwp-font-ui); font-size: .72rem; margin: 1rem 0; }
+.bwp-cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 36em) { .bwp-cf-row { grid-template-columns: 1fr; } }
+.bwp-cf-field { display: flex; flex-direction: column; gap: .3rem; margin-bottom: 1rem; }
 .bwp-cf-field--full { grid-column: 1 / -1; }
-
-/* Labels */
-.bwp-cf-label {
-    font-family:    var(--bwp-font-ui);
-    font-size:      .76rem;
-    font-weight:    600;
-    letter-spacing: .05em;
-    text-transform: uppercase;
-    color:          var(--bwp-text);
-}
-
-.bwp-cf-required {
-    color: var(--bwp-muted);
-    font-weight: 400;
-}
-
-/* Inputs and textarea */
-.bwp-cf-input,
-.bwp-cf-textarea {
-    width:        100%;
-    padding:      .5625em .75em;
-    font-family:  var(--bwp-font);
-    font-size:    1rem;
-    line-height:  1.6;
-    color:        var(--bwp-text);
-    background:   var(--bwp-bg);
-    border:       1px solid var(--bwp-border);
-    border-radius: var(--bwp-radius);
-    box-shadow:   inset 0 1px 3px rgba(0,0,0,.04);
-    transition:   border-color .15s, box-shadow .15s;
-    appearance:   none;
-    -webkit-appearance: none;
-    box-sizing:   border-box;
-}
-
-.bwp-cf-textarea {
-    resize:     vertical;
-    min-height: 160px;
-}
-
-.bwp-cf-input:focus,
-.bwp-cf-textarea:focus {
-    border-color: var(--bwp-accent);
-    box-shadow:   0 0 0 2px rgba(27,60,83,.12);
-    outline:      none;
-}
-
-/* Cookies checkbox row */
-.bwp-cf-field--cookies {
-    margin-bottom: 1.5em;
-}
-
-.bwp-cf-cookie-label {
-    display:     flex;
-    align-items: center;
-    gap:         .5em;
-    font-family: var(--bwp-font-ui);
-    font-size:   .78rem;
-    color:       var(--bwp-muted);
-    cursor:      pointer;
-    line-height: 1.4;
-}
-
-.bwp-cf-cookie-label input[type="checkbox"] {
-    flex-shrink: 0;
-    width:  1em;
-    height: 1em;
-    accent-color: var(--bwp-accent);
-    cursor: pointer;
-}
-
-/* Submit button — sized to clear WCAG 2.5.8 (24 px) and reach AAA 44 px */
-.bwp-comment-submit {
-    display:         inline-flex;
-    align-items:     center;
-    justify-content: center;
-    min-height:      44px;
-    min-width:       44px;
-    padding:         .75em 1.75em;
-    font-family:     var(--bwp-font-ui);
-    font-size:       .78rem;
-    font-weight:     600;
-    letter-spacing:  .09em;
-    text-transform:  uppercase;
-    color:           var(--bwp-bg);
-    background:      var(--bwp-accent);
-    border:          1px solid var(--bwp-accent);
-    border-radius:   var(--bwp-radius);
-    cursor:          pointer;
-    transition:      opacity .15s;
-    line-height:     1;
-}
-
-.bwp-comment-submit:hover   { opacity: .85; }
-.bwp-comment-submit:focus-visible {
-    outline:        2px solid var(--bwp-accent);
-    outline-offset: 2px;
-}
-
-/* Form actions wrapper WordPress generates */
-.bwp-comment-form .form-submit {
-    margin: 0;
-}
-
-@media (max-width: 36em) {
-    .bwp-comment__content { padding-left: 0; }
-    .bwp-comment-list .children { padding-left: 1.25em; }
-}
+.bwp-cf-label { font-family: var(--bwp-font-ui); font-size: .66rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--bwp-text); }
+.bwp-cf-required { color: var(--bwp-badge); }
+.bwp-cf-note { font-size: .9rem; color: var(--bwp-muted); font-style: italic; }
+.bwp-cf-cookie-label { display: flex; gap: .5rem; align-items: flex-start; font-size: .95rem; color: var(--bwp-text-mid); }
+.comment-respond .comment-reply-title { font-size: 1.3rem; }
 
 /* ═══════════════════════════════════════════════════════════
-   FOOTER WIDGETS
-   Search form and other widgets placed in the Footer sidebar.
-   Styled consistently with the sidebar search form.
+   FOOTER — colophon spread
    ═══════════════════════════════════════════════════════════ */
 
-.bwp-footer-widgets {
-    margin-top: 4em;
-    padding: 2em 0 0;
-    text-align: center;
-    border-top: 1px solid var(--bwp-border-faint);
-}
-
-.bwp-footer-widget { margin-bottom: 1.6em; }
-
-.bwp-footer-widget__title {
-    font-family:    var(--bwp-font-ui);
-    font-size:      .6em;
-    font-weight:    600;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color:          var(--bwp-muted);
-    margin-bottom:  .8em;
-}
-
-/* Search widget inside footer — constrained width, centred, matches sidebar */
-.bwp-footer-widget .search-form {
-    display:    flex;
-    max-width:  22em;
-    margin:     0 auto;
-}
-
-.bwp-footer-widget .search-field {
-    flex:          1;
-    padding:       .45em .7em;
-    font-family:   var(--bwp-font-ui);
-    font-size:     .82em;
-    border:        1px solid var(--bwp-ui-border);
-    border-right:  none;
-    border-radius: var(--bwp-radius) 0 0 var(--bwp-radius);
-    background:    var(--bwp-bg);
-    color:         var(--bwp-text);
-}
-
-.bwp-footer-widget .search-field:focus {
-    background: var(--bwp-bg-subtle);
-    outline: none;
-}
-
-.bwp-footer-widget .search-submit {
-    padding:        .45em .9em;
-    border:         1px solid var(--bwp-link);
-    border-radius:  0 var(--bwp-radius) var(--bwp-radius) 0;
-    background:     var(--bwp-link);
-    color:          #fff;
-    font-family:    var(--bwp-font-ui);
-    font-size:      .75em;
-    font-weight:    500;
-    letter-spacing: .07em;
-    text-transform: uppercase;
-    cursor:         pointer;
-    transition:     background .18s;
-    white-space:    nowrap;
-}
-
-.bwp-footer-widget .search-submit:hover { background: var(--bwp-link-hover); }
-
-
-/* ═══════════════════════════════════════════════════════════
-   SOCIAL ICONS — footer row
-   Max 6 visible by default; overflow revealed via +N toggle.
-   JS in frontend.js injects .bwp-social__toggle and sets
-   .bwp-social--collapsible on the <ul> when overflow exists.
-   ═══════════════════════════════════════════════════════════ */
-
-.bwp-site-footer__social {
-    margin-bottom: 1.25em;
-}
-
-.bwp-social {
-    list-style: none;
-    margin:  0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: .5em;
-}
-
-/* Hide items beyond position 6 when collapsible and not expanded */
-.bwp-social--collapsible .bwp-social__item:nth-child(n+7) {
-    display: none;
-}
-.bwp-social--collapsible.bwp-social--expanded .bwp-social__item:nth-child(n+7) {
-    display: list-item;
-}
-
-/* Shared styles for icon links and the +N toggle button.
-   min-width/min-height: 24px is a defensive floor — at default footer font
-   the 2em sizing computes to ~32 px, but a smaller inherited context could
-   drop below the WCAG 2.5.8 24 px tap-target minimum. */
-.bwp-social__link,
-.bwp-social__toggle {
-    display:         flex;
-    align-items:     center;
-    justify-content: center;
-    width:  2em;
-    height: 2em;
-    min-width:  24px;
-    min-height: 24px;
-    border-radius: 50%;
-    border:          1px solid var(--bwp-border-faint);
-    transition:      color .15s, border-color .15s, background .15s;
-    text-decoration: none;
-    cursor:          pointer;
-}
-
-.bwp-social__link {
-    color: var(--bwp-muted);
-}
-
-.bwp-social__link svg {
-    width:  1em;
-    height: 1em;
-    display: block;
-    flex-shrink: 0;
-}
-
-/* +N toggle button */
-.bwp-social__toggle {
-    font-family:  var(--bwp-font-ui);
-    font-size:    .65em;
-    font-weight:  600;
-    letter-spacing: .02em;
-    color:        var(--bwp-muted);
-    background:   transparent;
-    padding:      0;
-    line-height:  1;
-    white-space:  nowrap;
-    /* SC 2.5.8 (WCAG 2.2) — minimum 24×24 CSS px target size.
-       At font-size .65em the em-based 2em width/height resolves to ~20.8px,
-       below the 24px floor. min-width/min-height in px guarantees compliance
-       regardless of inherited font-size context. (W-03) */
-    min-width:    24px;
-    min-height:   24px;
-    /* li wrapper sizing */
-    box-sizing:   border-box;
-}
-
-.bwp-social__link:hover,
-.bwp-social__link:focus-visible,
-.bwp-social__toggle:hover,
-.bwp-social__toggle:focus-visible {
-    color:        var(--bwp-text);
-    border-color: var(--bwp-text);
-    background:   var(--bwp-bg-subtle);
-    outline:      none;
-}
-
-/* Night / dark scheme — soften border */
-body.bwp-night .bwp-social__link,
-body.bwp-night .bwp-social__toggle,
-body.bwp-scheme-night .bwp-social__link,
-body.bwp-scheme-night .bwp-social__toggle,
-body.bwp-time-night .bwp-social__link,
-body.bwp-time-night .bwp-social__toggle {
-    border-color: rgba(255,255,255,.15);
-}
-
-body.bwp-night .bwp-social__link:hover,
-body.bwp-night .bwp-social__toggle:hover,
-body.bwp-scheme-night .bwp-social__link:hover,
-body.bwp-scheme-night .bwp-social__toggle:hover,
-body.bwp-time-night .bwp-social__link:hover,
-body.bwp-time-night .bwp-social__toggle:hover {
-    border-color: var(--bwp-text);
-    background:   rgba(255,255,255,.06);
-}
-
-/* ═══════════════════════════════════════════════════════════
-   SITE FOOTER — colophon layout
-   Anthology name → Author → Copyright → Credit
-   ═══════════════════════════════════════════════════════════ */
+.bwp-footer-widgets { margin-top: 3rem; }
 
 .bwp-site-footer {
-    margin-top: 3em;
-    padding: 3em 0 2.4em;
-    text-align: center;
-    color: var(--bwp-muted);
-    font-family: var(--bwp-font-ui);
-    border-top: 1px solid var(--bwp-border);
-    position: relative;
+    margin-top: 4rem; padding-top: 2rem;
+    border-top: 1px solid var(--bwp-text);
 }
-
-/* Centred ✦ glyph sitting on the border-top rule */
-.bwp-site-footer::before {
-    content: '✦';
-    position: absolute;
-    top: -.72em;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: .7em;
-    line-height: 1;
-    color: var(--bwp-border);
-    background: var(--bwp-bg);
-    padding: 0 .8em;
-    letter-spacing: 0;
-}
-
 .bwp-site-footer__inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* SC 2.4.11 (WCAG 2.2) — the night toggle is fixed at bottom: 1.5em; right: 1.5em.
-       Without padding here the last keyboard-focusable element in the footer (typically
-       the credit links in the bottom-right) can overlap the toggle's footprint, causing
-       the focus ring to be partially obscured. padding-bottom: 4em clears that zone. (W-04) */
-    padding-bottom: 4em;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1.5rem;
+    align-items: start;
 }
-
-.bwp-site-footer__colophon {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: .3em;
-    margin-bottom: 1.6em;
-}
-
-/* Anthology name — display font, most prominent */
-.bwp-site-footer__anthology {
-    font-family: var(--bwp-font-display, 'Cinzel', Georgia, serif);
-    font-size: .98em;
-    font-weight: 400;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: var(--bwp-text-mid);
-    margin: 0 0 .2em;
-    line-height: 1.3;
-}
-
-.bwp-site-footer__author {
-    font-size: .68em;
-    letter-spacing: .2em;
-    text-transform: uppercase;
-    color: var(--bwp-muted);
-    margin: 0;
-    line-height: 1.4;
-}
-
-.bwp-site-footer__copyright {
-    font-size: .65em;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--bwp-muted);
-    opacity: .8;
-    margin: .4em 0 0;
-    line-height: 1.5;
-}
-
+.bwp-site-footer__colophon { grid-column: 1 / span 12; display: flex; flex-direction: column; gap: .3rem; }
+.bwp-site-footer__anthology { margin: 0; font-family: var(--bwp-font-display); font-size: 1.6rem; line-height: 1.1; }
+.bwp-site-footer__author { margin: 0; font-family: var(--bwp-font-ui); font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: var(--bwp-muted); }
+.bwp-site-footer__copyright { margin: .4rem 0 0; font-size: .92rem; color: var(--bwp-muted); }
+.bwp-site-footer__copyright p { margin: 0; }
+.bwp-footer-nav { grid-column: 1 / span 12; }
+.bwp-footer-nav__list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .35rem; }
+.bwp-footer-nav__list a:hover { background: var(--bwp-text); color: var(--bwp-on-ink); border-color: transparent; }
+.bwp-site-footer__social { grid-column: 1 / span 12; }
+.bwp-site-footer__logo { grid-column: 1 / span 12; }
+.bwp-site-footer__logo img { height: 48px; width: auto; }
 .bwp-site-footer__credit {
-    font-size: .6em;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: var(--bwp-muted);
-    opacity: .55;
-    margin: 0;
-    padding-top: 1.2em;
-    border-top: 1px solid var(--bwp-border-faint);
-    width: 100%;
-    text-align: center;
+    grid-column: 1 / span 12;
+    margin: 1rem 0 0; padding: 1rem 4rem 0 0; border-top: 1px solid var(--bwp-border-faint);
+    font-family: var(--bwp-font-ui); font-size: .62rem; letter-spacing: .16em; text-transform: uppercase; color: var(--bwp-muted);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .5rem;
+}
+.bwp-site-footer__credit a { color: var(--bwp-text); }
+.bwp-site-footer__jawi { margin: .2rem 0 0; font-family: var(--bwp-font-jawi); font-size: 1.5rem; line-height: 1.3; color: var(--bwp-badge); text-align: left; }
+@media screen and (min-width: 52em) {
+    .bwp-site-footer__colophon { grid-column: 1 / span 5; }
+    .bwp-footer-nav          { grid-column: 7 / span 6; justify-self: end; }
+    .bwp-site-footer__social { grid-column: 7 / span 6; justify-self: end; }
+    .bwp-site-footer__logo   { grid-column: 1 / span 5; }
 }
 
-.bwp-site-footer a { color: var(--bwp-muted); text-decoration: none; transition: color .15s, opacity .15s; }
-.bwp-site-footer a:hover { color: var(--bwp-link); opacity: 1; }
-
-.bwp-sidebar {
-    text-align: center; margin-top: 2.5em;
-    padding-top: 2em; border-top: 1px solid var(--bwp-border); line-height: 1.8;
+/* social icons */
+.bwp-social { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem; }
+.bwp-social__item { margin: 0; }
+.bwp-social__link {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; border-radius: var(--bwp-pill);
+    border: 1px solid var(--bwp-border); color: var(--bwp-text);
+    transition: background .15s, color .15s;
 }
-.bwp-sidebar .widget { margin-bottom: 2em; }
-
-.widget-title {
-    font-family: var(--bwp-font-ui);
-    font-size: .63em; font-weight: 600;
-    letter-spacing: .18em; text-transform: uppercase;
-    color: var(--bwp-muted); margin-bottom: .6em;
-}
-
-.bwp-sidebar .search-form { display: flex; max-width: 20em; margin: 0 auto; }
-.bwp-sidebar .search-field {
-    flex: 1; padding: .5em .7em;
-    font-family: var(--bwp-font-ui); font-size: .85em;
-    border: 1px solid var(--bwp-ui-border); border-right: none;
-    border-radius: var(--bwp-radius) 0 0 var(--bwp-radius);
-    background: var(--bwp-bg); color: var(--bwp-text);
-}
-.bwp-sidebar .search-field:focus { background: var(--bwp-bg-subtle); }
-.bwp-sidebar .search-submit {
-    padding: .5em .9em; border: 1px solid var(--bwp-link);
-    border-radius: 0 var(--bwp-radius) var(--bwp-radius) 0;
-    background: var(--bwp-link); color: #fff;
-    font-family: var(--bwp-font-ui); font-size: .78em;
-    font-weight: 500; letter-spacing: .06em; text-transform: uppercase;
-    cursor: pointer; transition: background .18s;
-}
-.bwp-sidebar .search-submit:hover { background: var(--bwp-link-hover); }
-
-/* ═══════════════════════════════════════════════════════════
-   MUKADIMAH / KOLOFON
-   ═══════════════════════════════════════════════════════════ */
-
-.bwp-foreword .bwp-foreword__content,
-.bwp-colophon-page   .bwp-colophon-page__content {
-    max-width: 30em; margin: 0 auto;
-    font-style: italic; font-size: 1.04em; line-height: 1.8;
-    color: var(--bwp-text-mid);
-}
-.bwp-foreword .bwp-foreword__content p + p,
-.bwp-colophon-page   .bwp-colophon-page__content p + p { text-indent: 2em; }
-
-.bwp-edit-link { text-align: center; margin-top: 1em; font-family: var(--bwp-font-ui); font-size: .74em; color: var(--bwp-muted); }
-
-/* ═══════════════════════════════════════════════════════════
-   FOOTER NAV
-   ═══════════════════════════════════════════════════════════ */
-
-.bwp-footer-nav {
-    margin-bottom: 1.4em;
-}
-
-.bwp-footer-nav__list {
-    list-style: none;
-    margin:  0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0 1.4em;
-}
-
-.bwp-footer-nav__list li { margin: 0; }
-
-.bwp-footer-nav__list a {
-    font-family:     var(--bwp-font-ui);
-    font-size:       .68rem;
-    letter-spacing:  .08em;
-    text-transform:  uppercase;
-    color:           var(--bwp-muted);
-    text-decoration: none;
-    border:          none;
-    transition:      color .15s;
-}
-.bwp-footer-nav__list a:hover { color: var(--bwp-text); }
-
-/* ═══════════════════════════════════════════════════════════
-   CHAPTER BLOCK + INLINE VERSE NUMBERS
-   Bible-style apparatus. Primary styling lives in ratapan.css;
-   these are the base rules shared across all forms.
-   ═══════════════════════════════════════════════════════════ */
-
-.bwp-chapter {
-    margin: 3em 0;
-}
-
-/* Optional chapter title — spans full width above the chapter grid */
-.bwp-chapter__title {
-    display: block;
-    font-family: var(--bwp-font-ui);
-    font-size: .7em;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--bwp-muted);
-    margin-bottom: .9em;
-    opacity: .8;
-}
-
-/* Chapter number — left column in the grid (form CSS sets grid layout) */
-.bwp-chapter__num {
-    font-family: var(--bwp-font-display, 'Cinzel', Georgia, serif);
-    font-size: 4.2em;
-    font-weight: 400;
-    line-height: .82;
-    letter-spacing: .02em;
-    color: var(--bwp-text);
-    user-select: none;
-}
-
-/* Content paragraphs */
-.bwp-chapter__content p {
-    position: static;
-    padding-left: 0;
-    margin: 0 0 .7em;
-    text-indent: 0 !important;
-}
-
-/* Verse numbers — inline, small, bold, before text */
-.bwp-vnum {
-    display: inline;
-    font-family: var(--bwp-font-ui);
-    font-size: .7em;
-    font-weight: 700;
-    font-style: normal;
-    color: var(--bwp-text-mid);
-    margin-right: .35em;
-    vertical-align: baseline;
-    user-select: none;
-    letter-spacing: .01em;
-}
-
-/* Verse 1 number hidden — the chapter numeral is the anchor */
-.bwp-chapter .bwp-vnum[data-v="1"] {
-    display: none;
+.bwp-social__link:hover { background: var(--bwp-text); color: var(--bwp-on-ink); border-color: transparent; }
+.bwp-social__link svg { width: 16px; height: 16px; }
+.bwp-social--collapsible .bwp-social__item:nth-child(n+7) { display: none; }
+.bwp-social--collapsible.bwp-social--expanded .bwp-social__item:nth-child(n+7) { display: block; }
+.bwp-social__toggle {
+    height: 40px; padding: 0 1em; border-radius: var(--bwp-pill);
+    border: 1px solid var(--bwp-border); background: transparent; color: var(--bwp-muted);
+    font-family: var(--bwp-font-ui); font-size: .66rem; letter-spacing: .1em; cursor: pointer;
 }
 
 /* ═══════════════════════════════════════════════════════════
-   DECORATIVE RULE
+   FLOATING CONTROLS — progress, night toggle, back to top
    ═══════════════════════════════════════════════════════════ */
 
-.bwp-rule {
-    display: block; border: none;
-    border-top: 1px solid var(--bwp-border);
-    margin: 2em auto; max-width: 5em;
+.bwp-progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 200; background: transparent; }
+.bwp-progress__bar { height: 100%; width: 0; background: var(--bwp-progress); border-radius: 0 var(--bwp-pill) var(--bwp-pill) 0; transition: width .1s linear; }
+
+.bwp-night-toggle {
+    position: fixed;
+    bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
+    right:  max(1.25rem, env(safe-area-inset-right, 0px));
+    width: 44px; height: 44px;
+    border: 1px solid var(--bwp-ui-border); border-radius: var(--bwp-pill);
+    background: var(--bwp-bg-raised); color: var(--bwp-link);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; box-shadow: var(--bwp-shadow); z-index: 100;
+    transition: background .2s, color .2s, transform .2s;
+}
+.bwp-night-toggle:hover { transform: translateY(-2px); box-shadow: var(--bwp-shadow-lg); }
+.bwp-night-toggle__moon { display: none; }
+body.bwp-night .bwp-night-toggle__sun  { display: none; }
+body.bwp-night .bwp-night-toggle__moon { display: block; }
+
+.bwp-back-to-top {
+    position: fixed;
+    bottom: calc(max(1.25rem, env(safe-area-inset-bottom, 0px)) + 44px + .6rem);
+    right:  max(1.25rem, env(safe-area-inset-right, 0px));
+    width: 44px; height: 44px; padding: 0;
+    border: none; border-radius: var(--bwp-pill);
+    background: var(--bwp-text); color: var(--bwp-bg);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 90;
+    opacity: 0; transform: translateY(8px); pointer-events: none;
+    transition: opacity .2s, transform .2s;
+}
+.bwp-back-to-top.is-visible { opacity: .85; transform: none; pointer-events: auto; }
+.bwp-back-to-top:hover, .bwp-back-to-top:focus-visible { opacity: 1; }
+
+.bwp-work__content p.bwp-stanza-focus { outline: 2px solid var(--bwp-accent); outline-offset: 6px; border-radius: 4px; }
+
+/* ═══════════════════════════════════════════════════════════
+   NIGHT MODE (reader toggle) — re-inks everything
+   Set on <html> by the preload script, mirrored on <body> by JS.
+   Kept at a single specificity level that beats scheme compounds.
+   ═══════════════════════════════════════════════════════════ */
+
+html.bwp-night body,
+body.bwp-night {
+    --bwp-bg:            #0f1430;
+    --bwp-bg-subtle:     #171d3d;
+    --bwp-bg-raised:     #131838;
+    --bwp-text:          #ece6d6;
+    --bwp-text-mid:      #d4cdb9;
+    --bwp-muted:         #b3a785;
+    --bwp-accent:        #e0b344;
+    --bwp-link:          #9ab8e8;
+    --bwp-link-hover:    #c3d6f5;
+    --bwp-border:        #2a3156;
+    --bwp-border-faint:  #1f2548;
+    --bwp-border-ink:    #ece6d6;
+    --bwp-ui-border:     #6c7398;
+    --bwp-ornament:      #e0b344;
+    --bwp-stone:         #3a4268;
+    --bwp-progress:      #e0b344;
+    --bwp-badge-ink:     #fbf4ea;
+    --bwp-on-ink:        #0f1430;
+    --bwp-shadow:        0 2px 8px rgba(0,0,0,.35);
+    --bwp-shadow-lg:     0 10px 30px rgba(0,0,0,.45);
+    --bwp-teal:          #9ab8e8;
+    --bwp-gold:          #e0b344;
+    --bwp-gold-dim:      #b8923a;
+    --bwp-gold-light:    #f0d27a;
+    --bwp-cream:         #171d3d;
+}
+html.bwp-night .bwp-badge, body.bwp-night .bwp-badge { filter: brightness(1.45) saturate(.85); }
+html.bwp-night .bwp-badge--karmina, body.bwp-night .bwp-badge--karmina { color: #0f1430; filter: none; }
+
+/* OS dark preference, honoured only when the reader has not chosen and no light scheme is pinned */
+@media (prefers-color-scheme: dark) {
+    html:not([data-bwp-night="0"]) body:not(.bwp-scheme-cream):not(.bwp-scheme-dusk):not(.bwp-night) {
+        --bwp-bg:            #0f1430;
+        --bwp-bg-subtle:     #171d3d;
+        --bwp-bg-raised:     #131838;
+        --bwp-text:          #ece6d6;
+        --bwp-text-mid:      #d4cdb9;
+        --bwp-muted:         #b3a785;
+        --bwp-accent:        #e0b344;
+        --bwp-link:          #9ab8e8;
+        --bwp-link-hover:    #c3d6f5;
+        --bwp-border:        #2a3156;
+        --bwp-border-faint:  #1f2548;
+        --bwp-border-ink:    #ece6d6;
+        --bwp-ui-border:     #6c7398;
+        --bwp-ornament:      #e0b344;
+        --bwp-stone:         #3a4268;
+        --bwp-progress:      #e0b344;
+        --bwp-on-ink:        #0f1430;
+    }
 }
 
 /* ═══════════════════════════════════════════════════════════
    RESPONSIVE
    ═══════════════════════════════════════════════════════════ */
 
-/* ── Narrow viewports: 320px–575px (max-width: 36em) ─────── */
-
-@media screen and (max-width: 36em) {
-
-    /* Masthead — reduce author name tracking, let it breathe less */
-    .bwp-site-header__title {
-        letter-spacing: .12em;
-    }
-
-    /* Nav — wrap items at small sizes without overflowing; keep the row
-       gap tight so a two-row nav still reads as one strip. */
-    .bwp-nav__list {
-        gap: 0 1.1em;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    .bwp-nav__list a { padding: .55em .1em; font-size: .7rem; }
-
-    /* Fixed controls — smaller and tucked into the corner so they sit over
-       the page gutter rather than the reading column. */
-    .bwp-night-toggle {
-        width: 36px; height: 36px;
-        bottom: max(.75em, env(safe-area-inset-bottom, 0px));
-        right:  max(.75em, env(safe-area-inset-right, 0px));
-    }
-    /* Back-to-top is hidden on phones: with a 22px gutter it would sit on
-       the reading column, and the browser chrome already offers a fast
-       scroll to top. The night toggle stays as the single floating control. */
-    .bwp-back-to-top { display: none; }
-
-    /* Poetry — reset the 32rem max-width; full-width on narrow screens */
-    .bwp-form-puisi .bwp-work__content,
-    .bwp-form-syair .bwp-work__content,
-    .bwp-form-karmina .bwp-work__content,
-    .bwp-form-ratapan .bwp-work__content {
-        max-width: 100%;
-    }
-
-    /* TOC header — slightly smaller on narrow */
-    .bwp-toc-header { font-size: 1.2rem; }
-
-    /* Drop cap — slightly smaller on narrow so it doesn't dominate */
-    .bwp-dropcap-cerpen.bwp-form-cerpen   .bwp-work__content > p:first-of-type::first-letter,
-    .bwp-dropcap-novel.bwp-form-novel     .bwp-work__content > p:first-of-type::first-letter,
-    .bwp-dropcap-hikayat.bwp-form-hikayat .bwp-work__content > p:first-of-type::first-letter,
-    .bwp-dropcap-memoir.bwp-form-memoir   .bwp-work__content > p:first-of-type::first-letter,
-    .bwp-dropcap-esei.bwp-form-esei       .bwp-work__content > p:first-of-type::first-letter,
-    .bwp-dropcap-nukilan.bwp-form-nukilan .bwp-work__content > p:first-of-type::first-letter,
-    .bwp-dropcap-force-on                 .bwp-work__content > p:first-of-type::first-letter {
-        font-size: 2.8em;
-    }
-
-    /* M-06: Reduce page wrap top/bottom padding on mobile — 3em top is generous
-       before the author title; 1.75em keeps breathing room without excess height. */
-    .bwp-page-wrap {
-        padding: 1.75em 1.25em 4.5em;   /* 1.25em ≈ 22px gutter; ≥16px at 320px */
-    }
-
-    /* M-07: Reduce book title hero block vertical padding on mobile. */
-    .bwp-book-title {
-        padding: 2.5em 1.25em 2em;
-        margin: 0 -1.25em 2.5em;        /* match the narrower page-wrap gutter */
-    }
-
-    /* M-08: Compress site header bottom margin on mobile. */
-    .bwp-site-header { margin-bottom: 2em; }
-
-    /* M-09: Fix [verse] shortcode verse-number negative margin.
-       margin-left: -2.4em pulls the number outside the 2em page-wrap
-       padding at 320px, causing horizontal overflow. Reset on mobile —
-       the number renders inline-left of its text line instead. */
-    .bwp-bait__num {
-        margin-left:  0;
-        min-width:    1.8em;
-        padding-right: .5em;
-    }
-
-    /* M-10: Fix .bwp-istilah tooltip viewport clipping on mobile.
-       white-space: nowrap + left: 50% + translateX(-50%) overflows the
-       left viewport edge for terms near the right margin.
-       Reset to left-anchored, word-wrapped tooltip on narrow screens. */
-    .bwp-istilah__tip {
-        white-space: normal;
-        max-width:   14em;
-        left:        0;
-        transform:   none;
-    }
-
-    /* M-11: Remove excerpt thumbnail offset on mobile — aligns under title
-       naturally without the wide left indent. */
-    .bwp-toc__item--has-thumb .bwp-toc__excerpt {
-        padding-left: 0;
-    }
-}
-
-/* ── Mid viewports: 576px–831px (36em–52em) ──────────────── */
-
+/* ── Tablet: 36em–52em ───────────────────────────────────── */
 @media screen and (min-width: 36em) and (max-width: 52em) {
-
-    /* Tablet — a touch wider than the phone column, with a lighter top
-       margin, and the masthead tracking between the phone and desktop sizes. */
-    .bwp-page-wrap { max-width: 40em; padding: 2.25em 2em 5em; }
-    .bwp-site-header { margin-bottom: 2.5em; }
-    .bwp-site-header__title { font-size: 1.15rem; }
-    .bwp-nav__list { gap: 0 1.4em; }
-
-    /* Poetry — constrain to a sensible column at mid-width */
-    .bwp-form-puisi .bwp-work__content,
-    .bwp-form-syair .bwp-work__content,
-    .bwp-form-karmina .bwp-work__content,
-    .bwp-form-ratapan .bwp-work__content {
-        max-width: 28rem;
-    }
+    .bwp-site-header { grid-template-columns: 1fr auto; grid-template-areas: "brand nav" "section section" "blurb blurb"; }
+    .bwp-site-header__section { text-align: left; }
+    .bwp-work__opening, .bwp-book-title { gap: 1rem; }
+    :root { --bwp-measure: 34em; }
 }
 
-/* ── Wide viewports: 832px+ (min-width: 52em) ────────────── */
+/* ── Phone: ≤36em ────────────────────────────────────────── */
+@media screen and (max-width: 36em) {
+    :root { --bwp-font-size: 1.0625rem; --bwp-lh: 1.7; }
+    .bwp-page-wrap { padding-bottom: 4.5rem; }
 
-@media screen and (min-width: 52em) {
-    .bwp-page-wrap        { max-width: 48em; }
-    .bwp-site-header__title { font-size: 1.25rem; }
-    .bwp-book-title__desc { font-size: 1.2em; }
-    .bwp-site-header      { margin-bottom: 3.5em; }
+    .bwp-site-header {
+        grid-template-columns: 1fr auto;
+        grid-template-areas: "brand toggle" "nav nav" "section section" "blurb blurb";
+        gap: .6rem 1rem;
+        padding: .9rem 0 .9rem;
+        margin-bottom: 1.75rem;
+    }
+    .bwp-brand__mark { width: 34px; height: 34px; }
+    .bwp-site-header__title { font-size: 1.05rem; }
+    .bwp-site-header__section { text-align: left; }
+
+    .bwp-nav-toggle {
+        grid-area: toggle;
+        display: inline-flex; align-items: center; gap: .5em;
+        min-height: 40px; padding: 0 1.1em;
+        border: none; border-radius: var(--bwp-pill);
+        background: var(--bwp-text); color: var(--bwp-on-ink);
+        font-family: var(--bwp-font-ui); font-size: .66rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+        cursor: pointer;
+    }
+    .bwp-nav { grid-area: nav; display: none; }
+    .bwp-nav.is-open { display: block; }
+    .bwp-nav__list { flex-direction: column; gap: 2px; padding: 6px; border-radius: var(--bwp-radius); }
+    .bwp-nav__list a { width: 100%; min-height: 44px; padding: .9em 1.2em; border-radius: var(--bwp-radius-sm); }
+    .bwp-nav__list .sub-menu { position: static; display: block; box-shadow: none; border: none; background: transparent; padding: 0 0 0 1rem; }
+
+    .bwp-book-title { padding-top: .5rem; }
+    .bwp-book-title__name { font-size: clamp(2.6rem, 13vw, 3.6rem); }
+    .bwp-book-title__jawi { font-size: 7rem; top: -.2em; }
+    .bwp-work__title { font-size: clamp(2.1rem, 10vw, 3rem); }
+    .bwp-work__opening[data-jawi]::before { font-size: 6rem; top: -.3em; }
+    .bwp-work__content { font-size: 1.1rem; }
+    .bwp-toc-group { padding: 1.1rem 1rem .6rem; border-radius: var(--bwp-radius); }
+    .bwp-toc__link { padding: .7rem .4rem; margin: 0 -.4rem; row-gap: .5rem; }
+    .bwp-toc__title { flex-basis: 100%; }
+    .bwp-toc__year { margin-left: 0; }
+    .bwp-toc__excerpt { padding: 0 .4rem .7rem; }
+    .bwp-colophon { padding: 1.1rem 1.1rem; border-radius: var(--bwp-radius); }
+
+    .bwp-night-toggle { width: 40px; height: 40px; bottom: max(.75rem, env(safe-area-inset-bottom, 0px)); right: max(.75rem, env(safe-area-inset-right, 0px)); }
+    .bwp-back-to-top { display: none; }
+    .bwp-istilah__tip { left: 0; transform: none; max-width: 14em; }
+    .bwp-bait__num { width: 1.8em; height: 1.8em; }
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -2503,87 +1109,13 @@ body.bwp-time-night .bwp-social__toggle:hover {
    ═══════════════════════════════════════════════════════════ */
 
 @media print {
-    /* ── Hide all UI chrome ── */
-    .bwp-progress, .bwp-night-toggle, .bwp-work-nav,
-    .bwp-related, .bwp-sidebar, .bwp-site-footer,
-    .bwp-back-link, .bwp-footer-widgets, .bwp-search-form,
-    .bwp-comments, .bwp-nav, .bwp-footer-nav, nav { display: none !important; }
-
-    /* ── Base page typography ── */
-    body            { font-size: 11pt; color: #000; background: #fff; line-height: 1.6; }
-    .bwp-page-wrap  { max-width: none; padding: 0; }
-    a               { color: #000; text-decoration: underline; }
-    .bwp-ornament   { color: #888; }
-
-    /* ── Headings ── */
-    .bwp-work__title      { font-size: 18pt; margin-bottom: .4em; }
-    .bwp-toc-header       { font-size: 14pt; }
-    .bwp-toc-group__heading { font-size: 10pt; letter-spacing: .14em; }
-
-    /* ── Prevent mid-work page breaks ── */
-    .bwp-work          { page-break-inside: avoid; }
-    .bwp-colophon      { page-break-inside: avoid; page-break-before: avoid; }
-    .bwp-epigraph      { page-break-inside: avoid; }
-
-    /* ── Orphans and widows ── */
-    .bwp-work__content p {
-        orphans: 3;
-        widows:  3;
-    }
-
-    /* ── Keep stanzas together where possible ── */
-    .bwp-work__content > p { page-break-inside: avoid; }
-
-    /* ── Colophon lines legible in print ── */
-    .bwp-colophon__line { color: #333; }
-}
-
-/* Extended colophon elements (karmina, esei thesis, dateline, etc.)
-   are defined in literary.css — do not duplicate here. */
-
-/* ── Back to top ────────────────────────────────────────────────────────── */
-
-.bwp-back-to-top {
-    position: fixed;
-    /* Sits directly above the night toggle (40px + gap) so the two fixed
-       controls never share the same corner. */
-    bottom: calc(max(1.5em, env(safe-area-inset-bottom, 0px)) + 40px + .75em);
-    right:  max(1.5em, env(safe-area-inset-right, 0px));
-    z-index: 90;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;             /* SC 2.5.8 minimum target size */
-    height: 44px;
-    padding: 0;
-    background: var(--bwp-text);
-    color: var(--bwp-bg);
-    border: none;
-    border-radius: var(--bwp-radius);
-    cursor: pointer;
-    opacity: 0;
-    transform: translateY( 8px );
-    transition: opacity .2s ease, transform .2s ease;
-    pointer-events: none;
-}
-
-/* Visible state — toggled by JS adding .is-visible */
-.bwp-back-to-top.is-visible {
-    opacity: .75;
-    transform: translateY( 0 );
-    pointer-events: auto;
-}
-
-.bwp-back-to-top:hover,
-.bwp-back-to-top:focus-visible {
-    opacity: 1;
-    outline: 2px solid var(--bwp-accent);
-    outline-offset: 2px;
-}
-
-/* Stanza focus ring — keyboard stanza nav */
-.bwp-work__content p.bwp-stanza-focus {
-    outline: 2px solid var(--bwp-accent);
-    outline-offset: 4px;
-    border-radius: 2px;
+    body { background: #fff; color: #000; font-size: 11pt; }
+    .bwp-nav, .bwp-nav-toggle, .bwp-footer-nav, .bwp-social, .bwp-share, .bwp-night-toggle, .bwp-back-to-top,
+    .bwp-progress, .bwp-comments, .bwp-work-nav, .bwp-related, .bwp-jalur { display: none !important; }
+    .bwp-page-wrap { max-width: none; padding: 0; animation: none; }
+    .bwp-work__opening[data-jawi]::before, .bwp-book-title__jawi { display: none; }
+    .bwp-work__title { font-size: 24pt; text-align: left; }
+    .bwp-work__content a { color: #000; text-decoration: none; }
+    .bwp-work__content a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .8em; color: #555; }
+    .bwp-colophon, .bwp-toc-group { background: none; border: 1px solid #999; }
 }

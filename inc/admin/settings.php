@@ -20,6 +20,7 @@ function book_wp_register_settings() {
     $settings = array(
         'book_wp_author_name'     => 'sanitize_text_field',
         'book_wp_anthology_name'  => 'sanitize_text_field',
+        'book_wp_jawi_name'       => 'sanitize_text_field',
         'book_wp_front_blurb'     => 'wp_kses_post',
         'book_wp_copyright'       => 'wp_kses_post',
         'book_wp_show_copyright'    => 'book_wp_cb',
@@ -135,6 +136,7 @@ function book_wp_handle_tab_save() {
         'general' => array(
             'book_wp_author_name'    => 'sanitize_text_field',
             'book_wp_anthology_name' => 'sanitize_text_field',
+            'book_wp_jawi_name'      => 'sanitize_text_field',
             'book_wp_front_blurb'         => 'wp_kses_post',
             'book_wp_copyright'           => 'wp_kses_post',
             'book_wp_show_copyright'      => 'book_wp_cb',
@@ -421,6 +423,15 @@ function bwp_tab_general() {
         </div>
 
         <div class="bwp-field">
+            <label class="bwp-field__label" for="book_wp_jawi_name"><?php esc_html_e( 'Anthology Name in Jawi', 'book-wp' ); ?></label>
+            <div class="bwp-field__control">
+                <input type="text" dir="rtl" lang="ms-Arab" name="book_wp_jawi_name" id="book_wp_jawi_name"
+                       value="<?php echo esc_attr( get_option( 'book_wp_jawi_name', '' ) ); ?>">
+            </div>
+            <span class="bwp-field__hint"><?php esc_html_e( 'Displayed prominently on the front page as the collection title.', 'book-wp' ); ?></span>
+        </div>
+
+        <div class="bwp-field">
             <label class="bwp-field__label" for="book_wp_front_blurb"><?php esc_html_e( 'Front Page Blurb', 'book-wp' ); ?></label>
             <div class="bwp-field__control">
                 <textarea name="book_wp_front_blurb" id="book_wp_front_blurb" rows="3"><?php echo esc_textarea( get_option( 'book_wp_front_blurb', '' ) ); ?></textarea>
@@ -560,10 +571,10 @@ function bwp_tab_typography() {
     );
 
     $schemes = array(
-        'default' => array( 'name' => 'Default', 'sub' => 'Warm white', 'bg' => '#ffffff', 'fg' => '#111111' ),
+        'default' => array( 'name' => 'Kapas',   'sub' => 'Nila on cotton', 'bg' => '#f6f1e4', 'fg' => '#1a1f3a' ),
         'cream'   => array( 'name' => 'Cream',   'sub' => 'Aged paper', 'bg' => '#faf5dc', 'fg' => '#332d26' ),
         'dusk'    => array( 'name' => 'Dusk',    'sub' => 'Warm grey',  'bg' => '#e8e4de', 'fg' => '#2c2825' ),
-        'night'   => array( 'name' => 'Night',   'sub' => 'Dark',       'bg' => '#1a1a1f', 'fg' => '#d4d2cc' ),
+        'night'   => array( 'name' => 'Malam',   'sub' => 'Indigo night', 'bg' => '#0f1430', 'fg' => '#ece6d6' ),
     );
 
     $times = array(

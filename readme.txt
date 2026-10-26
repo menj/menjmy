@@ -3,8 +3,8 @@ Contributors: menj
 Requires at least: 6.0
 Tested up to: 6.9.1
 Requires PHP: 8.2
-Version: 3.5.1
-Stable tag: 3.5.1
+Version: 4.0.0
+Stable tag: 4.0.0
 License: GPL-2.0-or-later
 Tags: literary, poetry, book, bilingual, minimal, typography
 
@@ -500,6 +500,11 @@ Adds tag support: thematic tag display on single posts, TOC by-tag grouping, tag
 Compliance fixes: licence corrected to GPL-2.0-or-later, CRLF normalised, capability scoped to edit_theme_options, content links underlined (WCAG 1.4.1), readme expanded with FAQ and Privacy sections.
 
 == Changelog ==
+= 4.0.0 =
+* Changed: Renamed to Sasterawan, tailored for https://menj.my. Front end rebuilt: editorial openings, nila/kunyit/kapas palette, pills and rounded cards, Fraunces display type, self-hosted Jawi face, jalur tema pills on the front page, two-column TOC cards.
+* Added: Terjemahan literary form with source-work fields and translator's note; Jawi anthology name option; brand assets and favicon fallback.
+* Fixed: meta box data loss across form groups; legacy-slug redirect on paged posts, feeds and previews; stale rewrite flush on permalink toggle; stanza count regex; test bootstrap; night legibility on Cream/Dusk; undefined back-to-top tokens.
+
 = 3.5.1 =
 * Fixed: Back to Top frontend script now has its own `bookWP` config scope, preventing `cfg is not defined` errors.
 * Changed: Custom CSS is now attached with `wp_add_inline_style()` after the active theme stylesheet stack instead of being echoed from an admin-only include.
