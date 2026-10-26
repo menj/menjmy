@@ -45,19 +45,23 @@
         // Author name stays the H2 landmark on every view; the H1 belongs to
         // each template (anthology title, work title, archive title).
         ?>
+        <?php
+        $bwp_site_name = get_option( 'book_wp_anthology_name', '' );
+        $bwp_site_name = $bwp_site_name ? $bwp_site_name : get_bloginfo( 'name' );
+        ?>
         <a class="bwp-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
             <?php if ( has_custom_logo() ) : ?>
                 <?php echo wp_get_attachment_image( get_theme_mod( 'custom_logo' ), 'thumbnail', false, array( 'class' => 'bwp-brand__mark', 'alt' => '' ) ); ?>
             <?php else : ?>
-                <img class="bwp-brand__mark" src="<?php echo esc_url( BOOK_WP_URI . '/assets/img/brand/mark.svg' ); ?>" alt="" width="40" height="40" decoding="async">
+                <img class="bwp-brand__mark" src="<?php echo esc_url( BOOK_WP_URI . '/assets/img/brand/mark.svg' ); ?>" alt="" width="46" height="46" decoding="async">
             <?php endif; ?>
-            <h2 class="bwp-site-header__title"><?php echo esc_html( $bwp_author ); ?></h2>
+            <span class="bwp-brand__text">
+                <h2 class="bwp-site-header__title"><?php echo esc_html( $bwp_site_name ); ?></h2>
+                <?php if ( get_bloginfo( 'description' ) ) : ?>
+                <span class="bwp-site-header__tagline"><?php bloginfo( 'description' ); ?></span>
+                <?php endif; ?>
+            </span>
         </a>
-
-        <?php $bwp_section = book_wp_header_section_label(); ?>
-        <?php if ( $bwp_section ) : ?>
-            <p class="bwp-site-header__section"><?php echo esc_html( $bwp_section ); ?></p>
-        <?php endif; ?>
 
         <?php if ( has_nav_menu( 'primary' ) ) : ?>
         <button class="bwp-nav-toggle" type="button" aria-expanded="false" aria-controls="bwp-nav">
@@ -74,6 +78,8 @@
             ) ); ?>
         </nav>
         <?php endif; ?>
+
+        <span class="bwp-site-header__band" aria-hidden="true"></span>
 
         <?php if ( is_single() ) : ?>
             <?php

@@ -19,6 +19,7 @@ $bwp_author    = get_option( 'book_wp_author_name', '' );
 $bwp_author    = $bwp_author ? $bwp_author : get_bloginfo( 'name' );
 $bwp_copyright = get_option( 'book_wp_copyright', '' );
 $bwp_jawi      = get_option( 'book_wp_jawi_name', '' );
+$bwp_jawa      = get_option( 'book_wp_jawa_name', '' );
 $bwp_quote     = get_option( 'book_wp_footer_quote', book_wp_default_footer_quote() );
 $bwp_quote_sub = get_option( 'book_wp_footer_quote_sub', book_wp_default_footer_quote_sub() );
 $bwp_tagline   = get_bloginfo( 'description' );
@@ -53,6 +54,9 @@ $bwp_portrait  = get_option( 'book_wp_author_portrait', BOOK_WP_URI . '/assets/i
                     <div class="bwp-site-footer__identity-text">
                     <?php if ( $bwp_jawi ) : ?>
                     <span class="bwp-site-footer__jawi" dir="rtl" lang="ms-Arab"><?php echo esc_html( $bwp_jawi ); ?></span>
+                    <?php endif; ?>
+                    <?php if ( $bwp_jawa ) : ?>
+                    <span class="bwp-site-footer__jawa" lang="jv-Java"><?php echo esc_html( $bwp_jawa ); ?></span>
                     <?php endif; ?>
                     <a class="bwp-site-footer__anthology" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php echo esc_html( $bwp_anthology ); ?></a>
                     <?php if ( $bwp_tagline ) : ?>

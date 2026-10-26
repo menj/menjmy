@@ -22,9 +22,12 @@ function book_wp_register_settings() {
         'book_wp_author_portrait' => 'esc_url_raw',
         'book_wp_anthology_name'  => 'sanitize_text_field',
         'book_wp_jawi_name'       => 'sanitize_text_field',
+        'book_wp_jawa_name'       => 'sanitize_text_field',
         'book_wp_footer_quote'    => 'sanitize_textarea_field',
         'book_wp_footer_quote_sub' => 'sanitize_text_field',
         'book_wp_front_blurb'     => 'wp_kses_post',
+        'book_wp_show_featured_work' => 'book_wp_cb',
+        'book_wp_featured_work_id'   => 'absint',
         'book_wp_copyright'       => 'wp_kses_post',
         'book_wp_show_copyright'    => 'book_wp_cb',
         'book_wp_toc_grouping'      => 'sanitize_text_field',
@@ -149,9 +152,12 @@ function book_wp_handle_tab_save() {
             'book_wp_author_portrait' => 'esc_url_raw',
             'book_wp_anthology_name' => 'sanitize_text_field',
             'book_wp_jawi_name'      => 'sanitize_text_field',
+            'book_wp_jawa_name'      => 'sanitize_text_field',
             'book_wp_footer_quote'   => 'sanitize_textarea_field',
             'book_wp_footer_quote_sub' => 'sanitize_text_field',
             'book_wp_front_blurb'         => 'wp_kses_post',
+            'book_wp_show_featured_work'  => 'book_wp_cb',
+            'book_wp_featured_work_id'    => 'absint',
             'book_wp_copyright'           => 'wp_kses_post',
             'book_wp_show_copyright'      => 'book_wp_cb',
             'book_wp_toc_grouping'        => 'sanitize_text_field',
@@ -455,6 +461,8 @@ function bwp_tab_general() {
 
         <div class="bwp-field">
             <label class="bwp-field__label" for="book_wp_jawi_name"><?php esc_html_e( 'Anthology Name in Jawi', 'book-wp' ); ?></label>
+            <div class="bwp-field">
+            <label class="bwp-field__label" for="book_wp_jawa_name"><?php esc_html_e( 'Anthology Name in Aksara Jawa', 'book-wp' ); ?></label>
             <div class="bwp-field__control">
                 <input type="text" dir="rtl" lang="ms-Arab" name="book_wp_jawi_name" id="book_wp_jawi_name"
                        value="<?php echo esc_attr( get_option( 'book_wp_jawi_name', '' ) ); ?>">
@@ -464,7 +472,18 @@ function bwp_tab_general() {
 
         <div class="bwp-field">
             <label class="bwp-field__label" for="book_wp_front_blurb"><?php esc_html_e( 'Front Page Blurb', 'book-wp' ); ?></label>
-            <div class="bwp-field bwp-field--full">
+            <div class="bwp-field">
+            <label class="bwp-field__label" for="book_wp_featured_work_id"><?php esc_html_e( 'Featured Work', 'book-wp' ); ?></label>
+            <div class="bwp-field__control">
+                <input type="number" min="0" name="book_wp_featured_work_id" id="book_wp_featured_work_id"
+                       value="<?php echo esc_attr( get_option( 'book_wp_featured_work_id', 0 ) ); ?>">
+                <p class="bwp-field__hint"><?php esc_html_e( 'Post ID to open the front page with. Leave 0 to show the newest work. The block can be hidden with the toggle below.', 'book-wp' ); ?></p>
+            </div>
+        </div>
+
+        <?php bwp_toggle( 'book_wp_show_featured_work', __( 'Karya Terbaru block', 'book-wp' ), __( 'Show the newest (or featured) work as an opening page above the table of contents.', 'book-wp' ), '1' ); ?>
+
+        <div class="bwp-field bwp-field--full">
             <label class="bwp-field__label" for="book_wp_footer_quote"><?php esc_html_e( 'Footer Sign-off', 'book-wp' ); ?></label>
             <div class="bwp-field__control">
                 <input type="text" name="book_wp_footer_quote" id="book_wp_footer_quote"

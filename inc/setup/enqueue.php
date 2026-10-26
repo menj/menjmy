@@ -25,7 +25,7 @@ function book_wp_enqueue_frontend() {
     $remote_fonts = '1' === get_option( 'book_wp_remote_fonts', '1' );
     $style_deps   = array( 'book-wp-style' );
 
-    // UI fonts — Fraunces (display), EB Garamond (body), Jost (UI), Noto Naskh Arabic (Jawi).
+    // UI fonts — Fraunces (display), EB Garamond (body), Jost (UI), Noto Naskh Arabic (Jawi), Noto Sans Javanese (Aksara Jawa).
     // Registered here via wp_enqueue_style() so the browser can initiate
     // the request in parallel with frontend.css. A CSS @import inside
     // frontend.css would create a serialised fetch chain — the browser
@@ -46,7 +46,7 @@ function book_wp_enqueue_frontend() {
 
         wp_enqueue_style(
             'book-wp-ui-fonts',
-            'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@400;500;600&family=Noto+Naskh+Arabic:wght@400&display=swap',
+            'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@400;500;600&family=Noto+Naskh+Arabic:wght@400&family=Noto+Sans+Javanese:wght@400;600&display=swap',
             array(),
             null
         );

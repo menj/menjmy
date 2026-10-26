@@ -8,47 +8,56 @@
     $jawi_name = get_option( 'book_wp_jawi_name', '' );
     $counts    = wp_count_posts( 'post' );
     $published = isset( $counts->publish ) ? (int) $counts->publish : 0;
+    $jalur_cats = get_categories( array( 'hide_empty' => true, 'orderby' => 'name', 'order' => 'ASC' ) );
+    $jalur_cats = array_values( array_filter( $jalur_cats, function( $c ) { return 'uncategorized' !== $c->slug; } ) );
+    $forms      = get_terms( array( 'taxonomy' => 'literary_form', 'hide_empty' => true, 'orderby' => 'count', 'order' => 'DESC' ) );
+    $forms      = ( $forms && ! is_wp_error( $forms ) ) ? $forms : array();
     ?>
+
+    <?php /* ── Half-title: anthology name, tagline, edition line ────────── */ ?>
     <div class="bwp-book-title">
         <?php if ( $jawi_name ) : ?>
             <span class="bwp-book-title__jawi" aria-hidden="true" dir="rtl"><?php echo esc_html( $jawi_name ); ?></span>
         <?php endif; ?>
-        <?php if ( ! empty( $anthology ) ) : ?>
-            <h1 class="bwp-book-title__name"><?php echo esc_html( $anthology ); ?></h1>
-        <?php else : ?>
-            <h1 class="bwp-book-title__name"><?php bloginfo( 'name' ); ?></h1>
-        <?php endif; ?>
+        <h1 class="bwp-book-title__name"><?php echo esc_html( $anthology ? $anthology : get_bloginfo( 'name' ) ); ?></h1>
         <div class="bwp-book-title__desc"><?php bloginfo( 'description' ); ?></div>
-        <div class="bwp-book-title__meta">
+        <p class="bwp-book-title__meta">
             <span><?php echo esc_html( sprintf( _n( '%s work', '%s works', $published, 'book-wp' ), number_format_i18n( $published ) ) ); ?></span>
-        </div>
+            <?php if ( $jalur_cats ) : ?><span><?php echo esc_html( sprintf( _n( '%s strand', '%s strands', count( $jalur_cats ), 'book-wp' ), number_format_i18n( count( $jalur_cats ) ) ) ); ?></span><?php endif; ?>
+            <?php if ( $forms ) : ?><span><?php echo esc_html( sprintf( _n( '%s form', '%s forms', count( $forms ), 'book-wp' ), number_format_i18n( count( $forms ) ) ) ); ?></span><?php endif; ?>
+        </p>
     </div>
 
-    <?php
-    // Jalur tema — every non-empty category as a pill, counts included.
-    $jalur_cats = get_categories( array( 'hide_empty' => true, 'orderby' => 'name', 'order' => 'ASC' ) );
-    $jalur_cats = array_filter( $jalur_cats, function( $c ) { return 'uncategorized' !== $c->slug; } );
-    if ( ! empty( $jalur_cats ) ) :
-    ?>
-    <nav class="bwp-jalur" aria-label="<?php esc_attr_e( 'Thematic strands', 'book-wp' ); ?>">
-        <span class="bwp-jalur__label"><?php esc_html_e( 'Jalur', 'book-wp' ); ?></span>
-        <?php foreach ( $jalur_cats as $jc ) : ?>
-            <a class="bwp-jalur__link" href="<?php echo esc_url( get_category_link( $jc->term_id ) ); ?>">
-                <?php echo esc_html( $jc->name ); ?>
-                <span class="bwp-jalur__count"><?php echo (int) $jc->count; ?></span>
-            </a>
-        <?php endforeach; ?>
-    </nav>
+    <?php /* ── Pintu masuk: jalur tema + bentuk ──────────────────────────── */ ?>
+    <?php if ( $jalur_cats || $forms ) : ?>
+    <div class="bwp-pintu">
+        <?php if ( $jalur_cats ) : ?>
+        <nav class="bwp-jalur" aria-label="<?php esc_attr_e( 'Thematic strands', 'book-wp' ); ?>">
+            <span class="bwp-jalur__label"><?php esc_html_e( 'Jalur', 'book-wp' ); ?></span>
+            <?php foreach ( $jalur_cats as $jc ) : ?>
+                <a class="bwp-jalur__link" href="<?php echo esc_url( get_category_link( $jc->term_id ) ); ?>">
+                    <?php echo esc_html( $jc->name ); ?>
+                    <span class="bwp-jalur__count"><?php echo (int) $jc->count; ?></span>
+                </a>
+            <?php endforeach; ?>
+        </nav>
+        <?php endif; ?>
+        <?php if ( $forms ) : ?>
+        <nav class="bwp-jalur bwp-jalur--bentuk" aria-label="<?php esc_attr_e( 'Literary forms', 'book-wp' ); ?>">
+            <span class="bwp-jalur__label"><?php esc_html_e( 'Bentuk', 'book-wp' ); ?></span>
+            <?php foreach ( $forms as $ft ) : ?>
+                <a class="bwp-jalur__link bwp-jalur__link--outline" href="<?php echo esc_url( get_term_link( $ft ) ); ?>">
+                    <?php echo esc_html( book_wp_form_label( $ft->slug ) ); ?>
+                    <span class="bwp-jalur__count"><?php echo (int) $ft->count; ?></span>
+                </a>
+            <?php endforeach; ?>
+        </nav>
+        <?php endif; ?>
+    </div>
     <?php endif; ?>
 
-    <?php
-    $front_blurb = get_option( 'book_wp_front_blurb', '' );
-    if ( ! empty( $front_blurb ) ) :
-    ?>
-        <div class="bwp-front-blurb">
-            <?php echo wp_kses_post( nl2br( $front_blurb ) ); ?>
-        </div>
-    <?php endif; ?>
+    <?php /* ── Karya terbaru: the newest work opens like a first page ────── */ ?>
+    <?php echo book_wp_featured_work(); // phpcs:ignore ?>
 
     <h2 class="bwp-toc-header"><?php echo esc_html( __( 'Table of Contents', 'book-wp' ) ); ?></h2>
 
@@ -365,7 +374,7 @@
 
     </div><!-- .bwp-toc-wrap -->
 
-    <?php echo book_wp_ornament( 'fleuron' ); // phpcs:ignore ?>
+    <div class="bwp-ornament bwp-ornament--kawung" aria-hidden="true"></div>
 
 </main><!-- #bwp-main -->
 

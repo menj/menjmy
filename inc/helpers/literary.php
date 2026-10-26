@@ -190,3 +190,55 @@ function book_wp_author_portrait( $size = 'md' ) {
         . '<img src="' . esc_url( $url ) . '" alt="' . esc_attr( $name ) . '" loading="lazy" decoding="async">'
         . '</span>';
 }
+
+/**
+ * Front page: the newest work (or the pinned one from settings) presented as
+ * an opening page — form badge, title, first stanza or lines, dateline.
+ */
+function book_wp_featured_work() {
+    if ( '1' !== get_option( 'book_wp_show_featured_work', '1' ) ) return '';
+    $pinned = (int) get_option( 'book_wp_featured_work_id', 0 );
+    $args = array( 'post_type' => 'post', 'post_status' => 'publish', 'posts_per_page' => 1, 'ignore_sticky_posts' => true );
+    if ( $pinned ) $args['p'] = $pinned;
+    $hidden = book_wp_hidden_tag_slugs();
+    if ( ! $pinned && $hidden ) $args['tax_query'] = array( array( 'taxonomy' => 'post_tag', 'field' => 'slug', 'terms' => $hidden, 'operator' => 'NOT IN' ) );
+    $q = new WP_Query( $args );
+    if ( ! $q->have_posts() ) return '';
+    $post = $q->posts[0];
+    $id   = $post->ID;
+    $slug = book_wp_get_form_slug( $id );
+    $cats = get_the_category( $id );
+    $cat  = ( $cats && 'uncategorized' !== $cats[0]->slug ) ? $cats[0] : null;
+
+    // First passage: first non-empty paragraph, line breaks kept for verse.
+    $content = apply_filters( 'the_content', $post->post_content );
+    $content = book_wp_remove_chapter_blocks( $content );
+    preg_match( '/<p(?:\s[^>]*)?>(.*?)<\/p>/si', $content, $m );
+    $first = isset( $m[1] ) ? $m[1] : wp_strip_all_tags( $content );
+    $first = wp_kses( $first, array( 'br' => array(), 'em' => array(), 'strong' => array() ) );
+    if ( ! book_wp_is_poetry( $id ) ) $first = wp_trim_words( wp_strip_all_tags( $first ), 48, '…' );
+
+    $loc  = get_post_meta( $id, 'book_wp_location', true );
+    $date = get_post_meta( $id, 'book_wp_date_composed', true );
+    $year = get_post_meta( $id, 'book_wp_year', true );
+    $dateline = implode( ', ', array_filter( array( $loc, $date ? $date : $year ) ) );
+
+    $html  = '<section class="bwp-featured" aria-labelledby="bwp-featured-title">';
+    $html .= '<p class="bwp-featured__kicker">' . ( $pinned ? esc_html__( 'Karya pilihan', 'book-wp' ) : esc_html__( 'Karya terbaru', 'book-wp' ) ) . '</p>';
+    $html .= '<div class="bwp-featured__grid">';
+    $html .= '<div class="bwp-featured__head">';
+    $html .= '<div class="bwp-analytics">';
+    if ( $slug ) $html .= '<span class="bwp-badge bwp-badge--' . esc_attr( $slug ) . '">' . esc_html( book_wp_form_label( $slug ) ) . '</span>';
+    if ( $cat )  $html .= '<a class="bwp-analytics__item bwp-analytics__cat" href="' . esc_url( get_category_link( $cat ) ) . '">' . esc_html( $cat->name ) . '</a>';
+    $html .= '<span class="bwp-analytics__item">' . esc_html( book_wp_reading_time( $id ) ) . '</span>';
+    $html .= '</div>';
+    $html .= '<h2 class="bwp-featured__title" id="bwp-featured-title"><a href="' . esc_url( get_permalink( $id ) ) . '">' . esc_html( get_the_title( $id ) ) . '</a></h2>';
+    if ( $dateline ) $html .= '<p class="bwp-featured__dateline">' . esc_html( $dateline ) . '</p>';
+    $html .= '</div>';
+    $html .= '<div class="bwp-featured__body' . ( book_wp_is_poetry( $id ) ? ' bwp-featured__body--verse' : '' ) . '">';
+    $html .= '<p>' . $first . '</p>';
+    $html .= '<a class="bwp-featured__more" href="' . esc_url( get_permalink( $id ) ) . '">' . esc_html__( 'Baca seterusnya', 'book-wp' ) . ' <span aria-hidden="true">&rarr;</span></a>';
+    $html .= '</div></div></section>';
+    wp_reset_postdata();
+    return $html;
+}
