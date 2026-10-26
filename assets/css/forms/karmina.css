@@ -117,7 +117,7 @@ body.bwp-form-karmina .bwp-colophon {
 /* ── Responsive ──────────────────────────────────────────── */
 
 @media screen and (min-width: 52em) {
-    body.bwp-form-karmina .bwp-work__title   { font-size: 1.8em; }
+    body.bwp-form-karmina .bwp-work__title   { }
     body.bwp-form-karmina .bwp-work__content {
         font-size:      1.35em;
         line-height:    2.4;
@@ -127,7 +127,7 @@ body.bwp-form-karmina .bwp-colophon {
 }
 
 @media print {
-    body.bwp-form-karmina .bwp-work__title   { font-size: 1.2em; text-align: center; }
+    body.bwp-form-karmina .bwp-work__title   { text-align: center; }
     body.bwp-form-karmina .bwp-work__content { font-size: 1.1em; padding: 2em 0; }
 }
 

@@ -42,7 +42,7 @@ body.bwp-night.bwp-form-hikayat,
 
 body.bwp-form-hikayat .bwp-page-wrap   { max-width: 44em; }
 body.bwp-form-hikayat .bwp-work__content {
-    max-width: 38em;
+    max-width: 35em;
     margin-left: auto;
     margin-right: auto;
 }
@@ -143,11 +143,11 @@ body.bwp-form-hikayat .bwp-analytics { justify-content: center; }
 /* ── Responsive ──────────────────────────────────────────── */
 
 @media screen and (min-width: 52em) {
-    body.bwp-form-hikayat .bwp-work__title   { font-size: 2.6em; }
+    body.bwp-form-hikayat .bwp-work__title   { font-size: clamp(1.7rem, 1.1rem + 2.4vw, 2.6rem); }
     body.bwp-form-hikayat .bwp-work__content { padding: 0; }
 }
 
 @media print {
-    body.bwp-form-hikayat .bwp-work__title   { font-size: 1.8em; text-align: center; }
+    body.bwp-form-hikayat .bwp-work__title   { text-align: center; }
     body.bwp-form-hikayat .bwp-work__content { line-height: 1.75; }
 }

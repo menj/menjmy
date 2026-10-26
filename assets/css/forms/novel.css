@@ -17,7 +17,7 @@
 
 body.bwp-form-novel .bwp-page-wrap  { max-width: 50em; }
 body.bwp-form-novel .bwp-work__content {
-    max-width: 42em;
+    max-width: 36em;
     margin-left: auto;
     margin-right: auto;
 }
@@ -118,8 +118,6 @@ body.bwp-form-novel .bwp-analytics { justify-content: flex-start; }
 
 body.bwp-form-novel .bwp-colophon {
     text-align: left;
-    
-    
     margin-top: 2.5em;
     font-size: .88em;
     color: var(--bwp-muted);
@@ -137,12 +135,12 @@ body.bwp-form-novel .bwp-work-nav {
 /* ── Responsive ──────────────────────────────────────────── */
 
 @media screen and (min-width: 52em) {
-    body.bwp-form-novel .bwp-work__title   { font-size: 3em; }
+    body.bwp-form-novel .bwp-work__title   { font-size: clamp(1.7rem, 1.1rem + 2.4vw, 3.0rem); }
     body.bwp-form-novel .bwp-work__content { font-size: 1.1em; line-height: 1.88; }
 }
 
 @media print {
-    body.bwp-form-novel .bwp-work__title   { font-size: 2em; text-align: left; }
+    body.bwp-form-novel .bwp-work__title   { font-size: clamp(1.7rem, 1.1rem + 2.4vw, 2.0rem); text-align: left; }
     body.bwp-form-novel .bwp-work__content { line-height: 1.7; }
     body.bwp-form-novel .bwp-work__content > p:first-of-type::first-letter {
         font-size: 3.5em;

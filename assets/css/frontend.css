@@ -146,6 +146,8 @@ body {
 a { color: var(--bwp-link); text-decoration: none; transition: color .18s; }
 a:hover { color: var(--bwp-link-hover); }
 img { max-width: 100%; height: auto; display: block; }
+iframe, video, embed, object, svg { max-width: 100%; }
+.bwp-work__content table { display: block; max-width: 100%; overflow-x: auto; }
 
 
 /* ═══════════════════════════════════════════════════════════
@@ -303,7 +305,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 .bwp-book-title__name {
     font-family: var(--bwp-font-display);
-    font-size: 2.8em;
+    font-size: clamp(2rem, 1.2rem + 3.6vw, 3.4rem);
     font-weight: 400;
     line-height: 1.12;
     letter-spacing: .04em;
@@ -706,7 +708,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 .bwp-work__title {
     font-family: var(--bwp-font-display);
-    font-size: 2.2em;
+    font-size: clamp(1.7rem, 1.1rem + 2.4vw, 2.6rem); /* fluid: ~27px at 390px → 41.6px at 1000px+ */
     font-weight: 400;
     text-align: left;
     line-height: 1.15;
@@ -1039,8 +1041,8 @@ body.bwp-time-night .bwp-tag:hover {
     left:            50%;
     transform:       translateX( -50% ) translateY( 4px );
     white-space:     nowrap;
-    background:      var(--bwp-ink);
-    color:           var(--bwp-paper);
+    background:      var(--bwp-text);
+    color:           var(--bwp-bg);
     font-family:     var(--bwp-font-ui);
     font-size:       .65rem;
     font-weight:     500;
@@ -1302,7 +1304,9 @@ body.bwp-time-night .bwp-share__btn:focus-visible {
    ═══════════════════════════════════════════════════════════ */
 
 .bwp-night-toggle {
-    position: fixed; bottom: 1.5em; right: 1.5em;
+    position: fixed;
+    bottom: max(1.5em, env(safe-area-inset-bottom, 0px));
+    right:  max(1.5em, env(safe-area-inset-right, 0px));
     width: 40px; height: 40px;
     border: 1px solid var(--bwp-ui-border);
     border-radius: 50%;
@@ -2379,12 +2383,26 @@ body.bwp-time-night .bwp-social__toggle:hover {
         letter-spacing: .12em;
     }
 
-    /* Nav — wrap items at small sizes without overflowing */
+    /* Nav — wrap items at small sizes without overflowing; keep the row
+       gap tight so a two-row nav still reads as one strip. */
     .bwp-nav__list {
-        gap: 1em;
+        gap: 0 1.1em;
         flex-wrap: wrap;
         justify-content: center;
     }
+    .bwp-nav__list a { padding: .55em .1em; font-size: .7rem; }
+
+    /* Fixed controls — smaller and tucked into the corner so they sit over
+       the page gutter rather than the reading column. */
+    .bwp-night-toggle {
+        width: 36px; height: 36px;
+        bottom: max(.75em, env(safe-area-inset-bottom, 0px));
+        right:  max(.75em, env(safe-area-inset-right, 0px));
+    }
+    /* Back-to-top is hidden on phones: with a 22px gutter it would sit on
+       the reading column, and the browser chrome already offers a fast
+       scroll to top. The night toggle stays as the single floating control. */
+    .bwp-back-to-top { display: none; }
 
     /* Poetry — reset the 32rem max-width; full-width on narrow screens */
     .bwp-form-puisi .bwp-work__content,
@@ -2393,9 +2411,6 @@ body.bwp-time-night .bwp-social__toggle:hover {
     .bwp-form-ratapan .bwp-work__content {
         max-width: 100%;
     }
-
-    /* Work title — scale down on very small screens */
-    .bwp-work__title { font-size: 1.6em; }
 
     /* TOC header — slightly smaller on narrow */
     .bwp-toc-header { font-size: 1.2rem; }
@@ -2414,15 +2429,13 @@ body.bwp-time-night .bwp-social__toggle:hover {
     /* M-06: Reduce page wrap top/bottom padding on mobile — 3em top is generous
        before the author title; 1.75em keeps breathing room without excess height. */
     .bwp-page-wrap {
-        padding-top:    1.75em;
-        padding-bottom: 4em;
+        padding: 1.75em 1.25em 4.5em;   /* 1.25em ≈ 22px gutter; ≥16px at 320px */
     }
 
     /* M-07: Reduce book title hero block vertical padding on mobile. */
     .bwp-book-title {
-        padding-top:    2.5em;
-        padding-bottom: 2em;
-        margin-bottom:  2.5em;
+        padding: 2.5em 1.25em 2em;
+        margin: 0 -1.25em 2.5em;        /* match the narrower page-wrap gutter */
     }
 
     /* M-08: Compress site header bottom margin on mobile. */
@@ -2460,8 +2473,12 @@ body.bwp-time-night .bwp-social__toggle:hover {
 
 @media screen and (min-width: 36em) and (max-width: 52em) {
 
-    /* Tablet — slightly wider page wrap than mobile default */
-    .bwp-page-wrap { max-width: 38em; }
+    /* Tablet — a touch wider than the phone column, with a lighter top
+       margin, and the masthead tracking between the phone and desktop sizes. */
+    .bwp-page-wrap { max-width: 40em; padding: 2.25em 2em 5em; }
+    .bwp-site-header { margin-bottom: 2.5em; }
+    .bwp-site-header__title { font-size: 1.15rem; }
+    .bwp-nav__list { gap: 0 1.4em; }
 
     /* Poetry — constrain to a sensible column at mid-width */
     .bwp-form-puisi .bwp-work__content,
@@ -2477,9 +2494,7 @@ body.bwp-time-night .bwp-social__toggle:hover {
 @media screen and (min-width: 52em) {
     .bwp-page-wrap        { max-width: 48em; }
     .bwp-site-header__title { font-size: 1.25rem; }
-    .bwp-book-title__name { font-size: 3.4em; }
     .bwp-book-title__desc { font-size: 1.2em; }
-    .bwp-work__title      { font-size: 2.6em; }
     .bwp-site-header      { margin-bottom: 3.5em; }
 }
 
@@ -2530,8 +2545,10 @@ body.bwp-time-night .bwp-social__toggle:hover {
 
 .bwp-back-to-top {
     position: fixed;
-    bottom: 2rem;
-    right: 2rem;
+    /* Sits directly above the night toggle (40px + gap) so the two fixed
+       controls never share the same corner. */
+    bottom: calc(max(1.5em, env(safe-area-inset-bottom, 0px)) + 40px + .75em);
+    right:  max(1.5em, env(safe-area-inset-right, 0px));
     z-index: 90;
     display: flex;
     align-items: center;
@@ -2539,8 +2556,8 @@ body.bwp-time-night .bwp-social__toggle:hover {
     width: 44px;             /* SC 2.5.8 minimum target size */
     height: 44px;
     padding: 0;
-    background: var(--bwp-ink);
-    color: var(--bwp-paper);
+    background: var(--bwp-text);
+    color: var(--bwp-bg);
     border: none;
     border-radius: var(--bwp-radius);
     cursor: pointer;

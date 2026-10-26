@@ -15,7 +15,7 @@
 
 body.bwp-form-nukilan .bwp-page-wrap   { max-width: 46em; }
 body.bwp-form-nukilan .bwp-work__content {
-    max-width: 40em;
+    max-width: 36em;
     margin-left: auto;
     margin-right: auto;
 }
@@ -111,11 +111,11 @@ body.bwp-form-nukilan .bwp-analytics { justify-content: center; }
 /* ── Responsive ──────────────────────────────────────────── */
 
 @media screen and (min-width: 52em) {
-    body.bwp-form-nukilan .bwp-work__title   { font-size: 2.2em; }
+    body.bwp-form-nukilan .bwp-work__title   { font-size: clamp(1.7rem, 1.1rem + 2.4vw, 2.2rem); }
     body.bwp-form-nukilan .bwp-work__content { padding-left: 2.6em; padding-right: 2.6em; }
 }
 
 @media print {
-    body.bwp-form-nukilan .bwp-work__title   { font-size: 1.5em; text-align: center; }
+    body.bwp-form-nukilan .bwp-work__title   { text-align: center; }
     body.bwp-form-nukilan .bwp-work__content { border-color: #888; background: none; }
 }

@@ -17,7 +17,7 @@
 
 body.bwp-form-esei .bwp-page-wrap  { max-width: 46em; }
 body.bwp-form-esei .bwp-work__content {
-    max-width: 40em;
+    max-width: 36em;
     margin-left: auto;
     margin-right: auto;
 }
@@ -135,8 +135,6 @@ body.bwp-form-esei .bwp-epigraph {
 
 body.bwp-form-esei .bwp-colophon {
     text-align: left;
-    
-    
     margin-top: 2em;
     font-size: .86em;
     color: var(--bwp-muted);
@@ -159,12 +157,12 @@ body.bwp-form-esei .bwp-ornament {
 /* ── Responsive ──────────────────────────────────────────── */
 
 @media screen and (min-width: 52em) {
-    body.bwp-form-esei .bwp-work__title   { font-size: 2.4em; }
+    body.bwp-form-esei .bwp-work__title   { font-size: clamp(1.7rem, 1.1rem + 2.4vw, 2.4rem); }
     body.bwp-form-esei .bwp-work__content { font-size: 1.07em; line-height: 1.92; }
 }
 
 @media print {
-    body.bwp-form-esei .bwp-work__title   { font-size: 1.7em; border-color: #000; }
+    body.bwp-form-esei .bwp-work__title   { border-color: #000; }
     body.bwp-form-esei .bwp-work__content { line-height: 1.7; }
     body.bwp-form-esei .bwp-work__content blockquote { margin-left: 1.5em; }
 }

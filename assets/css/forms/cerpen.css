@@ -17,7 +17,7 @@ body.bwp-form-cerpen .bwp-page-wrap {
 }
 
 body.bwp-form-cerpen .bwp-work__content {
-    max-width: 38em;
+    max-width: 34em;
     margin-left: auto;
     margin-right: auto;
 }
@@ -25,13 +25,12 @@ body.bwp-form-cerpen .bwp-work__content {
 /* ── Typography: slightly warmer, classical prose rhythm ─── */
 
 body.bwp-form-cerpen .bwp-work__title {
-    font-size: 2.0em;
+    font-size: clamp(1.6rem, 1rem + 2vw, 2.2rem);
     font-weight: 400;
     text-align: left;        /* left-aligned, like a chapter heading */
     letter-spacing: -.01em;
     line-height: 1.15;
-    border-bottom: 1px solid var(--bwp-border);
-    padding-bottom: .5em;
+    padding-bottom: .2em;
     margin-bottom: .8em;
 }
 
@@ -110,11 +109,11 @@ body.bwp-form-cerpen .bwp-colophon { text-align: left; }
 /* ── Responsive ──────────────────────────────────────────── */
 
 @media screen and (min-width: 52em) {
-    body.bwp-form-cerpen .bwp-work__title { font-size: 2.6em; }
+    body.bwp-form-cerpen .bwp-work__title { font-size: clamp(1.7rem, 1.1rem + 2.4vw, 2.6rem); }
     body.bwp-form-cerpen .bwp-work__content { font-size: 1.1em; line-height: 1.9; }
 }
 
 @media print {
-    body.bwp-form-cerpen .bwp-work__title { font-size: 1.8em; text-align: left; }
+    body.bwp-form-cerpen .bwp-work__title { text-align: left; }
     body.bwp-form-cerpen .bwp-work__content { line-height: 1.7; }
 }
