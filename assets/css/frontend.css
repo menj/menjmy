@@ -68,7 +68,7 @@
     --bwp-font-script:   'Ferments', 'Segoe Script', cursive;
     --bwp-font-size:     1.125rem;
     --bwp-lh:            1.75;
-    --bwp-measure:       36em;
+    --bwp-measure:       40em;
 
     /* Legacy aliases used by form stylesheets */
     --bwp-teal:        #1f3fa8;
@@ -262,9 +262,11 @@ a:focus-visible, button:focus-visible { border-radius: var(--bwp-pill); }
    ═══════════════════════════════════════════════════════════ */
 
 .bwp-page-wrap {
-    max-width: 76rem;
+    /* full-width layout: the pill header, cover, cards and footer span the
+       viewport between fluid gutters; body text keeps its own measure */
+    max-width: none;
     margin: 0 auto;
-    padding: 0 clamp(1.25rem, 4vw, 3.5rem) 1rem;
+    padding: 0 clamp(1rem, 3.5vw, 4rem) 1rem;
     animation: bwp-in .35s ease both;
 }
 @keyframes bwp-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
@@ -298,7 +300,7 @@ a:focus-visible, button:focus-visible { border-radius: var(--bwp-pill); }
     margin: 0;
     font-family: var(--bwp-font-brand);
     font-size: 1.2rem; font-weight: 400; letter-spacing: .01em;
-    line-height: 1; color: inherit;
+    line-height: 1; color: inherit; white-space: nowrap;
 }
 .bwp-site-header__jawi { font-family: var(--bwp-font-jawi); font-size: 1rem; line-height: 1; color: var(--h-gold); white-space: nowrap; }
 .bwp-site-header__tagline, .bwp-site-header__section, .bwp-site-header__band { display: none; }
@@ -309,11 +311,14 @@ a:focus-visible, button:focus-visible { border-radius: var(--bwp-pill); }
 .bwp-nav { grid-area: nav; }
 .bwp-nav__list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 1.5rem; }
 @media screen and (min-width: 48em) and (max-width: 66em) {
-    .bwp-nav__list { gap: 0 .85rem; }
-    .bwp-nav__list a { font-size: .6rem; letter-spacing: .1em; }
+    .bwp-site-header { gap: 0 1rem; }
+    .bwp-nav__list { gap: 0 .7rem; }
+    .bwp-nav__list a { font-size: .58rem; letter-spacing: .08em; }
     .bwp-site-header__jawi { font-size: .9rem; }
     .bwp-site-header--front .bwp-site-header__jawi { font-size: 1rem; }
     .bwp-site-header { padding-right: 1.2rem; }
+    /* inner pages: the Latin name alone fits the pill beside the menu */
+    .bwp-site-header:not(.bwp-site-header--front) .bwp-site-header__jawi { display: none; }
 }
 .bwp-nav__list li { margin: 0; position: relative; }
 .bwp-nav__list a {
@@ -686,6 +691,9 @@ body.bwp-toc-masonry .bwp-toc__item { width: 49%; margin-bottom: .75rem; }
     .bwp-work__title { grid-column: 1 / span 11; order: 1; }
     .bwp-work__opening[data-jawi]::before { left: auto; right: -.05em; }
 }
+
+.bwp-work__opening--page { padding-bottom: 1.25rem; margin-bottom: 2.25rem; }
+.bwp-work__opening--page .bwp-work__title { font-size: clamp(2.2rem, 5vw, 4.5rem); }
 
 /* analytics bar → chips */
 .bwp-analytics { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; }
