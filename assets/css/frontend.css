@@ -1294,7 +1294,6 @@ html.bwp-night .bwp-badge--karmina, body.bwp-night .bwp-badge--karmina { color: 
 
     .bwp-book-title { padding-top: .5rem; }
     .bwp-book-title__jawi { font-size: 7rem; top: -.2em; }
-    .bwp-work__title { font-size: clamp(2.1rem, 10vw, 3rem); }
     .bwp-work__content { font-size: 1.1rem; }
     .bwp-toc-group { padding: 1.1rem 1rem .6rem; border-radius: var(--bwp-radius); }
     .bwp-toc__link { padding: .7rem .4rem; margin: 0 -.4rem; row-gap: .5rem; }
