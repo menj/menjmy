@@ -992,19 +992,26 @@ body.bwp-archive-masonry .bwp-archive-list__item { width: 49%; margin-bottom: .7
    ═══════════════════════════════════════════════════════════ */
 
 .bwp-portrait {
-    display: inline-flex; overflow: hidden; flex: none;
+    position: relative; display: inline-flex; overflow: hidden; flex: none;
     border-radius: var(--bwp-pill);
-    background:
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M12 0L24 12 12 24 0 12z' fill='none' stroke='%23f6f1e4' stroke-opacity='.14' stroke-width='.8'/></svg>") 0 0 / 24px 24px,
-        #1a2a6c;
+    background: #1a2a6c;
     box-shadow: inset 0 0 0 2px rgba(224, 179, 68, .9);
     isolation: isolate;
 }
+/* layer 1: grayscale photo screened over nila → blacks become nila */
 .bwp-portrait img {
-    display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%;
-    filter: grayscale(1) contrast(1.15) brightness(1.05);
+    display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%;
+    transform: scale(var(--bwp-portrait-zoom, 1.6)); transform-origin: 50% 18%;
+    filter: grayscale(1) contrast(1.2) brightness(1.02);
     mix-blend-mode: screen;
-    opacity: .92;
+}
+/* layer 2: kapas multiplied on top → whites become kapas, nila stays nila */
+.bwp-portrait::after {
+    content: ''; position: absolute; inset: 0; border-radius: inherit;
+    background:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M12 0L24 12 12 24 0 12z' fill='none' stroke='%231a2a6c' stroke-opacity='.10' stroke-width='.8'/></svg>") 0 0 / 24px 24px,
+        #f6f1e4;
+    mix-blend-mode: multiply; pointer-events: none;
 }
 .bwp-portrait--sm { width: 56px; height: 56px; }
 .bwp-portrait--md { width: 120px; height: 120px; box-shadow: inset 0 0 0 3px rgba(224, 179, 68, .9); }
