@@ -102,21 +102,6 @@
         <?php endif; ?>
         </div><!-- .bwp-work__layout -->
 
-        <?php
-        $bwp_nav_output = '';
-        if ( '1' === get_option( 'book_wp_show_nav', '1' ) ) {
-            $bwp_nav_output = book_wp_work_navigation();
-            echo $bwp_nav_output; // phpcs:ignore
-        }
-        // When no nav renders (disabled or no adjacent posts), suppress the
-        // large top margin on the comments section via a body class hook.
-        if ( ! $bwp_nav_output ) {
-            add_filter( 'body_class', function( $classes ) {
-                $classes[] = 'bwp-no-work-nav';
-                return $classes;
-            } );
-        }
-        ?>
 
     </article>
 

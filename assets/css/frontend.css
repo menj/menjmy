@@ -742,7 +742,6 @@ body.bwp-toc-masonry .bwp-toc__item { width: 49%; margin-bottom: .75rem; }
 .bwp-share,
 .bwp-colophon,
 .bwp-related,
-.bwp-work-nav,
 .bwp-comments,
 .bwp-page-links,
 .bwp-foreword__content,
@@ -899,26 +898,6 @@ body.bwp-toc-masonry .bwp-toc__item { width: 49%; margin-bottom: .75rem; }
 .bwp-related__year { font-family: var(--bwp-font-ui); font-size: .66rem; color: var(--bwp-muted); }
 .bwp-related__item a:hover .bwp-related__year { color: inherit; opacity: .8; }
 
-/* previous / next → pill cards */
-.bwp-work-nav {
-    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem;
-    margin-top: 2rem;
-}
-.bwp-work-nav__link {
-    display: flex; flex-direction: column; gap: .25rem;
-    padding: .9rem 1.4rem;
-    border: 1px solid var(--bwp-border); border-radius: var(--bwp-radius-lg);
-    color: var(--bwp-text); transition: background .15s, border-color .15s;
-}
-.bwp-work-nav__link:hover { background: var(--bwp-bg-subtle); border-color: transparent; color: var(--bwp-text); }
-.bwp-work-nav__link--next { text-align: right; align-items: flex-end; grid-column: 2; }
-.bwp-work-nav__arrow { color: var(--bwp-accent); font-size: 1rem; line-height: 1; }
-.bwp-work-nav__label { font-family: var(--bwp-font-ui); font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: var(--bwp-muted); }
-.bwp-work-nav__title { font-family: var(--bwp-font-display); font-size: 1.1rem; line-height: 1.2; }
-@media (max-width: 36em) {
-    .bwp-work-nav { grid-template-columns: 1fr; }
-    .bwp-work-nav__link--next { grid-column: 1; }
-}
 
 /* pages (page.php, foreword, colophon page) */
 .bwp-edit-link { text-align: center; margin-top: 2rem; }
@@ -1349,7 +1328,7 @@ html.bwp-night .bwp-badge--karmina, body.bwp-night .bwp-badge--karmina { color: 
 @media print {
     body { background: #fff; color: #000; font-size: 11pt; }
     .bwp-nav, .bwp-nav-toggle, .bwp-footer-nav, .bwp-social, .bwp-share, .bwp-night-toggle, .bwp-back-to-top,
-    .bwp-progress, .bwp-comments, .bwp-work-nav, .bwp-related, .bwp-jalur { display: none !important; }
+    .bwp-progress, .bwp-comments, .bwp-related, .bwp-jalur { display: none !important; }
     .bwp-page-wrap { max-width: none; padding: 0; animation: none; }
     .bwp-book-title__jawi { display: none; }
     .bwp-work__title { font-size: 24pt; text-align: left; }

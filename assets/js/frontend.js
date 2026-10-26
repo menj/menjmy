@@ -79,20 +79,6 @@
             var tag = ( e.target || e.srcElement ).tagName;
             if ( tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' ) return;
 
-            // ← → — navigate between posts (prev / next work).
-            var link = null;
-            if ( e.key === 'ArrowLeft'  || e.keyCode === 37 ) {
-                link = document.querySelector( '.bwp-work-nav__link--prev' );
-            } else if ( e.key === 'ArrowRight' || e.keyCode === 39 ) {
-                link = document.querySelector( '.bwp-work-nav__link--next' );
-            }
-
-            if ( link ) {
-                e.preventDefault();
-                window.location.href = link.href;
-                return;
-            }
-
             // ↑ ↓ — navigate between stanzas within the current work.
             var isDown = e.key === 'ArrowDown' || e.keyCode === 40;
             var isUp   = e.key === 'ArrowUp'   || e.keyCode === 38;

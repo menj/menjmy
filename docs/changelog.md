@@ -18,7 +18,8 @@
   404: kicker and Jawi seal at the head, Kagnue title, chips or description
   beneath a hairline. Kagnue carries all h1/h2; Fraunces keeps italics,
   datelines and list titles. The floating strand blurb under the header is
-  retired. Rounded ink-tile drop cap, colophon and previous/next pill cards.
+  retired. Rounded ink-tile drop cap and colophon card; the previous/next work
+  navigation and its setting are removed.
 - Night mode and the Night scheme now share one Malam palette; Cream and Dusk
   re-ink correctly at clock-night and under the reader toggle.
 - Per-form stylesheets no longer set page width or title treatment; they

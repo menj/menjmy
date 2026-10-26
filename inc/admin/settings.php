@@ -34,7 +34,6 @@ function book_wp_register_settings() {
         'book_wp_show_copyright'    => 'book_wp_cb',
         'book_wp_toc_grouping'      => 'sanitize_text_field',
         'book_wp_show_badges'       => 'book_wp_cb',
-        'book_wp_show_nav'          => 'book_wp_cb',
         'book_wp_archive_layout'    => 'sanitize_text_field',
         'book_wp_archive_pagination'=> 'sanitize_text_field',
         'book_wp_toc_layout'        => 'sanitize_text_field',
@@ -166,7 +165,6 @@ function book_wp_handle_tab_save() {
             'book_wp_show_copyright'      => 'book_wp_cb',
             'book_wp_toc_grouping'        => 'sanitize_text_field',
             'book_wp_show_badges'         => 'book_wp_cb',
-            'book_wp_show_nav'            => 'book_wp_cb',
             'book_wp_archive_layout'      => 'sanitize_text_field',
             'book_wp_archive_pagination'  => 'sanitize_text_field',
             'book_wp_toc_layout'          => 'sanitize_text_field',
@@ -561,7 +559,6 @@ function bwp_tab_general() {
         </div>
 
         <?php bwp_toggle( 'book_wp_show_badges', __( 'Literary Form Badges', 'book-wp' ), __( 'Show coloured form badges beside titles in the TOC.', 'book-wp' ) ); ?>
-        <?php bwp_toggle( 'book_wp_show_nav', __( 'Previous / Next Navigation', 'book-wp' ), __( 'Show navigation links between works on single pages.', 'book-wp' ), '1' ); ?>
 
         <?php
         $toc_layout = get_option( 'book_wp_toc_layout',     'list' );
