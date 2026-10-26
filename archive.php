@@ -3,7 +3,9 @@
 
 <main id="bwp-main" class="bwp-main">
 
-<div class="bwp-archive-header bwp-opening">
+<?php $bwp_cover = book_wp_term_cover( get_queried_object() ); ?>
+<div class="bwp-archive-header bwp-opening<?php echo $bwp_cover ? ' bwp-opening--cover' : ''; ?>">
+    <?php echo book_wp_cover_markup( $bwp_cover ); // phpcs:ignore ?>
     <div class="bwp-opening__top">
         <?php
         $bwp_tax_label = '';
@@ -42,6 +44,7 @@
         <p class="bwp-archive-header__desc"><?php echo esc_html( $desc ); ?></p>
     <?php endif; endif; ?>
 
+    <?php echo book_wp_cover_credit( $bwp_cover ); // phpcs:ignore ?>
 </div>
 
 <?php if ( have_posts() ) : ?>

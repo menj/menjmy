@@ -48,5 +48,6 @@ require_once BOOK_WP_DIR . '/inc/shortcodes/shortcodes.php';
 if ( is_admin() ) {
     require_once BOOK_WP_DIR . '/inc/admin/meta-boxes.php';
     require_once BOOK_WP_DIR . '/inc/admin/settings.php';
+    require_once BOOK_WP_DIR . '/inc/admin/term-covers.php';
     require_once BOOK_WP_DIR . '/inc/admin/dashboard-widget.php';
 }

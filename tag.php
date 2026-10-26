@@ -3,7 +3,9 @@
 
 <main id="bwp-main" class="bwp-main">
 
-<div class="bwp-archive-header bwp-opening bwp-archive-header--tag">
+<?php $bwp_cover = book_wp_term_cover( get_queried_object() ); ?>
+<div class="bwp-archive-header bwp-opening<?php echo $bwp_cover ? ' bwp-opening--cover' : ''; ?> bwp-archive-header--tag">
+    <?php echo book_wp_cover_markup( $bwp_cover ); // phpcs:ignore ?>
     <div class="bwp-opening__top">
         <p class="bwp-archive-header__taxlabel bwp-opening__kicker"><?php esc_html_e( 'Tagged with', 'book-wp' ); ?></p>
         <?php $bwp_seal = get_option( 'book_wp_jawi_name', '' ); if ( $bwp_seal ) : ?><span class="bwp-opening__seal" aria-hidden="true" dir="rtl" lang="ms-Arab"><?php echo esc_html( $bwp_seal ); ?></span><?php endif; ?>
@@ -20,6 +22,7 @@
         <p class="bwp-archive-header__desc"><?php echo esc_html( $tag->description ); ?></p>
     <?php endif; ?>
 
+    <?php echo book_wp_cover_credit( $bwp_cover ); // phpcs:ignore ?>
 </div>
 
 <?php if ( have_posts() ) : ?>

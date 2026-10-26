@@ -22,6 +22,7 @@ function book_wp_register_settings() {
         'book_wp_author_portrait' => 'esc_url_raw',
         'book_wp_show_hero_image' => 'book_wp_cb',
         'book_wp_hero_image'      => 'esc_url_raw',
+        'book_wp_featured_as_cover' => 'book_wp_cb',
         'book_wp_anthology_name'  => 'sanitize_text_field',
         'book_wp_jawi_name'       => 'sanitize_text_field',
         'book_wp_jawa_name'       => 'sanitize_text_field',
@@ -152,6 +153,7 @@ function book_wp_handle_tab_save() {
             'book_wp_author_portrait' => 'esc_url_raw',
             'book_wp_show_hero_image' => 'book_wp_cb',
             'book_wp_hero_image'     => 'esc_url_raw',
+            'book_wp_featured_as_cover' => 'book_wp_cb',
             'book_wp_anthology_name' => 'sanitize_text_field',
             'book_wp_jawi_name'      => 'sanitize_text_field',
             'book_wp_jawa_name'      => 'sanitize_text_field',
@@ -450,6 +452,7 @@ function bwp_tab_general() {
             </div>
         </div>
 
+        <?php bwp_toggle( 'book_wp_featured_as_cover', __( 'Featured image as title-page cover', 'book-wp' ), __( 'A work with a featured image opens like the front-page jacket: title and chips set over the image. Off, the image sits below the apparatus as before.', 'book-wp' ), '1' ); ?>
         <?php bwp_toggle( 'book_wp_show_hero_image', __( 'Front-page cover photograph', 'book-wp' ), __( 'Set the anthology title over a photograph on the front page. Off, the title sits on plain paper.', 'book-wp' ), '1' ); ?>
 
         <div class="bwp-field">

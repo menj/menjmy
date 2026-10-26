@@ -294,3 +294,75 @@ function book_wp_hero_image() {
     );
 }
 
+/* ── Covers: the jacket treatment for works and archives ───────────────── */
+
+/**
+ * Bundled plates for strands and forms, drawn from Wikimedia Commons
+ * (public domain or CC0; see assets/img/covers/CREDITS.txt). Keyed by
+ * taxonomy then term slug. Filter `book_wp_cover_plates` to add or swap.
+ *
+ * @return array<string, array<string, array{file:string, credit:string, url:string}>>
+ */
+function book_wp_cover_plates() {
+    $plates = array( 'literary_form' => array(), 'category' => array(), 'post_tag' => array() );
+    $manifest = BOOK_WP_DIR . '/assets/img/covers/plates.php';
+    if ( file_exists( $manifest ) ) {
+        $plates = array_replace_recursive( $plates, (array) include $manifest );
+    }
+    return apply_filters( 'book_wp_cover_plates', $plates );
+}
+
+/**
+ * Cover for a term archive: a URL set on the term (term meta
+ * `book_wp_cover_image`), else the bundled plate for that slug.
+ *
+ * @param WP_Term|null $term
+ * @return array{src:string, credit:string, url:string}|array
+ */
+function book_wp_term_cover( $term ) {
+    if ( ! $term || ! isset( $term->taxonomy ) ) return array();
+    $custom = get_term_meta( $term->term_id, 'book_wp_cover_image', true );
+    if ( $custom ) {
+        return array( 'src' => esc_url( $custom ), 'credit' => (string) get_term_meta( $term->term_id, 'book_wp_cover_credit', true ), 'url' => '' );
+    }
+    $plates = book_wp_cover_plates();
+    if ( empty( $plates[ $term->taxonomy ][ $term->slug ] ) ) return array();
+    $plate = $plates[ $term->taxonomy ][ $term->slug ];
+    return array(
+        'src'    => BOOK_WP_URI . '/assets/img/covers/' . $plate['file'],
+        'credit' => isset( $plate['credit'] ) ? $plate['credit'] : '',
+        'url'    => isset( $plate['url'] ) ? $plate['url'] : '',
+    );
+}
+
+/**
+ * Cover image element for a title page, plus its credit line.
+ *
+ * @param array $cover From book_wp_term_cover() or a featured image array.
+ * @return string
+ */
+function book_wp_cover_markup( $cover ) {
+    if ( empty( $cover['src'] ) ) return '';
+    return '<img class="bwp-opening__img" src="' . esc_url( $cover['src'] ) . '" alt="" decoding="async" fetchpriority="high">';
+}
+function book_wp_cover_credit( $cover ) {
+    if ( empty( $cover['credit'] ) ) return '';
+    $text = esc_html( $cover['credit'] );
+    if ( ! empty( $cover['url'] ) ) $text = '<a href="' . esc_url( $cover['url'] ) . '" rel="noopener">' . $text . '</a>';
+    return '<p class="bwp-opening__credit">' . $text . '</p>';
+}
+
+/**
+ * A work's featured image as its title-page cover (default on; the old
+ * figure below the apparatus is used when the toggle is off).
+ */
+function book_wp_work_cover( $post_id = 0 ) {
+    if ( ! $post_id ) $post_id = get_the_ID();
+    if ( '1' !== get_option( 'book_wp_show_featured', '1' ) ) return array();
+    if ( '1' !== get_option( 'book_wp_featured_as_cover', '1' ) ) return array();
+    if ( ! has_post_thumbnail( $post_id ) ) return array();
+    $src = get_the_post_thumbnail_url( $post_id, 'large' );
+    if ( ! $src ) return array();
+    return array( 'src' => $src, 'credit' => (string) get_the_post_thumbnail_caption( $post_id ), 'url' => '' );
+}
+

@@ -11,7 +11,9 @@
         $form_slug_single = book_wp_get_form_slug();
         $jawi_form        = book_wp_form_jawi( $form_slug_single );
         ?>
-        <header class="bwp-work__opening bwp-opening">
+        <?php $bwp_cover = book_wp_work_cover(); ?>
+        <header class="bwp-work__opening bwp-opening<?php echo $bwp_cover ? ' bwp-opening--cover' : ''; ?>">
+            <?php echo book_wp_cover_markup( $bwp_cover ); // phpcs:ignore ?>
             <div class="bwp-opening__top">
                 <?php $bwp_kicker = book_wp_header_section_label(); if ( $bwp_kicker ) : ?>
                     <p class="bwp-opening__kicker"><?php echo esc_html( $bwp_kicker ); ?></p>
@@ -35,6 +37,7 @@
             if ( trim( $bwp_meta ) ) : ?>
             <div class="bwp-work__meta"><?php echo $bwp_meta; // phpcs:ignore ?></div>
             <?php endif; ?>
+            <?php echo book_wp_cover_credit( $bwp_cover ); // phpcs:ignore ?>
         </header>
 
         <div class="bwp-work__layout">
@@ -56,7 +59,7 @@
 
         <?php echo book_wp_terjemahan_block(); // phpcs:ignore ?>
 
-        <?php echo book_wp_featured_image(); // phpcs:ignore ?>
+        <?php if ( ! $bwp_cover ) echo book_wp_featured_image(); // phpcs:ignore ?>
 
         <div class="bwp-work__content">
             <?php the_content(); ?>
