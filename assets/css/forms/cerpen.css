@@ -1,0 +1,120 @@
+/**
+ * Book WP — Literary Form: Cerpen (Short Story)
+ *
+ * The short story asks to be read as a book. Wider column than poetry,
+ * conventional prose indent, warmer palette tint, chapter-like authority.
+ * The reader settles in — this takes time.
+ *
+ * Applied via body class: .bwp-form-cerpen
+ *
+ * @package Book_WP
+ */
+
+/* ── Layout: wider column, prose-confident ───────────────── */
+
+body.bwp-form-cerpen .bwp-page-wrap {
+    max-width: 44em;   /* wider than default for extended prose reading */
+}
+
+body.bwp-form-cerpen .bwp-work__content {
+    max-width: 38em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ── Typography: slightly warmer, classical prose rhythm ─── */
+
+body.bwp-form-cerpen .bwp-work__title {
+    font-size: 2.0em;
+    font-weight: 400;
+    text-align: left;        /* left-aligned, like a chapter heading */
+    letter-spacing: -.01em;
+    line-height: 1.15;
+    border-bottom: 1px solid var(--bwp-border);
+    padding-bottom: .5em;
+    margin-bottom: .8em;
+}
+
+/* Chapter heading feel — teal rule after title */
+body.bwp-form-cerpen .bwp-work__title::after {
+    content: '';
+    display: block;
+    width: 2em;
+    height: 2px;
+    background: var(--bwp-link, #2E6A8E);
+    margin-top: .6em;
+}
+
+body.bwp-form-cerpen .bwp-work__content {
+    font-size: 1.05em;
+    line-height: 1.85;
+}
+
+/* Conventional first-line indent for prose */
+body.bwp-form-cerpen .bwp-work__content p { text-indent: 0; }
+body.bwp-form-cerpen .bwp-work__content p + p { text-indent: 2.2em; margin-top: 0; }
+
+/* Scene break: extra space + ornament feel */
+body.bwp-form-cerpen .bwp-ornament {
+    text-align: center;
+    margin: 2em 0;
+    opacity: .35;
+    font-size: 1.0em;
+}
+
+/* ── Drop cap: left-aligned chapter feel ─────────────────── */
+
+body.bwp-form-cerpen .bwp-work__content > p:first-of-type::first-letter {
+    float: left;
+    font-family: var(--bwp-dropcap-font, var(--bwp-font-display, 'Cinzel')), Georgia, serif;
+    font-size: 3.8em;
+    line-height: .82;
+    padding-right: .09em;
+    margin-top: .04em;
+    color: var(--bwp-gold-dim, #a8893a);
+    font-weight: 400;
+}
+
+/* ── Epigraph: left-aligned, book-like ───────────────────── */
+
+body.bwp-form-cerpen .bwp-epigraph {
+    max-width: 28em;
+    margin-left: 0;
+    margin-right: auto;
+    font-size: .94em;
+}
+
+/* ── Analytics: left-aligned ──────────────────────────────── */
+
+body.bwp-form-cerpen .bwp-analytics { justify-content: flex-start; }
+
+/* ── Section divider: long rule for scene breaks ─────────── */
+
+body.bwp-form-cerpen .bwp-rule {
+    max-width: 100%;
+    border-top: 1px solid var(--bwp-border-faint);
+    margin: 2.5em 0;
+}
+
+/* ── Petikan / dialogue quotes ───────────────────────────── */
+
+body.bwp-form-cerpen .bwp-petikan {
+    font-size: .97em;
+    margin-left: 2em;
+}
+
+/* ── Author colophon: left-aligned for prose ─────────────── */
+
+body.bwp-form-cerpen .bwp-colophon { text-align: left; }
+
+/* ── Responsive ──────────────────────────────────────────── */
+
+@media screen and (min-width: 52em) {
+    body.bwp-form-cerpen .bwp-work__title { font-size: 2.6em; }
+    body.bwp-form-cerpen .bwp-work__content { font-size: 1.1em; line-height: 1.9; }
+}
+
+@media print {
+    body.bwp-form-cerpen .bwp-work__title { font-size: 1.8em; text-align: left; }
+    body.bwp-form-cerpen .bwp-work__content { line-height: 1.7; }
+}

@@ -1,0 +1,150 @@
+/**
+ * Book WP — Literary Form: Novel
+ *
+ * Chapter postings from a longer work. Of all the prose forms
+ * this is the most book-like — the reader settles in for duration.
+ * Widest column, most conventional line length, strongest chapter
+ * heading apparatus. The page should feel like opening a book,
+ * not a website. The novel earns the most chrome — chapter number,
+ * running title, part designation — all have a place here.
+ *
+ * Applied via body class: .bwp-form-novel
+ *
+ * @package Book_WP
+ */
+
+/* ── Layout: widest prose column ────────────────────────── */
+
+body.bwp-form-novel .bwp-page-wrap  { max-width: 50em; }
+body.bwp-form-novel .bwp-work__content {
+    max-width: 42em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ── Chapter heading apparatus ───────────────────────────── */
+
+body.bwp-form-novel .bwp-work__title {
+    font-family: var(--bwp-font-display, 'Cinzel', Georgia, serif);
+    font-size: 2.4em;
+    font-weight: 400;
+    font-style: normal;
+    text-align: left;
+    letter-spacing: -.015em;
+    line-height: 1.1;
+    margin-bottom: .2em;
+}
+
+/* Chapter number label above title — "Bab I" / "Chapter 1" */
+body.bwp-form-novel .bwp-work__title::before {
+    content: attr(data-chapter);  /* set via post meta if available */
+    display: block;
+    font-family: Georgia, serif;
+    font-size: .38em;
+    font-style: normal;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--bwp-muted);
+    margin-bottom: .5em;
+}
+
+body.bwp-form-novel .bwp-work__title::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: var(--bwp-border);
+    margin-top: .6em;
+    margin-bottom: .2em;
+}
+
+/* ── Body: conventional book prose ──────────────────────── */
+
+body.bwp-form-novel .bwp-work__content {
+    font-size: 1.07em;
+    line-height: 1.82;
+    text-align: left;
+}
+
+/* Standard book indent: no space between paragraphs */
+body.bwp-form-novel .bwp-work__content p { text-indent: 0; margin-bottom: 0; }
+body.bwp-form-novel .bwp-work__content p + p {
+    text-indent: 2.4em;
+    margin-top: 0;
+}
+
+/* Scene break — extra space + centre rule */
+body.bwp-form-novel .bwp-ornament {
+    text-align: center;
+    margin: 2em 0;
+    font-size: 1.0em;
+    opacity: .35;
+}
+
+/* ── Drop cap: large, book-chapter opening ───────────────── */
+
+body.bwp-form-novel .bwp-work__content > p:first-of-type::first-letter {
+    float: left;
+    font-family: var(--bwp-dropcap-font, var(--bwp-font-display, 'Cinzel')), Georgia, serif;
+    font-size: 4.5em;
+    line-height: .80;
+    padding-right: .08em;
+    margin-top: .04em;
+    color: var(--bwp-teal, #1a4d5e);
+    font-weight: 400;
+}
+
+/* ── Dialogue / petikan ──────────────────────────────────── */
+
+body.bwp-form-novel .bwp-petikan {
+    margin-left: 2.4em;
+    font-size: .97em;
+}
+
+/* ── Epigraph: prominent, book-like ─────────────────────── */
+
+body.bwp-form-novel .bwp-epigraph {
+    max-width: 30em;
+    margin-left: 0;
+    font-size: .95em;
+    margin-bottom: 2.5em;
+}
+
+/* ── Analytics: left-aligned ──────────────────────────────── */
+
+body.bwp-form-novel .bwp-analytics { justify-content: flex-start; }
+
+/* ── Colophon: chapter end ───────────────────────────────── */
+
+body.bwp-form-novel .bwp-colophon {
+    text-align: left;
+    
+    
+    margin-top: 2.5em;
+    font-size: .88em;
+    color: var(--bwp-muted);
+}
+
+/* ── Work nav: prominent — chapter navigation matters ─────── */
+
+body.bwp-form-novel .bwp-work-nav {
+    font-size: 1em;
+    opacity: 1;
+    border-top: 2px solid var(--bwp-border);
+    padding-top: 1em;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+
+@media screen and (min-width: 52em) {
+    body.bwp-form-novel .bwp-work__title   { font-size: 3em; }
+    body.bwp-form-novel .bwp-work__content { font-size: 1.1em; line-height: 1.88; }
+}
+
+@media print {
+    body.bwp-form-novel .bwp-work__title   { font-size: 2em; text-align: left; }
+    body.bwp-form-novel .bwp-work__content { line-height: 1.7; }
+    body.bwp-form-novel .bwp-work__content > p:first-of-type::first-letter {
+        font-size: 3.5em;
+    }
+}

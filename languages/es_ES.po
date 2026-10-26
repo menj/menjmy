@@ -1,0 +1,1479 @@
+# Book WP — Spanish (es_ES) Translation
+# Copyright (C) Book WP
+# This file is distributed under the same licence as Book WP.
+#
+# Translators:
+# MENJ <admin@example.com>, 2026
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Book WP 3.5.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-13\n"
+"PO-Revision-Date: 2026-05-13\n"
+"Last-Translator: MENJ <admin@example.com>\n"
+"Language-Team: Spanish <es@example.com>\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: book-wp .i18n-rebuild.pl, 2026-05-13\n"
+
+#: inc/admin/settings.php:1017
+msgid "%1$d rule(s) found — fewer than expected (%2$d), consider flushing"
+msgstr "%1$d regla(s) encontrada(s) — menos de lo esperado (%2$d), considere vaciar"
+
+#: comments.php:134
+msgid "%1$s at %2$s"
+msgstr ""
+
+#: inc/helpers/analytics.php:190
+msgid "%d lines"
+msgstr "%d versos"
+
+#: inc/helpers/analytics.php:90
+msgid "%d min read"
+msgstr "Lectura de %d min"
+
+#: inc/admin/settings.php:1010
+msgid "%d rule registered — routing active"
+msgid_plural "%d rules registered — routing active"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/helpers/analytics.php:194
+msgid "%d stanzas"
+msgstr "%d estrofas"
+
+#: inc/helpers/analytics.php:183
+msgid "%d words"
+msgstr "%d palabras"
+
+#: comments.php:27
+msgid "%s Comment"
+msgid_plural "%s Comments"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/admin/settings.php:923
+msgid "%s is active — social meta tags are handled by that plugin. This toggle has no effect."
+msgstr "%s está activo — las meta etiquetas sociales son gestionadas por ese plugin. Este interruptor no tiene efecto."
+
+#: inc/admin/dashboard-widget.php:230 inc/admin/dashboard-widget.php:237
+msgid "%s words"
+msgstr "%s palabras"
+
+#: inc/admin/settings.php:1014
+msgid "0 rules found — flush required"
+msgstr "0 reglas encontradas — se requiere vaciar"
+
+#: inc/admin/settings.php:852
+msgid "<code>[divider style=\"fleuron\"]</code> — Decorative section divider (uses global ornament if no style given)"
+msgstr "<code>[divider style=\"fleuron\"]</code> — Separador de sección decorativo (usa el ornamento global si no se indica un estilo)"
+
+#: inc/admin/settings.php:851
+msgid "<code>[quote source=\"…\"]…[/quote]</code> — Styled literary pull-quote with optional attribution"
+msgstr "<code>[quote source=\"…\"]…[/quote]</code> — Cita literaria con estilo y atribución opcional"
+
+#: inc/admin/settings.php:854
+msgid "<code>[term definition=\"…\"]word[/term]</code> — Inline glossary tooltip; hover or focus to reveal"
+msgstr "<code>[term definition=\"…\"]word[/term]</code> — Tooltip de glosario en línea; pase el cursor o enfoque para revelar"
+
+#: inc/admin/settings.php:853
+msgid "<code>[verse num=\"1\"]…[/verse]</code> — Numbered verse block; number outdents into the left margin"
+msgstr "<code>[verse num=\"1\"]…[/verse]</code> — Bloque de versos numerado; el número sobresale en el margen izquierdo"
+
+#: inc/admin/settings.php:501
+msgid "<strong>Front-end language</strong> follows your WordPress Site Language setting (Settings → General → Site Language). The theme ships with Bahasa Melayu, English, Spanish, and French translations."
+msgstr "<strong>Idioma del sitio</strong> sigue el ajuste de Idioma del sitio de WordPress (Ajustes → General → Idioma del sitio). El tema incluye traducciones en bahasa melayu, inglés, español y francés."
+
+#: inc/admin/settings.php:973
+msgid "<strong>Required:</strong> After saving this setting (on or off), visit <a href=\"%s\">Settings &rsaquo; Permalinks</a> and click Save Changes to flush the rewrite rules. Skipping this step causes 404 errors on the new URL structure."
+msgstr "<strong>Requerido:</strong> Después de guardar este ajuste (activado o desactivado), visite <a href=\"%s\">Ajustes &rsaquo; Enlaces permanentes</a> y haga clic en Guardar cambios para vaciar las reglas de reescritura. Omitir este paso causa errores 404 en la nueva estructura de URL."
+
+#: inc/admin/settings.php:500
+msgid "<strong>Site Title vs Author Name</strong> — Set your WordPress <em>Site Title</em> (Settings → General) to the <strong>anthology name</strong> — it controls the browser tab, RSS feed, and SEO title. The Author Name above appears in the masthead on every page."
+msgstr "<strong>Título del sitio vs Nombre del autor</strong> — Establezca el <em>Título del sitio</em> de WordPress (Ajustes → General) como el <strong>nombre de la antología</strong> — controla la pestaña del navegador, el feed RSS y el título SEO. El Nombre del autor aparece en el encabezado de cada página."
+
+#: inc/admin/settings.php:502
+msgid "<strong>TOC grouping</strong> — Group by Literary Form to organise puisi, cerpen, esei etc. into separate sections. Group by Category to follow your WordPress category structure. Group by Tag to organise by thematic keywords — a post appears under every tag it carries. Grouping headings use the category, form, or tag name with a work count badge."
+msgstr "<strong>Agrupación TDC</strong> — Agrupar por Forma literaria para organizar puisi, cerpen, esei, etc. en secciones separadas. Agrupar por Categoría para seguir la estructura de categorías de WordPress. Agrupar por Etiqueta para organizar por palabras clave temáticas — una entrada aparece bajo cada etiqueta que lleva. Los encabezados de grupo usan el nombre de categoría, forma o etiqueta con una insignia de recuento de obras."
+
+#: inc/admin/settings.php:875
+msgid "A floating button lets readers switch between the current colour scheme and the Night scheme. Position: bottom-right corner."
+msgstr "Un botón flotante permite a los lectores alternar entre el esquema de color actual y el esquema Noche. Posición: esquina inferior derecha."
+
+#: inc/helpers/permalink.php:353
+msgid "A literary form was recently added or changed. Visit <a href=\"%s\">Settings &rsaquo; Permalinks</a> and click <strong>Save Changes</strong> to apply the new URL routing rules. Until then, URLs for the new form may return 404 errors."
+msgstr ""
+
+#: inc/helpers/literary.php:67
+msgid "A novel is a long-form prose fiction work exploring character, plot, and theme in depth across sequential chapters."
+msgstr "Una novela es una obra de ficción en prosa de formato largo que explora personaje, trama y tema en profundidad a través de capítulos secuenciales."
+
+#: inc/admin/settings.php:872
+msgid "A thin line at the top of the viewport tracks scroll position. Helpful for longer prose works and poetry sequences."
+msgstr "Una línea delgada en la parte superior de la ventana rastrea la posición de desplazamiento. Útil para obras en prosa más largas y secuencias de poesía."
+
+#: inc/admin/meta-boxes.php:540 inc/helpers/colophon.php:231
+msgid "Abstract"
+msgstr "Resumen"
+
+#: inc/admin/settings.php:966
+msgid "Active form slugs:"
+msgstr "Slugs de formas activos:"
+
+#: inc/admin/settings.php:1159
+msgid "Active icons appear in the site footer. Leave a field blank to hide that icon. For RSS, leave blank to use the WordPress feed URL automatically."
+msgstr "Los iconos activos aparecen en el pie de página. Deje un campo en blanco para ocultar ese icono. Para RSS, déjelo en blanco para usar la URL del feed de WordPress automáticamente."
+
+#: inc/admin/settings.php:770
+msgid "Add sequential numbering to stanzas in poetry works."
+msgstr "Añadir numeración secuencial a las estrofas en obras de poesía."
+
+#: inc/admin/settings.php:1065
+msgid "Additional Styles"
+msgstr "Estilos adicionales"
+
+#: inc/helpers/colophon.php:219
+msgid "Addressed to"
+msgstr "Dirigido a"
+
+#: inc/admin/meta-boxes.php:511
+msgid "Addressee"
+msgstr "Destinatario"
+
+#: index.php:106
+msgid "All Works"
+msgstr "Todas las obras"
+
+#: inc/admin/settings.php:1085
+msgid "All properties update automatically across colour schemes and time-of-day palettes."
+msgstr "Todas las propiedades se actualizan automáticamente entre esquemas de color y paletas horarias."
+
+#: inc/helpers/literary.php:70
+msgid "An essay is a non-fiction prose work presenting the author's argument, analysis, or personal reflection on a subject."
+msgstr "Un ensayo es una obra en prosa de no ficción que presenta el argumento, análisis o reflexión personal del autor sobre un tema."
+
+#: inc/admin/settings.php:413
+msgid "Anthology Name"
+msgstr "Nombre de la antología"
+
+#: assets/js/blocks.js:129
+msgid "Appears as a tooltip on hover/focus. Press Enter to apply."
+msgstr ""
+
+#: inc/admin/settings.php:493
+msgid "Applies only when Grouping is set to None. Infinite scroll loads the next page automatically as the reader scrolls. Uses WordPress reading settings for posts per page."
+msgstr "Solo se aplica cuando la agrupación está en Ninguna. El desplazamiento infinito carga la página siguiente automáticamente. Usa los ajustes de lectura de WordPress para las entradas por página."
+
+#: inc/admin/settings.php:482
+msgid "Applies only when Grouping is set to None. List: single column. Grid: equal-width CSS columns. Masonry: cascading columns."
+msgstr "Solo se aplica cuando la agrupación está establecida en Ninguna. Lista: una columna. Cuadrícula: columnas CSS de igual ancho. Masonry: columnas en cascada."
+
+#: assets/js/blocks.js:139
+msgid "Apply"
+msgstr ""
+
+#: inc/admin/settings.php:633
+msgid "Apply a decorative large initial letter to the first paragraph. Enable per prose form. Poetry forms are never affected."
+msgstr "Aplicar una letra inicial decorativa grande al primer párrafo. Activar por forma de prosa. Las formas poéticas nunca se ven afectadas."
+
+#: inc/admin/settings.php:512
+msgid "Archive Pages"
+msgstr "Páginas de archivo"
+
+#: inc/admin/settings.php:873
+msgid "Arrow keys ← → move between works in the anthology. Works in sequence order as shown in the TOC."
+msgstr "Las teclas de flecha ← → se desplazan entre obras de la antología. En orden de secuencia tal como se muestra en el índice."
+
+#: inc/admin/settings.php:1147
+msgid "Author Identifiers"
+msgstr "Identificadores de autor"
+
+#: inc/admin/settings.php:404
+msgid "Author Name"
+msgstr "Nombre del autor"
+
+#: inc/admin/meta-boxes.php:483
+msgid "Author of Source"
+msgstr "Autor de la fuente"
+
+#: single.php:32 inc/admin/meta-boxes.php:187 inc/admin/meta-boxes.php:188 templates/single-puisi-generic.php:73
+msgid "Author's Note"
+msgstr "Nota del autor"
+
+#: inc/admin/settings.php:625
+msgid "Auto detects each visitor's local time and shifts the ink mood accordingly. Pin to a specific period to lock it for all visitors."
+msgstr "Detecta automáticamente la hora local de cada visitante y ajusta el tono de la tinta. Fije un periodo para bloquearlo para todos los visitantes."
+
+#: inc/helpers/literary.php:71
+msgid "Autobiografi or memoir is the author's personal account of their own lived experience, written in the first person."
+msgstr "La autobiografía o memoria es el relato personal del autor sobre su propia experiencia vivida, escrito en primera persona."
+
+#: inc/admin/settings.php:1075
+msgid "Available CSS Custom Properties"
+msgstr "Propiedades CSS personalizadas disponibles"
+
+#: inc/admin/settings.php:850
+msgid "Available Shortcodes"
+msgstr "Shortcodes disponibles"
+
+#: inc/admin/dashboard-widget.php:196
+msgid "Avg. Read Time"
+msgstr "Tiempo de lectura prom."
+
+#: inc/admin/dashboard-widget.php:190
+msgid "Avg. Words"
+msgstr "Palabras prom."
+
+#: inc/admin/settings.php:877
+msgid "Back to Top Button"
+msgstr "Botón volver arriba"
+
+#: footer.php:84
+msgid "Back to top"
+msgstr ""
+
+#: inc/helpers/permalink.php:348
+msgid "Book WP — rewrite flush pending"
+msgstr ""
+
+#: inc/admin/settings.php:461
+msgid "By Category"
+msgstr "Por categoría"
+
+#: inc/admin/settings.php:460
+msgid "By Literary Form"
+msgstr "Por forma literaria"
+
+#: inc/admin/settings.php:462
+msgid "By Tag"
+msgstr "Por etiqueta"
+
+#: comments.php:62 assets/js/blocks.js:143
+msgid "Cancel"
+msgstr ""
+
+#: inc/admin/meta-boxes.php:535
+msgid "Central Argument"
+msgstr "Argumento central"
+
+#: inc/admin/settings.php:689
+msgid "Centred"
+msgstr "Centrado"
+
+#: inc/helpers/literary.php:66
+msgid "Cerpen is a short prose fiction work focused on a single event, character, or mood within a compact narrative."
+msgstr "El cerpen es una obra de ficción en prosa corta centrada en un único evento, personaje o estado de ánimo dentro de una narrativa compacta."
+
+#: inc/admin/meta-boxes.php:390
+msgid "Cerpen — Short Fiction Details"
+msgstr "Cerpen — Detalles de ficción corta"
+
+#: inc/admin/meta-boxes.php:437 inc/hooks/actions.php:445 inc/shortcodes/shortcodes.php:249
+msgid "Chapter"
+msgstr "Capítulo"
+
+#: inc/admin/meta-boxes.php:464
+msgid "Chapter Intention"
+msgstr "Intención del capítulo"
+
+#: assets/js/blocks.js:386
+msgid "Chapter Number"
+msgstr "Número de capítulo"
+
+#: assets/js/blocks.js:382
+msgid "Chapter Settings"
+msgstr "Configuración del capítulo"
+
+#: assets/js/blocks.js:392
+msgid "Chapter Title (optional)"
+msgstr "Título del capítulo (opcional)"
+
+#: inc/admin/meta-boxes.php:303
+msgid "Check this if you are presenting a passage cited from another work. Leave unchecked if this is your own writing in the hikayat form."
+msgstr ""
+
+#: inc/admin/settings.php:658
+msgid "Choose a decorative typeface for the drop cap initial letter. \"Default\" uses each form's built-in font (Cinzel, IM Fell English SC, etc.)."
+msgstr "Elegir un tipo de letra decorativo para la capitular. «Predeterminado» usa la fuente integrada de cada forma (Cinzel, IM Fell English SC, etc.)."
+
+#: single.php:17
+msgid "Cited from"
+msgstr ""
+
+#: inc/admin/settings.php:401
+msgid "Collection"
+msgstr "Colección"
+
+#: templates/template-colophon.php:20
+msgid "Colophon"
+msgstr "Colofón"
+
+#: inc/hooks/filters.php:97
+msgid "Colophon Page"
+msgstr ""
+
+#: inc/admin/settings.php:704
+msgid "Comfortable — balanced breath between stanzas"
+msgstr "Cómodo — respiración equilibrada entre estrofas"
+
+#: comments.php:68
+msgid "Comment"
+msgstr ""
+
+#: comments.php:48
+msgid "Comment navigation"
+msgstr ""
+
+#: inc/admin/meta-boxes.php:339 inc/helpers/colophon.php:209
+msgid "Commentary"
+msgstr "Comentario"
+
+#: comments.php:17 inc/admin/settings.php:883
+msgid "Comments"
+msgstr "Comentarios"
+
+#: inc/admin/meta-boxes.php:214
+msgid "Completeness"
+msgstr "Completitud"
+
+#: inc/admin/meta-boxes.php:160
+msgid "Composition"
+msgstr "Composición"
+
+#: inc/admin/settings.php:767
+msgid "Content Display"
+msgstr "Visualización del contenido"
+
+#: inc/admin/settings.php:697
+msgid "Controls for all verse forms: puisi, syair, karmina, ratapan. Poetry is always ragged-right and never hyphenated regardless of these settings."
+msgstr "Controles para todas las formas de verso: puisi, syair, karmina, ratapan. La poesía siempre se alinea a la izquierda y nunca se divide con guiones, independientemente de estos ajustes."
+
+#: inc/setup/enqueue.php:170
+msgid "Copied!"
+msgstr ""
+
+#: inc/helpers/navigation.php:364
+msgid "Copy link to this work"
+msgstr ""
+
+#: inc/admin/settings.php:430
+msgid "Copyright"
+msgstr "Derechos de autor"
+
+#: inc/admin/settings.php:1063
+msgid "Custom CSS"
+msgstr "CSS personalizado"
+
+#: inc/admin/meta-boxes.php:161
+msgid "Date Composed"
+msgstr "Fecha de composición"
+
+#: inc/admin/meta-boxes.php:170
+msgid "Dedication"
+msgstr "Dedicatoria"
+
+#: assets/js/blocks.js:128
+msgid "Definition"
+msgstr ""
+
+#: inc/admin/settings.php:1143
+msgid "Developer & Repository"
+msgstr "Desarrollador y repositorio"
+
+#: inc/admin/meta-boxes.php:176
+msgid "Display"
+msgstr "Visualización"
+
+#: inc/admin/settings.php:876
+msgid "Display a compact share strip below the tags on single posts: Copy link, X (Twitter), Facebook, WhatsApp. No third-party scripts loaded."
+msgstr "Muestra una barra de compartir compacta debajo de las etiquetas: Copiar enlace, X (Twitter), Facebook, WhatsApp. Sin scripts de terceros."
+
+#: inc/admin/settings.php:771
+msgid "Display reading time, word count, line count."
+msgstr "Mostrar tiempo de lectura, recuento de palabras, recuento de líneas."
+
+#: inc/admin/settings.php:768
+msgid "Display the post thumbnail on single work pages."
+msgstr "Mostrar la miniatura de la entrada en las páginas de obras individuales."
+
+#: inc/admin/settings.php:434
+msgid "Displayed in the site footer. HTML is supported — e.g. <code>&amp;copy; 2026 &lt;strong&gt;My Anthology&lt;/strong&gt;</code>."
+msgstr "Se muestra en el pie de página. Se admite HTML — p. ej. <code>&amp;copy; 2026 &lt;strong&gt;Mi Antología&lt;/strong&gt;</code>."
+
+#: inc/admin/settings.php:409
+msgid "Displayed in the site header on all pages in place of the WordPress Site Title."
+msgstr "Se muestra en el encabezado del sitio en todas las páginas en lugar del título del sitio WordPress."
+
+#: inc/admin/settings.php:418
+msgid "Displayed prominently on the front page as the collection title."
+msgstr "Se muestra de forma prominente en la portada como título de la colección."
+
+#: assets/js/blocks.js:260
+msgid "Divider Settings"
+msgstr ""
+
+#: inc/admin/settings.php:657
+msgid "Drop Cap Font"
+msgstr "Fuente de capitular"
+
+#: inc/admin/meta-boxes.php:179
+msgid "Drop Cap Override"
+msgstr "Anulación de letra capital"
+
+#: inc/admin/settings.php:632
+msgid "Drop Cap — Per Form"
+msgstr "Capitular — Por forma"
+
+#: inc/admin/meta-boxes.php:522
+msgid "Duration of Composition"
+msgstr "Duración de la composición"
+
+#: comments.php:155 page.php:13 templates/template-colophon.php:30 templates/template-foreword.php:29
+msgid "Edit"
+msgstr "Editar"
+
+#: inc/helpers/colophon.php:154
+msgid "Editor"
+msgstr "Editor"
+
+#: inc/admin/meta-boxes.php:329
+msgid "Editor or Transcriber"
+msgstr "Editor o transcriptor"
+
+#: comments.php:81
+msgid "Email"
+msgstr ""
+
+#: inc/admin/meta-boxes.php:168
+msgid "Epigraph"
+msgstr "Epígrafe"
+
+#: inc/admin/meta-boxes.php:532
+msgid "Esei — Argument & Scope"
+msgstr "Esei — Argumento y alcance"
+
+#: inc/helpers/literary.php:46
+msgid "Essay"
+msgstr "Ensayo"
+
+#: inc/helpers/literary.php:44
+msgid "Excerpts"
+msgstr "Extractos"
+
+#: inc/admin/settings.php:768
+msgid "Featured Image"
+msgstr "Imagen destacada"
+
+#: inc/admin/settings.php:938
+msgid "Feed URL:"
+msgstr "URL del feed:"
+
+#: inc/admin/meta-boxes.php:545
+msgid "Field"
+msgstr "Campo"
+
+#: inc/admin/meta-boxes.php:380 inc/admin/meta-boxes.php:414 inc/admin/meta-boxes.php:561
+msgid "First Published In"
+msgstr "Publicado por primera vez en"
+
+#: assets/js/blocks.js:398
+msgid "First verse number"
+msgstr "Número del primer versículo"
+
+#: inc/admin/settings.php:1031
+msgid "Flush now"
+msgstr "Vaciar ahora"
+
+#: inc/helpers/colophon.php:156
+msgid "Folio"
+msgstr "Folio"
+
+#: inc/admin/meta-boxes.php:334
+msgid "Folio or Page Reference"
+msgstr "Referencia de folio o página"
+
+#: inc/admin/settings.php:577
+msgid "Font Family"
+msgstr "Familia tipográfica"
+
+#: inc/admin/settings.php:590
+msgid "Load Google Fonts"
+msgstr "Cargar Google Fonts"
+
+#: inc/admin/settings.php:590
+msgid "Loads Cinzel, EB Garamond, Jost, and selected optional fonts from Google Fonts. Disable for a no-remote-fonts privacy mode; browser/system fallbacks will be used instead."
+msgstr "Carga Cinzel, EB Garamond, Jost y las fuentes opcionales seleccionadas desde Google Fonts. Desactívalo para un modo de privacidad sin fuentes remotas; se usarán fuentes de reserva del navegador o del sistema."
+
+#: inc/setup/sidebars.php:23
+msgid "Footer"
+msgstr "Pie de página"
+
+#: footer.php:33 inc/setup/menus.php:15
+msgid "Footer Menu"
+msgstr "Menú del pie de página"
+
+#: inc/hooks/filters.php:96 templates/template-foreword.php:19
+msgid "Foreword"
+msgstr "Prólogo"
+
+#: inc/admin/settings.php:422
+msgid "Front Page Blurb"
+msgstr "Sinopsis de portada"
+
+#: inc/admin/meta-boxes.php:488
+msgid "Genre of Source"
+msgstr "Género de la fuente"
+
+#: assets/js/blocks.js:277
+msgid "Global ornament"
+msgstr ""
+
+#: inc/admin/settings.php:479 inc/admin/settings.php:519
+msgid "Grid"
+msgstr "Cuadrícula"
+
+#: inc/admin/settings.php:456
+msgid "Grouping"
+msgstr "Agrupación"
+
+#: inc/admin/settings.php:787
+msgid "Hidden Post Tags"
+msgstr "Etiquetas de publicación ocultas"
+
+#: inc/admin/settings.php:887
+msgid "Hide comments"
+msgstr "Ocultar comentarios"
+
+#: inc/helpers/literary.php:41
+msgid "Hikayat"
+msgstr "Hikayat"
+
+#: inc/admin/meta-boxes.php:308
+msgid "Hikayat Title"
+msgstr "Título del hikayat"
+
+#: inc/helpers/literary.php:64
+msgid "Hikayat is the dominant classical Malay narrative prose genre, recounting tales of heroes, royalty, and legend, shaped by Persian, Arabic, and Hindu traditions."
+msgstr "El hikayat es el género dominante de la prosa narrativa clásica malaya, con relatos de héroes, realeza y leyendas, influenciado por las tradiciones persa, árabe e hindú."
+
+#: inc/admin/meta-boxes.php:286
+msgid "Hikayat — Source Text & Manuscript"
+msgstr "Hikayat — Texto fuente y manuscrito"
+
+#: inc/admin/settings.php:855
+msgid "In the <strong>block editor</strong>, use the dedicated <em>Literary Quote</em>, <em>Literary Divider</em>, and <em>Verse Block</em> blocks. For term definitions, select a word and click the <strong>Term Definition</strong> button (book icon) in the formatting toolbar — no shortcode block needed."
+msgstr "En el <strong>editor de bloques</strong>, use los bloques dedicados <em>Cita literaria</em>, <em>Separador literario</em> y <em>Bloque de versos</em>. Para definiciones, seleccione una palabra y haga clic en el botón <strong>Definición de término</strong> (icono de libro) en la barra de herramientas — no se necesita bloque de shortcode."
+
+#: inc/admin/settings.php:720
+msgid "Independent from prose line height. Verse lines are shorter — they need less leading. Default: Normal (1.65)."
+msgstr "Independiente de la altura de línea de prosa. Los versos son más cortos — necesitan menos interlineado. Predeterminado: Normal (1.65)."
+
+#: inc/admin/settings.php:491 inc/admin/settings.php:531
+msgid "Infinite scroll"
+msgstr "Desplazamiento infinito"
+
+#: inc/admin/settings.php:1070
+msgid "Injected after all theme styles. Use the CSS custom properties below for consistency — hard-coding colour hex values will break in Night mode and time-of-day schemes."
+msgstr "Inyectado después de todos los estilos del tema. Use las propiedades CSS personalizadas a continuación para mantener la coherencia — codificar valores hexadecimales romperá el modo nocturno y los esquemas horarios."
+
+#: inc/admin/settings.php:612
+msgid "Ink — Time of Day"
+msgstr "Tinta — Hora del día"
+
+#: inc/admin/meta-boxes.php:230 inc/admin/meta-boxes.php:275 inc/admin/meta-boxes.php:365 inc/admin/meta-boxes.php:409
+msgid "Inspiration"
+msgstr "Inspiración"
+
+#: inc/admin/meta-boxes.php:404
+msgid "Intention"
+msgstr "Intención"
+
+#: inc/admin/settings.php:881
+msgid "Interaction"
+msgstr "Interacción"
+
+#: inc/admin/settings.php:426
+msgid "Introductory text displayed above the Table of Contents. HTML is supported — e.g. <code>&lt;em&gt;, &lt;strong&gt;, &lt;a href=\"\"&gt;</code>."
+msgstr "Texto introductorio sobre la tabla de contenidos. Se admite HTML — p. ej. <code>&lt;em&gt;, &lt;strong&gt;, &lt;a href=\"\"&gt;</code>."
+
+#: inc/helpers/colophon.php:131
+msgid "Isi"
+msgstr "Isi"
+
+#: inc/admin/meta-boxes.php:254
+msgid "Isi (Line 2 — Meaning)"
+msgstr "Isi (línea 2 — significado)"
+
+#: inc/admin/settings.php:934
+msgid "JSON Feed v1.1"
+msgstr "JSON Feed v1.1"
+
+#: inc/helpers/literary.php:40
+msgid "Karmina"
+msgstr "Karmina"
+
+#: inc/helpers/literary.php:63
+msgid "Karmina or pantun dua kerat consists of two lines — the image and the meaning — the most compressed form in the Malay poetic tradition."
+msgstr "El karmina o pantun dua kerat consta de dos líneas: la imagen y el significado, la forma más comprimida de la tradición poética malaya."
+
+#: inc/admin/meta-boxes.php:240
+msgid "Karmina — Pantun Structure"
+msgstr "Karmina — Estructura del pantun"
+
+#: inc/admin/meta-boxes.php:579
+msgid "Key Figures"
+msgstr "Figuras clave"
+
+#: inc/admin/settings.php:873
+msgid "Keyboard Navigation"
+msgstr "Navegación con teclado"
+
+#: inc/admin/meta-boxes.php:516
+msgid "Lament Register"
+msgstr "Registro de lamento"
+
+#: inc/helpers/literary.php:45
+msgid "Lamentations"
+msgstr "Lamentaciones"
+
+#: assets/js/blocks.js:387
+msgid "Large numeral floated left beside verse 1."
+msgstr "Numeral grande flotando a la izquierda junto al versículo 1."
+
+#: inc/admin/settings.php:515
+msgid "Layout"
+msgstr "Diseño"
+
+#: comments.php:60
+msgid "Leave a Comment"
+msgstr ""
+
+#: assets/js/blocks.js:265
+msgid "Leave blank to follow the global ornament set in Theme Options \\u2192 Literary."
+msgstr ""
+
+#: comments.php:70
+msgid "Leave your words here…"
+msgstr ""
+
+#: inc/admin/settings.php:688
+msgid "Left-aligned"
+msgstr "Alineado a la izquierda"
+
+#: inc/admin/settings.php:1139
+msgid "Libraries & Catalogues"
+msgstr "Bibliotecas y catálogos"
+
+#: inc/admin/settings.php:478 inc/admin/settings.php:518
+msgid "List"
+msgstr "Lista"
+
+#: inc/admin/settings.php:522
+msgid "List: single-column. Grid: equal-width CSS columns. Masonry: cascading columns — best when cards have varying heights (e.g. with featured images)."
+msgstr "Lista: una columna. Cuadrícula: columnas CSS de igual ancho. Masonry: columnas en cascada — mejor cuando las tarjetas tienen alturas variables (p. ej. con imágenes destacadas)."
+
+#: inc/admin/meta-boxes.php:167
+msgid "Literary Apparatus"
+msgstr "Aparato literario"
+
+#: assets/js/blocks.js:231
+msgid "Literary Divider"
+msgstr ""
+
+#: inc/admin/settings.php:467
+msgid "Literary Form Badges"
+msgstr "Insignias de forma literaria"
+
+#: inc/admin/settings.php:956
+msgid "Literary Form Permalinks"
+msgstr "Enlaces permanentes por forma literaria"
+
+#: inc/hooks/actions.php:21
+msgid "Literary Forms"
+msgstr "Formas literarias"
+
+#: assets/js/blocks.js:158
+msgid "Literary Quote"
+msgstr ""
+
+#: inc/admin/meta-boxes.php:23
+msgid "Literary Work Details"
+msgstr "Detalles de la obra literaria"
+
+#: inc/admin/meta-boxes.php:162
+msgid "Location"
+msgstr "Ubicación"
+
+#: inc/admin/dashboard-widget.php:227
+msgid "Longest"
+msgstr "Más larga"
+
+#: inc/admin/settings.php:717
+msgid "Loose — 1.80, open and airy"
+msgstr "Holgado — 1.80, abierto y ligero"
+
+#: inc/helpers/colophon.php:152
+msgid "Manuscript"
+msgstr "Manuscrito"
+
+#: inc/admin/meta-boxes.php:324
+msgid "Manuscript or Edition"
+msgstr "Manuscrito o edición"
+
+#: inc/admin/settings.php:480 inc/admin/settings.php:520
+msgid "Masonry"
+msgstr "Masonry"
+
+#: inc/helpers/colophon.php:120
+msgid "Melody"
+msgstr "Melodía"
+
+#: inc/admin/meta-boxes.php:209
+msgid "Melody (if set to music)"
+msgstr "Melodía (si se musicaliza)"
+
+#: inc/helpers/literary.php:47
+msgid "Memoir"
+msgstr "Memoria"
+
+#: inc/admin/meta-boxes.php:571
+msgid "Memoir — Memory & Context"
+msgstr "Memoir — Memoria y contexto"
+
+#: inc/admin/meta-boxes.php:550
+msgid "Methodology"
+msgstr "Metodología"
+
+#: inc/admin/meta-boxes.php:204
+msgid "Metre"
+msgstr "Metro"
+
+#: inc/admin/meta-boxes.php:493
+msgid "My Commentary"
+msgstr "Mi comentario"
+
+#: comments.php:76
+msgid "Name"
+msgstr ""
+
+#: assets/js/blocks.js:186
+msgid "Name of the author or work being quoted."
+msgstr ""
+
+#: inc/admin/meta-boxes.php:442
+msgid "Narrative Position"
+msgstr "Posición narrativa"
+
+#: inc/admin/meta-boxes.php:199
+msgid "Narrative Subject"
+msgstr "Sujeto narrativo"
+
+#: inc/admin/meta-boxes.php:590
+msgid "Nature of This Memory"
+msgstr "Naturaleza de este recuerdo"
+
+#: comments.php:50
+msgid "Newer Comments"
+msgstr ""
+
+#: inc/helpers/navigation.php:183
+msgid "Next Work"
+msgstr "Obra siguiente"
+
+#: archive.php:58 index.php:316 search.php:47 tag.php:54
+msgid "Next page"
+msgstr ""
+
+#: inc/admin/settings.php:875
+msgid "Night Mode Toggle"
+msgstr "Interruptor de modo nocturno"
+
+#: inc/admin/settings.php:459
+msgid "No grouping — single list"
+msgstr "Sin agrupación — lista única"
+
+#: inc/admin/dashboard-widget.php:174
+msgid "No published works yet. Start writing!"
+msgstr "Aún no hay obras publicadas. ¡Empieza a escribir!"
+
+#: inc/admin/settings.php:791
+msgid "No tags found. Create tags on your posts first."
+msgstr "No se encontraron etiquetas. Cree primero etiquetas en sus publicaciones."
+
+#: archive.php:65 search.php:54 tag.php:61
+msgid "No works found."
+msgstr "No se encontraron obras."
+
+#: assets/js/blocks.js:254
+msgid "None"
+msgstr ""
+
+#: inc/admin/settings.php:716
+msgid "Normal — 1.65, recommended for most verse"
+msgstr "Normal — 1.65, recomendado para la mayoría de los versos"
+
+#: inc/helpers/literary.php:43
+msgid "Novel"
+msgstr "Novela"
+
+#: inc/admin/meta-boxes.php:427
+msgid "Novel Title"
+msgstr "Título de la novela"
+
+#: inc/admin/meta-boxes.php:424
+msgid "Novel — Chapter Details"
+msgstr "Novela — Detalles del capítulo"
+
+#: inc/helpers/literary.php:68
+msgid "Nukilan are curated passages from prose works, speeches, or texts that carry standalone literary significance."
+msgstr "Los nukilan son pasajes seleccionados de obras en prosa, discursos o textos que tienen valor literario independiente."
+
+#: inc/admin/meta-boxes.php:475
+msgid "Nukilan — Source Details"
+msgstr "Nukilan — Detalles de la fuente"
+
+#: inc/admin/meta-boxes.php:220
+msgid "Number of Cantos"
+msgstr "Número de cantos"
+
+#: inc/admin/meta-boxes.php:225 inc/admin/meta-boxes.php:270
+msgid "Occasion"
+msgstr "Ocasión"
+
+#: inc/admin/meta-boxes.php:506
+msgid "Occasion of Grief"
+msgstr "Ocasión de duelo"
+
+#: comments.php:49
+msgid "Older Comments"
+msgstr ""
+
+#: assets/js/blocks.js:322
+msgid "Optional \\u2014 displayed in the left margin."
+msgstr ""
+
+#: inc/admin/meta-boxes.php:172
+msgid "Original Language"
+msgstr "Lengua original"
+
+#: inc/admin/meta-boxes.php:178
+msgid "Ornament Override"
+msgstr "Anulación de ornamento"
+
+#: assets/js/blocks.js:264
+msgid "Ornament Style"
+msgstr ""
+
+#: inc/admin/settings.php:903
+msgid "Outputs Schema.org CreativeWork markup in the page head. Helps search engines understand each work's type, author, and date. Disable if you use a dedicated SEO plugin that handles this."
+msgstr "Genera el marcado Schema.org CreativeWork en el encabezado de la página. Ayuda a los motores de búsqueda a comprender el tipo, autor y fecha de cada obra. Desactívelo si usa un complemento SEO dedicado."
+
+#: inc/admin/settings.php:931
+msgid "Outputs og:title, og:description, og:image, twitter:card, and related tags on single work pages. Controls share card appearance on X (Twitter), Facebook, LinkedIn, WhatsApp, and Telegram. Automatically disabled when RankMath, Yoast, or another SEO plugin is detected."
+msgstr "Genera og:title, og:description, og:image, twitter:card y etiquetas relacionadas en las páginas de obras. Controla la apariencia de las tarjetas de compartir en X (Twitter), Facebook, LinkedIn, WhatsApp y Telegram. Se desactiva automáticamente cuando se detecta RankMath, Yoast u otro plugin SEO."
+
+#: 404.php:9
+msgid "Page Not Found"
+msgstr "Página no encontrada"
+
+#: inc/admin/settings.php:490 inc/admin/settings.php:530
+msgid "Page links"
+msgstr "Enlaces de página"
+
+#: inc/admin/settings.php:533
+msgid "Page links: standard WordPress previous / next. Infinite scroll: next page loads automatically as the reader scrolls down — applies to literary form, category, and tag archives."
+msgstr "Enlaces de página: WordPress anterior / siguiente estándar. Desplazamiento infinito: la página siguiente se carga automáticamente al desplazar — se aplica a archivos de forma literaria, categoría y etiqueta."
+
+#: single.php:46
+msgid "Page navigation"
+msgstr "Navegación de página"
+
+#: inc/admin/settings.php:527
+msgid "Pagination"
+msgstr "Paginación"
+
+#: inc/admin/settings.php:596
+msgid "Paper — Colour Scheme"
+msgstr "Papel — Esquema de color"
+
+#: inc/admin/meta-boxes.php:432
+msgid "Part"
+msgstr "Parte"
+
+#: inc/admin/settings.php:1043
+msgid "Pattern"
+msgstr "Patrón"
+
+#: inc/admin/settings.php:856
+msgid "Per-work overrides for ornament and drop cap are set in the <strong>Literary Work Details</strong> meta box on each post's edit screen."
+msgstr "Las anulaciones por obra para el ornamento y la capitular se configuran en el cuadro meta <strong>Detalles de la obra literaria</strong> en la pantalla de edición de cada entrada."
+
+#: inc/helpers/colophon.php:169
+msgid "Performance"
+msgstr "Representación"
+
+#: inc/admin/meta-boxes.php:375
+msgid "Performance History"
+msgstr "Historial de representaciones"
+
+#: inc/admin/meta-boxes.php:574
+msgid "Period Covered"
+msgstr "Período cubierto"
+
+#: inc/admin/settings.php:947
+msgid "Permalinks"
+msgstr "Enlaces permanentes"
+
+#: inc/admin/meta-boxes.php:359
+msgid "Poetic Mode"
+msgstr "Modo poético"
+
+#: inc/helpers/literary.php:38
+msgid "Poetry"
+msgstr "Poesía"
+
+#: inc/admin/settings.php:685
+msgid "Poetry Alignment"
+msgstr "Alineación de poesía"
+
+#: inc/admin/settings.php:696
+msgid "Poetry Options"
+msgstr "Opciones de poesía"
+
+#: inc/helpers/literary.php:65
+msgid "Poetry is a literary form combining figurative language, rhythm, and emotion in structured lines and stanzas."
+msgstr "La poesía es una forma literaria que combina lenguaje figurado, ritmo y emoción en versos y estrofas estructuradas."
+
+#: inc/admin/meta-boxes.php:393 inc/admin/meta-boxes.php:453
+msgid "Point of View"
+msgstr "Punto de vista"
+
+#: comments.php:63
+msgid "Post Comment"
+msgstr ""
+
+#: inc/admin/settings.php:842
+msgid "Posts tagged with any of these tags will be hidden from the TOC, category archives, and search results. They remain accessible via their URL and tag archive. Tag display and the tag cap do not apply to these tags."
+msgstr "Las publicaciones etiquetadas con cualquiera de estas etiquetas se ocultarán del índice, los archivos de categorías y los resultados de búsqueda. Siguen siendo accesibles a través de su URL y el archivo de etiquetas. La visualización y el límite de etiquetas no se aplican a estas etiquetas."
+
+#: inc/admin/settings.php:468
+msgid "Previous / Next Navigation"
+msgstr "Navegación anterior / siguiente"
+
+#: inc/helpers/navigation.php:175
+msgid "Previous Work"
+msgstr "Obra anterior"
+
+#: archive.php:55 index.php:313 search.php:44 tag.php:51
+msgid "Previous page"
+msgstr ""
+
+#: header.php:57 inc/setup/menus.php:14
+msgid "Primary Menu"
+msgstr "Menú principal"
+
+#: inc/admin/meta-boxes.php:319 inc/helpers/colophon.php:150
+msgid "Protagonist"
+msgstr "Protagonista"
+
+#: inc/admin/settings.php:934
+msgid "Publishes a machine-readable feed at /feed/json — consumed by feed readers that support the JSON Feed spec (Reeder, NetNewsWire, etc.). Includes content, summary, literary form, word count, and reading time per item. Adds an autodiscovery <link> tag to the front-page <head>."
+msgstr "Publica un feed legible por máquina en /feed/json — consumido por lectores de feeds que soportan la especificación JSON Feed (Reeder, NetNewsWire, etc.). Incluye contenido, resumen, forma literaria, recuento de palabras y tiempo de lectura por artículo. Añade una etiqueta <link> de autodescubrimiento en el <head> de la portada."
+
+#: inc/admin/meta-boxes.php:351
+msgid "Puisi — Free Verse & Modern Forms"
+msgstr "Puisi — Verso libre y formas modernas"
+
+#: assets/js/blocks.js:197
+msgid "Quotation\\u2026"
+msgstr ""
+
+#: assets/js/blocks.js:181
+msgid "Quote Settings"
+msgstr ""
+
+#: inc/helpers/literary.php:69
+msgid "Ratapan are poetic expressions of grief or suffering, often connected to loss, longing, or mourning."
+msgstr "Los ratapan son expresiones poéticas de dolor o sufrimiento, a menudo relacionadas con la pérdida, el anhelo o el duelo."
+
+#: inc/admin/meta-boxes.php:503
+msgid "Ratapan — Grief Context"
+msgstr "Ratapan — Contexto de duelo"
+
+#: inc/admin/settings.php:771
+msgid "Reading Analytics"
+msgstr "Análisis de lectura"
+
+#: inc/admin/settings.php:871
+msgid "Reading Enhancements"
+msgstr "Mejoras de lectura"
+
+#: inc/admin/settings.php:593
+msgid "Reading Palette"
+msgstr "Paleta de lectura"
+
+#: inc/admin/settings.php:874
+msgid "Reading Position Memory"
+msgstr "Memoria de posición de lectura"
+
+#: inc/admin/settings.php:872
+msgid "Reading Progress Bar"
+msgstr "Barra de progreso de lectura"
+
+#: inc/admin/dashboard-widget.php:26
+msgid "Reading Statistics"
+msgstr "Estadísticas de lectura"
+
+#: inc/admin/meta-boxes.php:264
+msgid "Register"
+msgstr "Registro"
+
+#: inc/admin/settings.php:769 inc/helpers/navigation.php:119
+msgid "Related Works"
+msgstr "Obras relacionadas"
+
+#: assets/js/blocks.js:114
+msgid "Remove Definition"
+msgstr ""
+
+#: comments.php:153
+msgid "Reply"
+msgstr ""
+
+#: comments.php:61
+msgid "Reply to %s"
+msgstr ""
+
+#: comments.php:99
+msgid "Required fields are marked with"
+msgstr ""
+
+#: inc/admin/settings.php:1044
+msgid "Resolves to"
+msgstr "Resuelve a"
+
+#: inc/admin/settings.php:874
+msgid "Restores scroll position when a reader returns to a work they were part-way through. Uses localStorage — no server storage."
+msgstr "Restaura la posición de desplazamiento cuando un lector regresa a una obra que estaba leyendo a medias. Usa localStorage — sin almacenamiento en servidor."
+
+#: inc/admin/settings.php:1025
+msgid "Rewrite rules:"
+msgstr "Reglas de reescritura:"
+
+#: inc/helpers/colophon.php:136
+msgid "Rhyme"
+msgstr "Rima"
+
+#: inc/admin/meta-boxes.php:259 inc/admin/meta-boxes.php:354
+msgid "Rhyme Scheme"
+msgstr "Esquema de rima"
+
+#: inc/admin/settings.php:902
+msgid "SEO"
+msgstr "SEO"
+
+#: inc/helpers/colophon.php:129
+msgid "Sampiran"
+msgstr "Sampiran"
+
+#: inc/admin/meta-boxes.php:249
+msgid "Sampiran (Line 1 — Image)"
+msgstr "Sampiran (línea 1 — imagen)"
+
+#: inc/admin/settings.php:355
+msgid "Save %s"
+msgstr "Guardar %s"
+
+#: comments.php:90
+msgid "Save my name and email in this browser for the next time I comment."
+msgstr ""
+
+#: searchform.php:5 inc/hooks/filters.php:113 inc/hooks/filters.php:118
+msgid "Search"
+msgstr "Buscar"
+
+#: search.php:9
+msgid "Search Results"
+msgstr "Resultados de búsqueda"
+
+#: searchform.php:3 searchform.php:4
+msgid "Search Works"
+msgstr "Buscar obras"
+
+#: inc/admin/settings.php:811
+msgid "Search and select hidden tags"
+msgstr "Buscar y seleccionar etiquetas ocultas"
+
+#: inc/admin/settings.php:751
+msgid "Section Ornament"
+msgstr "Ornamento de sección"
+
+#: inc/admin/settings.php:804
+msgid "Select tags…"
+msgstr "Seleccionar etiquetas…"
+
+#: inc/admin/meta-boxes.php:370
+msgid "Sequence"
+msgstr "Secuencia"
+
+#: inc/helpers/colophon.php:167
+msgid "Series"
+msgstr "Serie"
+
+#: inc/admin/meta-boxes.php:399 inc/admin/meta-boxes.php:459
+msgid "Setting"
+msgstr "Entorno"
+
+#: inc/admin/settings.php:306
+msgid "Settings saved."
+msgstr "Configuración guardada."
+
+#: inc/admin/settings.php:313
+msgid "Settings tabs"
+msgstr "Pestañas de configuración"
+
+#: inc/helpers/navigation.php:358
+msgid "Share"
+msgstr ""
+
+#: inc/admin/settings.php:876
+msgid "Share Row"
+msgstr "Barra de compartir"
+
+#: inc/helpers/navigation.php:389
+msgid "Share on Facebook"
+msgstr ""
+
+#: inc/helpers/navigation.php:443
+msgid "Share on Mastodon"
+msgstr ""
+
+#: inc/helpers/navigation.php:433
+msgid "Share on Pinterest"
+msgstr ""
+
+#: inc/helpers/navigation.php:425
+msgid "Share on Threads"
+msgstr ""
+
+#: inc/helpers/navigation.php:378
+msgid "Share on X (Twitter)"
+msgstr ""
+
+#: inc/helpers/navigation.php:357
+msgid "Share this work"
+msgstr ""
+
+#: inc/helpers/navigation.php:450
+msgid "Share via Email"
+msgstr ""
+
+#: inc/helpers/navigation.php:402
+msgid "Share via WhatsApp"
+msgstr ""
+
+#: inc/helpers/literary.php:42
+msgid "Short Story"
+msgstr "Cuento"
+
+#: inc/admin/dashboard-widget.php:234
+msgid "Shortest"
+msgstr "Más corta"
+
+#: inc/admin/settings.php:441
+msgid "Show Copyright"
+msgstr "Mostrar derechos de autor"
+
+#: inc/admin/settings.php:877
+msgid "Show a fixed button in the bottom-right corner that smoothly scrolls back to the top of the page."
+msgstr "Muestra un botón fijo en la esquina inferior derecha que desplaza suavemente hacia la parte superior de la página."
+
+#: inc/admin/settings.php:769
+msgid "Show a related works section at the bottom of each work."
+msgstr "Mostrar una sección de obras relacionadas al final de cada obra."
+
+#: inc/admin/settings.php:467
+msgid "Show coloured form badges beside titles in the TOC."
+msgstr "Mostrar insignias de forma en color junto a los títulos en el índice."
+
+#: inc/admin/settings.php:886
+msgid "Show comments"
+msgstr "Mostrar comentarios"
+
+#: inc/admin/settings.php:468
+msgid "Show navigation links between works on single pages."
+msgstr "Mostrar enlaces de navegación entre obras en páginas individuales."
+
+#: inc/admin/settings.php:772
+msgid "Show post tags on single work pages, between the analytics bar and colophon."
+msgstr "Mostrar las etiquetas de la publicación en páginas de obras individuales, entre la barra analítica y el colofón."
+
+#: inc/admin/settings.php:1038
+msgid "Show registered rules"
+msgstr "Mostrar reglas registradas"
+
+#: inc/admin/settings.php:446
+msgid "Show the copyright line in the site footer."
+msgstr "Mostrar la línea de derechos de autor en el pie de página."
+
+#: inc/setup/sidebars.php:14
+msgid "Sidebar"
+msgstr "Barra lateral"
+
+#: header.php:35
+msgid "Skip to content"
+msgstr "Saltar al contenido"
+
+#: assets/js/blocks.js:393
+msgid "Small-caps label above the chapter."
+msgstr "Etiqueta en versalitas sobre el capítulo."
+
+#: inc/admin/settings.php:1135
+msgid "Social Media"
+msgstr "Redes sociales"
+
+#: inc/admin/settings.php:919 inc/admin/settings.php:931
+msgid "Social Meta Tags (OpenGraph / Twitter Card)"
+msgstr "Meta etiquetas sociales (OpenGraph / Twitter Card)"
+
+#: inc/admin/settings.php:1158
+msgid "Social Profiles"
+msgstr "Perfiles sociales"
+
+#: inc/helpers/social.php:247
+msgid "Social profiles"
+msgstr ""
+
+#: 404.php:10
+msgid "Sorry, the page you are looking for does not exist."
+msgstr "Lo sentimos, la página que busca no existe."
+
+#: inc/admin/meta-boxes.php:171 inc/helpers/colophon.php:97
+msgid "Source"
+msgstr "Fuente"
+
+#: assets/js/blocks.js:185
+msgid "Source / Attribution"
+msgstr ""
+
+#: inc/admin/meta-boxes.php:478
+msgid "Source Work Title"
+msgstr "Título de la obra fuente"
+
+#: inc/admin/settings.php:705
+msgid "Spacious — generous pause, meditative pace"
+msgstr "Espacioso — pausa generosa, ritmo meditativo"
+
+#: inc/admin/settings.php:770
+msgid "Stanza Numbers"
+msgstr "Números de estrofa"
+
+#: inc/admin/settings.php:700
+msgid "Stanza Spacing"
+msgstr "Espaciado de estrofas"
+
+#: assets/js/blocks.js:399
+msgid "Start numbering from this value (default: 1)."
+msgstr "Comenzar la numeración desde este valor (predeterminado: 1)."
+
+#: inc/admin/settings.php:903
+msgid "Structured Data (JSON-LD)"
+msgstr "Datos estructurados (JSON-LD)"
+
+#: inc/admin/settings.php:958
+msgid "Structures post URLs as /{literary-form}/{post-slug}/. Example: <code>%s</code>. Posts with no literary form assigned retain their existing permalink. Taxonomy archives are not affected — they remain at /form/{slug}/."
+msgstr "Estructura las URL de las entradas como /{forma-literaria}/{slug-entrada}/. Ejemplo: <code>%s</code>. Las entradas sin forma literaria asignada conservan su enlace permanente existente. Los archivos de taxonomía no se ven afectados — permanecen en /form/{slug}/."
+
+#: inc/admin/meta-boxes.php:556
+msgid "Subject"
+msgstr "Tema"
+
+#: inc/helpers/literary.php:39
+msgid "Syair"
+msgstr "Syair"
+
+#: inc/helpers/literary.php:62
+msgid "Syair is a four-line monorhyme verse form of Persian origin, typically narrative or didactic in character and traditionally sung."
+msgstr "El syair es una forma de verso monorrimo de cuatro líneas de origen persa, de carácter generalmente narrativo o didáctico y cantado tradicionalmente."
+
+#: inc/admin/meta-boxes.php:196
+msgid "Syair — Composition Details"
+msgstr "Syair — Detalles de composición"
+
+#: inc/admin/settings.php:1151
+msgid "Syndication"
+msgstr "Sindicación"
+
+#: inc/admin/settings.php:475
+msgid "TOC Layout"
+msgstr "Diseño de la TDC"
+
+#: inc/admin/settings.php:487
+msgid "TOC Pagination"
+msgstr "Paginación de la TDC"
+
+#: index.php:23 inc/admin/settings.php:453
+msgid "Table of Contents"
+msgstr "Tabla de contenidos"
+
+#: inc/admin/settings.php:776
+msgid "Tag Settings"
+msgstr "Ajustes de etiquetas"
+
+#: tag.php:9
+msgid "Tagged with"
+msgstr "Etiquetado con"
+
+#: single.php:64 inc/admin/settings.php:772
+msgid "Tags"
+msgstr "Etiquetas"
+
+#: inc/admin/meta-boxes.php:313
+msgid "Tale Cycle"
+msgstr "Ciclo de cuentos"
+
+#: assets/js/blocks.js:57 assets/js/blocks.js:115
+msgid "Term Definition"
+msgstr ""
+
+#: inc/admin/settings.php:629
+msgid "Text Options"
+msgstr "Opciones de texto"
+
+#: inc/admin/settings.php:708
+msgid "The gap between stanzas is where a poem breathes. Default: Comfortable."
+msgstr "El espacio entre estrofas es donde respira un poema. Predeterminado: Cómodo."
+
+#: inc/admin/dashboard-widget.php:246
+msgid "Theme Settings"
+msgstr "Ajustes del tema"
+
+#: inc/admin/settings.php:594
+msgid "These two controls work together — choose both independently and they combine. <strong>Colour Scheme</strong> sets the paper: background, surface, and border tones. <strong>Time of Day</strong> sets the ink: text colour, link colour, and accent mood. Your chosen paper holds across all time periods; the ink shifts with the light."
+msgstr "Estos dos controles funcionan juntos — elíjalos independientemente y se combinan. <strong>Esquema de color</strong> establece el papel: tonos de fondo, superficie y bordes. <strong>Hora del día</strong> establece la tinta: color del texto, enlaces y tono de acento. Su papel elegido se mantiene en todos los períodos; la tinta cambia con la luz."
+
+#: inc/admin/meta-boxes.php:300
+msgid "This is a citation — show \"Cited from\" above the title"
+msgstr ""
+
+#: inc/admin/settings.php:715
+msgid "Tight — 1.55, tightly-wound stanza"
+msgstr "Estrecho — 1.55, estrofa compacta"
+
+#: inc/admin/settings.php:703
+msgid "Tight — compact, stanzas close together"
+msgstr "Estrecho — compacto, estrofas juntas"
+
+#: inc/hooks/actions.php:342
+msgid "Toggle dark mode"
+msgstr "Activar modo oscuro"
+
+#: inc/admin/meta-boxes.php:584
+msgid "Tone"
+msgstr "Tono"
+
+#: inc/admin/dashboard-widget.php:186
+msgid "Total Words"
+msgstr "Palabras totales"
+
+#: inc/helpers/colophon.php:101 templates/single-puisi-generic.php:69
+msgid "Translated from"
+msgstr "Traducido de"
+
+#: assets/js/blocks.js:425
+msgid "Type verse 1 here. Press Enter for next verse."
+msgstr "Escriba el versículo 1 aquí. Presione Intro para el siguiente versículo."
+
+#: index.php:166
+msgid "Uncategorised"
+msgstr "Sin categoría"
+
+#: index.php:249
+msgid "Untagged"
+msgstr "Sin etiquetar"
+
+#: assets/js/blocks.js:246
+msgid "Use global setting (Theme Options)"
+msgstr ""
+
+#: inc/admin/settings.php:752
+msgid "Used in the TOC between groups, at the end of works, in the colophon, and by the <code>[divider]</code> shortcode. Can be overridden per-work in the Literary Work Details meta box."
+msgstr "Usado en la TDC entre grupos, al final de las obras, en el colofón y por el shortcode <code>[divider]</code>. Se puede anular por obra en el cuadro meta Detalles de la obra literaria."
+
+#: inc/admin/meta-boxes.php:596
+msgid "Verification Note"
+msgstr "Nota de verificación"
+
+#: inc/hooks/actions.php:430 inc/shortcodes/shortcodes.php:233 inc/shortcodes/shortcodes.php:273
+msgid "Verse"
+msgstr "Versículo"
+
+#: assets/js/blocks.js:294
+msgid "Verse Block"
+msgstr ""
+
+#: inc/admin/settings.php:712
+msgid "Verse Line Height"
+msgstr "Altura de línea de verso"
+
+#: assets/js/blocks.js:321
+msgid "Verse Number"
+msgstr ""
+
+#: assets/js/blocks.js:317
+msgid "Verse Settings"
+msgstr ""
+
+#: assets/js/blocks.js:341
+msgid "Verse text\\u2026"
+msgstr ""
+
+#: inc/helpers/navigation.php:169
+msgid "Work navigation"
+msgstr "Navegación de obras"
+
+#: inc/admin/dashboard-widget.php:182
+msgid "Works"
+msgstr "Obras"
+
+#: inc/admin/dashboard-widget.php:203
+msgid "Works by Form"
+msgstr "Obras por forma"
+
+#: inc/admin/meta-boxes.php:163
+msgid "Year (for sorting)"
+msgstr "Año (para ordenar)"
+
+#: inc/helpers/colophon.php:87 inc/helpers/colophon.php:92
+msgid "Year composed"
+msgstr "Año de composición"
+
+#: comments.php:142
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#: footer.php:72
+msgid "by"
+msgstr "por"
+
+#: inc/helpers/colophon.php:118
+msgid "cantos"
+msgstr "cantos"
+
+#: inc/admin/dashboard-widget.php:194
+msgid "min"
+msgstr "min"
+
+#: inc/hooks/actions.php:19
+msgctxt "taxonomy general name"
+msgid "Literary Forms"
+msgstr ""
+
+#: inc/hooks/actions.php:20
+msgctxt "taxonomy singular name"
+msgid "Literary Form"
+msgstr ""

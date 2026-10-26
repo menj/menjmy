@@ -1,0 +1,153 @@
+/**
+ * Book WP — Literary Form: Hikayat
+ *
+ * The hikayat is a Malay prose form — third-person omniscient narration,
+ * episodic structure, formal diction, classical rhythmic cadence. Includes
+ * both original compositions in the hikayat tradition and cited passages
+ * from classical manuscripts. Citation mode toggled via meta box.
+ *
+ * Applied via body class: .bwp-form-hikayat
+ *
+ * @package Book_WP
+ */
+
+/* ── Palette: parchment surface ─────────────────────────── */
+/* SURFACE ONLY — ink comes from the time-of-day system.     */
+/* Yields to Cream / Dusk schemes via :not() guards.         */
+
+:root:not(.bwp-time-night):not(.bwp-night) body.bwp-form-hikayat:not(.bwp-scheme-night):not(.bwp-scheme-cream):not(.bwp-scheme-dusk):not(.bwp-night) {
+    --bwp-bg:           #faf6ee;
+    --bwp-bg-subtle:    #f2ead8;
+    --bwp-border:       #d8ccaa;
+    --bwp-border-faint: #e8dfc0;
+    --bwp-gold-dim:     #8a7840;
+}
+
+/* Night: form-specific accent only — surface and ink come   */
+/* from the night system (toggle / time-night / scheme).     */
+html.bwp-night body.bwp-form-hikayat,
+body.bwp-scheme-night.bwp-form-hikayat,
+body.bwp-night.bwp-form-hikayat,
+:root.bwp-time-night body.bwp-form-hikayat {
+    --bwp-gold-dim:     #a09060;
+}
+
+@media (prefers-color-scheme: dark) {
+    html:not([data-bwp-night="0"]) body.bwp-form-hikayat:not(.bwp-scheme-cream):not(.bwp-scheme-dusk) {
+        --bwp-gold-dim:     #a09060;
+    }
+}
+
+/* ── Layout: wide — hikayat prose needs room ─────────────── */
+
+body.bwp-form-hikayat .bwp-page-wrap   { max-width: 44em; }
+body.bwp-form-hikayat .bwp-work__content {
+    max-width: 38em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ── "PETIKAN DARIPADA" label — citation mode only ───────── */
+/* Rendered only when the citation toggle is checked in the   */
+/* meta box. Appears directly above the centred title.        */
+
+body.bwp-form-hikayat .bwp-citation-label {
+    font-family:    var(--bwp-font-ui, 'Jost', system-ui, sans-serif);
+    font-size:      .68rem;
+    font-weight:    400;
+    font-style:     normal;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    text-align:     center;
+    color:          var(--bwp-muted);
+    margin:         0 0 .3em;
+    padding:        0;
+}
+
+/* ── Title: centred, authoritative, classical ───────────── */
+
+body.bwp-form-hikayat .bwp-work__title {
+    font-family:    var(--bwp-font-display, 'Cinzel', Georgia, serif);
+    font-size:      2.0em;
+    font-weight:    400;
+    font-style:     normal;
+    text-align:     center;
+    letter-spacing: .01em;
+    line-height:    1.2;
+    color:          var(--bwp-text);
+    margin-bottom:  1em;
+}
+
+body.bwp-form-hikayat .bwp-work__title::after {
+    content:    '';
+    display:    block;
+    width:      3em;
+    height:     2px;
+    background: var(--bwp-gold-dim, #8a7840);
+    margin:     .6em auto 0;
+}
+
+/* ── Body: formal prose — text always left-aligned ──────── */
+
+body.bwp-form-hikayat .bwp-work__content {
+    font-size:  1.02em;
+    line-height: 1.95;
+}
+
+body.bwp-form-hikayat .bwp-work__content p      { text-indent: 0; margin-bottom: .6em; }
+body.bwp-form-hikayat .bwp-work__content p + p  { text-indent: 1.6em; margin-top: 0; }
+
+/* ── Drop cap: IM Fell English SC ───────────────────────── */
+
+body.bwp-form-hikayat .bwp-work__content > p:first-of-type::first-letter {
+    float:          left;
+    font-family:    var(--bwp-dropcap-font, 'IM Fell English SC'), Georgia, serif;
+    font-size:      4.2em;
+    font-weight:    400;
+    font-style:     normal;
+    line-height:    .88;
+    letter-spacing: -.01em;
+    color:          var(--bwp-gold-dim, #8a7840);
+    margin-right:   .12em;
+    margin-top:     .05em;
+    padding:        0;
+}
+
+/* ── Colophon ────────────────────────────────────────────── */
+
+body.bwp-form-hikayat .bwp-colophon {
+    margin-top: 1.2em;
+    font-size:  .88em;
+    color:      var(--bwp-muted);
+    text-align: center;
+}
+
+body.bwp-form-hikayat .bwp-colophon strong {
+    font-style: normal;
+    color:      var(--bwp-text-mid);
+}
+
+/* ── Ornament: centred, restrained ──────────────────────── */
+
+body.bwp-form-hikayat .bwp-ornament {
+    opacity:    .3;
+    margin:     1.8em 0;
+    text-align: center;
+    font-size:  1em;
+}
+
+/* ── Analytics: centred ─────────────────────────────────── */
+
+body.bwp-form-hikayat .bwp-analytics { justify-content: center; }
+
+/* ── Responsive ──────────────────────────────────────────── */
+
+@media screen and (min-width: 52em) {
+    body.bwp-form-hikayat .bwp-work__title   { font-size: 2.6em; }
+    body.bwp-form-hikayat .bwp-work__content { padding: 0; }
+}
+
+@media print {
+    body.bwp-form-hikayat .bwp-work__title   { font-size: 1.8em; text-align: center; }
+    body.bwp-form-hikayat .bwp-work__content { line-height: 1.75; }
+}

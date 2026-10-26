@@ -1,0 +1,121 @@
+/**
+ * Book WP — Literary Form: Nukilan (Prose Excerpt)
+ *
+ * A curated fragment — the author's own selection from a larger work.
+ * Georgia italic signals quotation register. Narrow column: the excerpt
+ * is framed, not expansive. Gold borders say "this is a passage, not
+ * the whole." Narrowness is intentional.
+ *
+ * Applied via body class: .bwp-form-nukilan
+ *
+ * @package Book_WP
+ */
+
+/* ── Layout: wide — matches ratapan column ───────────────── */
+
+body.bwp-form-nukilan .bwp-page-wrap   { max-width: 46em; }
+body.bwp-form-nukilan .bwp-work__content {
+    max-width: 40em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ── Title: Georgia italic, centred — quotation register ─── */
+
+body.bwp-form-nukilan .bwp-work__title {
+    font-family:    Georgia, 'Times New Roman', serif;
+    font-size:      1.8em;
+    font-weight:    400;
+    font-style:     normal;
+    text-align:     center;
+    letter-spacing: .01em;
+    line-height:    1.25;
+    color:          var(--bwp-text-mid);
+}
+
+body.bwp-form-nukilan .bwp-work__title::after {
+    content:    '';
+    display:    block;
+    width:      6em;
+    height:     1px;
+    background: linear-gradient(90deg, transparent, var(--bwp-gold-dim, #a8893a), transparent);
+    margin:     .7em auto 0;
+}
+
+/* ── Body: italic signals quotation, framed by gold borders ─ */
+
+body.bwp-form-nukilan .bwp-work__content {
+    font-size:    1.04em;
+    line-height:  1.92;
+    font-style:   italic;
+    color:        var(--bwp-text-mid);
+    border-left:  2px solid var(--bwp-gold-dim, #a8893a);
+    border-right: 2px solid var(--bwp-gold-dim, #a8893a);
+    padding:      1em 1.6em;
+    background:   rgba(201,168,76,.04);
+}
+
+body.bwp-form-nukilan .bwp-work__content strong,
+body.bwp-form-nukilan .bwp-work__content b,
+body.bwp-form-nukilan .bwp-work__content em { font-style: normal; }
+
+body.bwp-form-nukilan .bwp-work__content p      { text-indent: 0; }
+body.bwp-form-nukilan .bwp-work__content p + p  { text-indent: 1.8em; margin-top: 0; }
+
+/* ── Drop cap: Libre Caslon Display — float left, classical display register ── */
+
+body.bwp-form-nukilan .bwp-work__content > p:first-of-type::first-letter {
+    float:          left;
+    font-family:    var(--bwp-dropcap-font, 'Libre Caslon Display'), Georgia, serif;
+    font-size:      4.2em;
+    font-weight:    400;
+    font-style:     normal;
+    line-height:    .88;
+    letter-spacing: -.01em;
+    color:          var(--bwp-gold-dim, #a8893a);
+    margin-right:   .12em;
+    margin-top:     .05em;
+    padding:        0;
+}
+
+/* ── Colophon ────────────────────────────────────────────── */
+
+body.bwp-form-nukilan .bwp-colophon { text-align: center; margin-top: 2em; }
+
+/* ── Epigraph ────────────────────────────────────────────── */
+
+body.bwp-form-nukilan .bwp-epigraph {
+    font-size:    .88em;
+    max-width:    22em;
+    margin-left:  auto;
+    margin-right: auto;
+    text-align:   center;
+    border-left:  none;
+    font-style:   normal;
+    opacity:      .75;
+}
+
+/* ── Ornament: centred ───────────────────────────────────── */
+
+body.bwp-form-nukilan .bwp-ornament {
+    text-align: center;
+    margin:     1.6em 0;
+    opacity:    .4;
+    font-size:  1.1em;
+}
+
+/* ── Analytics: centred ──────────────────────────────────── */
+
+body.bwp-form-nukilan .bwp-analytics { justify-content: center; }
+
+/* ── Responsive ──────────────────────────────────────────── */
+
+@media screen and (min-width: 52em) {
+    body.bwp-form-nukilan .bwp-work__title   { font-size: 2.2em; }
+    body.bwp-form-nukilan .bwp-work__content { padding-left: 2.6em; padding-right: 2.6em; }
+}
+
+@media print {
+    body.bwp-form-nukilan .bwp-work__title   { font-size: 1.5em; text-align: center; }
+    body.bwp-form-nukilan .bwp-work__content { border-color: #888; background: none; }
+}

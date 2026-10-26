@@ -1,0 +1,103 @@
+/**
+ * Book WP — Night scheme (persistent dark mode)
+ *
+ * Night scheme is the exception to the surface/ink split.
+ *
+ * A dark background requires light ink for legibility. Since time-night
+ * ink tokens come from <html> and body-level CSS beats inherited values,
+ * we must set the full palette here — both surface (dark) and ink (light).
+ * The compound selectors below then re-introduce time-of-day tinting by
+ * shifting accent, link, and ornament colours to reflect the current mood,
+ * while keeping the dark surface constant.
+ *
+ * Compound selectors use :root.bwp-time-* + body.bwp-scheme-night to
+ * provide genuine time enhancement without disrupting legibility.
+ */
+
+/* ── Base palette (afternoon fallback and default) ───────────────────────── */
+
+body.bwp-scheme-night {
+    /* Surface */
+    --bwp-bg:           #1a1a1f;
+    --bwp-bg-subtle:    #232328;
+    --bwp-border:       #333338;
+    --bwp-border-faint: #2a2a30;
+    --bwp-stone:        #4a4a52;
+
+    /* Ink — required because dark surface needs light ink */
+    --bwp-text:         #d4d2cc;
+    --bwp-text-mid:     #b8b5ae;
+    --bwp-muted:        #a09d98;
+    --bwp-link:         #7eb5d3;
+    --bwp-link-hover:   #a5d0ea;
+    --bwp-accent:       #b0a99e;
+    --bwp-ornament:     #555550;
+    --bwp-progress:     #7eb5d3;
+    --bwp-border-ink:   #707078;
+    --bwp-teal:         #4a7a9a;
+    --bwp-gold:         #8ab0c8;
+    --bwp-gold-dim:     #6a8aa0;
+    --bwp-gold-light:   #90a8b8;
+}
+
+/* ── Night scheme + Dawn — violet-silver tint ───────────────────────────── */
+/* The lavender ink of dawn shows through as tinted links and ornaments.     */
+
+:root.bwp-time-dawn body.bwp-scheme-night {
+    --bwp-link:         #9a8fcc;
+    --bwp-link-hover:   #b8b0e8;
+    --bwp-accent:       #9a8fcc;
+    --bwp-ornament:     #6a6090;
+    --bwp-progress:     #8880b8;
+    --bwp-gold:         #9a90c8;
+    --bwp-gold-dim:     #7a70a8;
+}
+
+/* ── Night scheme + Morning — amber warmth on dark ──────────────────────── */
+
+:root.bwp-time-morning body.bwp-scheme-night {
+    --bwp-link:         #c09848;
+    --bwp-link-hover:   #d8b060;
+    --bwp-accent:       #c09848;
+    --bwp-ornament:     #806030;
+    --bwp-progress:     #b08030;
+    --bwp-gold:         #c8a040;
+    --bwp-gold-dim:     #a08838;
+}
+
+/* ── Night scheme + Dusk — ochre ember glow ─────────────────────────────── */
+
+:root.bwp-time-dusk body.bwp-scheme-night {
+    --bwp-link:         #c87840;
+    --bwp-link-hover:   #e09058;
+    --bwp-accent:       #c87840;
+    --bwp-ornament:     #885028;
+    --bwp-progress:     #b06030;
+    --bwp-gold:         #d08838;
+    --bwp-gold-dim:     #a87030;
+}
+
+/* ── Night scheme + Night — deepest palette, maximum rest ───────────────── */
+/* Clock-night + explicit Night scheme: push towards the deepest tones.     */
+
+:root.bwp-time-night body.bwp-scheme-night {
+    --bwp-bg:           #0e141e;
+    --bwp-bg-subtle:    #141c28;
+    --bwp-border:       #1e2c3e;
+    --bwp-border-faint: #18243a;
+    --bwp-link:         #6aaad4;
+    --bwp-link-hover:   #9ccaf0;
+    --bwp-accent:       #6aaad4;
+    --bwp-ornament:     #2e4058;
+    --bwp-progress:     #5888b0;
+    --bwp-gold:         #7aaac8;
+    --bwp-gold-dim:     #5a7a98;
+}
+
+/* ── Component overrides ─────────────────────────────────────────────────── */
+
+/* Search button needs dark text since --bwp-link is always light here */
+body.bwp-scheme-night .bwp-search-form__btn,
+body.bwp-scheme-night .bwp-sidebar .search-submit {
+    color: #1a1a1f;
+}

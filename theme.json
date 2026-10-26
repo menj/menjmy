@@ -1,0 +1,168 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/theme.json",
+    "version": 3,
+
+    "_readme": [
+        "Book WP — theme.json (Classic Theme Edition)",
+        "",
+        "This file operates in CLASSIC THEME mode (no 'block-templates' support declared).",
+        "It does NOT enable Full Site Editing. Its purpose is to:",
+        "  1. Feed design tokens into the Gutenberg block editor (palette, typography, spacing).",
+        "  2. Disable editor features that conflict with the literary design system.",
+        "  3. Establish the content width constraints the block editor should respect.",
+        "",
+        "When the FSE migration happens (major version), this file will be expanded",
+        "with template and template-part registrations. See docs/upgrading.md § FSE Migration."
+    ],
+
+    "settings": {
+        "appearanceTools": false,
+
+        "layout": {
+            "contentSize": "680px",
+            "wideSize": "900px"
+        },
+
+        "color": {
+            "custom": false,
+            "customGradient": false,
+            "defaultPalette": false,
+            "defaultGradients": false,
+            "duotone": [],
+            "palette": [
+                {
+                    "slug": "bwp-bg",
+                    "color": "#ffffff",
+                    "name": "Background"
+                },
+                {
+                    "slug": "bwp-bg-subtle",
+                    "color": "#f5f5f5",
+                    "name": "Background Subtle"
+                },
+                {
+                    "slug": "bwp-text",
+                    "color": "#111111",
+                    "name": "Text"
+                },
+                {
+                    "slug": "bwp-text-mid",
+                    "color": "#333333",
+                    "name": "Text Mid"
+                },
+                {
+                    "slug": "bwp-muted",
+                    "color": "#666666",
+                    "name": "Muted"
+                },
+                {
+                    "slug": "bwp-accent",
+                    "color": "#1B3C53",
+                    "name": "Accent"
+                },
+                {
+                    "slug": "bwp-link",
+                    "color": "#1B3C53",
+                    "name": "Link"
+                },
+                {
+                    "slug": "bwp-link-hover",
+                    "color": "#2E6A8E",
+                    "name": "Link Hover"
+                },
+                {
+                    "slug": "bwp-border",
+                    "color": "#cccccc",
+                    "name": "Border"
+                },
+                {
+                    "slug": "bwp-teal",
+                    "color": "#1B3C53",
+                    "name": "Teal"
+                },
+                {
+                    "slug": "bwp-teal-deep",
+                    "color": "#0f2a38",
+                    "name": "Teal Deep"
+                },
+                {
+                    "slug": "bwp-gold",
+                    "color": "#9a8060",
+                    "name": "Gold"
+                },
+                {
+                    "slug": "bwp-gold-light",
+                    "color": "#b8a080",
+                    "name": "Gold Light"
+                },
+                {
+                    "slug": "bwp-cream",
+                    "color": "#f7f5f0",
+                    "name": "Cream"
+                }
+            ]
+        },
+
+        "typography": {
+            "customFontSize": false,
+            "defaultFontSizes": false,
+            "dropCap": false,
+            "fontStyle": false,
+            "fontWeight": false,
+            "letterSpacing": false,
+            "textDecoration": false,
+            "textTransform": false,
+            "fontFamilies": [
+                {
+                    "slug": "bwp-body",
+                    "name": "Body (EB Garamond)",
+                    "fontFamily": "'EB Garamond', Georgia, 'Times New Roman', serif"
+                },
+                {
+                    "slug": "bwp-ui",
+                    "name": "UI (Jost)",
+                    "fontFamily": "'Jost', system-ui, sans-serif"
+                },
+                {
+                    "slug": "bwp-display",
+                    "name": "Display (Cinzel)",
+                    "fontFamily": "'Cinzel', Georgia, serif"
+                }
+            ],
+            "fontSizes": [
+                { "slug": "small",   "size": "0.875rem", "name": "Small"   },
+                { "slug": "normal",  "size": "1.125rem", "name": "Normal"  },
+                { "slug": "medium",  "size": "1.25rem",  "name": "Medium"  },
+                { "slug": "large",   "size": "1.5rem",   "name": "Large"   },
+                { "slug": "x-large", "size": "2rem",     "name": "X-Large" }
+            ]
+        },
+
+        "spacing": {
+            "customSpacingSize": false,
+            "defaultSpacingSizes": false,
+            "units": [ "rem", "px" ]
+        },
+
+        "blocks": {
+            "core/paragraph": {
+                "typography": { "dropCap": false }
+            },
+            "core/image": {
+                "color": { "custom": false }
+            }
+        }
+    },
+
+    "styles": {
+        "typography": {
+            "fontFamily": "'EB Garamond', Georgia, 'Times New Roman', serif",
+            "fontSize": "1.125rem",
+            "lineHeight": "1.9"
+        },
+        "color": {
+            "background": "#ffffff",
+            "text": "#111111"
+        }
+    }
+}

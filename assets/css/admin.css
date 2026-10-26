@@ -1,0 +1,906 @@
+/**
+ * Book WP — Admin Settings Stylesheet
+ *
+ * Design system: modern_settings_ui v1.0.0
+ * Scoped entirely to .theme-settings-root (settings page) and .bwp-meta-root (meta boxes).
+ * No global overrides. All colours via CSS variables inheriting from WP admin tokens.
+ * WCAG 2.1 AA compliant.
+ *
+ * @package Book_WP
+ */
+
+/* ═══════════════════════════════════════════════════════════
+   DESIGN TOKENS — scoped to settings wrapper only
+   No hardcoded palette. Falls back to WP admin theme colour.
+   ═══════════════════════════════════════════════════════════ */
+
+.theme-settings-root {
+    --theme-accent:       var(--wp-admin-theme-color, #2271b1);
+    --theme-accent-rgb:   var(--wp-admin-theme-color--rgb, 34 113 177);
+    --theme-surface:      #ffffff;
+    --theme-border:       #dcdcde;
+    --theme-focus:        rgba(0, 0, 0, 0.18);
+    --theme-text:         inherit;
+    --theme-text-strong:  #1d2327;
+    --theme-text-muted:   #50575e;
+    --theme-bg-subtle:    #f6f7f7;
+    --theme-bg-tint:      rgba(0,0,0,0.025);
+    --theme-track-off:    rgba(0,0,0,0.2);
+    --theme-radius-sm:    4px;
+    --theme-radius-md:    6px;
+    --theme-radius-lg:    8px;
+    --theme-shadow-sm:    0 1px 3px rgba(0,0,0,.06);
+    --theme-transition:   0.15s ease;
+    /* Notice — semantic green, not a palette colour */
+    --theme-notice-bg:    #edfaef;
+    --theme-notice-border:#b8e6c0;
+    --theme-notice-text:  #1a5c27;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   WRAP
+   ═══════════════════════════════════════════════════════════ */
+
+.theme-settings-root {
+    max-width: 740px;
+    margin: 1.25rem 0 3.75rem;
+    font-family: inherit;
+    color: var(--theme-text);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   HEADER
+   ═══════════════════════════════════════════════════════════ */
+
+.theme-settings-root .bwp-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.125rem 1.375rem;
+    background: var(--theme-surface);
+    border: 1px solid var(--theme-border);
+    border-bottom: 3px solid var(--theme-accent);
+    border-radius: var(--theme-radius-lg) var(--theme-radius-lg) 0 0;
+    box-shadow: var(--theme-shadow-sm);
+}
+
+.theme-settings-root .bwp-header__icon {
+    width: 38px; height: 38px;
+    background: var(--theme-accent);
+    border-radius: var(--theme-radius-md);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+}
+
+.theme-settings-root .bwp-header__body { flex: 1; min-width: 0; }
+
+.theme-settings-root .bwp-header__title {
+    font-size: 1rem; font-weight: 700;
+    color: var(--theme-text-strong);
+    margin: 0; line-height: 1.3;
+}
+
+.theme-settings-root .bwp-header__desc {
+    font-size: 0.75rem; color: var(--theme-text-muted);
+    margin: 2px 0 0; line-height: 1.4;
+}
+
+.theme-settings-root .bwp-header__badge {
+    flex-shrink: 0; font-size: 0.625rem; font-weight: 600;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--theme-text-muted);
+    background: var(--theme-bg-subtle);
+    border: 1px solid var(--theme-border);
+    padding: 3px 9px; border-radius: 20px;
+}
+
+@media (max-width: 782px) {
+    .theme-settings-root .bwp-header { flex-wrap: wrap; gap: 0.75rem; padding: 1rem 1.125rem; }
+    .theme-settings-root .bwp-header__badge { margin-left: auto; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SAVE NOTICE
+   ═══════════════════════════════════════════════════════════ */
+
+.theme-settings-root .bwp-notice {
+    display: flex; align-items: center; gap: 0.5rem;
+    margin: 0; padding: 0.5625rem 1rem;
+    background: var(--theme-notice-bg);
+    border: 1px solid var(--theme-notice-border);
+    border-top: none; font-size: 0.8125rem;
+    color: var(--theme-notice-text);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TABS
+   ═══════════════════════════════════════════════════════════ */
+
+.theme-settings-root .bwp-tabs {
+    display: flex;
+    background: var(--theme-bg-subtle);
+    border: 1px solid var(--theme-border);
+    border-top: none; border-bottom: none;
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+.theme-settings-root .bwp-tabs::-webkit-scrollbar { display: none; }
+
+.theme-settings-root .bwp-tab {
+    display: inline-flex; align-items: center; gap: 0.3125rem;
+    padding: 0.625rem 0.9375rem;
+    font-size: 0.78rem; font-weight: 500;
+    color: var(--theme-text-muted);
+    text-decoration: none; white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color var(--theme-transition), border-color var(--theme-transition), background var(--theme-transition);
+}
+
+.theme-settings-root .bwp-tab:hover {
+    color: var(--theme-text-strong);
+    background: var(--theme-bg-tint);
+    text-decoration: none;
+}
+
+.theme-settings-root .bwp-tab:focus-visible {
+    outline: 2px solid var(--theme-accent);
+    outline-offset: -2px;
+    z-index: 1; position: relative;
+}
+
+.theme-settings-root .bwp-tab--active {
+    color: var(--theme-accent);
+    font-weight: 600;
+    background: var(--theme-surface);
+    border-bottom-color: var(--theme-accent);
+}
+
+.theme-settings-root .bwp-tab svg {
+    width: 13px; height: 13px; opacity: 0.65; flex-shrink: 0;
+}
+
+.theme-settings-root .bwp-tab--active svg { opacity: 1; }
+
+/* ═══════════════════════════════════════════════════════════
+   CARD + SECTIONS
+   ═══════════════════════════════════════════════════════════ */
+
+.theme-settings-root .bwp-card {
+    background: var(--theme-surface);
+    border: 1px solid var(--theme-border);
+    border-top: none;
+}
+
+.theme-settings-root .bwp-section {
+    padding: 1.25rem 1.375rem;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.theme-settings-root .bwp-section:last-child { border-bottom: none; }
+
+.theme-settings-root .bwp-section__label {
+    font-size: 0.656rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.09em;
+    color: var(--theme-text-muted);
+    margin: 0 0 0.875rem;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FIELD ROW — label left / control right (desktop)
+   ═══════════════════════════════════════════════════════════ */
+
+.theme-settings-root .bwp-field {
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    column-gap: 1.125rem;
+    align-items: start;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.045);
+}
+
+.theme-settings-root .bwp-field:last-child { border-bottom: none; padding-bottom: 0; }
+.theme-settings-root .bwp-field:first-child { padding-top: 0; }
+
+/* Full-width variant (e.g. custom CSS textarea) */
+.theme-settings-root .bwp-field--full {
+    grid-template-columns: 1fr;
+}
+
+.theme-settings-root .bwp-field__label {
+    font-size: 0.8125rem; font-weight: 600;
+    color: var(--theme-text-strong);
+    line-height: 1.4; padding-top: 7px;
+    grid-column: 1; grid-row: 1;
+}
+
+.theme-settings-root .bwp-field__control {
+    grid-column: 2; grid-row: 1;
+    display: flex; flex-direction: column; gap: 0.3125rem;
+}
+
+.theme-settings-root .bwp-field--full .bwp-field__label {
+    grid-column: 1; padding-top: 0; margin-bottom: 6px;
+}
+
+.theme-settings-root .bwp-field--full .bwp-field__control {
+    grid-column: 1; grid-row: 2;
+}
+
+.theme-settings-root .bwp-field__hint {
+    font-size: 0.719rem; color: var(--theme-text-muted);
+    line-height: 1.5; margin-top: 2px;
+}
+
+@media (max-width: 782px) {
+    .theme-settings-root .bwp-field,
+    .theme-settings-root .bwp-field--full {
+        grid-template-columns: 1fr;
+    }
+    .theme-settings-root .bwp-field__label {
+        grid-column: 1; grid-row: 1; padding-top: 0; margin-bottom: 4px;
+    }
+    .theme-settings-root .bwp-field__control {
+        grid-column: 1; grid-row: 2;
+    }
+    .theme-settings-root select,
+    .theme-settings-root input[type="text"],
+    .theme-settings-root textarea { max-width: 100%; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CONTROLS
+   ═══════════════════════════════════════════════════════════ */
+
+.theme-settings-root select,
+.theme-settings-root input[type="text"],
+.theme-settings-root textarea {
+    width: 100%; max-width: 360px;
+    padding: 0.4375rem 0.625rem;
+    font-size: 0.8125rem; font-family: inherit;
+    color: var(--theme-text-strong);
+    background: var(--theme-surface);
+    border: 1px solid var(--theme-border);
+    border-radius: var(--theme-radius-sm);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.04);
+    transition: border-color var(--theme-transition), box-shadow var(--theme-transition);
+    appearance: none; -webkit-appearance: none;
+}
+
+.theme-settings-root select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2350575e'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 28px;
+    cursor: pointer;
+}
+
+.theme-settings-root textarea {
+    max-width: 100%; min-height: 80px;
+    resize: vertical; line-height: 1.5;
+}
+
+.theme-settings-root textarea.bwp-code {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.75rem; min-height: 140px;
+    background: var(--theme-bg-subtle);
+}
+
+.theme-settings-root select:focus,
+.theme-settings-root input[type="text"]:focus,
+.theme-settings-root textarea:focus {
+    border-color: var(--theme-accent);
+    box-shadow: 0 0 0 2px rgba(var(--theme-accent-rgb), 0.15);
+    outline: none;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TOGGLE SWITCH
+   ═══════════════════════════════════════════════════════════ */
+
+.theme-settings-root .bwp-toggle-row {
+    display: flex; align-items: flex-start; gap: 0.75rem;
+    padding: 0.6875rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.045);
+}
+
+.theme-settings-root .bwp-toggle-row:last-child { border-bottom: none; padding-bottom: 0; }
+.theme-settings-root .bwp-toggle-row:first-child { padding-top: 0; }
+
+/* Visually hidden checkbox — accessible to AT */
+.theme-settings-root .bwp-toggle-row input[type="checkbox"] {
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+.theme-settings-root .bwp-toggle-track {
+    display: block; width: 36px; height: 20px;
+    background: var(--theme-track-off);
+    border-radius: 10px; position: relative;
+    cursor: pointer;
+    transition: background var(--theme-transition);
+    flex-shrink: 0; margin-top: 2px;
+    border: 1px solid rgba(0,0,0,0.12);
+}
+
+.theme-settings-root .bwp-toggle-track::after {
+    content: ''; position: absolute;
+    top: 2px; left: 2px;
+    width: 14px; height: 14px;
+    background: #fff; border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.22);
+    transition: transform var(--theme-transition);
+}
+
+.theme-settings-root .bwp-toggle-row input:checked + .bwp-toggle-track {
+    background: var(--theme-accent);
+    border-color: transparent;
+}
+
+.theme-settings-root .bwp-toggle-row input:checked + .bwp-toggle-track::after {
+    transform: translateX(16px);
+}
+
+.theme-settings-root .bwp-toggle-row input:focus-visible + .bwp-toggle-track {
+    outline: 2px solid var(--theme-accent);
+    outline-offset: 2px;
+}
+
+.theme-settings-root .bwp-toggle-body { flex: 1; min-width: 0; }
+
+.theme-settings-root .bwp-toggle-name {
+    font-size: 0.8125rem; font-weight: 600;
+    color: var(--theme-text-strong);
+    display: block; line-height: 1.35;
+    cursor: pointer;
+}
+
+.theme-settings-root .bwp-toggle-desc {
+    font-size: 0.719rem; color: var(--theme-text-muted);
+    line-height: 1.5; margin-top: 1px;
+}
+
+/* Disabled toggle row — shown when an SEO plugin supersedes the setting */
+.theme-settings-root .bwp-toggle-row--disabled {
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+.theme-settings-root .bwp-toggle-track--off {
+    display: block; width: 36px; height: 20px;
+    background: var(--theme-track-off);
+    border-radius: 10px; position: relative;
+    flex-shrink: 0; margin-top: 2px;
+    border: 1px solid rgba(0,0,0,0.12);
+}
+
+.theme-settings-root .bwp-toggle-track--off::after {
+    content: ''; position: absolute;
+    top: 2px; left: 2px;
+    width: 14px; height: 14px;
+    background: #fff; border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.22);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   VISUAL SELECTOR — clickable cards
+   ═══════════════════════════════════════════════════════════ */
+
+.theme-settings-root .bwp-vs-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.4375rem;
+}
+
+.theme-settings-root .bwp-vs-grid--wide {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    max-width: 100%;
+}
+
+.theme-settings-root .bwp-vs-item { position: relative; }
+
+.theme-settings-root .bwp-vs-item input[type="radio"] {
+    position: absolute; width: 1px; height: 1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap;
+}
+
+.theme-settings-root .bwp-vs-card {
+    display: flex; flex-direction: column;
+    align-items: center; gap: 0.3125rem;
+    padding: 0.5625rem 0.4375rem;
+    border: 1.5px solid var(--theme-border);
+    border-radius: var(--theme-radius-md);
+    background: var(--theme-surface);
+    cursor: pointer; text-align: center;
+    transition: border-color var(--theme-transition), background var(--theme-transition), box-shadow var(--theme-transition);
+}
+
+.theme-settings-root .bwp-vs-card:hover {
+    border-color: var(--theme-accent);
+    background: var(--theme-bg-subtle);
+}
+
+.theme-settings-root .bwp-vs-item input:checked + .bwp-vs-card {
+    border-color: var(--theme-accent);
+    background: var(--theme-bg-subtle);
+    box-shadow: 0 0 0 1.5px var(--theme-accent);
+}
+
+.theme-settings-root .bwp-vs-item input:focus-visible + .bwp-vs-card {
+    outline: 2px solid var(--theme-accent);
+    outline-offset: 2px;
+}
+
+.theme-settings-root .bwp-vs-preview {
+    width: 48px; height: 30px;
+    border-radius: 3px;
+    border: 1px solid rgba(0,0,0,0.08);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; line-height: 1; overflow: hidden;
+}
+
+.theme-settings-root .bwp-vs-preview svg {
+    width: 40px; height: 22px;
+    fill: currentColor; stroke: currentColor; stroke-width: 0.4;
+    overflow: visible;
+}
+
+.theme-settings-root .bwp-vs-name {
+    font-size: 0.6875rem; font-weight: 600;
+    color: var(--theme-text-strong); line-height: 1.2;
+}
+
+.theme-settings-root .bwp-vs-sub {
+    font-size: 0.625rem; color: var(--theme-text-muted);
+    line-height: 1.2;
+}
+
+/* Colour swatch */
+.theme-settings-root .bwp-swatch {
+    width: 100%; height: 24px;
+    border-radius: 2px; border: 1px solid rgba(0,0,0,0.08);
+    display: block;
+}
+
+@media (max-width: 782px) {
+    .theme-settings-root .bwp-vs-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .theme-settings-root .bwp-vs-grid--wide {
+        grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   INFO BLOCK
+   ═══════════════════════════════════════════════════════════ */
+
+.theme-settings-root .bwp-info {
+    padding: 0.6875rem 0.875rem;
+    background: var(--theme-bg-subtle);
+    border: 1px solid var(--theme-border);
+    border-left: 3px solid var(--theme-accent);
+    border-radius: var(--theme-radius-sm);
+    font-size: 0.75rem; color: var(--theme-text-muted);
+    line-height: 1.6;
+}
+
+.theme-settings-root .bwp-info p { margin: 0 0 5px; }
+.theme-settings-root .bwp-info p:last-child { margin: 0; }
+
+.theme-settings-root .bwp-info code {
+    background: rgba(0,0,0,0.06);
+    padding: 1px 0.3125rem; border-radius: 3px;
+    font-size: 0.6875rem;
+    font-family: 'Courier New', Courier, monospace;
+    color: var(--theme-text-strong);
+}
+
+.theme-settings-root .bwp-info strong { color: var(--theme-text-strong); }
+
+/* ═══════════════════════════════════════════════════════════
+   FORM FOOTER (save + footer credit)
+   ═══════════════════════════════════════════════════════════ */
+
+.theme-settings-root .bwp-form-footer {
+    display: flex; align-items: center;
+    justify-content: space-between; gap: 0.75rem;
+    padding: 0.875rem 1.375rem;
+    background: var(--theme-bg-subtle);
+    border: 1px solid var(--theme-border);
+    border-top: 1px solid rgba(0,0,0,0.07);
+    border-radius: 0 0 var(--theme-radius-lg) var(--theme-radius-lg);
+}
+
+.theme-settings-root .bwp-form-footer__credit {
+    font-size: 0.719rem; color: var(--theme-text-muted);
+}
+
+.theme-settings-root .bwp-form-footer__credit a {
+    color: var(--theme-accent); text-decoration: none;
+}
+
+.theme-settings-root .bwp-form-footer__credit a:hover { text-decoration: underline; }
+
+.theme-settings-root .bwp-btn-save {
+    display: inline-flex; align-items: center; gap: 0.375rem;
+    padding: 0.5rem 1.25rem;
+    font-size: 0.8125rem; font-weight: 600;
+    color: #ffffff;
+    background: var(--theme-accent);
+    border: none; border-radius: var(--theme-radius-md);
+    cursor: pointer; text-decoration: none;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    transition: opacity var(--theme-transition);
+    line-height: 1;
+}
+
+.theme-settings-root .bwp-btn-save:hover { opacity: 0.87; color: #fff; text-decoration: none; }
+
+.theme-settings-root .bwp-btn-save:focus-visible {
+    outline: 2px solid var(--theme-accent);
+    outline-offset: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   META BOX FIELDS (post editor) — own scope
+   ═══════════════════════════════════════════════════════════ */
+
+.bwp-meta-root {
+    --theme-accent:      var(--wp-admin-theme-color, #2271b1);
+    --theme-border:      #dcdcde;
+    --theme-text-strong: #1d2327;
+    --theme-text-muted:  #50575e;
+    --theme-bg-subtle:   #f6f7f7;
+    --theme-radius-sm:   4px;
+}
+
+.bwp-meta-root .bwp-mf { margin: 0 0 0.875rem; }
+.bwp-meta-root .bwp-mf:last-child { margin-bottom: 0; }
+
+.bwp-meta-root .bwp-mf label {
+    font-weight: 600; font-size: 0.75rem;
+    display: block; margin: 0 0 4px;
+    color: var(--theme-text-strong);
+}
+
+.bwp-meta-root .bwp-mf .description {
+    font-style: italic; color: var(--theme-text-muted);
+    font-size: 0.6875rem; margin-top: 3px; line-height: 1.4;
+}
+
+.bwp-meta-root .bwp-mf input[type="text"],
+.bwp-meta-root .bwp-mf textarea,
+.bwp-meta-root .bwp-mf select {
+    width: 100%;
+    border: 1px solid var(--theme-border);
+    border-radius: var(--theme-radius-sm);
+    padding: 0.3125rem 0.5rem; font-size: 0.75rem;
+}
+
+.bwp-meta-root .bwp-mf input:focus,
+.bwp-meta-root .bwp-mf textarea:focus,
+.bwp-meta-root .bwp-mf select:focus {
+    border-color: var(--theme-accent);
+    box-shadow: 0 0 0 1px var(--theme-accent);
+    outline: none;
+}
+
+.bwp-meta-root .bwp-mf-section {
+    font-size: 0.625rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.07em;
+    color: var(--theme-text-muted);
+    margin: 0.875rem 0 0.5rem; padding-bottom: 4px;
+    border-bottom: 1px solid var(--theme-border);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   REDUCED MOTION
+   ═══════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+    .theme-settings-root *, .theme-settings-root *::before, .theme-settings-root *::after,
+    .bwp-meta-root *, .bwp-meta-root *::before, .bwp-meta-root *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TAG MULTI-SELECT — custom interactive dropdown
+   ═══════════════════════════════════════════════════════════ */
+
+.bwp-tag-select {
+    position: relative;
+    max-width: 360px;
+}
+
+/* Pill box — shows selected tags + search input */
+.bwp-tag-select__box {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+    min-height: 38px;
+    padding: 4px 32px 4px 6px;
+    border: 1px solid var(--theme-border);
+    border-radius: var(--theme-radius-sm);
+    background: var(--theme-surface);
+    cursor: text;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.04);
+    transition: border-color var(--theme-transition), box-shadow var(--theme-transition);
+    position: relative;
+}
+
+.bwp-tag-select.is-open .bwp-tag-select__box,
+.bwp-tag-select__box:focus-within {
+    border-color: var(--theme-accent);
+    box-shadow: 0 0 0 2px rgba(var(--theme-accent-rgb), 0.15);
+}
+
+/* Caret icon */
+.bwp-tag-select__box::after {
+    content: '';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 6px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2350575e'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    pointer-events: none;
+    transition: transform var(--theme-transition);
+}
+
+.bwp-tag-select.is-open .bwp-tag-select__box::after {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+/* Selected tag pills */
+.bwp-tag-select__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 2px 6px 2px 8px;
+    background: var(--theme-accent);
+    color: #fff;
+    border-radius: 20px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+    white-space: nowrap;
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bwp-tag-select__pill-remove {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 14px;
+    height: 14px;
+    border: none;
+    background: rgba(255,255,255,0.25);
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 0;
+    font-size: 10px;
+    line-height: 1;
+    color: #fff;
+    flex-shrink: 0;
+    transition: background var(--theme-transition);
+}
+
+.bwp-tag-select__pill-remove:hover {
+    background: rgba(255,255,255,0.45);
+}
+
+/* Search input inside pill box */
+.bwp-tag-select__input {
+    flex: 1;
+    min-width: 80px;
+    border: none !important;
+    outline: none !important;
+    padding: 2px 4px !important;
+    font-size: 0.8125rem !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    width: auto !important;
+    max-width: none !important;
+    color: var(--theme-text-strong);
+}
+
+.bwp-tag-select__input::placeholder {
+    color: var(--theme-text-muted);
+    opacity: 0.7;
+}
+
+/* Dropdown list */
+.bwp-tag-select__dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 3px);
+    left: 0;
+    right: 0;
+    background: var(--theme-surface);
+    border: 1px solid var(--theme-border);
+    border-radius: var(--theme-radius-sm);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 999;
+    scrollbar-width: thin;
+}
+
+.bwp-tag-select.is-open .bwp-tag-select__dropdown {
+    display: block;
+}
+
+/* Dropdown items */
+.bwp-tag-select__option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px;
+    font-size: 0.8125rem;
+    color: var(--theme-text-strong);
+    cursor: pointer;
+    transition: background var(--theme-transition);
+    user-select: none;
+}
+
+.bwp-tag-select__option:hover,
+.bwp-tag-select__option.is-focused {
+    background: var(--theme-bg-subtle);
+}
+
+.bwp-tag-select__option.is-selected {
+    background: rgba(var(--theme-accent-rgb), 0.07);
+    color: var(--theme-accent);
+    font-weight: 600;
+}
+
+.bwp-tag-select__option.is-selected::after {
+    content: '✓';
+    margin-left: auto;
+    font-size: 0.75rem;
+    color: var(--theme-accent);
+}
+
+/* Empty / no results state */
+.bwp-tag-select__empty {
+    padding: 10px;
+    font-size: 0.75rem;
+    color: var(--theme-text-muted);
+    text-align: center;
+    font-style: italic;
+}
+
+/* Hidden native input that stores the value */
+.bwp-tag-select__value {
+    display: none;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SOCIAL TAB — icon-prefixed URL inputs and group labels
+   ═══════════════════════════════════════════════════════════ */
+
+/* Sub-group label within a section — lighter than bwp-section__label */
+.theme-settings-root .bwp-social-group-label {
+    font-size: 0.656rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--theme-text-muted);
+    margin: 1.25rem 0 0.25rem;
+    padding-bottom: 5px;
+    border-bottom: 1px dashed rgba(0,0,0,0.09);
+}
+
+.theme-settings-root .bwp-social-group-label:first-of-type {
+    margin-top: 0;
+}
+
+/* Tighter field rows for social — no redundant bottom padding */
+.theme-settings-root .bwp-social-field {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+/* Icon-prefixed input wrapper */
+.theme-settings-root .bwp-icon-input {
+    display: flex;
+    align-items: stretch;
+    max-width: 400px;
+    border: 1px solid var(--theme-border);
+    border-radius: var(--theme-radius-sm);
+    overflow: hidden;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.04);
+    transition: border-color var(--theme-transition), box-shadow var(--theme-transition);
+    background: var(--theme-surface);
+}
+
+.theme-settings-root .bwp-icon-input:focus-within {
+    border-color: var(--theme-accent);
+    box-shadow: 0 0 0 2px rgba(var(--theme-accent-rgb), 0.15);
+}
+
+/* Icon badge — left pill */
+.theme-settings-root .bwp-icon-input__badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 38px;
+    background: var(--theme-bg-subtle);
+    border-right: 1px solid var(--theme-border);
+    color: var(--theme-text-muted);
+    transition: background var(--theme-transition), color var(--theme-transition);
+}
+
+.theme-settings-root .bwp-icon-input:focus-within .bwp-icon-input__badge {
+    background: rgba(var(--theme-accent-rgb), 0.07);
+    color: var(--theme-accent);
+    border-right-color: rgba(var(--theme-accent-rgb), 0.2);
+}
+
+.theme-settings-root .bwp-icon-input__badge svg {
+    width: 15px;
+    height: 15px;
+    display: block;
+    flex-shrink: 0;
+}
+
+/* URL input inside the icon wrapper — strip border/shadow (wrapper handles it) */
+.theme-settings-root .bwp-icon-input input[type="url"] {
+    flex: 1;
+    min-width: 0;
+    padding: 0.4375rem 0.625rem;
+    font-size: 0.8125rem;
+    font-family: inherit;
+    color: var(--theme-text-strong);
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    max-width: none;
+    width: 100%;
+}
+
+.theme-settings-root .bwp-icon-input input[type="url"]:focus {
+    border: none;
+    box-shadow: none;
+    outline: none;
+}
+
+.theme-settings-root .bwp-icon-input input[type="url"]::placeholder {
+    color: var(--theme-text-muted);
+    opacity: 0.6;
+}
+
+/* Per-platform brand tints on the icon badge (subtle, not garish) */
+.theme-settings-root .bwp-icon-input__badge--twitter   { color: #000;    }
+.theme-settings-root .bwp-icon-input__badge--facebook  { color: #1877F2; }
+.theme-settings-root .bwp-icon-input__badge--instagram { color: #C13584; }
+.theme-settings-root .bwp-icon-input__badge--threads   { color: #000;    }
+.theme-settings-root .bwp-icon-input__badge--linkedin  { color: #0A66C2; }
+.theme-settings-root .bwp-icon-input__badge--youtube   { color: #FF0000; }
+.theme-settings-root .bwp-icon-input__badge--medium    { color: #000;    }
+.theme-settings-root .bwp-icon-input__badge--wikipedia { color: #000;    }
+.theme-settings-root .bwp-icon-input__badge--github    { color: #24292f; }
+.theme-settings-root .bwp-icon-input__badge--goodreads { color: #553B08; }
+.theme-settings-root .bwp-icon-input__badge--worldcat  { color: #2C5697; }
+.theme-settings-root .bwp-icon-input__badge--loc       { color: #C41230; }
+.theme-settings-root .bwp-icon-input__badge--nlb       { color: #003B7A; }
+.theme-settings-root .bwp-icon-input__badge--pnm       { color: #006847; }
+.theme-settings-root .bwp-icon-input__badge--orcid     { color: #A6CE39; }
+.theme-settings-root .bwp-icon-input__badge--isni      { color: #4C4C4C; }
+.theme-settings-root .bwp-icon-input__badge--rss       { color: #F26522; }

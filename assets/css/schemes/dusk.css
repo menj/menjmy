@@ -1,0 +1,58 @@
+/**
+ * Book WP — Dusk scheme (warm grey)
+ *
+ * SCHEME OWNS SURFACE. TIME OWNS INK.
+ *
+ * Warm grey paper that cools at dawn, warms through morning, deepens
+ * at dusk, and dims at night. Time provides the ink mood throughout.
+ */
+
+/* ── Base surface ────────────────────────────────────────────────────────── */
+
+body.bwp-scheme-dusk {
+    --bwp-bg:           #e8e4de;
+    --bwp-bg-subtle:    #ddd8d0;
+    --bwp-border:       #ccc7be;
+    --bwp-border-faint: #dad5cc;
+    --bwp-stone:        #8a7c6a;
+}
+
+/* ── Dusk scheme + Dawn — cool stone grey ───────────────────────────────── */
+
+:root.bwp-time-dawn body.bwp-scheme-dusk {
+    --bwp-bg:           #e4e2ea;
+    --bwp-bg-subtle:    #d8d6e2;
+    --bwp-border:       #bdbac8;
+    --bwp-border-faint: #cecbd8;
+    --bwp-stone:        #8280a0;
+}
+
+/* ── Dusk scheme + Morning — warm linen ─────────────────────────────────── */
+
+:root.bwp-time-morning body.bwp-scheme-dusk {
+    --bwp-bg:           #ece6d8;
+    --bwp-bg-subtle:    #e0d8c4;
+    --bwp-border:       #ccc0a0;
+    --bwp-border-faint: #dad4b8;
+    --bwp-stone:        #907858;
+}
+
+/* ── Dusk scheme + Dusk — deeper warm grey, slate undertone ─────────────── */
+
+:root.bwp-time-dusk body.bwp-scheme-dusk {
+    --bwp-bg:           #e4dcc8;
+    --bwp-bg-subtle:    #d8d0b8;
+    --bwp-border:       #c8b898;
+    --bwp-border-faint: #d4c8a8;
+    --bwp-stone:        #987050;
+}
+
+/* ── Dusk scheme + Night — muted graphite ───────────────────────────────── */
+
+:root.bwp-time-night body.bwp-scheme-dusk {
+    --bwp-bg:           #d0ccc4;
+    --bwp-bg-subtle:    #c4c0b8;
+    --bwp-border:       #b0aca4;
+    --bwp-border-faint: #bcb8b0;
+    --bwp-stone:        #807870;
+}

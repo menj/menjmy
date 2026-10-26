@@ -1,0 +1,170 @@
+/**
+ * Book WP — Literary Form: Esei
+ *
+ * The literary-academic essay. Your essays run toward the scholarly
+ * end — argument, evidence, source apparatus. The design supports
+ * that: authoritative column width, strong heading hierarchy,
+ * footnote/reference styling built in, slightly more formal
+ * than cerpen but warmer than a pure academic paper.
+ * The essay has a byline, a date, and a clear argument to make.
+ *
+ * Applied via body class: .bwp-form-esei
+ *
+ * @package Book_WP
+ */
+
+/* ── Layout: essay column — neither too narrow nor book-wide */
+
+body.bwp-form-esei .bwp-page-wrap  { max-width: 46em; }
+body.bwp-form-esei .bwp-work__content {
+    max-width: 40em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ── Title: authoritative, left-aligned ─────────────────── */
+
+body.bwp-form-esei .bwp-work__title {
+    font-family: var(--bwp-font-display, 'Cinzel', Georgia, serif);
+    font-size: 2.0em;
+    font-weight: 400;
+    font-style: normal;
+    text-align: left;
+    letter-spacing: -.01em;
+    line-height: 1.18;
+    border-bottom: 2px solid var(--bwp-teal, #1a4d5e);
+    padding-bottom: .4em;
+    margin-bottom: 1em;
+}
+
+body.bwp-form-esei .bwp-work__title::after { display: none; }  /* border handles it */
+
+/* ── Body: standard essay prose ─────────────────────────── */
+
+body.bwp-form-esei .bwp-work__content {
+    font-size: 1.04em;
+    line-height: 1.88;
+    text-align: left;
+}
+
+body.bwp-form-esei .bwp-work__content p { text-indent: 0; margin-bottom: .8em; }
+body.bwp-form-esei .bwp-work__content p + p { text-indent: 0; margin-top: 0; }
+
+/* ── Heading hierarchy within the essay ─────────────────── */
+
+body.bwp-form-esei .bwp-work__content h2 {
+    font-family: var(--bwp-font-display, 'Cinzel', Georgia, serif);
+    font-size: 1.25em;
+    font-weight: 400;
+    color: var(--bwp-teal, #1a4d5e);
+    margin-top: 2.5em;
+    margin-bottom: .4em;
+    letter-spacing: .01em;
+    border-bottom: 1px solid var(--bwp-border-faint);
+    padding-bottom: .25em;
+}
+
+body.bwp-form-esei .bwp-work__content h3 {
+    font-family: Georgia, serif;
+    font-size: 1.05em;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--bwp-text-mid);
+    margin-top: 2em;
+    margin-bottom: .3em;
+}
+
+/* ── Blockquote / petikan: academic indent style ────────── */
+
+body.bwp-form-esei .bwp-work__content blockquote,
+body.bwp-form-esei .bwp-petikan {
+    margin-left: 2.4em;
+    margin-right: 1.2em;
+    font-size: .95em;
+    line-height: 1.8;
+    color: var(--bwp-text-mid);
+    border-left: none;
+    padding-left: 0;
+    background: none;
+}
+
+/* ── Footnotes: superscript markers and note list ────────── */
+
+body.bwp-form-esei .bwp-work__content sup {
+    font-size: .72em;
+    line-height: 0;
+    vertical-align: super;
+    color: var(--bwp-link);
+    font-style: normal;
+}
+
+/* Footnote / endnote list — typically an <ol> at post bottom */
+body.bwp-form-esei .bwp-work__content ol.footnotes,
+body.bwp-form-esei .bwp-work__content .wp-block-footnotes {
+    font-size: .82em;
+    line-height: 1.65;
+    color: var(--bwp-muted);
+    border-top: 1px solid var(--bwp-border);
+    padding-top: 1em;
+    margin-top: 2.5em;
+    list-style: decimal;
+    padding-left: 1.4em;
+}
+
+body.bwp-form-esei .bwp-work__content ol.footnotes li,
+body.bwp-form-esei .bwp-work__content .wp-block-footnotes li {
+    margin-bottom: .4em;
+}
+
+/* ── No drop cap — essays open argumentatively ───────────── */
+
+body.bwp-form-esei .bwp-work__content > p:first-of-type::first-letter {
+    all: unset;
+}
+
+/* ── Epigraph: left-aligned, appropriate for essays ─────── */
+
+body.bwp-form-esei .bwp-epigraph {
+    max-width: 30em;
+    margin-left: 0;
+    font-size: .94em;
+    margin-bottom: 2em;
+}
+
+/* ── Colophon: publication meta ─────────────────────────── */
+
+body.bwp-form-esei .bwp-colophon {
+    text-align: left;
+    
+    
+    margin-top: 2em;
+    font-size: .86em;
+    color: var(--bwp-muted);
+}
+
+/* ── Analytics: left-aligned ──────────────────────────────── */
+
+body.bwp-form-esei .bwp-analytics { justify-content: flex-start; }
+
+/* ── Ornament: very restrained in essays ────────────────── */
+
+body.bwp-form-esei .bwp-ornament {
+    text-align: left;
+    margin: 1.8em 0;
+    opacity: .3;
+    font-size: .9em;
+    letter-spacing: .2em;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+
+@media screen and (min-width: 52em) {
+    body.bwp-form-esei .bwp-work__title   { font-size: 2.4em; }
+    body.bwp-form-esei .bwp-work__content { font-size: 1.07em; line-height: 1.92; }
+}
+
+@media print {
+    body.bwp-form-esei .bwp-work__title   { font-size: 1.7em; border-color: #000; }
+    body.bwp-form-esei .bwp-work__content { line-height: 1.7; }
+    body.bwp-form-esei .bwp-work__content blockquote { margin-left: 1.5em; }
+}

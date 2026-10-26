@@ -1,0 +1,240 @@
+/**
+ * Book WP — Block Editor Styles
+ *
+ * Loaded into the Gutenberg block editor via add_editor_style().
+ * Makes block editor content mirror front-end typography as closely
+ * as possible. Does NOT import Google Fonts — the editor ships its own
+ * font stack. This file only applies the custom property values that
+ * theme.json cannot express directly.
+ *
+ * @package Book_WP
+ */
+
+/* Editor body uses the body font.
+   .editor-styles-wrapper is the root the editor wraps content in. */
+.editor-styles-wrapper {
+    font-family: 'EB Garamond', Georgia, 'Times New Roman', serif;
+    font-size: 1.125rem;
+    line-height: 1.9;
+    color: #111111;
+    /* max-width removed — theme.json contentSize (680px) already constrains
+       the content column. Setting max-width here restricts the entire editor
+       canvas wrapper, leaving the right half of the editor panel empty. */
+}
+
+/* Headings */
+.editor-styles-wrapper h1,
+.editor-styles-wrapper h2,
+.editor-styles-wrapper h3,
+.editor-styles-wrapper h4,
+.editor-styles-wrapper h5,
+.editor-styles-wrapper h6 {
+    font-family: 'Jost', system-ui, sans-serif;
+    font-weight: 400;
+    letter-spacing: .04em;
+    color: #111111;
+    line-height: 1.3;
+}
+
+/* Links */
+.editor-styles-wrapper a {
+    color: #1B3C53;
+    text-decoration: none;
+    border-bottom: 1px solid #cccccc;
+}
+
+/* Blockquote */
+.editor-styles-wrapper blockquote {
+    border-left: 2px solid #cccccc;
+    margin-left: 0;
+    padding-left: 1.5em;
+    color: #666666;
+    font-style: italic;
+}
+
+/* Code */
+.editor-styles-wrapper code,
+.editor-styles-wrapper pre {
+    font-family: 'Jost', monospace;
+    font-size: 0.875em;
+    background: #f5f5f5;
+    padding: 0.1em 0.3em;
+}
+
+/* Verse block — used for poetry stanzas */
+.editor-styles-wrapper .wp-block-verse {
+    font-family: inherit;
+    font-size: inherit;
+    white-space: pre-wrap;
+}
+
+/* Pullquote */
+.editor-styles-wrapper .wp-block-pullquote {
+    border-top: 1px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
+    text-align: center;
+    padding: 1.5em 0;
+}
+.editor-styles-wrapper .wp-block-pullquote blockquote {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Separator */
+.editor-styles-wrapper .wp-block-separator {
+    border: none;
+    border-top: 1px solid #cccccc;
+}
+
+/* Site header — masthead preview in editor */
+.editor-styles-wrapper .bwp-site-header__title {
+    font-family: 'Cinzel', Georgia, serif;
+    font-size: 1.1rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+/* ── book-wp/chapter block — editor canvas styles ───────────────────────── */
+/*                                                                            */
+/* These replace the inline styles previously hardcoded in blocks.js.        */
+/* Font families, sizes, and layout now come from CSS so they respond to     */
+/* font overrides set in Theme Options → Typography.                         */
+
+.editor-styles-wrapper .bwp-chapter {
+    display:               grid;
+    grid-template-columns: 1.8em 1fr;
+    grid-template-rows:    auto auto;
+    column-gap:            .7em;
+    align-items:           start;
+}
+
+.editor-styles-wrapper .bwp-chapter__title {
+    grid-column:    1 / -1;
+    grid-row:       1;
+    display:        block;
+    font-family:    'Jost', system-ui, sans-serif;
+    font-size:      .64em;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    opacity:        .75;
+    margin-bottom:  .6em;
+}
+
+.editor-styles-wrapper .bwp-chapter__num {
+    grid-column:    1;
+    grid-row:       2;
+    font-family:    'Cinzel', Georgia, serif;
+    font-size:      2em;
+    font-weight:    700;
+    line-height:    1.2;
+    letter-spacing: -.01em;
+    opacity:        .85;
+    padding-top:    .1em;
+    text-align:     right;
+    user-select:    none;
+}
+
+.editor-styles-wrapper .bwp-chapter__content {
+    grid-column: 2;
+    grid-row:    2;
+    font-family: 'EB Garamond', Georgia, serif;
+    line-height: 1.75;
+}
+
+/* ── book-wp/term inline format — editor canvas ─────────────────────────── */
+
+.editor-styles-wrapper .bwp-istilah {
+    border-bottom: 1px dotted #888888;
+    cursor: help;
+}
+
+/* The tooltip span is hidden in the editor — definition lives in the
+   data-definition attribute and is visible via the toolbar button. */
+.editor-styles-wrapper .bwp-istilah__tip {
+    display: none;
+}
+
+/* Term definition popover — appears below the toolbar when applying a term */
+.bwp-term-popover .bwp-term-popover__body {
+    padding: 12px 16px;
+    min-width: 280px;
+}
+
+.bwp-term-popover .bwp-term-popover__actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+/* ── book-wp/quote block — editor canvas ────────────────────────────────── */
+
+.editor-styles-wrapper .bwp-petikan {
+    margin: 1.5em 0;
+    padding: .8em 0 .8em 1.4em;
+    border-left: 2px solid #cccccc;
+    font-style: italic;
+    color: #555555;
+    background: none;
+}
+
+.editor-styles-wrapper .bwp-petikan__text [data-rich-text-placeholder]::before {
+    font-style: italic;
+    color: #aaaaaa;
+}
+
+.editor-styles-wrapper .bwp-petikan__source {
+    display: block;
+    margin-top: .5em;
+    font-family: 'Jost', system-ui, sans-serif;
+    font-size: .8em;
+    font-style: normal;
+    letter-spacing: .03em;
+    color: #888888;
+}
+
+/* ── book-wp/divider block — editor canvas ──────────────────────────────── */
+
+.editor-styles-wrapper .bwp-ornament-preview {
+    text-align: center;
+    padding: .75em 0;
+    border-top: 1px dashed #dddddd;
+    border-bottom: 1px dashed #dddddd;
+    margin: .5em 0;
+}
+
+.editor-styles-wrapper .bwp-ornament-preview__label {
+    font-family: 'Jost', system-ui, sans-serif;
+    font-size: .72em;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #aaaaaa;
+}
+
+/* ── book-wp/verse block — editor canvas ────────────────────────────────── */
+
+.editor-styles-wrapper .bwp-bait {
+    display: flex;
+    gap: 0;
+    margin: .4em 0;
+}
+
+.editor-styles-wrapper .bwp-bait__num {
+    flex-shrink: 0;
+    font-family: 'Jost', system-ui, sans-serif;
+    font-size: .68em;
+    color: #aaaaaa;
+    font-style: normal;
+    min-width: 2.2em;
+    text-align: right;
+    padding-top: .3em;
+    padding-right: .8em;
+    margin-left: -2.2em;
+    user-select: none;
+    letter-spacing: .04em;
+}
+
+.editor-styles-wrapper .bwp-bait__text {
+    flex: 1;
+}

@@ -1,0 +1,1479 @@
+# Book WP — Malay (ms_MY) Translation
+# Copyright (C) Book WP
+# This file is distributed under the same licence as Book WP.
+#
+# Translators:
+# MENJ <admin@example.com>, 2026
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Book WP 3.5.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-13\n"
+"PO-Revision-Date: 2026-05-13\n"
+"Last-Translator: MENJ <admin@example.com>\n"
+"Language-Team: Malay <ms@example.com>\n"
+"Language: ms_MY\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: book-wp .i18n-rebuild.pl, 2026-05-13\n"
+
+#: inc/admin/settings.php:1017
+msgid "%1$d rule(s) found — fewer than expected (%2$d), consider flushing"
+msgstr "%1$d peraturan ditemui — kurang daripada jangkaan (%2$d), pertimbangkan untuk mengosongkan"
+
+#: comments.php:134
+msgid "%1$s at %2$s"
+msgstr "%1$s pada %2$s"
+
+#: inc/helpers/analytics.php:190
+msgid "%d lines"
+msgstr "%d baris"
+
+#: inc/helpers/analytics.php:90
+msgid "%d min read"
+msgstr "%d min bacaan"
+
+#: inc/admin/settings.php:1010
+msgid "%d rule registered — routing active"
+msgid_plural "%d rules registered — routing active"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/helpers/analytics.php:194
+msgid "%d stanzas"
+msgstr "%d rangkap"
+
+#: inc/helpers/analytics.php:183
+msgid "%d words"
+msgstr "%d perkataan"
+
+#: comments.php:27
+msgid "%s Comment"
+msgid_plural "%s Comments"
+msgstr[0] "%s Ulasan"
+msgstr[1] "%s Ulasan"
+
+#: inc/admin/settings.php:923
+msgid "%s is active — social meta tags are handled by that plugin. This toggle has no effect."
+msgstr "%s aktif — tag meta sosial dikendalikan oleh pemalam itu. Togol ini tiada kesan."
+
+#: inc/admin/dashboard-widget.php:230 inc/admin/dashboard-widget.php:237
+msgid "%s words"
+msgstr "%s perkataan"
+
+#: inc/admin/settings.php:1014
+msgid "0 rules found — flush required"
+msgstr "0 peraturan ditemui — pengosongan diperlukan"
+
+#: inc/admin/settings.php:852
+msgid "<code>[divider style=\"fleuron\"]</code> — Decorative section divider (uses global ornament if no style given)"
+msgstr "<code>[divider style=\"fleuron\"]</code> — Pemisah bahagian hiasan (menggunakan hiasan global jika tiada gaya dinyatakan)"
+
+#: inc/admin/settings.php:851
+msgid "<code>[quote source=\"…\"]…[/quote]</code> — Styled literary pull-quote with optional attribution"
+msgstr "<code>[quote source=\"…\"]…[/quote]</code> — Petikan sastera bergaya dengan atribusi pilihan"
+
+#: inc/admin/settings.php:854
+msgid "<code>[term definition=\"…\"]word[/term]</code> — Inline glossary tooltip; hover or focus to reveal"
+msgstr "<code>[term definition=\"…\"]word[/term]</code> — Petua alat glosari sebaris; tuding atau fokus untuk memaparkan"
+
+#: inc/admin/settings.php:853
+msgid "<code>[verse num=\"1\"]…[/verse]</code> — Numbered verse block; number outdents into the left margin"
+msgstr "<code>[verse num=\"1\"]…[/verse]</code> — Blok bait bernombor; nombor terkeluar ke jidar kiri"
+
+#: inc/admin/settings.php:501
+msgid "<strong>Front-end language</strong> follows your WordPress Site Language setting (Settings → General → Site Language). The theme ships with Bahasa Melayu, English, Spanish, and French translations."
+msgstr "<strong>Bahasa hadapan</strong> mengikut tetapan Bahasa Laman WordPress anda (Tetapan → Am → Bahasa Laman). Tema ini disertakan dengan terjemahan Bahasa Melayu, Inggeris, Sepanyol, dan Perancis."
+
+#: inc/admin/settings.php:973
+msgid "<strong>Required:</strong> After saving this setting (on or off), visit <a href=\"%s\">Settings &rsaquo; Permalinks</a> and click Save Changes to flush the rewrite rules. Skipping this step causes 404 errors on the new URL structure."
+msgstr "<strong>Diperlukan:</strong> Selepas menyimpan tetapan ini (hidup atau mati), lawati <a href=\"%s\">Tetapan &rsaquo; Pautan Kekal</a> dan klik Simpan Perubahan untuk mengosongkan peraturan penulisan semula. Melangkau langkah ini menyebabkan ralat 404 pada struktur URL baharu."
+
+#: inc/admin/settings.php:500
+msgid "<strong>Site Title vs Author Name</strong> — Set your WordPress <em>Site Title</em> (Settings → General) to the <strong>anthology name</strong> — it controls the browser tab, RSS feed, and SEO title. The Author Name above appears in the masthead on every page."
+msgstr "<strong>Tajuk Laman vs Nama Pengarang</strong> — Tetapkan <em>Tajuk Laman</em> WordPress anda (Tetapan → Am) kepada <strong>nama antologi</strong> — ia mengawal tab pelayar, suapan RSS, dan tajuk SEO. Nama Pengarang di atas muncul di kepala laman pada setiap halaman."
+
+#: inc/admin/settings.php:502
+msgid "<strong>TOC grouping</strong> — Group by Literary Form to organise puisi, cerpen, esei etc. into separate sections. Group by Category to follow your WordPress category structure. Group by Tag to organise by thematic keywords — a post appears under every tag it carries. Grouping headings use the category, form, or tag name with a work count badge."
+msgstr "<strong>Pengelompokan Isi Kandungan</strong> — Kumpulkan mengikut Bentuk Sastera untuk menyusun puisi, cerpen, esei dll. ke dalam bahagian berasingan. Kumpulkan mengikut Kategori untuk mengikut struktur kategori WordPress anda. Kumpulkan mengikut Tag untuk menyusun mengikut kata kunci tematik — sebuah pos muncul di bawah setiap tag yang dibawanya. Tajuk kumpulan menggunakan nama kategori, bentuk, atau tag dengan lencana kiraan karya."
+
+#: inc/admin/settings.php:875
+msgid "A floating button lets readers switch between the current colour scheme and the Night scheme. Position: bottom-right corner."
+msgstr "Butang terapung membolehkan pembaca bertukar antara skim warna semasa dan skim Malam. Kedudukan: sudut kanan bawah."
+
+#: inc/helpers/permalink.php:353
+msgid "A literary form was recently added or changed. Visit <a href=\"%s\">Settings &rsaquo; Permalinks</a> and click <strong>Save Changes</strong> to apply the new URL routing rules. Until then, URLs for the new form may return 404 errors."
+msgstr ""
+
+#: inc/helpers/literary.php:67
+msgid "A novel is a long-form prose fiction work exploring character, plot, and theme in depth across sequential chapters."
+msgstr "Novel ialah karya fiksyen prosa panjang yang meneroka perwatakan, plot, dan tema secara mendalam melalui bab-bab yang berurutan."
+
+#: inc/admin/settings.php:872
+msgid "A thin line at the top of the viewport tracks scroll position. Helpful for longer prose works and poetry sequences."
+msgstr "Garisan nipis di bahagian atas paparan menjejak kedudukan skrol. Berguna untuk karya prosa dan urutan puisi yang lebih panjang."
+
+#: inc/admin/meta-boxes.php:540 inc/helpers/colophon.php:231
+msgid "Abstract"
+msgstr "Abstrak"
+
+#: inc/admin/settings.php:966
+msgid "Active form slugs:"
+msgstr "Slug bentuk aktif:"
+
+#: inc/admin/settings.php:1159
+msgid "Active icons appear in the site footer. Leave a field blank to hide that icon. For RSS, leave blank to use the WordPress feed URL automatically."
+msgstr "Ikon aktif muncul di kaki laman. Biarkan ruang kosong untuk menyembunyikan ikon. Untuk RSS, biarkan kosong untuk menggunakan URL suapan WordPress secara automatik."
+
+#: inc/admin/settings.php:770
+msgid "Add sequential numbering to stanzas in poetry works."
+msgstr "Tambah penomboran berurutan pada rangkap dalam karya puisi."
+
+#: inc/admin/settings.php:1065
+msgid "Additional Styles"
+msgstr "Gaya Tambahan"
+
+#: inc/helpers/colophon.php:219
+msgid "Addressed to"
+msgstr "Kepada"
+
+#: inc/admin/meta-boxes.php:511
+msgid "Addressee"
+msgstr "Penerima"
+
+#: index.php:106
+msgid "All Works"
+msgstr "Semua Karya"
+
+#: inc/admin/settings.php:1085
+msgid "All properties update automatically across colour schemes and time-of-day palettes."
+msgstr "Semua sifat dikemas kini secara automatik merentasi skema warna dan palet waktu."
+
+#: inc/helpers/literary.php:70
+msgid "An essay is a non-fiction prose work presenting the author's argument, analysis, or personal reflection on a subject."
+msgstr "Esei ialah karya prosa bukan fiksyen yang mengemukakan hujah, analisis, atau refleksi peribadi pengarang terhadap sesuatu topik."
+
+#: inc/admin/settings.php:413
+msgid "Anthology Name"
+msgstr "Nama Antologi"
+
+#: assets/js/blocks.js:129
+msgid "Appears as a tooltip on hover/focus. Press Enter to apply."
+msgstr ""
+
+#: inc/admin/settings.php:493
+msgid "Applies only when Grouping is set to None. Infinite scroll loads the next page automatically as the reader scrolls. Uses WordPress reading settings for posts per page."
+msgstr "Hanya terpakai apabila Pengelompokan ditetapkan kepada Tiada. Tatal tanpa had memuatkan halaman seterusnya secara automatik semasa pembaca menatal. Menggunakan tetapan bacaan WordPress untuk bilangan pos setiap halaman."
+
+#: inc/admin/settings.php:482
+msgid "Applies only when Grouping is set to None. List: single column. Grid: equal-width CSS columns. Masonry: cascading columns."
+msgstr "Hanya terpakai apabila Pengelompokan ditetapkan kepada Tiada. Senarai: satu lajur. Grid: lajur CSS sama lebar. Masonry: lajur bertingkat."
+
+#: assets/js/blocks.js:139
+msgid "Apply"
+msgstr ""
+
+#: inc/admin/settings.php:633
+msgid "Apply a decorative large initial letter to the first paragraph. Enable per prose form. Poetry forms are never affected."
+msgstr "Gunakan huruf besar hiasan pada perenggan pertama. Aktifkan mengikut bentuk prosa. Bentuk puisi tidak terjejas."
+
+#: inc/admin/settings.php:512
+msgid "Archive Pages"
+msgstr "Halaman Arkib"
+
+#: inc/admin/settings.php:873
+msgid "Arrow keys ← → move between works in the anthology. Works in sequence order as shown in the TOC."
+msgstr "Kekunci anak panah ← → bergerak antara karya dalam antologi. Mengikut urutan seperti yang ditunjukkan dalam Kandungan."
+
+#: inc/admin/settings.php:1147
+msgid "Author Identifiers"
+msgstr "Pengecam Pengarang"
+
+#: inc/admin/settings.php:404
+msgid "Author Name"
+msgstr "Nama Pengarang"
+
+#: inc/admin/meta-boxes.php:483
+msgid "Author of Source"
+msgstr "Pengarang Sumber"
+
+#: single.php:32 inc/admin/meta-boxes.php:187 inc/admin/meta-boxes.php:188 templates/single-puisi-generic.php:73
+msgid "Author's Note"
+msgstr "Nota Penulis"
+
+#: inc/admin/settings.php:625
+msgid "Auto detects each visitor's local time and shifts the ink mood accordingly. Pin to a specific period to lock it for all visitors."
+msgstr "Mengesan waktu tempatan setiap pelawat secara automatik dan mengubah suasana dakwat. Tetapkan ke tempoh tertentu untuk menguncinya bagi semua pelawat."
+
+#: inc/helpers/literary.php:71
+msgid "Autobiografi or memoir is the author's personal account of their own lived experience, written in the first person."
+msgstr "Autobiografi atau memoar ialah catatan peribadi pengarang tentang pengalaman hidupnya sendiri, ditulis dalam sudut pandangan orang pertama."
+
+#: inc/admin/settings.php:1075
+msgid "Available CSS Custom Properties"
+msgstr "Sifat Tersuai CSS Tersedia"
+
+#: inc/admin/settings.php:850
+msgid "Available Shortcodes"
+msgstr "Kod Pendek Tersedia"
+
+#: inc/admin/dashboard-widget.php:196
+msgid "Avg. Read Time"
+msgstr "Purata Masa Baca"
+
+#: inc/admin/dashboard-widget.php:190
+msgid "Avg. Words"
+msgstr "Purata Perkataan"
+
+#: inc/admin/settings.php:877
+msgid "Back to Top Button"
+msgstr "Butang Kembali ke Atas"
+
+#: footer.php:84
+msgid "Back to top"
+msgstr ""
+
+#: inc/helpers/permalink.php:348
+msgid "Book WP — rewrite flush pending"
+msgstr ""
+
+#: inc/admin/settings.php:461
+msgid "By Category"
+msgstr "Mengikut Kategori"
+
+#: inc/admin/settings.php:460
+msgid "By Literary Form"
+msgstr "Mengikut Bentuk Sastera"
+
+#: inc/admin/settings.php:462
+msgid "By Tag"
+msgstr "Mengikut Tag"
+
+#: comments.php:62 assets/js/blocks.js:143
+msgid "Cancel"
+msgstr "Batal"
+
+#: inc/admin/meta-boxes.php:535
+msgid "Central Argument"
+msgstr "Hujah Utama"
+
+#: inc/admin/settings.php:689
+msgid "Centred"
+msgstr "Tengah"
+
+#: inc/helpers/literary.php:66
+msgid "Cerpen is a short prose fiction work focused on a single event, character, or mood within a compact narrative."
+msgstr "Cerpen ialah karya fiksyen prosa pendek yang menumpukan satu peristiwa, watak, atau suasana dalam satu penceritaan yang padat."
+
+#: inc/admin/meta-boxes.php:390
+msgid "Cerpen — Short Fiction Details"
+msgstr "Cerpen — Butiran Fiksyen Pendek"
+
+#: inc/admin/meta-boxes.php:437 inc/hooks/actions.php:445 inc/shortcodes/shortcodes.php:249
+msgid "Chapter"
+msgstr "Fasal"
+
+#: inc/admin/meta-boxes.php:464
+msgid "Chapter Intention"
+msgstr "Tujuan Fasal"
+
+#: assets/js/blocks.js:386
+msgid "Chapter Number"
+msgstr "Nombor Fasal"
+
+#: assets/js/blocks.js:382
+msgid "Chapter Settings"
+msgstr "Tetapan Fasal"
+
+#: assets/js/blocks.js:392
+msgid "Chapter Title (optional)"
+msgstr "Tajuk Fasal (pilihan)"
+
+#: inc/admin/meta-boxes.php:303
+msgid "Check this if you are presenting a passage cited from another work. Leave unchecked if this is your own writing in the hikayat form."
+msgstr ""
+
+#: inc/admin/settings.php:658
+msgid "Choose a decorative typeface for the drop cap initial letter. \"Default\" uses each form's built-in font (Cinzel, IM Fell English SC, etc.)."
+msgstr "Pilih muka taip hiasan untuk huruf besar awal. \"Lalai\" menggunakan fon terbina dalam setiap bentuk (Cinzel, IM Fell English SC, dll.)."
+
+#: single.php:17
+msgid "Cited from"
+msgstr "Petikan daripada"
+
+#: inc/admin/settings.php:401
+msgid "Collection"
+msgstr "Koleksi"
+
+#: templates/template-colophon.php:20
+msgid "Colophon"
+msgstr "Kolofon"
+
+#: inc/hooks/filters.php:97
+msgid "Colophon Page"
+msgstr "Kolofon"
+
+#: inc/admin/settings.php:704
+msgid "Comfortable — balanced breath between stanzas"
+msgstr "Selesa — jarak seimbang antara rangkap"
+
+#: comments.php:68
+msgid "Comment"
+msgstr "Ulasan"
+
+#: comments.php:48
+msgid "Comment navigation"
+msgstr ""
+
+#: inc/admin/meta-boxes.php:339 inc/helpers/colophon.php:209
+msgid "Commentary"
+msgstr "Ulasan"
+
+#: comments.php:17 inc/admin/settings.php:883
+msgid "Comments"
+msgstr "Ulasan"
+
+#: inc/admin/meta-boxes.php:214
+msgid "Completeness"
+msgstr "Kelengkapan"
+
+#: inc/admin/meta-boxes.php:160
+msgid "Composition"
+msgstr "Gubahan"
+
+#: inc/admin/settings.php:767
+msgid "Content Display"
+msgstr "Paparan Kandungan"
+
+#: inc/admin/settings.php:697
+msgid "Controls for all verse forms: puisi, syair, karmina, ratapan. Poetry is always ragged-right and never hyphenated regardless of these settings."
+msgstr "Kawalan untuk semua bentuk bait: puisi, syair, karmina, ratapan. Puisi sentiasa rata kiri dan tidak dipenggal kata tanpa mengira tetapan ini."
+
+#: inc/setup/enqueue.php:170
+msgid "Copied!"
+msgstr ""
+
+#: inc/helpers/navigation.php:364
+msgid "Copy link to this work"
+msgstr ""
+
+#: inc/admin/settings.php:430
+msgid "Copyright"
+msgstr "Hak Cipta"
+
+#: inc/admin/settings.php:1063
+msgid "Custom CSS"
+msgstr "CSS Tersuai"
+
+#: inc/admin/meta-boxes.php:161
+msgid "Date Composed"
+msgstr "Tarikh Digubah"
+
+#: inc/admin/meta-boxes.php:170
+msgid "Dedication"
+msgstr "Persembahan"
+
+#: assets/js/blocks.js:128
+msgid "Definition"
+msgstr ""
+
+#: inc/admin/settings.php:1143
+msgid "Developer & Repository"
+msgstr "Pembangun & Repositori"
+
+#: inc/admin/meta-boxes.php:176
+msgid "Display"
+msgstr "Paparan"
+
+#: inc/admin/settings.php:876
+msgid "Display a compact share strip below the tags on single posts: Copy link, X (Twitter), Facebook, WhatsApp. No third-party scripts loaded."
+msgstr "Paparkan jalur kongsi padat di bawah tag pada pos tunggal: Salin pautan, X (Twitter), Facebook, WhatsApp. Tiada skrip pihak ketiga dimuatkan."
+
+#: inc/admin/settings.php:771
+msgid "Display reading time, word count, line count."
+msgstr "Paparkan masa membaca, kiraan perkataan, kiraan baris."
+
+#: inc/admin/settings.php:768
+msgid "Display the post thumbnail on single work pages."
+msgstr "Paparkan imej kecil siaran pada halaman karya tunggal."
+
+#: inc/admin/settings.php:434
+msgid "Displayed in the site footer. HTML is supported — e.g. <code>&amp;copy; 2026 &lt;strong&gt;My Anthology&lt;/strong&gt;</code>."
+msgstr "Dipaparkan di kaki laman. HTML disokong — cth. <code>&amp;copy; 2026 &lt;strong&gt;Antologi Saya&lt;/strong&gt;</code>."
+
+#: inc/admin/settings.php:409
+msgid "Displayed in the site header on all pages in place of the WordPress Site Title."
+msgstr "Dipaparkan di pengepala laman di semua halaman menggantikan Tajuk Laman WordPress."
+
+#: inc/admin/settings.php:418
+msgid "Displayed prominently on the front page as the collection title."
+msgstr "Dipaparkan dengan jelas di halaman depan sebagai tajuk koleksi."
+
+#: assets/js/blocks.js:260
+msgid "Divider Settings"
+msgstr ""
+
+#: inc/admin/settings.php:657
+msgid "Drop Cap Font"
+msgstr "Fon Huruf Besar Awal"
+
+#: inc/admin/meta-boxes.php:179
+msgid "Drop Cap Override"
+msgstr "Override Huruf Drop Cap"
+
+#: inc/admin/settings.php:632
+msgid "Drop Cap — Per Form"
+msgstr "Huruf Besar Awal — Mengikut Bentuk"
+
+#: inc/admin/meta-boxes.php:522
+msgid "Duration of Composition"
+msgstr "Tempoh Gubahan"
+
+#: comments.php:155 page.php:13 templates/template-colophon.php:30 templates/template-foreword.php:29
+msgid "Edit"
+msgstr "Sunting"
+
+#: inc/helpers/colophon.php:154
+msgid "Editor"
+msgstr "Penyunting"
+
+#: inc/admin/meta-boxes.php:329
+msgid "Editor or Transcriber"
+msgstr "Penyunting atau Penyalin"
+
+#: comments.php:81
+msgid "Email"
+msgstr "E-mel"
+
+#: inc/admin/meta-boxes.php:168
+msgid "Epigraph"
+msgstr "Epigraf"
+
+#: inc/admin/meta-boxes.php:532
+msgid "Esei — Argument & Scope"
+msgstr "Esei — Hujah & Skop"
+
+#: inc/helpers/literary.php:46
+msgid "Essay"
+msgstr "Esei"
+
+#: inc/helpers/literary.php:44
+msgid "Excerpts"
+msgstr "Nukilan"
+
+#: inc/admin/settings.php:768
+msgid "Featured Image"
+msgstr "Imej Pilihan"
+
+#: inc/admin/settings.php:938
+msgid "Feed URL:"
+msgstr "URL Suapan:"
+
+#: inc/admin/meta-boxes.php:545
+msgid "Field"
+msgstr "Bidang"
+
+#: inc/admin/meta-boxes.php:380 inc/admin/meta-boxes.php:414 inc/admin/meta-boxes.php:561
+msgid "First Published In"
+msgstr "Pertama Diterbitkan Dalam"
+
+#: assets/js/blocks.js:398
+msgid "First verse number"
+msgstr "Nombor ayat pertama"
+
+#: inc/admin/settings.php:1031
+msgid "Flush now"
+msgstr "Kosongkan sekarang"
+
+#: inc/helpers/colophon.php:156
+msgid "Folio"
+msgstr "Halaman"
+
+#: inc/admin/meta-boxes.php:334
+msgid "Folio or Page Reference"
+msgstr "Rujukan Folio atau Halaman"
+
+#: inc/admin/settings.php:577
+msgid "Font Family"
+msgstr "Keluarga Fon"
+
+#: inc/admin/settings.php:590
+msgid "Load Google Fonts"
+msgstr "Muatkan Google Fonts"
+
+#: inc/admin/settings.php:590
+msgid "Loads Cinzel, EB Garamond, Jost, and selected optional fonts from Google Fonts. Disable for a no-remote-fonts privacy mode; browser/system fallbacks will be used instead."
+msgstr "Memuatkan Cinzel, EB Garamond, Jost, dan fon pilihan terpilih daripada Google Fonts. Lumpuhkan untuk mod privasi tanpa fon jarak jauh; fon sandaran pelayar/sistem akan digunakan."
+
+#: inc/setup/sidebars.php:23
+msgid "Footer"
+msgstr "Pengaki"
+
+#: footer.php:33 inc/setup/menus.php:15
+msgid "Footer Menu"
+msgstr "Menu Pengaki"
+
+#: inc/hooks/filters.php:96 templates/template-foreword.php:19
+msgid "Foreword"
+msgstr "Mukadimah"
+
+#: inc/admin/settings.php:422
+msgid "Front Page Blurb"
+msgstr "Sinopsis Halaman Depan"
+
+#: inc/admin/meta-boxes.php:488
+msgid "Genre of Source"
+msgstr "Genre Sumber"
+
+#: assets/js/blocks.js:277
+msgid "Global ornament"
+msgstr ""
+
+#: inc/admin/settings.php:479 inc/admin/settings.php:519
+msgid "Grid"
+msgstr "Grid"
+
+#: inc/admin/settings.php:456
+msgid "Grouping"
+msgstr "Pengelompokan"
+
+#: inc/admin/settings.php:787
+msgid "Hidden Post Tags"
+msgstr "Tag Kiriman Tersembunyi"
+
+#: inc/admin/settings.php:887
+msgid "Hide comments"
+msgstr "Sembunyikan komen"
+
+#: inc/helpers/literary.php:41
+msgid "Hikayat"
+msgstr "Hikayat"
+
+#: inc/admin/meta-boxes.php:308
+msgid "Hikayat Title"
+msgstr "Tajuk Hikayat"
+
+#: inc/helpers/literary.php:64
+msgid "Hikayat is the dominant classical Malay narrative prose genre, recounting tales of heroes, royalty, and legend, shaped by Persian, Arabic, and Hindu traditions."
+msgstr "Hikayat ialah genre prosa naratif klasik Melayu yang menceritakan kisah pahlawan, raja-raja, dan legenda, sering dipengaruhi tradisi Parsi, Arab, dan Hindu."
+
+#: inc/admin/meta-boxes.php:286
+msgid "Hikayat — Source Text & Manuscript"
+msgstr "Hikayat — Teks Sumber & Manuskrip"
+
+#: inc/admin/settings.php:855
+msgid "In the <strong>block editor</strong>, use the dedicated <em>Literary Quote</em>, <em>Literary Divider</em>, and <em>Verse Block</em> blocks. For term definitions, select a word and click the <strong>Term Definition</strong> button (book icon) in the formatting toolbar — no shortcode block needed."
+msgstr "Dalam <strong>penyunting blok</strong>, gunakan blok khusus <em>Petikan Sastera</em>, <em>Pemisah Sastera</em>, dan <em>Blok Bait</em>. Untuk definisi istilah, pilih perkataan dan klik butang <strong>Definisi Istilah</strong> (ikon buku) dalam bar alat pemformatan — tiada blok kod pendek diperlukan."
+
+#: inc/admin/settings.php:720
+msgid "Independent from prose line height. Verse lines are shorter — they need less leading. Default: Normal (1.65)."
+msgstr "Bebas daripada ketinggian baris prosa. Baris bait lebih pendek — kurang ruang antara baris diperlukan. Lalai: Normal (1.65)."
+
+#: inc/admin/settings.php:491 inc/admin/settings.php:531
+msgid "Infinite scroll"
+msgstr "Tatal tanpa had"
+
+#: inc/admin/settings.php:1070
+msgid "Injected after all theme styles. Use the CSS custom properties below for consistency — hard-coding colour hex values will break in Night mode and time-of-day schemes."
+msgstr "Disuntik selepas semua gaya tema. Gunakan sifat tersuai CSS di bawah untuk konsistensi — nilai warna heks yang dikod keras akan rosak dalam mod Malam dan skim waktu."
+
+#: inc/admin/settings.php:612
+msgid "Ink — Time of Day"
+msgstr "Dakwat — Waktu Siang"
+
+#: inc/admin/meta-boxes.php:230 inc/admin/meta-boxes.php:275 inc/admin/meta-boxes.php:365 inc/admin/meta-boxes.php:409
+msgid "Inspiration"
+msgstr "Ilham"
+
+#: inc/admin/meta-boxes.php:404
+msgid "Intention"
+msgstr "Tujuan"
+
+#: inc/admin/settings.php:881
+msgid "Interaction"
+msgstr "Interaksi"
+
+#: inc/admin/settings.php:426
+msgid "Introductory text displayed above the Table of Contents. HTML is supported — e.g. <code>&lt;em&gt;, &lt;strong&gt;, &lt;a href=\"\"&gt;</code>."
+msgstr "Teks pengenalan di atas Isi Kandungan. HTML disokong — cth. <code>&lt;em&gt;, &lt;strong&gt;, &lt;a href=\"\"&gt;</code>."
+
+#: inc/helpers/colophon.php:131
+msgid "Isi"
+msgstr "Isi"
+
+#: inc/admin/meta-boxes.php:254
+msgid "Isi (Line 2 — Meaning)"
+msgstr "Isi (Baris 2 — Maksud)"
+
+#: inc/admin/settings.php:934
+msgid "JSON Feed v1.1"
+msgstr "JSON Feed v1.1"
+
+#: inc/helpers/literary.php:40
+msgid "Karmina"
+msgstr "Karmina"
+
+#: inc/helpers/literary.php:63
+msgid "Karmina or pantun dua kerat consists of two lines — the image and the meaning — the most compressed form in the Malay poetic tradition."
+msgstr "Karmina atau pantun dua kerat terdiri daripada dua baris: pembayang dan maksud — bentuk yang paling ringkas dan padat dalam puisi Melayu."
+
+#: inc/admin/meta-boxes.php:240
+msgid "Karmina — Pantun Structure"
+msgstr "Karmina — Struktur Pantun"
+
+#: inc/admin/meta-boxes.php:579
+msgid "Key Figures"
+msgstr "Tokoh Utama"
+
+#: inc/admin/settings.php:873
+msgid "Keyboard Navigation"
+msgstr "Navigasi Papan Kekunci"
+
+#: inc/admin/meta-boxes.php:516
+msgid "Lament Register"
+msgstr "Daftar Ratapan"
+
+#: inc/helpers/literary.php:45
+msgid "Lamentations"
+msgstr "Ratapan"
+
+#: assets/js/blocks.js:387
+msgid "Large numeral floated left beside verse 1."
+msgstr "Nombor besar terapung di kiri, bersebelahan dengan ayat 1."
+
+#: inc/admin/settings.php:515
+msgid "Layout"
+msgstr "Susun Atur"
+
+#: comments.php:60
+msgid "Leave a Comment"
+msgstr "Tinggalkan Ulasan"
+
+#: assets/js/blocks.js:265
+msgid "Leave blank to follow the global ornament set in Theme Options \\u2192 Literary."
+msgstr ""
+
+#: comments.php:70
+msgid "Leave your words here…"
+msgstr "Keratlah kata dari kalbumu, curahkanlah di sini…"
+
+#: inc/admin/settings.php:688
+msgid "Left-aligned"
+msgstr "Jajar kiri"
+
+#: inc/admin/settings.php:1139
+msgid "Libraries & Catalogues"
+msgstr "Perpustakaan & Katalog"
+
+#: inc/admin/settings.php:478 inc/admin/settings.php:518
+msgid "List"
+msgstr "Senarai"
+
+#: inc/admin/settings.php:522
+msgid "List: single-column. Grid: equal-width CSS columns. Masonry: cascading columns — best when cards have varying heights (e.g. with featured images)."
+msgstr "Senarai: satu lajur. Grid: lajur CSS sama lebar. Masonry: lajur bertingkat — terbaik apabila kad mempunyai ketinggian berbeza (cth. dengan imej pilihan)."
+
+#: inc/admin/meta-boxes.php:167
+msgid "Literary Apparatus"
+msgstr "Aparatus Kesusasteraan"
+
+#: assets/js/blocks.js:231
+msgid "Literary Divider"
+msgstr ""
+
+#: inc/admin/settings.php:467
+msgid "Literary Form Badges"
+msgstr "Lencana Bentuk Sastera"
+
+#: inc/admin/settings.php:956
+msgid "Literary Form Permalinks"
+msgstr "Pautan Kekal Bentuk Sastera"
+
+#: inc/hooks/actions.php:21
+msgid "Literary Forms"
+msgstr "Bentuk Sastera"
+
+#: assets/js/blocks.js:158
+msgid "Literary Quote"
+msgstr ""
+
+#: inc/admin/meta-boxes.php:23
+msgid "Literary Work Details"
+msgstr "Butiran Karya Sastera"
+
+#: inc/admin/meta-boxes.php:162
+msgid "Location"
+msgstr "Lokasi"
+
+#: inc/admin/dashboard-widget.php:227
+msgid "Longest"
+msgstr "Terpanjang"
+
+#: inc/admin/settings.php:717
+msgid "Loose — 1.80, open and airy"
+msgstr "Longgar — 1.80, terbuka dan lapang"
+
+#: inc/helpers/colophon.php:152
+msgid "Manuscript"
+msgstr "Naskhah"
+
+#: inc/admin/meta-boxes.php:324
+msgid "Manuscript or Edition"
+msgstr "Manuskrip atau Edisi"
+
+#: inc/admin/settings.php:480 inc/admin/settings.php:520
+msgid "Masonry"
+msgstr "Masonry"
+
+#: inc/helpers/colophon.php:120
+msgid "Melody"
+msgstr "Irama"
+
+#: inc/admin/meta-boxes.php:209
+msgid "Melody (if set to music)"
+msgstr "Melodi (jika dilagukan)"
+
+#: inc/helpers/literary.php:47
+msgid "Memoir"
+msgstr "Autobiografi"
+
+#: inc/admin/meta-boxes.php:571
+msgid "Memoir — Memory & Context"
+msgstr "Memoar — Kenangan & Konteks"
+
+#: inc/admin/meta-boxes.php:550
+msgid "Methodology"
+msgstr "Metodologi"
+
+#: inc/admin/meta-boxes.php:204
+msgid "Metre"
+msgstr "Meter"
+
+#: inc/admin/meta-boxes.php:493
+msgid "My Commentary"
+msgstr "Ulasan Saya"
+
+#: comments.php:76
+msgid "Name"
+msgstr "Nama"
+
+#: assets/js/blocks.js:186
+msgid "Name of the author or work being quoted."
+msgstr ""
+
+#: inc/admin/meta-boxes.php:442
+msgid "Narrative Position"
+msgstr "Kedudukan Naratif"
+
+#: inc/admin/meta-boxes.php:199
+msgid "Narrative Subject"
+msgstr "Subjek Naratif"
+
+#: inc/admin/meta-boxes.php:590
+msgid "Nature of This Memory"
+msgstr "Sifat Kenangan Ini"
+
+#: comments.php:50
+msgid "Newer Comments"
+msgstr ""
+
+#: inc/helpers/navigation.php:183
+msgid "Next Work"
+msgstr "Karya Seterusnya"
+
+#: archive.php:58 index.php:316 search.php:47 tag.php:54
+msgid "Next page"
+msgstr ""
+
+#: inc/admin/settings.php:875
+msgid "Night Mode Toggle"
+msgstr "Togol Mod Malam"
+
+#: inc/admin/settings.php:459
+msgid "No grouping — single list"
+msgstr "Tiada pengelompokan — senarai tunggal"
+
+#: inc/admin/dashboard-widget.php:174
+msgid "No published works yet. Start writing!"
+msgstr "Tiada karya diterbitkan lagi. Mulakan menulis!"
+
+#: inc/admin/settings.php:791
+msgid "No tags found. Create tags on your posts first."
+msgstr "Tiada tag ditemui. Cipta tag pada kiriman anda dahulu."
+
+#: archive.php:65 search.php:54 tag.php:61
+msgid "No works found."
+msgstr "Tiada karya ditemui."
+
+#: assets/js/blocks.js:254
+msgid "None"
+msgstr ""
+
+#: inc/admin/settings.php:716
+msgid "Normal — 1.65, recommended for most verse"
+msgstr "Normal — 1.65, disyorkan untuk kebanyakan bait"
+
+#: inc/helpers/literary.php:43
+msgid "Novel"
+msgstr "Novel"
+
+#: inc/admin/meta-boxes.php:427
+msgid "Novel Title"
+msgstr "Tajuk Novel"
+
+#: inc/admin/meta-boxes.php:424
+msgid "Novel — Chapter Details"
+msgstr "Novel — Butiran Fasal"
+
+#: inc/helpers/literary.php:68
+msgid "Nukilan are curated passages from prose works, speeches, or texts that carry standalone literary significance."
+msgstr "Nukilan ialah petikan pilihan daripada karya prosa, ceramah, atau teks yang mempunyai nilai kesusasteraan tersendiri."
+
+#: inc/admin/meta-boxes.php:475
+msgid "Nukilan — Source Details"
+msgstr "Nukilan — Butiran Sumber"
+
+#: inc/admin/meta-boxes.php:220
+msgid "Number of Cantos"
+msgstr "Bilangan Canto"
+
+#: inc/admin/meta-boxes.php:225 inc/admin/meta-boxes.php:270
+msgid "Occasion"
+msgstr "Majlis"
+
+#: inc/admin/meta-boxes.php:506
+msgid "Occasion of Grief"
+msgstr "Majlis Dukacita"
+
+#: comments.php:49
+msgid "Older Comments"
+msgstr ""
+
+#: assets/js/blocks.js:322
+msgid "Optional \\u2014 displayed in the left margin."
+msgstr ""
+
+#: inc/admin/meta-boxes.php:172
+msgid "Original Language"
+msgstr "Bahasa Asal"
+
+#: inc/admin/meta-boxes.php:178
+msgid "Ornament Override"
+msgstr "Override Ornamen"
+
+#: assets/js/blocks.js:264
+msgid "Ornament Style"
+msgstr ""
+
+#: inc/admin/settings.php:903
+msgid "Outputs Schema.org CreativeWork markup in the page head. Helps search engines understand each work's type, author, and date. Disable if you use a dedicated SEO plugin that handles this."
+msgstr "Keluarkan markup Schema.org CreativeWork dalam kepala halaman. Membantu enjin carian memahami jenis, pengarang, dan tarikh setiap karya. Nyahaktifkan jika anda menggunakan pemalam SEO khusus."
+
+#: inc/admin/settings.php:931
+msgid "Outputs og:title, og:description, og:image, twitter:card, and related tags on single work pages. Controls share card appearance on X (Twitter), Facebook, LinkedIn, WhatsApp, and Telegram. Automatically disabled when RankMath, Yoast, or another SEO plugin is detected."
+msgstr "Mengeluarkan og:title, og:description, og:image, twitter:card, dan tag berkaitan pada halaman karya. Mengawal penampilan kad kongsi di X (Twitter), Facebook, LinkedIn, WhatsApp, dan Telegram. Dilumpuhkan secara automatik apabila RankMath, Yoast, atau pemalam SEO lain dikesan."
+
+#: 404.php:9
+msgid "Page Not Found"
+msgstr "Halaman Tidak Ditemui"
+
+#: inc/admin/settings.php:490 inc/admin/settings.php:530
+msgid "Page links"
+msgstr "Pautan halaman"
+
+#: inc/admin/settings.php:533
+msgid "Page links: standard WordPress previous / next. Infinite scroll: next page loads automatically as the reader scrolls down — applies to literary form, category, and tag archives."
+msgstr "Pautan halaman: WordPress sebelumnya / seterusnya standard. Tatal tanpa had: halaman seterusnya dimuatkan secara automatik semasa pembaca menatal ke bawah — terpakai untuk arkib bentuk sastera, kategori, dan tag."
+
+#: single.php:46
+msgid "Page navigation"
+msgstr "Navigasi halaman"
+
+#: inc/admin/settings.php:527
+msgid "Pagination"
+msgstr "Penomboran Halaman"
+
+#: inc/admin/settings.php:596
+msgid "Paper — Colour Scheme"
+msgstr "Kertas — Skema Warna"
+
+#: inc/admin/meta-boxes.php:432
+msgid "Part"
+msgstr "Bahagian"
+
+#: inc/admin/settings.php:1043
+msgid "Pattern"
+msgstr "Corak"
+
+#: inc/admin/settings.php:856
+msgid "Per-work overrides for ornament and drop cap are set in the <strong>Literary Work Details</strong> meta box on each post's edit screen."
+msgstr "Penindihan per karya untuk hiasan dan huruf besar awal ditetapkan dalam kotak meta <strong>Butiran Karya Sastera</strong> pada skrin suntingan setiap pos."
+
+#: inc/helpers/colophon.php:169
+msgid "Performance"
+msgstr "Persembahan"
+
+#: inc/admin/meta-boxes.php:375
+msgid "Performance History"
+msgstr "Sejarah Persembahan"
+
+#: inc/admin/meta-boxes.php:574
+msgid "Period Covered"
+msgstr "Tempoh Diliputi"
+
+#: inc/admin/settings.php:947
+msgid "Permalinks"
+msgstr "Pautan Kekal"
+
+#: inc/admin/meta-boxes.php:359
+msgid "Poetic Mode"
+msgstr "Mod Puisi"
+
+#: inc/helpers/literary.php:38
+msgid "Poetry"
+msgstr "Puisi"
+
+#: inc/admin/settings.php:685
+msgid "Poetry Alignment"
+msgstr "Penjajaran Puisi"
+
+#: inc/admin/settings.php:696
+msgid "Poetry Options"
+msgstr "Pilihan Puisi"
+
+#: inc/helpers/literary.php:65
+msgid "Poetry is a literary form combining figurative language, rhythm, and emotion in structured lines and stanzas."
+msgstr "Puisi ialah bentuk sastera yang menggabungkan bahasa figuratif, irama, dan emosi dalam baris dan rangkap yang tersusun."
+
+#: inc/admin/meta-boxes.php:393 inc/admin/meta-boxes.php:453
+msgid "Point of View"
+msgstr "Sudut Pandangan"
+
+#: comments.php:63
+msgid "Post Comment"
+msgstr "Hantar Ulasan"
+
+#: inc/admin/settings.php:842
+msgid "Posts tagged with any of these tags will be hidden from the TOC, category archives, and search results. They remain accessible via their URL and tag archive. Tag display and the tag cap do not apply to these tags."
+msgstr "Kiriman yang ditag dengan mana-mana tag ini akan disembunyikan daripada TOC, arkib kategori, dan hasil carian. Mereka masih boleh diakses melalui URL dan arkib tag mereka. Paparan tag dan had tag tidak terpakai pada tag ini."
+
+#: inc/admin/settings.php:468
+msgid "Previous / Next Navigation"
+msgstr "Navigasi Sebelumnya / Seterusnya"
+
+#: inc/helpers/navigation.php:175
+msgid "Previous Work"
+msgstr "Karya Sebelumnya"
+
+#: archive.php:55 index.php:313 search.php:44 tag.php:51
+msgid "Previous page"
+msgstr ""
+
+#: header.php:57 inc/setup/menus.php:14
+msgid "Primary Menu"
+msgstr "Menu Utama"
+
+#: inc/admin/meta-boxes.php:319 inc/helpers/colophon.php:150
+msgid "Protagonist"
+msgstr "Protagonis"
+
+#: inc/admin/settings.php:934
+msgid "Publishes a machine-readable feed at /feed/json — consumed by feed readers that support the JSON Feed spec (Reeder, NetNewsWire, etc.). Includes content, summary, literary form, word count, and reading time per item. Adds an autodiscovery <link> tag to the front-page <head>."
+msgstr "Menerbitkan suapan boleh baca mesin di /feed/json — dibaca oleh pembaca suapan yang menyokong spesifikasi JSON Feed (Reeder, NetNewsWire, dll.). Termasuk kandungan, ringkasan, bentuk sastera, kiraan perkataan, dan masa membaca setiap item. Menambahkan tag <link> penemuan automatik ke <head> halaman depan."
+
+#: inc/admin/meta-boxes.php:351
+msgid "Puisi — Free Verse & Modern Forms"
+msgstr "Puisi — Sajak Bebas & Bentuk Moden"
+
+#: assets/js/blocks.js:197
+msgid "Quotation\\u2026"
+msgstr ""
+
+#: assets/js/blocks.js:181
+msgid "Quote Settings"
+msgstr ""
+
+#: inc/helpers/literary.php:69
+msgid "Ratapan are poetic expressions of grief or suffering, often connected to loss, longing, or mourning."
+msgstr "Ratapan ialah ekspresi kesedihan atau penderitaan dalam bentuk puitis, sering dikaitkan dengan kehilangan atau kerinduan."
+
+#: inc/admin/meta-boxes.php:503
+msgid "Ratapan — Grief Context"
+msgstr "Ratapan — Konteks Dukacita"
+
+#: inc/admin/settings.php:771
+msgid "Reading Analytics"
+msgstr "Analitik Bacaan"
+
+#: inc/admin/settings.php:871
+msgid "Reading Enhancements"
+msgstr "Peningkatan Pembacaan"
+
+#: inc/admin/settings.php:593
+msgid "Reading Palette"
+msgstr "Palet Pembacaan"
+
+#: inc/admin/settings.php:874
+msgid "Reading Position Memory"
+msgstr "Memori Kedudukan Bacaan"
+
+#: inc/admin/settings.php:872
+msgid "Reading Progress Bar"
+msgstr "Bar Kemajuan Bacaan"
+
+#: inc/admin/dashboard-widget.php:26
+msgid "Reading Statistics"
+msgstr "Statistik Pembacaan"
+
+#: inc/admin/meta-boxes.php:264
+msgid "Register"
+msgstr "Daftar"
+
+#: inc/admin/settings.php:769 inc/helpers/navigation.php:119
+msgid "Related Works"
+msgstr "Karya Berkaitan"
+
+#: assets/js/blocks.js:114
+msgid "Remove Definition"
+msgstr ""
+
+#: comments.php:153
+msgid "Reply"
+msgstr "Balas"
+
+#: comments.php:61
+msgid "Reply to %s"
+msgstr "Balas kepada %s"
+
+#: comments.php:99
+msgid "Required fields are marked with"
+msgstr "Medan diperlukan ditanda dengan"
+
+#: inc/admin/settings.php:1044
+msgid "Resolves to"
+msgstr "Menyelesaikan ke"
+
+#: inc/admin/settings.php:874
+msgid "Restores scroll position when a reader returns to a work they were part-way through. Uses localStorage — no server storage."
+msgstr "Memulihkan kedudukan skrol apabila pembaca kembali ke karya yang sedang dibaca. Menggunakan localStorage — tiada penyimpanan pelayan."
+
+#: inc/admin/settings.php:1025
+msgid "Rewrite rules:"
+msgstr "Peraturan penulisan semula:"
+
+#: inc/helpers/colophon.php:136
+msgid "Rhyme"
+msgstr "Rima"
+
+#: inc/admin/meta-boxes.php:259 inc/admin/meta-boxes.php:354
+msgid "Rhyme Scheme"
+msgstr "Pola Rima"
+
+#: inc/admin/settings.php:902
+msgid "SEO"
+msgstr "SEO"
+
+#: inc/helpers/colophon.php:129
+msgid "Sampiran"
+msgstr "Sampiran"
+
+#: inc/admin/meta-boxes.php:249
+msgid "Sampiran (Line 1 — Image)"
+msgstr "Sampiran (Baris 1 — Gambaran)"
+
+#: inc/admin/settings.php:355
+msgid "Save %s"
+msgstr "Simpan %s"
+
+#: comments.php:90
+msgid "Save my name and email in this browser for the next time I comment."
+msgstr "Simpan nama dan e-mel saya dalam pelayar ini untuk ulasan seterusnya."
+
+#: searchform.php:5 inc/hooks/filters.php:113 inc/hooks/filters.php:118
+msgid "Search"
+msgstr "Cari"
+
+#: search.php:9
+msgid "Search Results"
+msgstr "Hasil Carian"
+
+#: searchform.php:3 searchform.php:4
+msgid "Search Works"
+msgstr "Cari Karya"
+
+#: inc/admin/settings.php:811
+msgid "Search and select hidden tags"
+msgstr "Cari dan pilih tag tersembunyi"
+
+#: inc/admin/settings.php:751
+msgid "Section Ornament"
+msgstr "Hiasan Bahagian"
+
+#: inc/admin/settings.php:804
+msgid "Select tags…"
+msgstr "Pilih tag…"
+
+#: inc/admin/meta-boxes.php:370
+msgid "Sequence"
+msgstr "Urutan"
+
+#: inc/helpers/colophon.php:167
+msgid "Series"
+msgstr "Siri"
+
+#: inc/admin/meta-boxes.php:399 inc/admin/meta-boxes.php:459
+msgid "Setting"
+msgstr "Latar"
+
+#: inc/admin/settings.php:306
+msgid "Settings saved."
+msgstr "Tetapan disimpan."
+
+#: inc/admin/settings.php:313
+msgid "Settings tabs"
+msgstr "Tab tetapan"
+
+#: inc/helpers/navigation.php:358
+msgid "Share"
+msgstr ""
+
+#: inc/admin/settings.php:876
+msgid "Share Row"
+msgstr "Baris Kongsi"
+
+#: inc/helpers/navigation.php:389
+msgid "Share on Facebook"
+msgstr ""
+
+#: inc/helpers/navigation.php:443
+msgid "Share on Mastodon"
+msgstr ""
+
+#: inc/helpers/navigation.php:433
+msgid "Share on Pinterest"
+msgstr ""
+
+#: inc/helpers/navigation.php:425
+msgid "Share on Threads"
+msgstr ""
+
+#: inc/helpers/navigation.php:378
+msgid "Share on X (Twitter)"
+msgstr ""
+
+#: inc/helpers/navigation.php:357
+msgid "Share this work"
+msgstr ""
+
+#: inc/helpers/navigation.php:450
+msgid "Share via Email"
+msgstr ""
+
+#: inc/helpers/navigation.php:402
+msgid "Share via WhatsApp"
+msgstr ""
+
+#: inc/helpers/literary.php:42
+msgid "Short Story"
+msgstr "Cerpen"
+
+#: inc/admin/dashboard-widget.php:234
+msgid "Shortest"
+msgstr "Terpendek"
+
+#: inc/admin/settings.php:441
+msgid "Show Copyright"
+msgstr "Papar Hak Cipta"
+
+#: inc/admin/settings.php:877
+msgid "Show a fixed button in the bottom-right corner that smoothly scrolls back to the top of the page."
+msgstr "Tunjukkan butang tetap di sudut kanan bawah yang menatal dengan lancar ke bahagian atas halaman."
+
+#: inc/admin/settings.php:769
+msgid "Show a related works section at the bottom of each work."
+msgstr "Paparkan bahagian karya berkaitan di bahagian bawah setiap karya."
+
+#: inc/admin/settings.php:467
+msgid "Show coloured form badges beside titles in the TOC."
+msgstr "Paparkan lencana bentuk berwarna di sebelah tajuk dalam Kandungan."
+
+#: inc/admin/settings.php:886
+msgid "Show comments"
+msgstr "Papar komen"
+
+#: inc/admin/settings.php:468
+msgid "Show navigation links between works on single pages."
+msgstr "Paparkan pautan navigasi antara karya pada halaman tunggal."
+
+#: inc/admin/settings.php:772
+msgid "Show post tags on single work pages, between the analytics bar and colophon."
+msgstr "Tunjukkan tag kiriman pada halaman karya tunggal, di antara bar analitik dan kolofon."
+
+#: inc/admin/settings.php:1038
+msgid "Show registered rules"
+msgstr "Tunjukkan peraturan berdaftar"
+
+#: inc/admin/settings.php:446
+msgid "Show the copyright line in the site footer."
+msgstr "Papar baris hak cipta di kaki laman."
+
+#: inc/setup/sidebars.php:14
+msgid "Sidebar"
+msgstr "Bar Sisi"
+
+#: header.php:35
+msgid "Skip to content"
+msgstr "Langkau ke kandungan"
+
+#: assets/js/blocks.js:393
+msgid "Small-caps label above the chapter."
+msgstr "Label huruf kecil di atas fasal."
+
+#: inc/admin/settings.php:1135
+msgid "Social Media"
+msgstr "Media Sosial"
+
+#: inc/admin/settings.php:919 inc/admin/settings.php:931
+msgid "Social Meta Tags (OpenGraph / Twitter Card)"
+msgstr "Tag Meta Sosial (OpenGraph / Twitter Card)"
+
+#: inc/admin/settings.php:1158
+msgid "Social Profiles"
+msgstr "Profil Sosial"
+
+#: inc/helpers/social.php:247
+msgid "Social profiles"
+msgstr ""
+
+#: 404.php:10
+msgid "Sorry, the page you are looking for does not exist."
+msgstr "Maaf, halaman yang anda cari tidak wujud."
+
+#: inc/admin/meta-boxes.php:171 inc/helpers/colophon.php:97
+msgid "Source"
+msgstr "Sumber"
+
+#: assets/js/blocks.js:185
+msgid "Source / Attribution"
+msgstr ""
+
+#: inc/admin/meta-boxes.php:478
+msgid "Source Work Title"
+msgstr "Tajuk Karya Sumber"
+
+#: inc/admin/settings.php:705
+msgid "Spacious — generous pause, meditative pace"
+msgstr "Lapang — jeda panjang, renungan tenang"
+
+#: inc/admin/settings.php:770
+msgid "Stanza Numbers"
+msgstr "Nombor Rangkap"
+
+#: inc/admin/settings.php:700
+msgid "Stanza Spacing"
+msgstr "Jarak Rangkap"
+
+#: assets/js/blocks.js:399
+msgid "Start numbering from this value (default: 1)."
+msgstr "Mulakan penomboran dari nilai ini (lalai: 1)."
+
+#: inc/admin/settings.php:903
+msgid "Structured Data (JSON-LD)"
+msgstr "Data Berstruktur (JSON-LD)"
+
+#: inc/admin/settings.php:958
+msgid "Structures post URLs as /{literary-form}/{post-slug}/. Example: <code>%s</code>. Posts with no literary form assigned retain their existing permalink. Taxonomy archives are not affected — they remain at /form/{slug}/."
+msgstr "Menstruktur URL pos sebagai /{bentuk-sastera}/{slug-pos}/. Contoh: <code>%s</code>. Pos tanpa bentuk sastera mengekalkan pautan kekal sedia ada. Arkib taksonomi tidak terjejas — kekal di /form/{slug}/."
+
+#: inc/admin/meta-boxes.php:556
+msgid "Subject"
+msgstr "Subjek"
+
+#: inc/helpers/literary.php:39
+msgid "Syair"
+msgstr "Syair"
+
+#: inc/helpers/literary.php:62
+msgid "Syair is a four-line monorhyme verse form of Persian origin, typically narrative or didactic in character and traditionally sung."
+msgstr "Syair ialah puisi empat baris berima tunggal, berasal dari tradisi Parsi-Arab, biasanya bersifat naratif atau didaktik dan sering didendangkan."
+
+#: inc/admin/meta-boxes.php:196
+msgid "Syair — Composition Details"
+msgstr "Syair — Butiran Gubahan"
+
+#: inc/admin/settings.php:1151
+msgid "Syndication"
+msgstr "Sindikasi"
+
+#: inc/admin/settings.php:475
+msgid "TOC Layout"
+msgstr "Susun Atur Isi Kandungan"
+
+#: inc/admin/settings.php:487
+msgid "TOC Pagination"
+msgstr "Penomboran Isi Kandungan"
+
+#: index.php:23 inc/admin/settings.php:453
+msgid "Table of Contents"
+msgstr "Kandungan"
+
+#: inc/admin/settings.php:776
+msgid "Tag Settings"
+msgstr "Tetapan Tag"
+
+#: tag.php:9
+msgid "Tagged with"
+msgstr "Ditag dengan"
+
+#: single.php:64 inc/admin/settings.php:772
+msgid "Tags"
+msgstr "Tag"
+
+#: inc/admin/meta-boxes.php:313
+msgid "Tale Cycle"
+msgstr "Kitaran Cerita"
+
+#: assets/js/blocks.js:57 assets/js/blocks.js:115
+msgid "Term Definition"
+msgstr ""
+
+#: inc/admin/settings.php:629
+msgid "Text Options"
+msgstr "Pilihan Teks"
+
+#: inc/admin/settings.php:708
+msgid "The gap between stanzas is where a poem breathes. Default: Comfortable."
+msgstr "Jarak antara rangkap ialah ruang puisi bernafas. Lalai: Selesa."
+
+#: inc/admin/dashboard-widget.php:246
+msgid "Theme Settings"
+msgstr "Tetapan Tema"
+
+#: inc/admin/settings.php:594
+msgid "These two controls work together — choose both independently and they combine. <strong>Colour Scheme</strong> sets the paper: background, surface, and border tones. <strong>Time of Day</strong> sets the ink: text colour, link colour, and accent mood. Your chosen paper holds across all time periods; the ink shifts with the light."
+msgstr "Kedua-dua kawalan ini berfungsi bersama — pilih kedua-duanya secara bebas dan ia bergabung. <strong>Skema Warna</strong> menetapkan kertas: nada latar belakang, permukaan, dan sempadan. <strong>Waktu Siang</strong> menetapkan dakwat: warna teks, warna pautan, dan suasana aksen. Kertas pilihan anda kekal merentasi semua tempoh; dakwat berubah mengikut cahaya."
+
+#: inc/admin/meta-boxes.php:300
+msgid "This is a citation — show \"Cited from\" above the title"
+msgstr ""
+
+#: inc/admin/settings.php:715
+msgid "Tight — 1.55, tightly-wound stanza"
+msgstr "Rapat — 1.55, rangkap padat"
+
+#: inc/admin/settings.php:703
+msgid "Tight — compact, stanzas close together"
+msgstr "Rapat — padat, rangkap berdekatan"
+
+#: inc/hooks/actions.php:342
+msgid "Toggle dark mode"
+msgstr "Togol mod gelap"
+
+#: inc/admin/meta-boxes.php:584
+msgid "Tone"
+msgstr "Nada"
+
+#: inc/admin/dashboard-widget.php:186
+msgid "Total Words"
+msgstr "Jumlah Perkataan"
+
+#: inc/helpers/colophon.php:101 templates/single-puisi-generic.php:69
+msgid "Translated from"
+msgstr "Terjemahan daripada"
+
+#: assets/js/blocks.js:425
+msgid "Type verse 1 here. Press Enter for next verse."
+msgstr "Taip ayat 1 di sini. Tekan Enter untuk ayat seterusnya."
+
+#: index.php:166
+msgid "Uncategorised"
+msgstr "Lain-lain"
+
+#: index.php:249
+msgid "Untagged"
+msgstr "Tidak bertag"
+
+#: assets/js/blocks.js:246
+msgid "Use global setting (Theme Options)"
+msgstr ""
+
+#: inc/admin/settings.php:752
+msgid "Used in the TOC between groups, at the end of works, in the colophon, and by the <code>[divider]</code> shortcode. Can be overridden per-work in the Literary Work Details meta box."
+msgstr "Digunakan dalam Isi Kandungan antara kumpulan, di akhir karya, dalam kolofon, dan oleh kod pendek <code>[divider]</code>. Boleh ditindih per karya dalam kotak meta Butiran Karya Sastera."
+
+#: inc/admin/meta-boxes.php:596
+msgid "Verification Note"
+msgstr "Nota Pengesahan"
+
+#: inc/hooks/actions.php:430 inc/shortcodes/shortcodes.php:233 inc/shortcodes/shortcodes.php:273
+msgid "Verse"
+msgstr "Ayat"
+
+#: assets/js/blocks.js:294
+msgid "Verse Block"
+msgstr ""
+
+#: inc/admin/settings.php:712
+msgid "Verse Line Height"
+msgstr "Ketinggian Baris Bait"
+
+#: assets/js/blocks.js:321
+msgid "Verse Number"
+msgstr ""
+
+#: assets/js/blocks.js:317
+msgid "Verse Settings"
+msgstr ""
+
+#: assets/js/blocks.js:341
+msgid "Verse text\\u2026"
+msgstr ""
+
+#: inc/helpers/navigation.php:169
+msgid "Work navigation"
+msgstr "Navigasi karya"
+
+#: inc/admin/dashboard-widget.php:182
+msgid "Works"
+msgstr "Karya"
+
+#: inc/admin/dashboard-widget.php:203
+msgid "Works by Form"
+msgstr "Karya Mengikut Bentuk"
+
+#: inc/admin/meta-boxes.php:163
+msgid "Year (for sorting)"
+msgstr "Tahun (untuk pengisihan)"
+
+#: inc/helpers/colophon.php:87 inc/helpers/colophon.php:92
+msgid "Year composed"
+msgstr "Tahun digubah"
+
+#: comments.php:142
+msgid "Your comment is awaiting moderation."
+msgstr "Ulasan anda sedang menunggu tapisan."
+
+#: footer.php:72
+msgid "by"
+msgstr "oleh"
+
+#: inc/helpers/colophon.php:118
+msgid "cantos"
+msgstr "bahagian"
+
+#: inc/admin/dashboard-widget.php:194
+msgid "min"
+msgstr "min"
+
+#: inc/hooks/actions.php:19
+msgctxt "taxonomy general name"
+msgid "Literary Forms"
+msgstr ""
+
+#: inc/hooks/actions.php:20
+msgctxt "taxonomy singular name"
+msgid "Literary Form"
+msgstr ""

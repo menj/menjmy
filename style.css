@@ -1,0 +1,20 @@
+/*
+Theme Name: Book WP
+Theme URI: https://github.com/menj/book-wp
+Description: Minimalist-modern literary anthology theme with per-form typography, reading analytics, thematic tagging, night mode, and bilingual (EN/MS) support. Tema WordPress untuk penerbitan antologi sastera — puisi, cerpen, hikayat, esei, memoir, dan bentuk lain.
+Author: MENJ
+Author URI: https://github.com/menj
+Version: 3.5.1
+License: GPL-2.0-or-later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Requires at least: 6.0
+Tested up to: 6.9.1
+Requires PHP: 8.2
+Text Domain: book-wp
+Tags: literary, poetry, book, bilingual, minimal, typography
+*/
+
+/* Front-end styles → assets/css/frontend.css
+   Admin styles    → assets/css/admin.css
+   Colour schemes  → assets/css/schemes/*.css
+   Font overrides  → assets/css/fonts/*.css  */

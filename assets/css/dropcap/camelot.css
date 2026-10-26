@@ -1,0 +1,22 @@
+/**
+ * Book WP — Drop Cap Font: Camelot
+ *
+ * Loaded conditionally when "Camelot" is selected in
+ * Typography → Drop Cap Font. Sets --bwp-dropcap-font so
+ * every form's ::first-letter inherits the choice via the
+ * var() fallback chain in each form stylesheet.
+ *
+ * @package Book_WP
+ */
+
+@font-face {
+    font-family: 'Camelot';
+    src: url('../../fonts/dropcap/camelot.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --bwp-dropcap-font: 'Camelot';
+}

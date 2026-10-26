@@ -1,0 +1,254 @@
+/**
+ * Book WP — Dashboard Widget: Reading Statistics
+ *
+ * Scoped to .bwp-dash inside the WordPress dashboard widget frame.
+ * Inherits WP admin colour tokens for accent consistency.
+ * Designed to feel native but distinctly "Book WP".
+ *
+ * @package Book_WP
+ */
+
+/* ── Root tokens (scoped) ─────────────────────────────────────────────── */
+
+.bwp-dash {
+    --bwp-d-accent:   var(--wp-admin-theme-color, #2271b1);
+    --bwp-d-accent-a: var(--wp-admin-theme-color--rgb, 34 113 177);
+    --bwp-d-surface:  #fff;
+    --bwp-d-border:   #dcdcde;
+    --bwp-d-text:     #1d2327;
+    --bwp-d-muted:    #646970;
+    --bwp-d-subtle:   #f6f7f7;
+    --bwp-d-radius:   4px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+/* ── Empty state ──────────────────────────────────────────────────────── */
+
+.bwp-dash__empty {
+    text-align: center;
+    padding: 1.5rem 0;
+    color: var(--bwp-d-muted);
+    font-size: .8125rem;
+    font-style: italic;
+}
+
+/* ── Headline metrics — 4-column grid ─────────────────────────────────── */
+
+.bwp-dash__metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--bwp-d-border);
+    border: 1px solid var(--bwp-d-border);
+    border-radius: var(--bwp-d-radius);
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.bwp-dash__metric {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: .75rem .25rem;
+    background: var(--bwp-d-surface);
+    text-align: center;
+    min-width: 0;
+}
+
+.bwp-dash__metric-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--bwp-d-text);
+    line-height: 1.2;
+    letter-spacing: -.02em;
+    font-variant-numeric: tabular-nums;
+}
+
+.bwp-dash__metric-unit {
+    font-size: .6875rem;
+    font-weight: 400;
+    color: var(--bwp-d-muted);
+    margin-left: 1px;
+}
+
+.bwp-dash__metric-label {
+    font-size: .625rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--bwp-d-muted);
+    margin-top: .2rem;
+    line-height: 1.35;
+    text-wrap: balance;
+}
+
+/* ── Section chrome ───────────────────────────────────────────────────── */
+
+.bwp-dash__section {
+    margin-bottom: .875rem;
+}
+
+.bwp-dash__section-label {
+    font-size: .625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--bwp-d-muted);
+    margin: 0 0 .5rem;
+    padding-bottom: .375rem;
+    border-bottom: 1px solid rgba(0,0,0,.06);
+}
+
+/* ── Form distribution rows ───────────────────────────────────────────── */
+
+.bwp-dash__form-list {
+    display: flex;
+    flex-direction: column;
+    gap: .375rem;
+}
+
+.bwp-dash__form-row {
+    display: grid;
+    grid-template-columns: auto 1fr 1.75rem auto;
+    gap: .5rem;
+    align-items: center;
+    font-size: .75rem;
+    line-height: 1.4;
+}
+
+.bwp-dash__form-badge {
+    display: inline-block;
+    padding: .125rem .4375rem;
+    border-radius: 20px;
+    font-size: .625rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+    text-align: center;
+    white-space: nowrap;
+    background: var(--bwp-d-subtle);
+    color: var(--bwp-d-muted);
+    border: 1px solid var(--bwp-d-border);
+}
+
+/* Per-form badge colours — matches the frontend badge palette */
+.bwp-dash__form-badge--puisi    { background: #eef3ff; color: #3b5998; border-color: #c7d5f0; }
+.bwp-dash__form-badge--syair    { background: #f3eef8; color: #5b3a8c; border-color: #d5c7e5; }
+.bwp-dash__form-badge--karmina  { background: #fff4ec; color: #b05e2a; border-color: #f0d5be; }
+.bwp-dash__form-badge--hikayat  { background: #f0f7ee; color: #3a6b2c; border-color: #c7dfc0; }
+.bwp-dash__form-badge--cerpen   { background: #fef6e8; color: #8a6914; border-color: #eedcaa; }
+.bwp-dash__form-badge--novel    { background: #e9f5f6; color: #1a5c63; border-color: #b8dce0; }
+.bwp-dash__form-badge--nukilan  { background: #f5eff0; color: #804050; border-color: #e0c8ce; }
+.bwp-dash__form-badge--ratapan  { background: #f4f0ee; color: #6b5040; border-color: #ddd0c8; }
+.bwp-dash__form-badge--esei     { background: #eef2f5; color: #3d5a70; border-color: #c5d3df; }
+.bwp-dash__form-badge--memoir   { background: #f5f0f5; color: #6b3a6b; border-color: #dfc8df; }
+
+.bwp-dash__form-bar-wrap {
+    height: 6px;
+    background: var(--bwp-d-subtle);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.bwp-dash__form-bar {
+    display: block;
+    height: 100%;
+    background: var(--bwp-d-accent);
+    border-radius: 3px;
+    min-width: 3px;
+    transition: width .4s ease;
+}
+
+.bwp-dash__form-count {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--bwp-d-text);
+    text-align: right;
+}
+
+.bwp-dash__form-words {
+    font-size: .6875rem;
+    color: var(--bwp-d-muted);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+/* ── Extremes (longest / shortest) ────────────────────────────────────── */
+
+.bwp-dash__extremes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .75rem;
+}
+
+.bwp-dash__extreme {
+    display: flex;
+    flex-direction: column;
+    gap: .125rem;
+    padding: .5rem .625rem;
+    background: var(--bwp-d-subtle);
+    border-radius: var(--bwp-d-radius);
+}
+
+.bwp-dash__extreme-label {
+    font-size: .5625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--bwp-d-muted);
+}
+
+.bwp-dash__extreme-title {
+    font-size: .75rem;
+    font-weight: 600;
+    color: var(--bwp-d-text);
+    text-decoration: none;
+    line-height: 1.35;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.bwp-dash__extreme-title:hover {
+    color: var(--bwp-d-accent);
+}
+
+.bwp-dash__extreme-meta {
+    font-size: .625rem;
+    color: var(--bwp-d-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+/* ── Footer ───────────────────────────────────────────────────────────── */
+
+.bwp-dash__footer {
+    padding-top: .625rem;
+    border-top: 1px solid rgba(0,0,0,.06);
+    text-align: right;
+}
+
+.bwp-dash__settings-link {
+    font-size: .6875rem;
+    font-weight: 600;
+    color: var(--bwp-d-accent);
+    text-decoration: none;
+    letter-spacing: .01em;
+}
+
+.bwp-dash__settings-link:hover {
+    text-decoration: underline;
+}
+
+/* ── Responsive — collapse to 2×2 on narrow dashboard columns ─────── */
+
+@media (max-width: 480px) {
+    .bwp-dash__metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .bwp-dash__extremes {
+        grid-template-columns: 1fr;
+    }
+    .bwp-dash__form-row {
+        grid-template-columns: auto 1fr 1.5rem auto;
+    }
+}

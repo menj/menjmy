@@ -1,0 +1,148 @@
+/**
+ * Book WP — Literary Form: Karmina
+ *
+ * Pantun dua kerat. Two lines. Sampiran + isi.
+ * The stone is small; the garden frames it.
+ * Title size raised to 1.5em — was 1.3em, which looked accidental.
+ * Muted colour and uppercase remain its distinctive character.
+ *
+ * Applied via body class: .bwp-form-karmina
+ *
+ * @package Book_WP
+ */
+
+/* ── Layout: wide wrap for chrome, narrow content for the verse ──────── */
+/* bwp-page-wrap must be wide enough for the title, analytics bar, tags   */
+/* and colophon to sit comfortably. Only bwp-work__content is kept narrow — */
+/* the two verse lines float in whitespace within the wider wrapper.       */
+
+body.bwp-form-karmina .bwp-page-wrap   { max-width: 38em; }
+body.bwp-form-karmina .bwp-work__content {
+    max-width: 20em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ── Title: small, muted, uppercase — almost an annotation ─ */
+
+body.bwp-form-karmina .bwp-work__title {
+    font-family:    var(--bwp-font-display, 'Cinzel', Georgia, serif);
+    font-size:      1.5em;
+    font-weight:    400;
+    font-style:     normal;
+    text-align:     center;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    line-height:    1.3;
+    color:          var(--bwp-muted);
+}
+
+body.bwp-form-karmina .bwp-work__title::after {
+    content:    '';
+    display:    block;
+    width:      2em;
+    height:     1px;
+    background: var(--bwp-gold-dim, #a8893a);
+    margin:     .6em auto 0;
+    opacity:    .5;
+}
+
+/* ── Body: two lines, centred, generous space ────────────── */
+
+body.bwp-form-karmina .bwp-work__content {
+    font-size:      1.18em;
+    line-height:    2.2;
+    text-align:     center;
+    padding-top:    3em;
+    padding-bottom: 3em;
+}
+
+body.bwp-form-karmina .bwp-work__content p {
+    text-indent:   0 !important;
+    margin-bottom: 0;
+}
+
+/* Sampiran: muted, italic — the image/hook */
+body.bwp-form-karmina .bwp-work__content p:first-of-type {
+    color:      var(--bwp-text-mid);
+    font-style: italic;
+}
+
+/* Isi: full weight — the meaning arrives */
+body.bwp-form-karmina .bwp-work__content p + p {
+    margin-top:  0;
+    text-indent: 0 !important;
+    font-style:  normal;
+    color:       var(--bwp-text);
+    font-weight: 500;
+}
+
+/* ── No drop cap ─────────────────────────────────────────── */
+
+body.bwp-form-karmina .bwp-work__content > p:first-of-type::first-letter {
+    all: unset;
+}
+
+/* ── Ornament: centred, minimal ──────────────────────────── */
+
+body.bwp-form-karmina .bwp-ornament {
+    opacity:    .25;
+    font-size:  .9em;
+    text-align: center;
+    margin:     1.5em 0;
+}
+
+/* ── Epigraph: hidden — karmina needs no preamble ────────── */
+
+body.bwp-form-karmina .bwp-epigraph { display: none; }
+
+/* ── Analytics: centred ──────────────────────────────────── */
+
+body.bwp-form-karmina .bwp-analytics { justify-content: center; }
+
+/* ── Work nav: stepped back ──────────────────────────────── */
+
+body.bwp-form-karmina .bwp-work-nav       { opacity: .4; font-size: .85em; }
+body.bwp-form-karmina .bwp-work-nav:hover { opacity: .8; }
+
+/* ── Colophon ────────────────────────────────────────────── */
+
+body.bwp-form-karmina .bwp-colophon {
+    margin-top: 1.5em;
+    text-align: center;
+    font-size:  .88em;
+    color:      var(--bwp-muted);
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+
+@media screen and (min-width: 52em) {
+    body.bwp-form-karmina .bwp-work__title   { font-size: 1.8em; }
+    body.bwp-form-karmina .bwp-work__content {
+        font-size:      1.35em;
+        line-height:    2.4;
+        padding-top:    4em;
+        padding-bottom: 4em;
+    }
+}
+
+@media print {
+    body.bwp-form-karmina .bwp-work__title   { font-size: 1.2em; text-align: center; }
+    body.bwp-form-karmina .bwp-work__content { font-size: 1.1em; padding: 2em 0; }
+}
+
+/* ── Analytics: compact — all items on one line ──────────── */
+/* Narrow column needs tighter gap and smaller item text so   */
+/* badge · category · read time · words · lines · stanzas    */
+/* all fit on a single row without wrapping.                  */
+
+body.bwp-form-karmina .bwp-analytics {
+    gap:             .2em .55em;
+    justify-content: center;
+}
+
+body.bwp-form-karmina .bwp-analytics__item,
+body.bwp-form-karmina .bwp-analytics__cat {
+    font-size:      .68em;
+    letter-spacing: .07em;
+}

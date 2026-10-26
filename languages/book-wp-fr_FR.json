@@ -1,0 +1,39 @@
+{
+  "translation-revision-date": "2026-03-04T00:00:00+00:00",
+  "generator": "Book WP",
+  "source": "assets/js/blocks.js",
+  "domain": "book-wp",
+  "locale_data": {
+    "messages": {
+      "": {
+        "domain": "book-wp",
+        "lang": "fr_FR",
+        "plural-forms": "nplurals=2; plural=(n != 1);"
+      },
+      "Chapter Settings": [
+        "Paramètres du chapitre"
+      ],
+      "Chapter Number": [
+        "Numéro de chapitre"
+      ],
+      "Large numeral floated left beside verse 1.": [
+        "Grand numéral flottant à gauche à côté du verset 1."
+      ],
+      "Chapter Title (optional)": [
+        "Titre du chapitre (facultatif)"
+      ],
+      "Small-caps label above the chapter.": [
+        "Étiquette en petites majuscules au-dessus du chapitre."
+      ],
+      "First verse number": [
+        "Numéro du premier verset"
+      ],
+      "Start numbering from this value (default: 1).": [
+        "Commencer la numérotation à partir de cette valeur (défaut : 1)."
+      ],
+      "Type verse 1 here. Press Enter for next verse.": [
+        "Tapez le verset 1 ici. Appuyez sur Entrée pour le verset suivant."
+      ]
+    }
+  }
+}

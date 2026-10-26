@@ -1,0 +1,42 @@
+{
+    "apiVersion": 3,
+    "name": "book-wp/chapter",
+    "title": "Chapter (Ratapan)",
+    "description": "Bible-style lament chapter with auto-numbered verses. Type each verse as a separate paragraph \u2014 numbering is applied automatically.",
+    "category": "text",
+    "icon": "book-alt",
+    "keywords": [
+        "ratapan",
+        "lament",
+        "chapter",
+        "verse",
+        "bible",
+        "fasal",
+        "ayat"
+    ],
+    "supports": {
+        "html": false,
+        "className": false,
+        "customClassName": false
+    },
+    "attributes": {
+        "chapterNum": {
+            "type": "string",
+            "default": "1"
+        },
+        "chapterTitle": {
+            "type": "string",
+            "default": ""
+        },
+        "verseStart": {
+            "type": "string",
+            "default": "1"
+        },
+        "content": {
+            "type": "string",
+            "default": ""
+        }
+    },
+    "textdomain": "book-wp",
+    "editorScript": "book-wp-blocks"
+}

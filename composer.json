@@ -1,0 +1,23 @@
+{
+    "name": "menj/book-wp",
+    "description": "Book WP — a literary anthology WordPress theme.",
+    "type": "wordpress-theme",
+    "license": "GPL-2.0-or-later",
+    "require-dev": {
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+        "phpunit/phpunit": "^10.5",
+        "squizlabs/php_codesniffer": "^3.9",
+        "wp-coding-standards/wpcs": "^3.1",
+        "phpcompatibility/phpcompatibility-wp": "^2.1"
+    },
+    "scripts": {
+        "lint:php": "phpcs --standard=config/.phpcs.xml.dist",
+        "lint:php:fix": "phpcbf --standard=config/.phpcs.xml.dist",
+        "test": "phpunit -c config/phpunit.xml"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}

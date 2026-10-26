@@ -1,0 +1,103 @@
+/**
+ * Book WP — Literary Layer
+ *
+ * Augments frontend.css. frontend.css now handles all base tokens,
+ * type, colour, and structure. This file handles only what is
+ * unique to the classical Malay literary context: colophon elements,
+ * form-specific colophon blocks (karmina, esei thesis), and
+ * night-mode compatibility for those elements.
+ *
+ * @package Book_WP
+ */
+
+/* ═══════════════════════════════════════════════════════════
+   COLOPHON — Extended form-specific elements
+   ═══════════════════════════════════════════════════════════ */
+
+/* Dateline: "Cyberjaya, 3 Ramadan 1446" — italic, slightly larger */
+.bwp-colophon__line--dateline {
+    font-family:    var(--bwp-font-ui);
+    font-size:      .75em;
+    font-style:     normal;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+    color:          var(--bwp-muted);
+    opacity:        1;
+}
+
+/* Subject / theme one-liner */
+.bwp-colophon__line--subject {
+    font-size:    1.02em;
+    font-style:   italic;
+    margin-bottom: .3em;
+}
+
+/* Meta attributes — mode, register, rhyme */
+.bwp-colophon__line--meta {
+    font-family:    var(--bwp-font-display);
+    font-size:      .75em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    opacity:        .7;
+}
+
+/* Karmina: labelled sampiran / isi display */
+.bwp-colophon__karmina {
+    margin:      .8em 0;
+    padding:     .6em .9em;
+    border-left: 2px solid var(--bwp-gold-dim, #a8893a);
+    background: rgba(201, 168, 76, .04);
+}
+.bwp-colophon__karmina-label {
+    font-family:    var(--bwp-font-display);
+    font-size:      .68em;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color:          var(--bwp-muted);
+    margin:         .5em 0 .1em;
+    font-weight:    400;
+}
+.bwp-colophon__karmina-label:first-child { margin-top: 0; }
+.bwp-colophon__karmina-line {
+    font-style:  italic;
+    margin:      0;
+    line-height: 1.5;
+}
+
+/* Esei: thesis block — foregrounded */
+.bwp-colophon__thesis {
+    margin:      .8em 0;
+    padding:     .7em 1em;
+    border-left: 3px solid var(--bwp-teal, #1B3C53);
+    font-style:  italic;
+    background: rgba(27, 60, 83, .04);
+    font-size:   1em;
+    line-height: 1.6;
+}
+.bwp-colophon__thesis p { margin: 0; }
+
+/* ═══════════════════════════════════════════════════════════
+   WORK NAV TITLE — ink, not blue
+   ═══════════════════════════════════════════════════════════ */
+
+.bwp-work-nav__title { color: var(--bwp-text); }
+
+/* ═══════════════════════════════════════════════════════════
+   NIGHT MODE OVERRIDES for literary elements
+   ═══════════════════════════════════════════════════════════ */
+
+body.bwp-night .bwp-colophon__thesis,
+html.bwp-night .bwp-colophon__thesis,
+:root.bwp-time-night .bwp-colophon__thesis,
+body.bwp-scheme-night .bwp-colophon__thesis {
+    border-left-color: var(--bwp-link);
+    background: rgba(126, 181, 211, .06);
+}
+
+body.bwp-night .bwp-colophon__karmina,
+html.bwp-night .bwp-colophon__karmina,
+:root.bwp-time-night .bwp-colophon__karmina,
+body.bwp-scheme-night .bwp-colophon__karmina {
+    border-left-color: var(--bwp-gold-dim);
+    background: rgba(126, 181, 211, .04);
+}

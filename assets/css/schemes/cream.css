@@ -1,0 +1,64 @@
+/**
+ * Book WP — Cream scheme (aged paper)
+ *
+ * SCHEME OWNS SURFACE. TIME OWNS INK.
+ *
+ * Selectors on body.bwp-scheme-cream set surface tokens directly on <body>.
+ * Custom properties set on body beat values inherited from <html> (where
+ * the time class lives) — so cream paper holds regardless of time period.
+ *
+ * Compound selectors (time + scheme) tune the surface tint to complement
+ * the active ink mood: cooler at dawn, warmest at morning, deep at dusk,
+ * dimmed at night. Ink tokens are untouched — time provides those.
+ */
+
+/* ── Base surface ────────────────────────────────────────────────────────── */
+/* Afternoon default and fallback for any unlisted period.                   */
+
+body.bwp-scheme-cream {
+    --bwp-bg:           #faf5dc;
+    --bwp-bg-subtle:    #f3edcc;
+    --bwp-border:       #d8cfc0;
+    --bwp-border-faint: #e8e2d4;
+    --bwp-stone:        #9a8c70;
+}
+
+/* ── Cream + Dawn — faintly cooler paper, misty morning ─────────────────── */
+
+:root.bwp-time-dawn body.bwp-scheme-cream {
+    --bwp-bg:           #f6f4f8;
+    --bwp-bg-subtle:    #efecf4;
+    --bwp-border:       #ccc8d8;
+    --bwp-border-faint: #e2dff0;
+    --bwp-stone:        #8a84a0;
+}
+
+/* ── Cream + Morning — warmest paper, amber-soaked ─────────────────────── */
+
+:root.bwp-time-morning body.bwp-scheme-cream {
+    --bwp-bg:           #fdf6e0;
+    --bwp-bg-subtle:    #f8eecc;
+    --bwp-border:       #dcc898;
+    --bwp-border-faint: #ede4c0;
+    --bwp-stone:        #a08850;
+}
+
+/* ── Cream + Dusk — ochre-tinged parchment ──────────────────────────────── */
+
+:root.bwp-time-dusk body.bwp-scheme-cream {
+    --bwp-bg:           #fdf0d0;
+    --bwp-bg-subtle:    #f5e4b8;
+    --bwp-border:       #d4b888;
+    --bwp-border-faint: #e8d8b0;
+    --bwp-stone:        #a07848;
+}
+
+/* ── Cream + Night — dimmed warm parchment, lamp-lit ───────────────────── */
+
+:root.bwp-time-night body.bwp-scheme-cream {
+    --bwp-bg:           #f0e8cc;
+    --bwp-bg-subtle:    #e8ddb8;
+    --bwp-border:       #c8b898;
+    --bwp-border-faint: #d8c8a8;
+    --bwp-stone:        #907858;
+}

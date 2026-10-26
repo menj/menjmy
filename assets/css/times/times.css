@@ -1,0 +1,125 @@
+/**
+ * Book WP — Time-of-Day Ink Palettes
+ *
+ * TIME OWNS INK. SCHEME OWNS SURFACE.
+ *
+ * These rules set only ink tokens — text, links, accents, ornaments.
+ * Surface tokens (--bwp-bg, --bwp-bg-subtle, --bwp-border,
+ * --bwp-border-faint) are owned by the scheme files.
+ *
+ * Why the split works:
+ *   - bwp-time-* is applied to <html> by time-theme.js
+ *   - bwp-scheme-* is applied to <body> by PHP body_class()
+ *   - CSS custom properties set directly on <body> always beat values
+ *     inherited from <html> — no specificity fight, no load-order dependency
+ *   - Scheme + time compound selectors in the scheme files further tune
+ *     the surface to complement the active ink mood
+ *
+ * Period map:
+ *   bwp-time-dawn       04:00 – 06:59  — pale, cool, quiet; lavender-violet
+ *   bwp-time-morning    07:00 – 11:59  — warm, bright; amber-gold
+ *   bwp-time-afternoon  12:00 – 16:59  — neutral; frontend.css defaults
+ *   bwp-time-dusk       17:00 – 20:59  — warm ochre, burnt sienna
+ *   bwp-time-night      21:00 – 03:59  — deep navy; silver on dark
+ */
+
+/* ── Dawn  04:00–06:59 ──────────────────────────────────────────────────── */
+/* Pale, cool, quiet. Lavender-violet ink.                                   */
+
+:root.bwp-time-dawn {
+    --bwp-text:         #1a1820;
+    --bwp-text-mid:     #32303a;
+    --bwp-muted:        #6a6478;
+    --bwp-link:         #5a4a8a;
+    --bwp-link-hover:   #3d3268;
+    --bwp-accent:       #5a4a8a;
+    --bwp-ornament:     #aaa4bc;
+    --bwp-progress:     #7a68b0;
+    --bwp-border-ink:   #7878a0;
+    --bwp-teal:         #4a3a78;
+    --bwp-gold:         #9a88c0;
+}
+
+/* ── Morning  07:00–11:59 ───────────────────────────────────────────────── */
+/* Warm, bright. Amber-gold ink.                                             */
+
+:root.bwp-time-morning {
+    --bwp-text:         #1a1508;
+    --bwp-text-mid:     #302a10;
+    --bwp-muted:        #7a6a40;
+    --bwp-link:         #8a5210;
+    --bwp-link-hover:   #6a3c08;
+    --bwp-accent:       #8a5210;
+    --bwp-ornament:     #b89868;
+    --bwp-progress:     #c07818;
+    --bwp-border-ink:   #887858;
+    --bwp-teal:         #6a4c18;
+    --bwp-gold:         #c89030;
+}
+
+/* ── Afternoon  12:00–16:59 ─────────────────────────────────────────────── */
+/* Maximum contrast. No overrides — frontend.css base is the default.       */
+
+/* (intentionally empty) */
+
+/* ── Dusk  17:00–20:59 ──────────────────────────────────────────────────── */
+/* Warm ochre, burnt sienna. Deep amber ink.                                 */
+
+:root.bwp-time-dusk {
+    --bwp-text:         #1c1008;
+    --bwp-text-mid:     #2e1c0c;
+    --bwp-muted:        #886040;
+    --bwp-link:         #a03a10;
+    --bwp-link-hover:   #782808;
+    --bwp-accent:       #a03a10;
+    --bwp-ornament:     #b88040;
+    --bwp-progress:     #b84010;
+    --bwp-border-ink:   #907050;
+    --bwp-teal:         #6a2808;
+    --bwp-gold:         #d07820;
+}
+
+/* ── Night  21:00–03:59 ─────────────────────────────────────────────────── */
+/* Deep navy. Silver type on dark ground.                                    */
+/* Note: the Night *scheme* (user-selected) handles its own full palette.   */
+/* These ink tokens apply when the visitor's clock is in the night window.  */
+
+:root.bwp-time-night {
+    --bwp-text:         #d4dce8;
+    --bwp-text-mid:     #b0bcc8;
+    --bwp-muted:        #8a9aaa;
+    --bwp-link:         #6aaad4;
+    --bwp-link-hover:   #9ccaf0;
+    --bwp-accent:       #6aaad4;
+    --bwp-ornament:     #2e4058;
+    --bwp-progress:     #5888b0;
+    --bwp-border-ink:   #2e4058;
+    --bwp-teal:         #4a8ab0;
+    --bwp-gold:         #7aaac8;
+    --bwp-stone:        #3a4858;
+    --bwp-gold-dim:     #6a8aa0;
+    --bwp-gold-light:   #90a8b8;
+}
+
+/* Night time surface — only applies when no scheme is active (default).    */
+/* If a scheme is active, body.bwp-scheme-* surface tokens win via cascade. */
+
+:root.bwp-time-night {
+    --bwp-bg:           #0e141e;
+    --bwp-bg-subtle:    #141c28;
+    --bwp-border:       #1e2c3e;
+    --bwp-border-faint: #18243a;
+}
+
+/* ── Night time: component overrides ────────────────────────────────────── */
+
+:root.bwp-time-night .bwp-night-toggle {
+    background:   #141c28;
+    border-color: #1e2c3e;
+    color:        #6aaad4;
+}
+
+:root.bwp-time-night .bwp-search-form__btn,
+:root.bwp-time-night .bwp-sidebar .search-submit {
+    color: #0e141e;
+}

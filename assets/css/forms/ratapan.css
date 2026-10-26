@@ -1,0 +1,239 @@
+/**
+ * Book WP — Literary Form: Ratapan (Lament / Elegy)
+ *
+ * The lament is grief made language. Sombre palette, compressed
+ * leading, dark border treatments. Wide column to accommodate the
+ * Bible-style chapter numeral float without cramping verse text.
+ *
+ * Applied via body class: .bwp-form-ratapan
+ *
+ * @package Book_WP
+ */
+
+/* ── Palette: muted, sombre ─────────────────────────────── */
+/* SURFACE + FORM ACCENTS — ink comes from the time system.  */
+/* Yields to Cream / Dusk schemes via :not() guards.         */
+
+:root:not(.bwp-time-night):not(.bwp-night) body.bwp-form-ratapan:not(.bwp-scheme-night):not(.bwp-scheme-cream):not(.bwp-scheme-dusk):not(.bwp-night) {
+    --bwp-border:       #c8c4be;
+    --bwp-border-faint: #e0dcd6;
+    --bwp-bg-subtle:    #f0ede8;
+    --bwp-ornament:     #8a8480;
+    --bwp-stone:        #9a9490;
+    --bwp-progress:     #5a5858;
+    --bwp-gold:         #9a9490;
+    --bwp-gold-light:   #b4b0aa;
+    --bwp-gold-dim:     #7a7470;
+}
+
+/* Night: form-specific accents only — surface and ink come  */
+/* from the night system (toggle / time-night / scheme).     */
+html.bwp-night body.bwp-form-ratapan,
+body.bwp-scheme-night.bwp-form-ratapan,
+body.bwp-night.bwp-form-ratapan,
+:root.bwp-time-night body.bwp-form-ratapan {
+    --bwp-ornament:     #4a5058;
+    --bwp-progress:     #6a7880;
+    --bwp-gold:         #6a7078;
+    --bwp-gold-light:   #808890;
+    --bwp-gold-dim:     #607080;
+}
+
+@media (prefers-color-scheme: dark) {
+    html:not([data-bwp-night="0"]) body.bwp-form-ratapan:not(.bwp-scheme-cream):not(.bwp-scheme-dusk) {
+        --bwp-ornament:     #4a5058;
+        --bwp-progress:     #6a7880;
+        --bwp-gold:         #6a7078;
+        --bwp-gold-light:   #808890;
+        --bwp-gold-dim:     #607080;
+    }
+}
+
+/* ── Layout: wide — chapter float needs room ─────────────── */
+
+body.bwp-form-ratapan .bwp-page-wrap   { max-width: 46em; }
+body.bwp-form-ratapan .bwp-work__content {
+    max-width: 40em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ── Title: centred, normal weight, sombre ───────────────── */
+
+body.bwp-form-ratapan .bwp-work__title {
+    font-family:    var(--bwp-font-display, 'Cinzel', Georgia, serif);
+    font-size:      2.0em;
+    font-weight:    400;
+    font-style:     normal;
+    text-align:     center;
+    letter-spacing: .04em;
+    line-height:    1.2;
+    color:          var(--bwp-text);
+}
+
+/* Ash hairline — not gold, grief uses no ornament */
+body.bwp-form-ratapan .bwp-work__title::after {
+    content:    '';
+    display:    block;
+    width:      3em;
+    height:     1px;
+    background: var(--bwp-border);
+    margin:     .7em auto 0;
+}
+
+/* ── Body: measured, deliberate ──────────────────────────── */
+
+body.bwp-form-ratapan .bwp-work__content {
+    font-size:  1.04em;
+    line-height: 2.0;
+}
+
+body.bwp-form-ratapan .bwp-work__content p      { text-indent: 0 !important; }
+body.bwp-form-ratapan .bwp-work__content p + p  { margin-top: 1.8em; text-indent: 0 !important; }
+
+/* ── No drop cap ─────────────────────────────────────────── */
+
+body.bwp-form-ratapan .bwp-work__content > p:first-of-type::first-letter {
+    all: unset;
+}
+
+/* ── Ornament: minimal ───────────────────────────────────── */
+
+body.bwp-form-ratapan .bwp-ornament {
+    text-align: center;
+    opacity:    .3;
+    margin:     2em 0;
+    font-size:  1.1em;
+}
+
+/* ── Epigraph ────────────────────────────────────────────── */
+
+body.bwp-form-ratapan .bwp-epigraph {
+    border-left-color: var(--bwp-border);
+    background:        none;
+    opacity:           .8;
+}
+
+body.bwp-form-ratapan .bwp-epigraph::before {
+    color:   var(--bwp-ornament);
+    opacity: .2;
+}
+
+/* ── Bait numbers: muted ─────────────────────────────────── */
+
+body.bwp-form-ratapan .bwp-bait__num {
+    color:   var(--bwp-ornament);
+    opacity: .5;
+}
+
+/* ── Colophon ────────────────────────────────────────────── */
+
+body.bwp-form-ratapan .bwp-colophon { opacity: .7; }
+
+/* ── Progress bar: cool grey ─────────────────────────────── */
+
+body.bwp-form-ratapan .bwp-progress__bar { background: var(--bwp-progress); }
+
+/* ── Analytics: centred ──────────────────────────────────── */
+
+body.bwp-form-ratapan .bwp-analytics { justify-content: center; }
+
+/* ── Bible-style chapter/verse apparatus ─────────────────── */
+
+body.bwp-form-ratapan .bwp-chapter {
+    display:      block;
+    margin:       2em 0 0;
+    border-top:   1px solid var(--bwp-border-faint);
+    padding-top:  1.2em;
+    overflow:     hidden;
+}
+
+body.bwp-form-ratapan .bwp-chapter:first-child {
+    border-top:  none;
+    padding-top: 0;
+    margin-top:  0;
+}
+
+body.bwp-form-ratapan .bwp-chapter__title {
+    display:        block;
+    font-size:      .62em;
+    letter-spacing: .18em;
+    color:          var(--bwp-muted);
+    opacity:        .75;
+    margin-bottom:  .8em;
+    text-transform: uppercase;
+}
+
+body.bwp-form-ratapan .bwp-chapter__num {
+    float:          left;
+    font-size:      4.2em;
+    font-weight:    700;
+    line-height:    .88;
+    letter-spacing: -.02em;
+    color:          var(--bwp-text);
+    opacity:        .82;
+    margin-right:   .18em;
+    margin-top:     .04em;
+    padding:        0;
+}
+
+body.bwp-form-ratapan .bwp-chapter__content {
+    display:    block;
+    text-align: left;
+    hyphens:    none;
+    line-height: 1.7;
+}
+
+body.bwp-form-ratapan .bwp-chapter__content p {
+    display:  block;
+    margin:   0 !important;
+    padding:  0 !important;
+    line-height: 1.65;
+}
+
+body.bwp-form-ratapan .bwp-chapter__content p + p { margin-top: 0 !important; }
+
+body.bwp-form-ratapan .bwp-vnum {
+    font-family:    var(--bwp-font-ui);
+    font-size:      .78em;
+    font-weight:    700;
+    font-style:     normal;
+    color:          var(--bwp-text);
+    opacity:        .75;
+    vertical-align: baseline;
+    line-height:    inherit;
+    margin-right:   .4em;
+    letter-spacing: 0;
+    user-select:    none;
+}
+
+body.bwp-form-ratapan .bwp-chapter .bwp-vnum[data-v="1"] { display: none; }
+
+body.bwp-form-ratapan .bwp-chapter .bwp-work__content > p::before { display: none; }
+
+body.bwp-form-ratapan .bwp-chapter::after {
+    content: '';
+    display: table;
+    clear:   both;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+
+@media screen and (max-width: 36em) {
+    /* Chapter numeral — at 4.2em (≈67 px) on a 360 px viewport the float
+       leaves too little room for verse text.  Shrink to keep the
+       Bible-style apparatus legible without dominating the column. */
+    body.bwp-form-ratapan .bwp-chapter__num { font-size: 2.6em; }
+}
+
+@media screen and (min-width: 52em) {
+    body.bwp-form-ratapan .bwp-work__title   { font-size: 2.6em; }
+    body.bwp-form-ratapan .bwp-work__content { line-height: 2.1; }
+}
+
+@media print {
+    body.bwp-form-ratapan .bwp-work__title        { font-size: 1.8em; }
+    body.bwp-form-ratapan .bwp-chapter__num        { font-size: 3.8em; opacity: 1; }
+    body.bwp-form-ratapan .bwp-chapter             { border-top-color: #888; }
+    body.bwp-form-ratapan .bwp-chapter__content    { text-align: left; hyphens: none; }
+}

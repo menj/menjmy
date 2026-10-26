@@ -1,0 +1,140 @@
+/**
+ * Book WP — Literary Form: Memoir (Autobiographical Essay)
+ *
+ * First-person essay — the narrator and author are the same.
+ * Warmer register than the argumentative essay. Georgia italic
+ * title for personal voice; warm palette tint; paragraph spacing
+ * rather than indent reflects confessional, reflective rhythm.
+ *
+ * Applied via body class: .bwp-form-memoir
+ *
+ * @package Book_WP
+ */
+
+/* ── Palette: warmer than neutral, personal ─────────────── */
+/* SURFACE ONLY — ink comes from the time-of-day system.     */
+/* Yields to Cream / Dusk schemes via :not() guards.         */
+
+:root:not(.bwp-time-night):not(.bwp-night) body.bwp-form-memoir:not(.bwp-scheme-night):not(.bwp-scheme-cream):not(.bwp-scheme-dusk):not(.bwp-night) {
+    --bwp-bg:        #fdfaf6;
+    --bwp-bg-subtle: #f5f0e8;
+}
+
+/* Night: no form-specific overrides needed — surface and    */
+/* ink come from the night system (toggle / time / scheme).  */
+
+@media (prefers-color-scheme: dark) {
+    /* No form-specific overrides needed. */
+}
+
+/* ── Layout: intimate — between esei and poetry ─────────── */
+
+body.bwp-form-memoir .bwp-page-wrap   { max-width: 40em; }
+body.bwp-form-memoir .bwp-work__content {
+    max-width: 34em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ── Title: Georgia italic — personal, not monumental ────── */
+
+body.bwp-form-memoir .bwp-work__title {
+    font-family:    Georgia, 'Times New Roman', serif;
+    font-size:      1.8em;
+    font-weight:    400;
+    font-style:     italic;
+    text-align:     left;
+    letter-spacing: .0em;
+    line-height:    1.2;
+    color:          var(--bwp-text);
+}
+
+body.bwp-form-memoir .bwp-work__title::after {
+    content:    '';
+    display:    block;
+    width:      2.5em;
+    height:     1px;
+    background: var(--bwp-gold-dim, #a8893a);
+    margin-top: .6em;
+    opacity:    .6;
+}
+
+/* ── Body: paragraph spacing, intimate prose ─────────────── */
+
+body.bwp-form-memoir .bwp-work__content {
+    font-size:  1.05em;
+    line-height: 1.9;
+    text-align: left;
+}
+
+body.bwp-form-memoir .bwp-work__content p      { text-indent: 0; margin-bottom: .75em; }
+body.bwp-form-memoir .bwp-work__content p + p  { text-indent: 0; margin-top: 0; }
+
+/* ── Drop cap: small, personal, Georgia italic ───────────── */
+
+body.bwp-form-memoir .bwp-work__content > p:first-of-type::first-letter {
+    float:        left;
+    font-family:  var(--bwp-dropcap-font, Georgia), serif;
+    font-size:    3em;
+    line-height:  .88;
+    padding-right: .06em;
+    margin-top:   .06em;
+    color:        var(--bwp-muted);
+    font-weight:  400;
+    font-style:   italic;
+}
+
+/* ── Petikan: diary-style ────────────────────────────────── */
+
+body.bwp-form-memoir .bwp-petikan {
+    margin-left:        1.6em;
+    font-size:          .96em;
+    font-style:         italic;
+    border-left-color:  var(--bwp-muted);
+    opacity:            .85;
+}
+
+/* ── Epigraph ────────────────────────────────────────────── */
+
+body.bwp-form-memoir .bwp-epigraph {
+    font-style:        italic;
+    font-size:         .9em;
+    max-width:         26em;
+    margin-left:       0;
+    border-left-color: var(--bwp-muted);
+    opacity:           .8;
+}
+
+/* ── Ornament: minimal ───────────────────────────────────── */
+
+body.bwp-form-memoir .bwp-ornament {
+    text-align: left;
+    opacity:    .2;
+    margin:     2em 0;
+    font-size:  .9em;
+}
+
+/* ── Colophon ────────────────────────────────────────────── */
+
+body.bwp-form-memoir .bwp-colophon {
+    text-align: left;
+    font-size:  .88em;
+    color:      var(--bwp-muted);
+    margin-top: 2.5em;
+}
+
+/* ── Analytics: left-aligned ────────────────────────────── */
+
+body.bwp-form-memoir .bwp-analytics { justify-content: flex-start; }
+
+/* ── Responsive ──────────────────────────────────────────── */
+
+@media screen and (min-width: 52em) {
+    body.bwp-form-memoir .bwp-work__title   { font-size: 2.2em; }
+    body.bwp-form-memoir .bwp-work__content { font-size: 1.08em; }
+}
+
+@media print {
+    body.bwp-form-memoir .bwp-work__title   { font-size: 1.6em; font-style: italic; }
+    body.bwp-form-memoir .bwp-work__content { line-height: 1.72; }
+}

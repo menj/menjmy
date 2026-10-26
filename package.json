@@ -1,0 +1,21 @@
+{
+    "name": "book-wp",
+    "version": "3.5.1",
+    "description": "Book WP \u2014 a literary anthology WordPress theme.",
+    "private": true,
+    "scripts": {
+        "lint:js": "eslint --config config/.eslintrc.json assets/js/",
+        "lint:js:fix": "eslint --config config/.eslintrc.json assets/js/ --fix",
+        "lint:css": "stylelint --config config/.stylelintrc.json \"assets/css/**/*.css\"",
+        "lint:css:fix": "stylelint --config config/.stylelintrc.json \"assets/css/**/*.css\" --fix",
+        "lint": "npm run lint:js && npm run lint:css"
+    },
+    "devDependencies": {
+        "eslint": "^8.57.0",
+        "stylelint": "^16.3.0",
+        "stylelint-config-standard": "^36.0.0"
+    },
+    "engines": {
+        "node": ">=18.0.0"
+    }
+}
