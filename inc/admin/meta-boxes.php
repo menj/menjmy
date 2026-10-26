@@ -1,6 +1,6 @@
 <?php
 /**
- * Book WP — Literary Work Meta Boxes
+ * Sasterawan — Literary Work Meta Boxes
  *
  * Each literary form has its own distinctive custom fields that
  * characterise it to readers — not just bibliographic data but

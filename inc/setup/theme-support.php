@@ -1,6 +1,6 @@
 <?php
 /**
- * Book WP — Theme Support & Core Setup
+ * Sasterawan — Theme Support & Core Setup
  *
  * @package Book_WP
  */

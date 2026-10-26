@@ -8,7 +8,7 @@
     <?php wp_head(); ?>
     <?php if ( '1' === get_option( 'book_wp_night_toggle', '1' ) ) : ?>
     <script>
-    /* Book WP — Night-mode preload (runs synchronously before first paint).
+    /* Sasterawan — Night-mode preload (runs synchronously before first paint).
        Reads saved preference from localStorage. If none is set, falls back to
        the OS prefers-color-scheme media query. Adds .bwp-night to <html> so
        CSS applies before <body> is painted, eliminating the flash-of-light-theme

@@ -1,4 +1,4 @@
-# Book WP
+# Sasterawan
 
 A minimalist literary anthology theme for WordPress. Posts are independent
 literary works organised by custom taxonomy (`literary_form`), category, and
@@ -32,8 +32,8 @@ wp theme install book-wp --activate
 After activation:
 
 1. Set `Settings > General > Site Title` to the anthology or collection name
-2. Go to `Appearance > Book WP > General` — set Author Name and Anthology Name
-3. Go to `Appearance > Book WP > Typography` — choose font, remote-font loading,
+2. Go to `Appearance > Sasterawan > General` — set Author Name and Anthology Name
+3. Go to `Appearance > Sasterawan > Typography` — choose font, remote-font loading,
    and colour scheme
 4. Create WordPress categories for your collections
 5. Go to `Posts > Literary Forms` to review or add literary form terms
@@ -168,7 +168,7 @@ All tokens defined on `:root` in `frontend.css`:
 
 ### Schemes (Paper)
 
-Four schemes, set via `Appearance > Book WP > Typography > Paper`:
+Four schemes, set via `Appearance > Sasterawan > Typography > Paper`:
 
 | Scheme | Class on `<body>` | CSS file | Character |
 |--------|------------------|----------|-----------|
@@ -189,7 +189,7 @@ at dusk, dimmed at night.
 ### Time of Day (Ink)
 
 Five periods, set automatically from the visitor's local clock or pinned by
-the admin via `Appearance > Book WP > Typography > Ink`:
+the admin via `Appearance > Sasterawan > Typography > Ink`:
 
 | Period | Hours | Class on `<html>` | Character |
 |--------|-------|-------------------|-----------|
@@ -293,7 +293,7 @@ Custom CSS is attached with `wp_add_inline_style()` to a synthetic
 prints after scheme, form, tag, and font layers.
 
 Remote Google Fonts are controlled by `book_wp_remote_fonts` (default `1`).
-When disabled, Book WP skips Google Fonts and preconnect hints. The CSS still
+When disabled, Sasterawan skips Google Fonts and preconnect hints. The CSS still
 declares the preferred font-family stack, so visitor-installed fonts can be
 used before browser/system fallbacks.
 

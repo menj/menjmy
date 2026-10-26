@@ -1,4 +1,4 @@
-# Book WP — Architecture, Upgrades & Roadmap
+# Sasterawan — Architecture, Upgrades & Roadmap
 
 **Version:** 3.5.1  
 **Type:** Classic PHP template theme (not FSE)  
@@ -11,7 +11,7 @@
 
 ## Overview
 
-Book WP is a minimalist literary anthology theme. Every structural decision is oriented around a single-author, multi-work anthology where posts are independent literary works — not blog entries, not chapters of one book. Works are organised by literary form (a custom taxonomy), by WordPress category, or by tag. The theme enforces this model throughout: the front page is a Table of Contents, archives are form/category/tag indexes, and single pages are reading environments.
+Sasterawan is a minimalist literary anthology theme. Every structural decision is oriented around a single-author, multi-work anthology where posts are independent literary works — not blog entries, not chapters of one book. Works are organised by literary form (a custom taxonomy), by WordPress category, or by tag. The theme enforces this model throughout: the front page is a Table of Contents, archives are form/category/tag indexes, and single pages are reading environments.
 
 ---
 
@@ -222,7 +222,7 @@ All keys registered via `register_post_meta()` in `actions.php` with `show_in_re
 
 ## Theme Options (wp_options)
 
-Managed via `inc/admin/settings.php`. Settings page at Appearance → Book WP. Six tabs.
+Managed via `inc/admin/settings.php`. Settings page at Appearance → Sasterawan. Six tabs.
 
 ### Tab 1 — General
 
@@ -1018,7 +1018,7 @@ itself must not be attempted as a point release. Decision: designate a
 milestone (Booklit 2.0 or similar) and scope the work as a dedicated branch.
 
 **#18 — Block pattern library**
-Book WP has zero registered block patterns. A new post opens to a blank
+Sasterawan has zero registered block patterns. A new post opens to a blank
 editor; the user must know the correct block structure for literary apparatus
 from memory. Candidate patterns: epigraph layout, dedication spread, chapter
 opening (chapter block + drop cap paragraph), syair four-stanza structure,
@@ -1051,7 +1051,7 @@ page structure — `single.php`, `index.php`, `archive.php`, `header.php`,
 added, so FSE is never triggered and the WordPress PHP template resolver
 continues to run.
 
-This is the natural next step for Book WP. The literary apparatus (analytics
+This is the natural next step for Sasterawan. The literary apparatus (analytics
 bar, colophon, epigraph, related works) is inherently server-side PHP — it
 cannot be expressed as static saved block HTML. A hybrid approach preserves
 that constraint while making each piece of apparatus insertable in the block
@@ -1179,7 +1179,7 @@ render).
 
 ### Current State
 
-Book WP is a **classic PHP template theme**. FSE is not active. The block
+Sasterawan is a **classic PHP template theme**. FSE is not active. The block
 editor works but previously had no knowledge of the theme's design tokens.
 
 **v3.3.20 partial bridge (already done):**
@@ -1198,7 +1198,7 @@ WordPress determines a theme is a block/FSE theme by the presence of
 exists, WordPress switches the entire template resolution pipeline from PHP
 to HTML block templates and **abandons the PHP template hierarchy entirely**.
 
-Book WP currently has PHP custom page templates in `templates/`:
+Sasterawan currently has PHP custom page templates in `templates/`:
 
 ```
 templates/
@@ -1518,7 +1518,7 @@ defined( 'ABSPATH' ) || exit;
 **File:** `inc/setup/enqueue.php`
 **Severity:** Resolved for no-remote-fonts operation.
 
-Book WP now includes `book_wp_remote_fonts` in Theme Options → Typography.
+Sasterawan now includes `book_wp_remote_fonts` in Theme Options → Typography.
 When disabled, the theme skips Google Fonts stylesheet requests, font
 preconnect hints, and form-specific Google display fonts. The CSS keeps the
 same font-family preferences and falls back to visitor-installed fonts or

@@ -1,7 +1,7 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 /**
- * Book WP — Social Profile Icons
+ * Sasterawan — Social Profile Icons
  *
  * Renders the social icon row used in the site footer.
  * Each platform URL is stored as a separate option (book_wp_social_{slug}).

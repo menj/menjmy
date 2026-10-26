@@ -1,5 +1,5 @@
 /**
- * Book WP — Dashboard Widget: Reading Statistics
+ * Sasterawan — Dashboard Widget: Reading Statistics
  *
  * Animates the form-distribution bar widths from 0 to their target
  * value when the widget first enters the viewport, using

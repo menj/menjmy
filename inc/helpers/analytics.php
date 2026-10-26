@@ -1,6 +1,6 @@
 <?php
 /**
- * Book WP — Reading Analytics
+ * Sasterawan — Reading Analytics
  *
  * Computes reading time, word count, line count, stanza count,
  * and renders the analytics bar displayed above each work.

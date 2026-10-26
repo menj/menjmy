@@ -1,6 +1,6 @@
 <?php
 /**
- * Book WP — Dashboard Widget: Reading Statistics
+ * Sasterawan — Dashboard Widget: Reading Statistics
  *
  * Adds a dashboard widget to the WordPress admin home screen showing
  * aggregate reading statistics across all published works: total word

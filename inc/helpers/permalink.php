@@ -358,7 +358,7 @@ function book_wp_pending_flush_admin_notice() {
     ?>
     <div class="notice notice-warning is-dismissible">
         <p>
-            <strong><?php esc_html_e( 'Book WP — rewrite flush pending', 'book-wp' ); ?></strong>
+            <strong><?php esc_html_e( 'Sasterawan — rewrite flush pending', 'book-wp' ); ?></strong>
             &nbsp;
             <?php printf(
                 wp_kses(

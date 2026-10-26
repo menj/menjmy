@@ -1,6 +1,6 @@
 <?php
 /**
- * Book WP — Navigation & Layout Helpers
+ * Sasterawan — Navigation & Layout Helpers
  *
  * Related works sidebar, previous/next work navigation,
  * table-of-contents entry builder, featured image, and

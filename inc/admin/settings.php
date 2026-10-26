@@ -1,6 +1,6 @@
 <?php
 /**
- * Book WP — Admin Settings
+ * Sasterawan — Admin Settings
  *
  * Design system: modern_settings_ui v1.0.0
  * Wrapper: .theme-settings-root  |  Each tab has its own <form>.
@@ -251,7 +251,7 @@ function book_wp_admin_assets( $hook ) {
 add_action( 'admin_menu', 'book_wp_menu' );
 
 function book_wp_menu() {
-    add_theme_page( 'Book WP Settings', 'Book WP', 'edit_theme_options', 'book-wp-settings', 'book_wp_settings_page' );
+    add_theme_page( 'Sasterawan Settings', 'Sasterawan', 'edit_theme_options', 'book-wp-settings', 'book_wp_settings_page' );
 }
 
 /* ── SVG icons ─────────────────────────────────────────────────────────── */
@@ -296,8 +296,8 @@ function book_wp_settings_page() {
                 <?php echo bwp_icon( 'book' ); ?>
             </div>
             <div class="bwp-header__body">
-                <h1 class="bwp-header__title">Book WP</h1>
-                <p class="bwp-header__desc">Literary publishing theme for WordPress</p>
+                <h1 class="bwp-header__title">Sasterawan</h1>
+                <p class="bwp-header__desc"><?php esc_html_e( 'Tema antologi sastera Melayu untuk menj.my', 'book-wp' ); ?></p>
             </div>
             <span class="bwp-header__badge">v<?php echo esc_html( BOOK_WP_VERSION ); ?></span>
         </div>

@@ -1,5 +1,5 @@
 /**
- * Book WP — Block Editor Scripts
+ * Sasterawan — Block Editor Scripts
  *
  * Registers all custom blocks and the book-wp/term inline format type.
  *

@@ -1,6 +1,6 @@
 <?php
 /**
- * Book WP — PHPUnit Bootstrap
+ * Sasterawan — PHPUnit Bootstrap
  *
  * Provides lightweight stubs for WordPress core functions so the
  * helper modules under inc/helpers/ can be loaded and tested in

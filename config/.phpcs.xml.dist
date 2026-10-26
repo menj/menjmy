@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="Book WP">
-    <description>WordPress-focused PHP linting for the Book WP theme.</description>
+<ruleset name="Sasterawan">
+    <description>WordPress-focused PHP linting for the Sasterawan theme.</description>
 
     <file>.</file>
 

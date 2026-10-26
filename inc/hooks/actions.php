@@ -1,6 +1,6 @@
 <?php
 /**
- * Book WP — Action Hooks
+ * Sasterawan — Action Hooks
  *
  * Non-setup, non-admin add_action registrations.
  *
@@ -749,7 +749,7 @@ add_filter( 'widget_tag_cloud_args', 'book_wp_hide_tags_from_cloud' );
 
 /**
  * Detect whether a known SEO plugin is active.
- * If so, Book WP defers all OG/Twitter meta output to that plugin.
+ * If so, Sasterawan defers all OG/Twitter meta output to that plugin.
  * Covers: RankMath, Yoast SEO, All in One SEO, SEOPress, The SEO Framework.
  *
  * @return bool
@@ -767,7 +767,7 @@ function book_wp_seo_plugin_active() {
  *
  * Bails silently if:
  * - Not a single post page.
- * - The option is disabled in Appearance > Book WP > Advanced.
+ * - The option is disabled in Appearance > Sasterawan > Advanced.
  * - A known SEO plugin is active (RankMath, Yoast, etc.) — defers to that plugin.
  *
  * Description source priority: book_wp_toc_excerpt → auto-trim post content (30 words).
@@ -835,7 +835,7 @@ function book_wp_social_meta() {
     }
 
     // ── Output ─────────────────────────────────────────────────────────────
-    echo "\n<!-- Book WP: Social Meta (og / twitter) -->\n";
+    echo "\n<!-- Sasterawan: Social Meta (og / twitter) -->\n";
 
     // OpenGraph — base
     echo '<meta property="og:type" content="article" />' . "\n";
@@ -877,5 +877,16 @@ function book_wp_social_meta() {
         echo '<meta name="twitter:site" content="' . esc_attr( $twitter_handle ) . '" />' . "\n";
     }
 
-    echo "<!-- /Book WP: Social Meta -->\n\n";
+    echo "<!-- /Sasterawan: Social Meta -->\n\n";
+}
+
+/* ── Brand favicon fallback ──────────────────────────────────────────── */
+/* WordPress prints Site Icon tags when one is set; otherwise fall back to */
+/* the theme's own SVG mark so the browser tab is never blank.             */
+
+add_action( 'wp_head', 'book_wp_favicon_fallback', 5 );
+
+function book_wp_favicon_fallback() {
+    if ( has_site_icon() ) return;
+    echo '<link rel="icon" href="' . esc_url( BOOK_WP_URI . '/assets/img/brand/favicon.svg' ) . '" type="image/svg+xml">' . "\n";
 }

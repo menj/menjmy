@@ -1,6 +1,6 @@
 <?php
 /**
- * Book WP — Filter Hooks
+ * Sasterawan — Filter Hooks
  *
  * @package Book_WP
  */

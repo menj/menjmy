@@ -1,6 +1,6 @@
 <?php
 /**
- * Book WP — Navigation Menus
+ * Sasterawan — Navigation Menus
  *
  * @package Book_WP
  */

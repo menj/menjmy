@@ -1,6 +1,6 @@
 <?php
 /**
- * Book WP — Literary Form Helpers & Ornaments
+ * Sasterawan — Literary Form Helpers & Ornaments
  *
  * Form slug/label resolution, poetry detection, form descriptions,
  * and the decorative typographic ornament renderer.

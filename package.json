@@ -1,7 +1,7 @@
 {
     "name": "book-wp",
     "version": "3.5.1",
-    "description": "Book WP \u2014 a literary anthology WordPress theme.",
+    "description": "Sasterawan \u2014 a literary anthology WordPress theme tailored for https://menj.my.",
     "private": true,
     "scripts": {
         "lint:js": "eslint --config config/.eslintrc.json assets/js/",

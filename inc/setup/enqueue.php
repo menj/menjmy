@@ -1,6 +1,6 @@
 <?php
 /**
- * Book WP — Asset Enqueueing
+ * Sasterawan — Asset Enqueueing
  *
  * All wp_enqueue_style / wp_enqueue_script calls live here.
  * Never hardcode asset paths in templates — use these handles.

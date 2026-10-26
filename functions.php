@@ -1,6 +1,6 @@
 <?php
 /**
- * Book WP — Functions & Definitions
+ * Sasterawan — Functions & Definitions
  *
  * Bootstrap only. Defines constants and loads includes.
  * No feature implementations here — those live in inc/.

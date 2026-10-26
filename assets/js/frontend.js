@@ -1,5 +1,5 @@
 /**
- * Book WP — Frontend JavaScript
+ * Sasterawan — Frontend JavaScript
  *
  * Literary reading enhancements:
  * - Reading progress bar (scroll-driven)

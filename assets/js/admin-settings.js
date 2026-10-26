@@ -1,5 +1,5 @@
 /**
- * Book WP — Admin Settings JS
+ * Sasterawan — Admin Settings JS
  *
  * Handles the tag multi-select dropdown widget on the Theme Settings page.
  * No external dependencies. Scoped entirely to .bwp-tag-select elements.
