@@ -3,10 +3,10 @@
 
 <main id="bwp-main" class="bwp-main">
 
-<div class="bwp-archive-header bwp-archive-header--tag">
+<div class="bwp-archive-header bwp-opening bwp-archive-header--tag">
     <?php echo book_wp_ornament( 'leaf' ); // phpcs:ignore ?>
 
-    <p class="bwp-archive-header__taxlabel"><?php esc_html_e( 'Tagged with', 'book-wp' ); ?></p>
+    <p class="bwp-archive-header__taxlabel bwp-opening__kicker"><?php esc_html_e( 'Tagged with', 'book-wp' ); ?></p>
 
     <h1 class="bwp-archive-header__title">
         <span class="bwp-tag bwp-tag--lg"><?php single_tag_title(); ?></span>

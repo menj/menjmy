@@ -11,7 +11,16 @@
         $form_slug_single = book_wp_get_form_slug();
         $jawi_form        = book_wp_form_jawi( $form_slug_single );
         ?>
-        <header class="bwp-work__opening"<?php if ( $jawi_form ) echo ' data-jawi="' . esc_attr( $jawi_form ) . '"'; ?>>
+        <header class="bwp-work__opening bwp-opening">
+            <div class="bwp-opening__top">
+                <?php $bwp_kicker = book_wp_header_section_label(); if ( $bwp_kicker ) : ?>
+                    <p class="bwp-opening__kicker"><?php echo esc_html( $bwp_kicker ); ?></p>
+                <?php endif; ?>
+                <?php if ( $jawi_form ) : ?>
+                    <span class="bwp-opening__seal" aria-hidden="true" dir="rtl" lang="ms-Arab"><?php echo esc_html( $jawi_form ); ?></span>
+                <?php endif; ?>
+            </div>
+            <h1 class="bwp-work__title"><?php the_title(); ?></h1>
             <div class="bwp-work__meta">
                 <?php
                 // "PETIKAN DARIPADA" — shown only when the post is a hikayat
@@ -25,7 +34,6 @@
                     <?php echo book_wp_analytics_bar(); // phpcs:ignore ?>
                 <?php endif; ?>
             </div>
-            <h1 class="bwp-work__title"><?php the_title(); ?></h1>
         </header>
 
         <?php

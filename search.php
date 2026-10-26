@@ -3,10 +3,10 @@
 
 <main id="bwp-main" class="bwp-main">
 
-<div class="bwp-archive-header bwp-archive-header--search">
+<div class="bwp-archive-header bwp-opening bwp-archive-header--search">
     <?php echo book_wp_ornament( 'leaf' ); // phpcs:ignore ?>
 
-    <p class="bwp-archive-header__taxlabel"><?php esc_html_e( 'Search Results', 'book-wp' ); ?></p>
+    <p class="bwp-archive-header__taxlabel bwp-opening__kicker"><?php esc_html_e( 'Search Results', 'book-wp' ); ?></p>
 
     <h1 class="bwp-archive-header__title">
         <span class="bwp-tag bwp-tag--lg"><?php echo esc_html( get_search_query() ); ?></span>

@@ -650,50 +650,55 @@ body.bwp-toc-masonry .bwp-toc__item { width: 49%; margin-bottom: .75rem; }
 
 .bwp-single { position: relative; }
 
-.bwp-work__opening {
+/* ── Title page: every work, page and archive opens the same way ──
+   a rounded paper panel: kicker and Jawi seal at the head, Kagnue title,
+   chips beneath a hairline — the inside counterpart of the front-page jacket */
+.bwp-opening {
     position: relative;
-    display: grid;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    gap: 1rem 1.5rem;
-    align-items: end;
-    padding-bottom: 1.75rem;
-    margin-bottom: 2rem;
-    border-bottom: 1px solid var(--bwp-text);
+    display: flex; flex-direction: column; gap: 1.1rem;
+    padding: clamp(1.3rem, 2.4vw, 2rem) clamp(1.25rem, 3.5vw, 3rem) clamp(1.2rem, 2.2vw, 1.8rem);
+    margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+    background: var(--bwp-bg-subtle);
+    border: 1px solid var(--bwp-border);
+    border-radius: 40px;
     overflow: hidden;
 }
-/* Jawi watermark from data-jawi on the opening */
-.bwp-work__opening[data-jawi]::before {
-    content: attr(data-jawi);
-    position: absolute; left: -.05em; top: 0;
-    font-family: var(--bwp-font-jawi);
-    font-size: clamp(6rem, 14vw, 11rem); line-height: 1.1;
-    color: var(--bwp-link); opacity: .06;
-    pointer-events: none; user-select: none; white-space: nowrap;
-    direction: rtl;
+.bwp-opening__top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; min-height: 1.4rem; }
+.bwp-opening__kicker {
+    margin: 0; padding-top: .3rem;
+    font-family: var(--bwp-font-ui); font-size: .66rem; font-weight: 600;
+    letter-spacing: .22em; text-transform: uppercase; color: var(--bwp-rubric);
+    white-space: nowrap;
 }
-.bwp-work__meta { grid-column: 1 / span 12; display: flex; flex-direction: column; gap: .7rem; position: relative; }
+.bwp-opening__seal {
+    margin-left: auto;
+    font-family: var(--bwp-font-jawi); font-size: clamp(1.3rem, 2.2vw, 1.9rem); line-height: 1;
+    color: var(--bwp-accent); white-space: nowrap;
+}
+.bwp-work__title,
+.bwp-archive-header__title {
+    margin: 0;
+    font-family: var(--bwp-font-brand);
+    font-size: clamp(2rem, 4.6vw, 4.4rem);
+    line-height: 1.02; letter-spacing: 0; font-weight: 400;
+    max-width: 22ch; text-wrap: balance;
+}
+.bwp-work__meta {
+    display: flex; flex-wrap: wrap; align-items: center; gap: .7rem 1rem;
+    padding-top: 1rem; border-top: 1px solid var(--bwp-border);
+}
+.bwp-work__meta:empty { display: none; }
 .bwp-citation-label {
     margin: 0;
     font-family: var(--bwp-font-ui); font-size: .66rem; letter-spacing: .2em;
     text-transform: uppercase; color: var(--bwp-muted);
 }
-.bwp-work__title {
-    grid-column: 1 / span 12;
-    position: relative;
-    margin: 0;
-    font-size: clamp(2.4rem, 7vw, 6.25rem);
-    line-height: .95; letter-spacing: -.02em;
-    font-variation-settings: 'opsz' 144, 'SOFT' 50;
-    text-wrap: balance;
+.bwp-opening--page { gap: .9rem; }
+@media screen and (max-width: 40em) {
+    .bwp-opening { border-radius: 28px; gap: .9rem; }
+    .bwp-opening__kicker { font-size: .58rem; letter-spacing: .18em; }
+    .bwp-opening__seal { font-size: 1.1rem; }
 }
-@media screen and (min-width: 52em) {
-    .bwp-work__meta  { grid-column: 1 / span 12; order: 2; flex-direction: row; align-items: center; flex-wrap: wrap; gap: .7rem 1rem; }
-    .bwp-work__title { grid-column: 1 / span 11; order: 1; }
-    .bwp-work__opening[data-jawi]::before { left: auto; right: -.05em; }
-}
-
-.bwp-work__opening--page { padding-bottom: 1.25rem; margin-bottom: 2.25rem; }
-.bwp-work__opening--page .bwp-work__title { font-size: clamp(2.2rem, 5vw, 4.5rem); }
 
 /* analytics bar → chips */
 .bwp-analytics { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; }
@@ -933,14 +938,9 @@ body.bwp-toc-masonry .bwp-toc__item { width: 49%; margin-bottom: .75rem; }
    ARCHIVE / SEARCH / 404
    ═══════════════════════════════════════════════════════════ */
 
-.bwp-archive-header { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--bwp-text); }
 .bwp-archive-header .bwp-ornament { display: none; }
-.bwp-archive-header__taxlabel {
-    margin: 0 0 .5rem; font-family: var(--bwp-font-ui); font-size: .66rem; font-weight: 600;
-    letter-spacing: .2em; text-transform: uppercase; color: var(--bwp-rubric);
-}
-.bwp-archive-header__title { font-family: var(--bwp-font-brand); font-size: clamp(2.2rem, 6vw, 4.6rem); line-height: 1; letter-spacing: 0; margin: 0 0 .5rem; }
-.bwp-archive-header__desc { max-width: 40em; font-size: 1.1rem; font-style: italic; color: var(--bwp-muted); margin: 0; }
+.bwp-archive-header__taxlabel { margin: 0; }
+.bwp-archive-header__desc { max-width: 40em; font-size: 1.1rem; font-style: italic; color: var(--bwp-muted); margin: 0; padding-top: 1rem; border-top: 1px solid var(--bwp-border); }
 
 .bwp-archive-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .75rem; }
 .bwp-archive-list__item {
@@ -1294,7 +1294,6 @@ html.bwp-night .bwp-badge--karmina, body.bwp-night .bwp-badge--karmina { color: 
     .bwp-book-title { padding-top: .5rem; }
     .bwp-book-title__jawi { font-size: 7rem; top: -.2em; }
     .bwp-work__title { font-size: clamp(2.1rem, 10vw, 3rem); }
-    .bwp-work__opening[data-jawi]::before { font-size: 6rem; top: -.3em; }
     .bwp-work__content { font-size: 1.1rem; }
     .bwp-toc-group { padding: 1.1rem 1rem .6rem; border-radius: var(--bwp-radius); }
     .bwp-toc__link { padding: .7rem .4rem; margin: 0 -.4rem; row-gap: .5rem; }
@@ -1318,7 +1317,7 @@ html.bwp-night .bwp-badge--karmina, body.bwp-night .bwp-badge--karmina { color: 
     .bwp-nav, .bwp-nav-toggle, .bwp-footer-nav, .bwp-social, .bwp-share, .bwp-night-toggle, .bwp-back-to-top,
     .bwp-progress, .bwp-comments, .bwp-work-nav, .bwp-related, .bwp-jalur { display: none !important; }
     .bwp-page-wrap { max-width: none; padding: 0; animation: none; }
-    .bwp-work__opening[data-jawi]::before, .bwp-book-title__jawi { display: none; }
+    .bwp-book-title__jawi { display: none; }
     .bwp-work__title { font-size: 24pt; text-align: left; }
     .bwp-work__content a { color: #000; text-decoration: none; }
     .bwp-work__content a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .8em; color: #555; }
