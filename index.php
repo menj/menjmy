@@ -6,12 +6,15 @@
     <?php
     $anthology = get_option( 'book_wp_anthology_name', '' );
     $jawi_name = get_option( 'book_wp_jawi_name', '' );
-    $counts    = wp_count_posts( 'post' );
-    $published = isset( $counts->publish ) ? (int) $counts->publish : 0;
+    // Counts and term lists follow the public view: hidden-tagged works are
+    // excluded exactly as the TOC and archives exclude them.
+    $published  = book_wp_visible_work_count();
     $jalur_cats = get_categories( array( 'hide_empty' => true, 'orderby' => 'name', 'order' => 'ASC' ) );
-    $jalur_cats = array_values( array_filter( $jalur_cats, function( $c ) { return 'uncategorized' !== $c->slug; } ) );
+    $jalur_cats = array_filter( $jalur_cats, function( $c ) { return 'uncategorized' !== $c->slug; } );
+    $jalur_cats = book_wp_visible_terms( $jalur_cats, 'category' );
     $forms      = get_terms( array( 'taxonomy' => 'literary_form', 'hide_empty' => true, 'orderby' => 'count', 'order' => 'DESC' ) );
-    $forms      = ( $forms && ! is_wp_error( $forms ) ) ? $forms : array();
+    $forms      = book_wp_visible_terms( ( $forms && ! is_wp_error( $forms ) ) ? $forms : array(), 'literary_form' );
+    usort( $forms, function( $a, $b ) { return $b->count <=> $a->count; } );
     $hero_img   = function_exists( 'book_wp_hero_image' ) ? book_wp_hero_image() : array();
     ?>
 

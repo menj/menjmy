@@ -42,6 +42,10 @@ function bwp_reset_mocks() {
     $GLOBALS['_bwp_post_tags']   = array();
     $GLOBALS['_bwp_categories']  = array();
     $GLOBALS['_bwp_current_id']  = 0;
+    $GLOBALS['_bwp_get_posts_result'] = array();
+    $GLOBALS['_bwp_term_objects']     = array();
+    $GLOBALS['_bwp_publish_count']    = 0;
+    $GLOBALS['_bwp_hidden_tag_slugs'] = array();
 }
 
 /* ── Stub helpers for setting up test fixtures ─────────────────────── */
@@ -238,7 +242,16 @@ function wp_get_post_tags( $post_id, $args = array() ) {
 }
 
 function get_posts( $args = array() ) {
-    return array();
+    $GLOBALS['_bwp_last_get_posts_args'] = $args;
+    return $GLOBALS['_bwp_get_posts_result'] ?? array();
+}
+
+function get_objects_in_term( $term_id, $taxonomy ) {
+    return $GLOBALS['_bwp_term_objects'][ $taxonomy ][ $term_id ] ?? array();
+}
+
+function wp_count_posts( $type = 'post' ) {
+    return (object) array( 'publish' => $GLOBALS['_bwp_publish_count'] ?? 0 );
 }
 
 function wp_list_pluck( $list, $field ) {
