@@ -94,13 +94,17 @@ $bwp_portrait  = get_option( 'book_wp_author_portrait', BOOK_WP_URI . '/assets/i
             </div>
 
             <div class="bwp-site-footer__bottom">
+                <?php if ( '1' === get_option( 'book_wp_show_copyright', '1' ) ) : ?>
                 <p class="bwp-site-footer__copyright">
-                    <?php if ( ! empty( $bwp_copyright ) && '1' === get_option( 'book_wp_show_copyright', '1' ) ) : ?>
+                    <?php if ( ! empty( $bwp_copyright ) ) : ?>
                         <?php echo wp_kses_post( $bwp_copyright ); ?>
                     <?php else : ?>
                         &copy; <?php echo esc_html( gmdate( 'Y' ) . ' ' . $bwp_author ); ?> &middot; <?php esc_html_e( 'Hakcipta terpelihara', 'book-wp' ); ?>
                     <?php endif; ?>
                 </p>
+                <?php else : ?>
+                <span class="bwp-site-footer__copyright" aria-hidden="true"></span>
+                <?php endif; ?>
 
                 <?php
                 $bwp_social = book_wp_social_icons();

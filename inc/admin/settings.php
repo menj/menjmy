@@ -438,7 +438,7 @@ function bwp_tab_general() {
                 <input type="text" name="book_wp_author_name" id="book_wp_author_name"
                        value="<?php echo esc_attr( get_option( 'book_wp_author_name', '' ) ); ?>">
             </div>
-            <span class="bwp-field__hint"><?php esc_html_e( 'Displayed in the site header on all pages in place of the WordPress Site Title.', 'book-wp' ); ?></span>
+            <span class="bwp-field__hint"><?php esc_html_e( 'Shown on the front-page cover, in the footer lockup and in structured data. The header carries the anthology name.', 'book-wp' ); ?></span>
         </div>
 
         <div class="bwp-field">
@@ -1228,7 +1228,7 @@ function bwp_tab_social() {
     $groups = array(
         array(
             'label'    => __( 'Social Media', 'book-wp' ),
-            'slugs'    => array( 'twitter', 'facebook', 'instagram', 'threads', 'linkedin', 'youtube', 'medium' ),
+            'slugs'    => array( 'twitter', 'bluesky', 'facebook', 'instagram', 'threads', 'tiktok', 'linkedin', 'youtube', 'medium', 'substack', 'telegram', 'whatsapp' ),
         ),
         array(
             'label'    => __( 'Libraries & Catalogues', 'book-wp' ),
@@ -1240,7 +1240,7 @@ function bwp_tab_social() {
         ),
         array(
             'label'    => __( 'Author Identifiers', 'book-wp' ),
-            'slugs'    => array( 'orcid', 'isni' ),
+            'slugs'    => array( 'orcid', 'isni', 'viaf', 'wikidata', 'academia' ),
         ),
         array(
             'label'    => __( 'Syndication', 'book-wp' ),

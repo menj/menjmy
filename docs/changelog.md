@@ -29,8 +29,8 @@
   navigation and its setting are removed.
 - Night mode and the Night scheme now share one Malam palette; Cream and Dusk
   re-ink correctly at clock-night and under the reader toggle.
-- Per-form stylesheets no longer set page width or title treatment; they
-  keep typography only.
+- Per-form stylesheets no longer set the title treatment; they keep their
+  form's typography, reading measure and ornament styling.
 - Display font Cinzel replaced by Fraunces; Noto Naskh Arabic loaded for
   Jawi fallback.
 

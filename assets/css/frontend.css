@@ -499,7 +499,14 @@ html.bwp-night .bwp-book-title--cover { background: #0e1636; }
 
 /* Karya terbaru — the newest work as an opening page */
 .bwp-featured { margin: 0 0 3rem; padding: 2rem clamp(1.25rem, 3vw, 2.5rem) 2.25rem; border-radius: var(--bwp-radius-lg); background: var(--bwp-bg-subtle) url('../img/textures/manuscript.jpg') right -4rem top -2rem / 60% auto no-repeat; position: relative; overflow: hidden; }
-.bwp-featured::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, var(--bwp-bg-subtle) 42%, rgba(243, 240, 231, .78) 70%, rgba(243, 240, 231, .55)); pointer-events: none; }
+.bwp-featured::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    /* fade the manuscript texture into the card's own surface so every scheme and night mode keep their contrast */
+    background: linear-gradient(90deg, var(--bwp-bg-subtle) 42%, rgba(243, 240, 231, .78) 70%, rgba(243, 240, 231, .55));
+    background: linear-gradient(90deg, var(--bwp-bg-subtle) 42%, color-mix(in srgb, var(--bwp-bg-subtle) 78%, transparent) 70%, color-mix(in srgb, var(--bwp-bg-subtle) 55%, transparent));
+}
+html.bwp-night .bwp-featured::before,
+body.bwp-scheme-night .bwp-featured::before { background: linear-gradient(90deg, var(--bwp-bg-subtle) 42%, rgba(23, 29, 61, .82) 70%, rgba(23, 29, 61, .6)); }
 .bwp-featured > * { position: relative; }
 .bwp-featured__kicker { margin: 0 0 1.25rem; font-family: var(--bwp-font-ui); font-size: .64rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--bwp-rubric); }
 .bwp-featured__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 1.5rem 2rem; align-items: start; }

@@ -103,6 +103,8 @@ function book_wp_header_section_label() {
  */
 function book_wp_terjemahan_block( $post_id = 0 ) {
     if ( ! $post_id ) $post_id = get_the_ID();
+    // Only translations carry this apparatus; nukilan share the source-author key.
+    if ( ! book_wp_has_form( $post_id, 'terjemahan' ) ) return '';
     $title  = get_post_meta( $post_id, 'book_wp_source_title',  true );
     $author = get_post_meta( $post_id, 'book_wp_source_author', true );
     $year   = get_post_meta( $post_id, 'book_wp_source_year',   true );
@@ -123,12 +125,27 @@ function book_wp_terjemahan_block( $post_id = 0 ) {
     return $html . '</div>';
 }
 
+/**
+ * Every literary_form slug on a post. A translation is filed under
+ * terjemahan *and* its native form (puisi, cerpen…), so helpers that care
+ * about verse versus prose look at all of them, not just the first.
+ *
+ * @return string[]
+ */
+function book_wp_get_form_slugs( $post_id = 0 ) {
+    if ( ! $post_id ) $post_id = get_the_ID();
+    $terms = get_the_terms( $post_id, 'literary_form' );
+    if ( ! $terms || is_wp_error( $terms ) ) return array();
+    return array_values( array_map( function( $t ) { return $t->slug; }, $terms ) );
+}
+
+function book_wp_has_form( $post_id, $slug ) {
+    return in_array( $slug, book_wp_get_form_slugs( $post_id ), true );
+}
+
 function book_wp_is_poetry( $post_id = 0 ) {
-    return in_array(
-        book_wp_get_form_slug( $post_id ),
-        array( 'puisi', 'syair', 'karmina', 'ratapan' ),
-        true
-    );
+    $verse = array( 'puisi', 'syair', 'karmina', 'ratapan' );
+    return (bool) array_intersect( $verse, book_wp_get_form_slugs( $post_id ) );
 }
 
 function book_wp_form_description( $slug ) {

@@ -182,4 +182,27 @@ class LiteraryTest extends \PHPUnit\Framework\TestCase {
             $result
         );
     }
+
+    /* ── Translations: verse detection and the translation block ───────── */
+
+    public function test_translation_filed_under_puisi_counts_as_poetry(): void {
+        bwp_set_post_terms( 30, 'literary_form', array( bwp_make_term( 'terjemahan' ), bwp_make_term( 'puisi' ) ) );
+        $this->assertTrue( book_wp_is_poetry( 30 ) );
+        $this->assertSame( 'terjemahan', book_wp_get_form_slug( 30 ) );
+    }
+
+    public function test_translation_of_prose_is_not_poetry(): void {
+        bwp_set_post_terms( 31, 'literary_form', array( bwp_make_term( 'terjemahan' ), bwp_make_term( 'cerpen' ) ) );
+        $this->assertFalse( book_wp_is_poetry( 31 ) );
+    }
+
+    public function test_translation_block_only_renders_for_terjemahan(): void {
+        bwp_set_post_terms( 32, 'literary_form', array( bwp_make_term( 'nukilan' ) ) );
+        bwp_set_post_meta( 32, 'book_wp_source_author', 'Edgar Allan Poe' );
+        $this->assertSame( '', book_wp_terjemahan_block( 32 ), 'nukilan share the source-author key but are not translations' );
+
+        bwp_set_post_terms( 33, 'literary_form', array( bwp_make_term( 'terjemahan' ) ) );
+        bwp_set_post_meta( 33, 'book_wp_source_author', 'Edgar Allan Poe' );
+        $this->assertStringContainsString( 'bwp-terjemahan', book_wp_terjemahan_block( 33 ) );
+    }
 }
