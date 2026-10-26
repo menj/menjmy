@@ -177,7 +177,13 @@ add_action( 'updated_option', 'book_wp_flush_on_permalink_toggle' );
 
 function book_wp_flush_on_permalink_toggle( $option_name ) {
     if ( 'book_wp_form_permalinks' !== $option_name ) return;
-    flush_rewrite_rules( false );
+    // Do not flush here: this runs inside the request that saved the option,
+    // where init already fired with the *old* value, so the form rules are not
+    // registered yet and an immediate flush would persist a rule set without
+    // them. Defer to admin_init on the next request (see
+    // book_wp_maybe_flush_rewrite_rules), by which time init has re-run with
+    // the new value and the rules are in place.
+    update_option( 'book_wp_flush_rewrite_rules', '1' );
 }
 
 /* ── Flush on theme activation ────────────────────────────────────────── */
@@ -279,6 +285,13 @@ function book_wp_redirect_legacy_post_slug() {
 
     // Only intercept single posts — pages, archives, 404s are all excluded.
     if ( ! is_single() ) return;
+
+    // Sub-resources of a single post have a path that legitimately differs
+    // from get_permalink(): <!--nextpage--> pages, paged comments, per-post
+    // feeds, embeds, trackbacks and previews. Redirecting them would send the
+    // reader back to page one, so leave them alone.
+    if ( is_feed() || is_embed() || is_preview() || is_trackback() ) return;
+    if ( get_query_var( 'page' ) || get_query_var( 'cpage' ) ) return;
 
     $post_id = get_the_ID();
     if ( ! $post_id ) return;

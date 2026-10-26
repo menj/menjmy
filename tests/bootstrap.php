@@ -271,6 +271,78 @@ if ( ! function_exists( 'book_wp_hidden_tag_slugs' ) ) {
     }
 }
 
+/* ── Plugin API stubs ─────────────────────────────────────────────── */
+/* The helpers register hooks at file load, so these must exist before   */
+/* they are required. Filters are recorded so tests can assert on them;  */
+/* apply_filters() runs any callbacks registered through add_filter().   */
+
+$GLOBALS['_bwp_filters'] = array();
+
+if ( ! function_exists( 'add_filter' ) ) {
+    function add_filter( $tag, $callback, $priority = 10, $accepted_args = 1 ) {
+        $GLOBALS['_bwp_filters'][ $tag ][ $priority ][] = array( $callback, $accepted_args );
+        return true;
+    }
+}
+if ( ! function_exists( 'add_action' ) ) {
+    function add_action( $tag, $callback, $priority = 10, $accepted_args = 1 ) {
+        return add_filter( $tag, $callback, $priority, $accepted_args );
+    }
+}
+if ( ! function_exists( 'remove_filter' ) ) {
+    function remove_filter( $tag, $callback, $priority = 10 ) {
+        unset( $GLOBALS['_bwp_filters'][ $tag ][ $priority ] );
+        return true;
+    }
+}
+if ( ! function_exists( 'remove_action' ) ) {
+    function remove_action( $tag, $callback, $priority = 10 ) {
+        return remove_filter( $tag, $callback, $priority );
+    }
+}
+if ( ! function_exists( 'has_filter' ) ) {
+    function has_filter( $tag, $callback = false ) {
+        return ! empty( $GLOBALS['_bwp_filters'][ $tag ] );
+    }
+}
+if ( ! function_exists( 'has_action' ) ) {
+    function has_action( $tag, $callback = false ) {
+        return has_filter( $tag, $callback );
+    }
+}
+if ( ! function_exists( 'apply_filters' ) ) {
+    function apply_filters( $tag, $value, ...$args ) {
+        if ( empty( $GLOBALS['_bwp_filters'][ $tag ] ) ) return $value;
+        $by_priority = $GLOBALS['_bwp_filters'][ $tag ];
+        ksort( $by_priority );
+        foreach ( $by_priority as $callbacks ) {
+            foreach ( $callbacks as $cb ) {
+                $params = array_slice( array_merge( array( $value ), $args ), 0, max( 1, (int) $cb[1] ) );
+                $value  = call_user_func_array( $cb[0], $params );
+            }
+        }
+        return $value;
+    }
+}
+if ( ! function_exists( 'do_action' ) ) {
+    function do_action( $tag, ...$args ) {
+        if ( empty( $GLOBALS['_bwp_filters'][ $tag ] ) ) return;
+        $by_priority = $GLOBALS['_bwp_filters'][ $tag ];
+        ksort( $by_priority );
+        foreach ( $by_priority as $callbacks ) {
+            foreach ( $callbacks as $cb ) {
+                call_user_func_array( $cb[0], array_slice( $args, 0, max( 0, (int) $cb[1] ) ) );
+            }
+        }
+    }
+}
+if ( ! function_exists( 'doing_action' ) ) {
+    function doing_action( $tag = null ) { return false; }
+}
+if ( ! function_exists( 'doing_filter' ) ) {
+    function doing_filter( $tag = null ) { return false; }
+}
+
 /* ── Load the helpers under test ──────────────────────────────────── */
 
 $base = dirname( __DIR__ ) . '/inc/helpers/';

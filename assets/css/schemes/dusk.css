@@ -19,7 +19,7 @@ body.bwp-scheme-dusk {
 
 /* ── Dusk scheme + Dawn — cool stone grey ───────────────────────────────── */
 
-:root.bwp-time-dawn body.bwp-scheme-dusk {
+:where(:root.bwp-time-dawn) body.bwp-scheme-dusk {
     --bwp-bg:           #e4e2ea;
     --bwp-bg-subtle:    #d8d6e2;
     --bwp-border:       #bdbac8;
@@ -29,7 +29,7 @@ body.bwp-scheme-dusk {
 
 /* ── Dusk scheme + Morning — warm linen ─────────────────────────────────── */
 
-:root.bwp-time-morning body.bwp-scheme-dusk {
+:where(:root.bwp-time-morning) body.bwp-scheme-dusk {
     --bwp-bg:           #ece6d8;
     --bwp-bg-subtle:    #e0d8c4;
     --bwp-border:       #ccc0a0;
@@ -39,7 +39,7 @@ body.bwp-scheme-dusk {
 
 /* ── Dusk scheme + Dusk — deeper warm grey, slate undertone ─────────────── */
 
-:root.bwp-time-dusk body.bwp-scheme-dusk {
+:where(:root.bwp-time-dusk) body.bwp-scheme-dusk {
     --bwp-bg:           #e4dcc8;
     --bwp-bg-subtle:    #d8d0b8;
     --bwp-border:       #c8b898;
@@ -49,10 +49,26 @@ body.bwp-scheme-dusk {
 
 /* ── Dusk scheme + Night — muted graphite ───────────────────────────────── */
 
-:root.bwp-time-night body.bwp-scheme-dusk {
+:where(:root.bwp-time-night) body.bwp-scheme-dusk {
     --bwp-bg:           #d0ccc4;
     --bwp-bg-subtle:    #c4c0b8;
     --bwp-border:       #b0aca4;
     --bwp-border-faint: #bcb8b0;
     --bwp-stone:        #807870;
+
+    /* Ink — the global night ink is silver for a navy surface; on warm grey
+       it must be re-set to a dark tone or the page is unreadable. */
+    --bwp-text:         #1f1d1a;
+    --bwp-text-mid:     #3c3834;
+    --bwp-muted:        #58524a;
+    --bwp-link:         #1f4a6a;
+    --bwp-link-hover:   #143448;
+    --bwp-accent:       #1f4a6a;
+    --bwp-ornament:     #8c8680;
+    --bwp-progress:     #1f4a6a;
+    --bwp-border-ink:   #6c665e;
+    --bwp-teal:         #1B3C53;
+    --bwp-gold:         #7a6448;
+    --bwp-gold-dim:     #5c4a34;
+    --bwp-gold-light:   #948060;
 }

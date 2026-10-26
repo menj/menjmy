@@ -301,7 +301,7 @@ function book_wp_stanza_count( $post_id = 0 ) {
     if ( false !== strpos( $body, '<!-- wp:' ) ) {
         $body_stanzas = max( 0, preg_match_all( '/<!-- wp:(?:paragraph|verse)\b/', $body ) );
     } elseif ( trim( $body ) ) {
-        preg_match_all( '/<p[\s>][^>]*>(.*?)<\/p>/si', $body, $matches );
+        preg_match_all( '/<p(?:\s[^>]*)?>(.*?)<\/p>/si', $body, $matches );
         if ( ! empty( $matches[1] ) ) {
             $body_stanzas = count( array_filter( $matches[1], function ( $b ) {
                 return '' !== trim( wp_strip_all_tags( $b ) );
