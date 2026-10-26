@@ -1,0 +1,25 @@
+/**
+ * Sasterawan — Self-hosted Latin faces
+ *
+ * Sabon Next LT  — the reading face (Jan Tschichold's Sabon, Monotype Next
+ *                  cut), supplied by the site owner under their own licence.
+ * Special Elite  — typewriter accent (Astigmatic, Apache 2.0) for manuscript
+ *                  references, translation source lines and the certot form.
+ *
+ * Served from the theme; no third-party request. EB Garamond and Courier
+ * remain the fallbacks if the files are missing.
+ */
+
+@font-face { font-family: 'Sabon Next LT'; font-style: normal; font-weight: 400; font-display: swap; src: url('../../fonts/sabon/SabonNextLT-Regular.woff') format('woff'); }
+@font-face { font-family: 'Sabon Next LT'; font-style: italic; font-weight: 400; font-display: swap; src: url('../../fonts/sabon/SabonNextLT-Italic.woff') format('woff'); }
+@font-face { font-family: 'Sabon Next LT'; font-style: normal; font-weight: 700; font-display: swap; src: url('../../fonts/sabon/SabonNextLT-Bold.woff') format('woff'); }
+@font-face { font-family: 'Sabon Next LT'; font-style: italic; font-weight: 700; font-display: swap; src: url('../../fonts/sabon/SabonNextLT-BoldItalic.woff') format('woff'); }
+@font-face { font-family: 'Special Elite'; font-style: normal; font-weight: 400; font-display: swap; src: url('../../fonts/special-elite/SpecialElite-Regular.woff') format('woff'); }
+
+:root {
+    --bwp-font:      'Sabon Next LT', 'EB Garamond', Georgia, 'Times New Roman', serif;
+    --bwp-font-mono: 'Special Elite', 'Courier New', monospace;
+    /* Sabon runs a little smaller than Garamond at the same size */
+    --bwp-font-size: 1.1875rem;
+    --bwp-lh: 1.7;
+}

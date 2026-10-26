@@ -25,7 +25,7 @@ function book_wp_enqueue_frontend() {
     $remote_fonts = '1' === get_option( 'book_wp_remote_fonts', '1' );
     $style_deps   = array( 'book-wp-style' );
 
-    // UI fonts — Fraunces (display), EB Garamond (body), Jost (UI), Noto Naskh Arabic (Jawi), Noto Sans Javanese (Aksara Jawa).
+    // Remote fonts — Fraunces (display), Jost (UI), Noto Naskh Arabic (Jawi fallback), Noto Sans Javanese. Body (Sabon) and Jawi (Dubidam) are self-hosted.
     // Registered here via wp_enqueue_style() so the browser can initiate
     // the request in parallel with frontend.css. A CSS @import inside
     // frontend.css would create a serialised fetch chain — the browser
@@ -46,7 +46,7 @@ function book_wp_enqueue_frontend() {
 
         wp_enqueue_style(
             'book-wp-ui-fonts',
-            'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@400;500;600&family=Noto+Naskh+Arabic:wght@400&family=Noto+Sans+Javanese:wght@400;600&display=swap',
+            'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:wght@400;500;600&family=Noto+Naskh+Arabic:wght@400&family=Noto+Sans+Javanese:wght@400;600&display=swap',
             array(),
             null
         );
@@ -69,6 +69,24 @@ function book_wp_enqueue_frontend() {
         BOOK_WP_VERSION
     );
     $style_deps[] = 'book-wp-jawi-font';
+
+    // Self-hosted Latin faces: Sabon Next LT (reading) and Special Elite (accent).
+    wp_enqueue_style(
+        'book-wp-local-fonts',
+        BOOK_WP_URI . '/assets/css/fonts/local.css',
+        array( 'book-wp-frontend' ),
+        BOOK_WP_VERSION
+    );
+    $style_deps[] = 'book-wp-local-fonts';
+
+    // Self-hosted body face (Sabon Next LT) — the reading typeface.
+    wp_enqueue_style(
+        'book-wp-body-font',
+        BOOK_WP_URI . '/assets/css/fonts/sabon.css',
+        array( 'book-wp-frontend' ),
+        BOOK_WP_VERSION
+    );
+    $style_deps[] = 'book-wp-body-font';
     $style_deps[] = 'book-wp-frontend';
 
     // Classical Malay Literary theme layer — augments frontend.css, does not replace it.

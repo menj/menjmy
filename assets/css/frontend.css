@@ -9,6 +9,8 @@
  *
  * Layers that load after this file and may override tokens:
  *   fonts/jawi.css       self-hosted Jawi face (Dubidam Arabic)
+ *   fonts/local.css      self-hosted Sabon Next (body) and Special Elite (accent)
+ *   fonts/sabon.css      self-hosted body face (Sabon Next LT)
  *   times/times.css      ink by time of day (on <html>)
  *   schemes/*.css        paper by user-chosen scheme (on <body>)
  *   forms/*.css          per-literary-form typography
@@ -772,7 +774,7 @@ body.bwp-toc-masonry .bwp-toc__item { width: 49%; margin-bottom: .75rem; }
     font-family: var(--bwp-font-ui); font-size: .7rem; letter-spacing: .06em;
     color: var(--bwp-text);
 }
-.bwp-colophon__line em { font-family: var(--bwp-font); font-style: italic; font-size: 1.05em; letter-spacing: 0; }
+.bwp-colophon__line em { font-family: var(--bwp-font-mono); font-style: normal; font-size: 1.05em; letter-spacing: 0; }
 .bwp-colophon__line--dateline { font-family: var(--bwp-font-display); font-size: 1.05rem; letter-spacing: 0; font-style: italic; background: transparent; padding-left: 0; display: flex; width: 100%; }
 .bwp-colophon__notes {
     margin: .8rem 0 0; padding: .9rem 1.1rem;

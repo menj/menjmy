@@ -1,0 +1,20 @@
+/**
+ * Sasterawan — Body face: Sabon Next LT (self-hosted)
+ *
+ * Jan Tschichold's Sabon, in Monotype's Next cut, supplied by the site
+ * owner under their own licence. The book face for all reading text;
+ * Fraunces stays the display face. Served from the theme, no third-party
+ * request. EB Garamond remains the fallback when these files are absent.
+ */
+
+@font-face { font-family: 'Sabon Next LT'; font-style: normal; font-weight: 400; font-display: swap; src: url('../../fonts/sabon/SabonNextLT-Regular.woff') format('woff'); }
+@font-face { font-family: 'Sabon Next LT'; font-style: italic; font-weight: 400; font-display: swap; src: url('../../fonts/sabon/SabonNextLT-Italic.woff') format('woff'); }
+@font-face { font-family: 'Sabon Next LT'; font-style: normal; font-weight: 700; font-display: swap; src: url('../../fonts/sabon/SabonNextLT-Bold.woff') format('woff'); }
+@font-face { font-family: 'Sabon Next LT'; font-style: italic; font-weight: 700; font-display: swap; src: url('../../fonts/sabon/SabonNextLT-BoldItalic.woff') format('woff'); }
+
+:root {
+    --bwp-font: 'Sabon Next LT', 'EB Garamond', Georgia, 'Times New Roman', serif;
+    /* Sabon sits a touch smaller on the body than Garamond; compensate */
+    --bwp-font-size: 1.1875rem;
+    --bwp-lh: 1.7;
+}
