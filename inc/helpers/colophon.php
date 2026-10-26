@@ -1,6 +1,6 @@
 <?php
 /**
- * Book WP — Colophon, Epigraph & Dedication
+ * Sasterawan — Colophon, Epigraph & Dedication
  *
  * Renders the epigraph (opening quotation), dedication, and the
  * full colophon footer with form-specific literary metadata.

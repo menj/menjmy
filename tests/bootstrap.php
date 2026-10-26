@@ -1,6 +1,6 @@
 <?php
 /**
- * Book WP — PHPUnit Bootstrap
+ * Sasterawan — PHPUnit Bootstrap
  *
  * Provides lightweight stubs for WordPress core functions so the
  * helper modules under inc/helpers/ can be loaded and tested in
@@ -42,6 +42,10 @@ function bwp_reset_mocks() {
     $GLOBALS['_bwp_post_tags']   = array();
     $GLOBALS['_bwp_categories']  = array();
     $GLOBALS['_bwp_current_id']  = 0;
+    $GLOBALS['_bwp_get_posts_result'] = array();
+    $GLOBALS['_bwp_term_objects']     = array();
+    $GLOBALS['_bwp_publish_count']    = 0;
+    $GLOBALS['_bwp_hidden_tag_slugs'] = array();
 }
 
 /* ── Stub helpers for setting up test fixtures ─────────────────────── */
@@ -238,7 +242,16 @@ function wp_get_post_tags( $post_id, $args = array() ) {
 }
 
 function get_posts( $args = array() ) {
-    return array();
+    $GLOBALS['_bwp_last_get_posts_args'] = $args;
+    return $GLOBALS['_bwp_get_posts_result'] ?? array();
+}
+
+function get_objects_in_term( $term_id, $taxonomy ) {
+    return $GLOBALS['_bwp_term_objects'][ $taxonomy ][ $term_id ] ?? array();
+}
+
+function wp_count_posts( $type = 'post' ) {
+    return (object) array( 'publish' => $GLOBALS['_bwp_publish_count'] ?? 0 );
 }
 
 function wp_list_pluck( $list, $field ) {
@@ -248,7 +261,15 @@ function wp_list_pluck( $list, $field ) {
 }
 
 function wp_get_object_terms( $ids, $tax, $args = array() ) {
-    return array();
+    // (term, object) pairs derived from the per-term object lists a test sets
+    // in $GLOBALS['_bwp_term_objects'][ $taxonomy ][ $term_id ].
+    $out = array();
+    foreach ( $GLOBALS['_bwp_term_objects'][ $tax ] ?? array() as $term_id => $object_ids ) {
+        foreach ( array_intersect( (array) $object_ids, (array) $ids ) as $oid ) {
+            $out[] = (object) array( 'term_id' => $term_id, 'object_id' => $oid );
+        }
+    }
+    return $out;
 }
 
 function get_feed_link( $feed = '' ) {
@@ -271,7 +292,101 @@ if ( ! function_exists( 'book_wp_hidden_tag_slugs' ) ) {
     }
 }
 
+/* ── Plugin API stubs ─────────────────────────────────────────────── */
+/* The helpers register hooks at file load, so these must exist before   */
+/* they are required. Filters are recorded so tests can assert on them;  */
+/* apply_filters() runs any callbacks registered through add_filter().   */
+
+$GLOBALS['_bwp_filters'] = array();
+
+if ( ! function_exists( 'add_filter' ) ) {
+    function add_filter( $tag, $callback, $priority = 10, $accepted_args = 1 ) {
+        $GLOBALS['_bwp_filters'][ $tag ][ $priority ][] = array( $callback, $accepted_args );
+        return true;
+    }
+}
+if ( ! function_exists( 'add_action' ) ) {
+    function add_action( $tag, $callback, $priority = 10, $accepted_args = 1 ) {
+        return add_filter( $tag, $callback, $priority, $accepted_args );
+    }
+}
+if ( ! function_exists( 'remove_filter' ) ) {
+    function remove_filter( $tag, $callback, $priority = 10 ) {
+        unset( $GLOBALS['_bwp_filters'][ $tag ][ $priority ] );
+        return true;
+    }
+}
+if ( ! function_exists( 'remove_action' ) ) {
+    function remove_action( $tag, $callback, $priority = 10 ) {
+        return remove_filter( $tag, $callback, $priority );
+    }
+}
+if ( ! function_exists( 'has_filter' ) ) {
+    function has_filter( $tag, $callback = false ) {
+        return ! empty( $GLOBALS['_bwp_filters'][ $tag ] );
+    }
+}
+if ( ! function_exists( 'has_action' ) ) {
+    function has_action( $tag, $callback = false ) {
+        return has_filter( $tag, $callback );
+    }
+}
+if ( ! function_exists( 'apply_filters' ) ) {
+    function apply_filters( $tag, $value, ...$args ) {
+        if ( empty( $GLOBALS['_bwp_filters'][ $tag ] ) ) return $value;
+        $by_priority = $GLOBALS['_bwp_filters'][ $tag ];
+        ksort( $by_priority );
+        foreach ( $by_priority as $callbacks ) {
+            foreach ( $callbacks as $cb ) {
+                $params = array_slice( array_merge( array( $value ), $args ), 0, max( 1, (int) $cb[1] ) );
+                $value  = call_user_func_array( $cb[0], $params );
+            }
+        }
+        return $value;
+    }
+}
+if ( ! function_exists( 'do_action' ) ) {
+    function do_action( $tag, ...$args ) {
+        if ( empty( $GLOBALS['_bwp_filters'][ $tag ] ) ) return;
+        $by_priority = $GLOBALS['_bwp_filters'][ $tag ];
+        ksort( $by_priority );
+        foreach ( $by_priority as $callbacks ) {
+            foreach ( $callbacks as $cb ) {
+                call_user_func_array( $cb[0], array_slice( $args, 0, max( 0, (int) $cb[1] ) ) );
+            }
+        }
+    }
+}
+if ( ! function_exists( 'doing_action' ) ) {
+    function doing_action( $tag = null ) { return false; }
+}
+if ( ! function_exists( 'doing_filter' ) ) {
+    function doing_filter( $tag = null ) { return false; }
+}
+
 /* ── Load the helpers under test ──────────────────────────────────── */
+
+
+/* ── Theme mod / option write stubs for migrate.php ─────────────────── */
+if ( ! function_exists( 'update_option' ) ) {
+    function update_option( $name, $value, $autoload = null ) { $GLOBALS['_bwp_options'][ $name ] = $value; return true; }
+}
+if ( ! function_exists( 'get_stylesheet' ) ) {
+    function get_stylesheet() { return $GLOBALS['_bwp_stylesheet'] ?? 'menjmy'; }
+}
+if ( ! function_exists( 'get_theme_mod' ) ) {
+    function get_theme_mod( $name, $default = false ) {
+        $mods = $GLOBALS['_bwp_options'][ 'theme_mods_' . get_stylesheet() ] ?? array();
+        return array_key_exists( $name, (array) $mods ) ? $mods[ $name ] : $default;
+    }
+}
+if ( ! function_exists( 'set_theme_mod' ) ) {
+    function set_theme_mod( $name, $value ) {
+        $key = 'theme_mods_' . get_stylesheet();
+        $mods = $GLOBALS['_bwp_options'][ $key ] ?? array();
+        $mods[ $name ] = $value; $GLOBALS['_bwp_options'][ $key ] = $mods; return true;
+    }
+}
 
 $base = dirname( __DIR__ ) . '/inc/helpers/';
 
@@ -279,3 +394,4 @@ require_once $base . 'literary.php';
 require_once $base . 'analytics.php';
 require_once $base . 'colophon.php';
 require_once $base . 'navigation.php';
+require_once $base . 'migrate.php';

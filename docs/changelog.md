@@ -1,3 +1,58 @@
+## [4.0.0] — Sasterawan: Malaysiana Redesign
+
+### Compatibility
+- Data model unchanged from Book WP 3.5.x: options, post meta keys, taxonomy,
+  menu locations, widget areas and text domain all keep their names.
+- New `inc/helpers/migrate.php` copies theme mods (logo, header/background,
+  Customizer CSS, menu locations) from a `book-wp` folder on activation when
+  the theme is installed under a new folder. Covered by `tests/MigrationTest.php`.
+
+### Changed
+- Theme renamed **Sasterawan**, tailored for https://menj.my (Di Bawah Permukaan).
+- Front end rebuilt from scratch (`assets/css/frontend.css`): editorial,
+  asymmetric openings with oversized Fraunces display type set off-axis, a
+  nila/kunyit/kapas palette, 999px pills for navigation, badges, chips and
+  buttons, 20–28px card radii, and a self-hosted Jawi face (Dubidam Arabic)
+  for the anthology watermark, per-form watermarks and the footer signature.
+- New site header: brand mark + author, centred context label
+  ("Puisi · Sanggahan"), pill navigation with a phone disclosure button.
+- Front page opens like an anthology jacket: a toned underwater photograph
+  (David Boca, Pexels) under the Kagnue title, with an imprint line and Jawi
+  seal at the head and the author's name and edition line at the foot.
+  Switchable and replaceable under Settings → General. **Jalur tema** pills
+  generated from categories, table of contents as two-column cards.
+- One title-page panel opens every work, page, archive, tag, search and the
+  404: kicker and Jawi seal at the head, Kagnue title, chips or description
+  beneath a hairline. Kagnue carries all h1/h2; Fraunces keeps italics,
+  datelines and list titles. The floating strand blurb under the header is
+  retired. Rounded ink-tile drop cap and colophon card; the previous/next work
+  navigation and its setting are removed.
+- Night mode and the Night scheme now share one Malam palette; Cream and Dusk
+  re-ink correctly at clock-night and under the reader toggle.
+- Per-form stylesheets no longer set the title treatment; they keep their
+  form's typography, reading measure and ornament styling.
+- Display font Cinzel replaced by Fraunces; Noto Naskh Arabic loaded for
+  Jawi fallback.
+
+### Added
+- **Terjemahan** literary form (translations into Malay, e.g. Poe) with
+  source title, author, year, language and translator's note fields and an
+  apparatus block above the work.
+- `book_wp_jawi_name` option (General tab): anthology name in Jawi.
+- Brand assets under `assets/img/brand/` (mark, inverse, mono, favicon,
+  wordmark, lockup) and a favicon fallback when no Site Icon is set.
+- `book_wp_form_jawi()`, `book_wp_header_section_label()`,
+  `book_wp_terjemahan_block()` helpers.
+
+### Fixed
+- Meta box no longer loses edits when a field name appears in several form
+  groups; stray `</div>` removed.
+- Legacy-slug redirect leaves paged posts, comment pages, feeds and previews
+  alone; permalink toggle defers its rewrite flush.
+- Stanza counter no longer merges bare paragraphs.
+- Test bootstrap loads without WordPress (plugin API stubs); 120 tests pass.
+- Back-to-top and copy tooltip use defined colour tokens.
+
 ## [3.5.1] — Maintenance Hardening, Tooling & Font Privacy
 
 ### Fixed
@@ -61,7 +116,7 @@
 
 ### Changed (translation files)
 - `languages/book-wp.pot` **regenerated from source** at 3.5.0.  Old `.pot`
-  header read `Project-Id-Version: Book WP 3.3.56` — it had been stale for
+  header read `Project-Id-Version: Sasterawan 3.3.56` — it had been stale for
   five minor versions.  New `.pot` covers all 361 unique `msgid` calls in
   PHP + JS source (`__()`, `_e()`, `esc_html__()`/`_e()`, `esc_attr__()`/`_e()`,
   `_x()`, `_ex()`, `esc_html_x()`, `esc_attr_x()`, `_n()`, `_nx()` and their
@@ -938,7 +993,7 @@ CSS: `.bwp-share` flex row with `.bwp-share__label` and `.bwp-share__btn` compon
 
 JS: clipboard IIFE appended to `frontend.js`. Uses `navigator.clipboard.writeText()` with a `document.execCommand('copy')` fallback for older browsers. Label text swaps to `bookWP.copied` string on success; reverts after 2s. `bookWP.copied` and `bookWP.shareRow` added to `wp_localize_script` object in `enqueue.php`.
 
-Settings: `book_wp_share_row` toggle added to Reading tab, Appearance > Book WP > Reading, under Reading Enhancements. Default off.
+Settings: `book_wp_share_row` toggle added to Reading tab, Appearance > Sasterawan > Reading, under Reading Enhancements. Default off.
 
 ---
 
@@ -1460,7 +1515,7 @@ icon function (`book_wp_social_icon( $slug )`), and output function
 Instagram, Threads, LinkedIn, YouTube, Medium, Wikipedia, GitHub, RSS.
 
 **New settings tab: Social** (`inc/admin/settings.php`)
-Sixth tab added to Appearance > Book WP. Each platform has its own URL
+Sixth tab added to Appearance > Sasterawan. Each platform has its own URL
 field (sanitised with `esc_url_raw`). RSS falls back to `get_feed_link()`
 automatically when the field is left blank. The `share` icon added to
 `bwp_icon()`. Options registered in `book_wp_register_settings()` and
@@ -1760,7 +1815,7 @@ side panels, and the gap between them are now one continuous surface.
 
 ---
 
-# Book WP — Changelog
+# Sasterawan — Changelog
 
 ## Editorial note — intentional consolidations
 
@@ -1852,7 +1907,7 @@ schemes (Cream, Dusk):
 
 # Changelog
 
-All notable changes to Book WP are documented in this file.
+All notable changes to Sasterawan are documented in this file.
 
 ---
 
@@ -2590,7 +2645,7 @@ for explicit type safety. No functional change.
 - Ornament removed from footer (content templates own their closing ornaments)
 - New `.bwp-site-footer__inner` flex wrapper
 - `.bwp-site-footer__colophon`: anthology name (display font, spaced caps), author name, copyright — all drawn from existing theme options
-- `.bwp-site-footer__credit`: Book WP by MENJ separated by thin rule, opacity .55
+- `.bwp-site-footer__credit`: Sasterawan by MENJ separated by thin rule, opacity .55
 - `::before` pseudo-element: centred ✦ on the border-top rule replaces duplicate SVG ornament
 
 **footer-widget search form (3.4.1 — was completely unstyled):**
@@ -2670,7 +2725,7 @@ verse paragraph tight-packing, chapter title small-caps treatment — all preser
 
 ### Bug fix — Night mode: unguarded palette overrides + missing third dark-mode class (consolidated from 3.3.57, 3.3.58)
 
-Book WP has three independent dark-mode mechanisms:
+Sasterawan has three independent dark-mode mechanisms:
 - `bwp-night` — floating toggle button (set on `body` by JS)
 - `bwp-scheme-night` — persistent Night scheme (set on `body` by PHP)
 - `bwp-time-night` — clock-driven Night period (set on `:root` by JS)
@@ -3367,7 +3422,7 @@ title pages.
 
 ### Feature — Block editor bridge (classic theme FSE groundwork)
 
-Book WP is and remains a **classic PHP template theme**. This release adds the
+Sasterawan is and remains a **classic PHP template theme**. This release adds the
 maximum block editor integration possible without triggering FSE mode, and
 documents the full migration path for when FSE is undertaken.
 
@@ -3973,7 +4028,7 @@ Complete sastera (literary) rebuild. Every file rewritten.
 
 ## 2.0.0 — 2026-02-27
 
-- Rewrote theme as Book WP for literary publishing
+- Rewrote theme as Sasterawan for literary publishing
 - Custom taxonomy: literary_form (puisi, nukilan, ratapan)
 - Post meta fields for year, source, dedication
 - Basic front-page Table of Contents

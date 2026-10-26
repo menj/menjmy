@@ -3,16 +3,16 @@
 
 <main id="bwp-main" class="bwp-main">
 
-<div class="bwp-archive-header bwp-archive-header--search">
-    <?php echo book_wp_ornament( 'leaf' ); // phpcs:ignore ?>
-
-    <p class="bwp-archive-header__taxlabel"><?php esc_html_e( 'Search Results', 'book-wp' ); ?></p>
+<div class="bwp-archive-header bwp-opening bwp-archive-header--search">
+    <div class="bwp-opening__top">
+        <p class="bwp-archive-header__taxlabel bwp-opening__kicker"><?php esc_html_e( 'Search Results', 'book-wp' ); ?></p>
+        <?php $bwp_seal = get_option( 'book_wp_jawi_name', '' ); if ( $bwp_seal ) : ?><span class="bwp-opening__seal" aria-hidden="true" dir="rtl" lang="ms-Arab"><?php echo esc_html( $bwp_seal ); ?></span><?php endif; ?>
+    </div>
 
     <h1 class="bwp-archive-header__title">
         <span class="bwp-tag bwp-tag--lg"><?php echo esc_html( get_search_query() ); ?></span>
     </h1>
 
-    <?php echo book_wp_ornament( 'dash' ); // phpcs:ignore ?>
 </div>
 
 <?php if ( have_posts() ) : ?>

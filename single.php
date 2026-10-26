@@ -8,23 +8,45 @@
     <article <?php post_class( 'bwp-single' ); ?> id="post-<?php the_ID(); ?>">
 
         <?php
-        // "PETIKAN DARIPADA" — shown above the title only when the post is
-        // in the hikayat form AND the citation toggle is checked in the meta box.
         $form_slug_single = book_wp_get_form_slug();
-        if ( 'hikayat' === $form_slug_single
-            && '1' === get_post_meta( get_the_ID(), 'book_wp_hikayat_is_citation', true ) ) :
+        $jawi_form        = book_wp_form_jawi( $form_slug_single );
         ?>
-            <p class="bwp-citation-label"><?php esc_html_e( 'Cited from', 'book-wp' ); ?></p>
-        <?php endif; ?>
-        <h1 class="bwp-work__title"><?php the_title(); ?></h1>
+        <?php $bwp_cover = book_wp_work_cover(); ?>
+        <header class="bwp-work__opening bwp-opening<?php echo $bwp_cover ? ' bwp-opening--cover' : ''; ?>">
+            <?php echo book_wp_cover_markup( $bwp_cover ); // phpcs:ignore ?>
+            <div class="bwp-opening__top">
+                <?php $bwp_kicker = book_wp_header_section_label(); if ( $bwp_kicker ) : ?>
+                    <p class="bwp-opening__kicker"><?php echo esc_html( $bwp_kicker ); ?></p>
+                <?php endif; ?>
+                <?php if ( $jawi_form ) : ?>
+                    <span class="bwp-opening__seal" aria-hidden="true" dir="rtl" lang="ms-Arab"><?php echo esc_html( $jawi_form ); ?></span>
+                <?php endif; ?>
+            </div>
+            <h1 class="bwp-work__title"><?php the_title(); ?></h1>
+            <?php
+            // Chips row: "Cited from" for hikayat citations, then the analytics
+            // bar. Printed only when something is in it, so no empty ruled strip.
+            $bwp_meta = '';
+            if ( 'hikayat' === $form_slug_single
+                && '1' === get_post_meta( get_the_ID(), 'book_wp_hikayat_is_citation', true ) ) {
+                $bwp_meta .= '<p class="bwp-citation-label">' . esc_html__( 'Cited from', 'book-wp' ) . '</p>';
+            }
+            if ( '1' === get_option( 'book_wp_show_analytics', '1' ) ) {
+                $bwp_meta .= book_wp_analytics_bar();
+            }
+            if ( trim( $bwp_meta ) ) : ?>
+            <div class="bwp-work__meta"><?php echo $bwp_meta; // phpcs:ignore ?></div>
+            <?php endif; ?>
+            <?php if ( '1' === get_option( 'book_wp_show_chapter_blurb', '0' ) ) : $bwp_blurb = book_wp_strand_blurb(); if ( $bwp_blurb ) : ?>
+            <p class="bwp-opening__blurb"><?php echo esc_html( $bwp_blurb ); ?></p>
+            <?php endif; endif; ?>
+            <?php echo book_wp_cover_credit( $bwp_cover ); // phpcs:ignore ?>
+        </header>
 
-        <?php if ( '1' === get_option( 'book_wp_show_analytics', '1' ) ) : ?>
-            <?php echo book_wp_analytics_bar(); // phpcs:ignore ?>
-        <?php endif; ?>
-
+        <div class="bwp-work__layout">
+        <div class="bwp-work__main">
         <?php
-        // Nota Penulis — shown between analytics bar and body content,
-        // full width across the page wrap. All forms.
+        // Nota Penulis — shown between analytics bar and body content. All forms.
         $bwp_notes = get_post_meta( get_the_ID(), 'book_wp_notes', true );
         if ( $bwp_notes ) :
         ?>
@@ -38,7 +60,9 @@
 
         <?php echo book_wp_epigraph(); // phpcs:ignore ?>
 
-        <?php echo book_wp_featured_image(); // phpcs:ignore ?>
+        <?php echo book_wp_terjemahan_block(); // phpcs:ignore ?>
+
+        <?php if ( ! $bwp_cover ) echo book_wp_featured_image(); // phpcs:ignore ?>
 
         <div class="bwp-work__content">
             <?php the_content(); ?>
@@ -71,26 +95,20 @@
         <?php endif; endif; endif; ?>
 
         <?php echo book_wp_share_row(); // phpcs:ignore ?>
-
-        <?php echo book_wp_colophon(); // phpcs:ignore ?>
-
-        <?php echo book_wp_related_works(); // phpcs:ignore ?>
+        </div><!-- .bwp-work__main -->
 
         <?php
-        $bwp_nav_output = '';
-        if ( '1' === get_option( 'book_wp_show_nav', '1' ) ) {
-            $bwp_nav_output = book_wp_work_navigation();
-            echo $bwp_nav_output; // phpcs:ignore
-        }
-        // When no nav renders (disabled or no adjacent posts), suppress the
-        // large top margin on the comments section via a body class hook.
-        if ( ! $bwp_nav_output ) {
-            add_filter( 'body_class', function( $classes ) {
-                $classes[] = 'bwp-no-work-nav';
-                return $classes;
-            } );
-        }
+        // Apparatus — colophon and related works. Beside the text on wide
+        // screens, below it on tablet and phone.
+        $bwp_aside = book_wp_colophon() . book_wp_related_works();
+        if ( trim( $bwp_aside ) ) :
         ?>
+        <aside class="bwp-work__aside" aria-label="<?php esc_attr_e( 'About this work', 'book-wp' ); ?>">
+            <?php echo $bwp_aside; // phpcs:ignore ?>
+        </aside>
+        <?php endif; ?>
+        </div><!-- .bwp-work__layout -->
+
 
     </article>
 

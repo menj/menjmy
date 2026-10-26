@@ -1,6 +1,6 @@
 <?php
 /**
- * Book WP — Navigation & Layout Helpers
+ * Sasterawan — Navigation & Layout Helpers
  *
  * Related works sidebar, previous/next work navigation,
  * table-of-contents entry builder, featured image, and
@@ -458,3 +458,89 @@ function book_wp_share_row( $post_id = 0 ) {
     $html .= '</div>';
     return $html;
 }
+
+/* ── Visible works: published posts minus hidden-tagged ones ───────────── */
+
+/**
+ * IDs of works the public can reach. The TOC, archives and feeds exclude
+ * posts carrying a hidden trigger tag, so anything that counts works or
+ * decides whether a term is empty must look at this set, not raw totals.
+ *
+ * @return int[]
+ */
+function book_wp_visible_work_ids() {
+    static $ids = null;
+    if ( null !== $ids ) return $ids;
+
+    $args = array(
+        'post_type'              => 'post',
+        'post_status'            => 'publish',
+        'posts_per_page'         => -1,
+        'fields'                 => 'ids',
+        'no_found_rows'          => true,
+        'update_post_meta_cache' => false,
+        'update_post_term_cache' => false,
+    );
+    $hidden = book_wp_hidden_tag_slugs();
+    if ( $hidden ) {
+        $args['tax_query'] = array( array(
+            'taxonomy' => 'post_tag',
+            'field'    => 'slug',
+            'terms'    => $hidden,
+            'operator' => 'NOT IN',
+        ) );
+    }
+    $found = get_posts( $args );
+    $ids   = is_array( $found ) ? array_map( 'intval', $found ) : array();
+    return $ids;
+}
+
+/**
+ * Number of publicly listed works. Falls back to the cheap status count
+ * when no hidden tags are configured, since the two then agree.
+ *
+ * @return int
+ */
+function book_wp_visible_work_count() {
+    if ( ! book_wp_hidden_tag_slugs() ) {
+        $counts = wp_count_posts( 'post' );
+        return isset( $counts->publish ) ? (int) $counts->publish : 0;
+    }
+    return count( book_wp_visible_work_ids() );
+}
+
+/**
+ * Recount terms against visible works and drop the ones left empty, so a
+ * strand or form made only of hidden posts never links to an empty archive.
+ * Terms come back untouched when nothing is hidden.
+ *
+ * @param WP_Term[] $terms
+ * @param string    $taxonomy
+ * @return WP_Term[]
+ */
+function book_wp_visible_terms( $terms, $taxonomy ) {
+    if ( ! is_array( $terms ) || ! $terms ) return array();
+    if ( ! book_wp_hidden_tag_slugs() ) return array_values( $terms );
+
+    $visible = book_wp_visible_work_ids();
+    if ( ! $visible ) return array();
+
+    // One query for every visible work's terms, then a count per term.
+    $pairs = wp_get_object_terms( $visible, $taxonomy, array( 'fields' => 'all_with_object_id' ) );
+    if ( is_wp_error( $pairs ) ) return array();
+    $counts = array();
+    foreach ( (array) $pairs as $pair ) {
+        $tid = (int) $pair->term_id;
+        $counts[ $tid ] = isset( $counts[ $tid ] ) ? $counts[ $tid ] + 1 : 1;
+    }
+
+    $out = array();
+    foreach ( $terms as $term ) {
+        $n = isset( $counts[ (int) $term->term_id ] ) ? $counts[ (int) $term->term_id ] : 0;
+        if ( $n < 1 ) continue;
+        $term->count = $n;
+        $out[]       = $term;
+    }
+    return $out;
+}
+

@@ -1,5 +1,5 @@
 /**
- * Book WP — Literary Form: Nukilan (Prose Excerpt)
+ * Sasterawan — Literary Form: Nukilan (Prose Excerpt)
  *
  * A curated fragment — the author's own selection from a larger work.
  * Georgia italic signals quotation register. Narrow column: the excerpt
@@ -11,36 +11,14 @@
  * @package Book_WP
  */
 
-/* ── Layout: wide — matches ratapan column ───────────────── */
-
-body.bwp-form-nukilan .bwp-page-wrap   { max-width: 46em; }
+/* ── Layout: 36em prose column (ratapan runs wider at 40em) ── */
 body.bwp-form-nukilan .bwp-work__content {
-    max-width: 40em;
+    max-width: 36em;
     margin-left: auto;
     margin-right: auto;
 }
 
 /* ── Title: Georgia italic, centred — quotation register ─── */
-
-body.bwp-form-nukilan .bwp-work__title {
-    font-family:    Georgia, 'Times New Roman', serif;
-    font-size:      1.8em;
-    font-weight:    400;
-    font-style:     normal;
-    text-align:     center;
-    letter-spacing: .01em;
-    line-height:    1.25;
-    color:          var(--bwp-text-mid);
-}
-
-body.bwp-form-nukilan .bwp-work__title::after {
-    content:    '';
-    display:    block;
-    width:      6em;
-    height:     1px;
-    background: linear-gradient(90deg, transparent, var(--bwp-gold-dim, #a8893a), transparent);
-    margin:     .7em auto 0;
-}
 
 /* ── Body: italic signals quotation, framed by gold borders ─ */
 
@@ -80,20 +58,7 @@ body.bwp-form-nukilan .bwp-work__content > p:first-of-type::first-letter {
 
 /* ── Colophon ────────────────────────────────────────────── */
 
-body.bwp-form-nukilan .bwp-colophon { text-align: center; margin-top: 2em; }
-
 /* ── Epigraph ────────────────────────────────────────────── */
-
-body.bwp-form-nukilan .bwp-epigraph {
-    font-size:    .88em;
-    max-width:    22em;
-    margin-left:  auto;
-    margin-right: auto;
-    text-align:   center;
-    border-left:  none;
-    font-style:   normal;
-    opacity:      .75;
-}
 
 /* ── Ornament: centred ───────────────────────────────────── */
 
@@ -106,16 +71,12 @@ body.bwp-form-nukilan .bwp-ornament {
 
 /* ── Analytics: centred ──────────────────────────────────── */
 
-body.bwp-form-nukilan .bwp-analytics { justify-content: center; }
-
 /* ── Responsive ──────────────────────────────────────────── */
 
 @media screen and (min-width: 52em) {
-    body.bwp-form-nukilan .bwp-work__title   { font-size: 2.2em; }
     body.bwp-form-nukilan .bwp-work__content { padding-left: 2.6em; padding-right: 2.6em; }
 }
 
 @media print {
-    body.bwp-form-nukilan .bwp-work__title   { font-size: 1.5em; text-align: center; }
     body.bwp-form-nukilan .bwp-work__content { border-color: #888; background: none; }
 }

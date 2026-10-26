@@ -1,6 +1,6 @@
 <?php
 /**
- * Book WP — Literary Form Helpers & Ornaments
+ * Sasterawan — Literary Form Helpers & Ornaments
  *
  * Form slug/label resolution, poetry detection, form descriptions,
  * and the decorative typographic ornament renderer.
@@ -45,16 +45,107 @@ function book_wp_form_label( $slug ) {
         'ratapan' => __( 'Lamentations',  'book-wp' ),
         'esei'    => __( 'Essay',         'book-wp' ),
         'memoir'  => __( 'Memoir',        'book-wp' ),
+        'terjemahan' => __( 'Translation', 'book-wp' ),
     );
     return isset( $labels[ $slug ] ) ? $labels[ $slug ] : $slug;
 }
 
-function book_wp_is_poetry( $post_id = 0 ) {
-    return in_array(
-        book_wp_get_form_slug( $post_id ),
-        array( 'puisi', 'syair', 'karmina', 'ratapan' ),
-        true
+/**
+ * Jawi spelling of a literary form, used as the faint watermark behind a
+ * work's opening. Decorative only (aria-hidden via CSS generated content).
+ *
+ * @param  string $slug Literary form slug.
+ * @return string       Jawi string, or '' when unknown.
+ */
+function book_wp_form_jawi( $slug ) {
+    $jawi = array(
+        'puisi'      => 'ڤويسي',
+        'syair'      => 'شعير',
+        'karmina'    => 'كرمينا',
+        'hikayat'    => 'حكايت',
+        'cerpen'     => 'چرڤين',
+        'novel'      => 'نوۏيل',
+        'nukilan'    => 'نوكيلن',
+        'ratapan'    => 'راتڤن',
+        'esei'       => 'ايسي',
+        'memoir'     => 'ميموار',
+        'terjemahan' => 'ترجمهن',
     );
+    $jawi = apply_filters( 'book_wp_form_jawi', $jawi );
+    return isset( $jawi[ $slug ] ) ? $jawi[ $slug ] : '';
+}
+
+/**
+ * Short context label for the centre of the site header:
+ * "Puisi · Sanggahan" on a work, the archive type on archives, the tagline at home.
+ */
+function book_wp_header_section_label() {
+    if ( is_singular( 'post' ) ) {
+        $parts = array();
+        $label = book_wp_get_form_label();
+        if ( $label ) $parts[] = $label;
+        $cat = book_wp_work_strand();
+        if ( $cat ) $parts[] = $cat->name;
+        return implode( ' · ', $parts );
+    }
+    if ( is_category() )  return __( 'Jalur', 'book-wp' ) . ' · ' . single_cat_title( '', false );
+    if ( is_tax( 'literary_form' ) ) return __( 'Form', 'book-wp' ) . ' · ' . single_term_title( '', false );
+    if ( is_tag() )       return __( 'Tag', 'book-wp' ) . ' · ' . single_tag_title( '', false );
+    if ( is_search() )    return __( 'Search', 'book-wp' );
+    if ( is_page() )      return get_the_title();
+    if ( is_home() || is_front_page() ) return get_bloginfo( 'description' );
+    return '';
+}
+
+/**
+ * Translation apparatus shown above a translated work: source title, author,
+ * year and language, plus the translator's note.
+ */
+function book_wp_terjemahan_block( $post_id = 0 ) {
+    if ( ! $post_id ) $post_id = get_the_ID();
+    // Only translations carry this apparatus; nukilan share the source-author key.
+    if ( ! book_wp_has_form( $post_id, 'terjemahan' ) ) return '';
+    $title  = get_post_meta( $post_id, 'book_wp_source_title',  true );
+    $author = get_post_meta( $post_id, 'book_wp_source_author', true );
+    $year   = get_post_meta( $post_id, 'book_wp_source_year',   true );
+    $lang   = get_post_meta( $post_id, 'book_wp_original_lang', true );
+    $note   = get_post_meta( $post_id, 'book_wp_translator_note', true );
+    if ( ! $title && ! $author && ! $note ) return '';
+
+    $src = array_filter( array(
+        $title  ? '“' . $title . '”' : '',
+        $author,
+        $year,
+        $lang ? sprintf( __( 'from %s', 'book-wp' ), $lang ) : '',
+    ) );
+    $html  = '<div class="bwp-terjemahan">';
+    $html .= '<span class="bwp-terjemahan__label">' . esc_html__( 'Translated from', 'book-wp' ) . '</span>';
+    if ( $src )  $html .= '<p class="bwp-terjemahan__source">' . esc_html( implode( ' · ', $src ) ) . '</p>';
+    if ( $note ) $html .= '<p class="bwp-terjemahan__note">' . esc_html__( "Translator's note", 'book-wp' ) . ': ' . esc_html( $note ) . '</p>';
+    return $html . '</div>';
+}
+
+/**
+ * Every literary_form slug on a post. A translation is filed under
+ * terjemahan *and* its native form (puisi, cerpen…), so helpers that care
+ * about verse versus prose look at all of them, not just the first.
+ *
+ * @return string[]
+ */
+function book_wp_get_form_slugs( $post_id = 0 ) {
+    if ( ! $post_id ) $post_id = get_the_ID();
+    $terms = get_the_terms( $post_id, 'literary_form' );
+    if ( ! $terms || is_wp_error( $terms ) ) return array();
+    return array_values( array_map( function( $t ) { return $t->slug; }, $terms ) );
+}
+
+function book_wp_has_form( $post_id, $slug ) {
+    return in_array( $slug, book_wp_get_form_slugs( $post_id ), true );
+}
+
+function book_wp_is_poetry( $post_id = 0 ) {
+    $verse = array( 'puisi', 'syair', 'karmina', 'ratapan' );
+    return (bool) array_intersect( $verse, book_wp_get_form_slugs( $post_id ) );
 }
 
 function book_wp_form_description( $slug ) {
@@ -69,6 +160,7 @@ function book_wp_form_description( $slug ) {
         'ratapan' => __( 'Ratapan are poetic expressions of grief or suffering, often connected to loss, longing, or mourning.', 'book-wp' ),
         'esei'    => __( "An essay is a non-fiction prose work presenting the author's argument, analysis, or personal reflection on a subject.", 'book-wp' ),
         'memoir'  => __( "Autobiografi or memoir is the author's personal account of their own lived experience, written in the first person.", 'book-wp' ),
+        'terjemahan' => __( 'Terjemahan are works carried from another language into Malay — poems and short stories alike — each with its source and a translator\'s note.', 'book-wp' ),
     );
     return isset( $desc[ $slug ] ) ? $desc[ $slug ] : '';
 }
@@ -91,3 +183,263 @@ function book_wp_ornament( $style = '' ) {
     if ( empty( $svg ) ) return '';
     return '<div class="bwp-ornament bwp-ornament--' . esc_attr( $style ) . '" aria-hidden="true">' . $svg . '</div>';
 }
+
+/* ── Footer sign-off defaults (Di Bawah Permukaan, Mukadimah) ─────────── */
+
+function book_wp_default_footer_quote() {
+    return 'Yang tampak hanyalah permukaan, sedang arus kesedaran diam-diam mengubah haluan, mengendapkan pengalaman; di sini, bahasa bergerak perlahan, menyentuh yang halus, menyusup ke kedalaman.';
+}
+function book_wp_default_footer_quote_sub() {
+    return '';
+}
+
+/**
+ * Javanese rendering of the anthology name: a translation, not a
+ * transliteration. "Sangisoring Lumahan" = beneath the surface (ngoko,
+ * literary register). Shown in Aksara Jawa in the footer identity block.
+ */
+function book_wp_default_jawa_name() {
+    return 'ꦱꦔꦶꦱꦺꦴꦫꦶꦁꦭꦸꦩꦲꦤ꧀';
+}
+
+/**
+ * Duotone portrait medallion. Size: 'sm' (56px), 'md' (120px), 'lg' (240px).
+ * The duotone is CSS (grayscale + screen blend over nila), so any photo works.
+ */
+function book_wp_author_portrait( $size = 'md' ) {
+    $url = get_option( 'book_wp_author_portrait', BOOK_WP_URI . '/assets/img/brand/portrait.png' );
+    if ( ! $url ) return '';
+    $name = get_option( 'book_wp_author_name', '' );
+    $name = $name ? $name : get_bloginfo( 'name' );
+    $size = in_array( $size, array( 'sm', 'md', 'lg' ), true ) ? $size : 'md';
+    return '<span class="bwp-portrait bwp-portrait--' . esc_attr( $size ) . '">'
+        . '<img src="' . esc_url( $url ) . '" alt="' . esc_attr( $name ) . '" loading="lazy" decoding="async">'
+        . '</span>';
+}
+
+/**
+ * Front page: the newest work (or the pinned one from settings) presented as
+ * an opening page — form badge, title, first stanza or lines, dateline.
+ */
+function book_wp_featured_work() {
+    if ( '1' !== get_option( 'book_wp_show_featured_work', '1' ) ) return '';
+    $pinned = (int) get_option( 'book_wp_featured_work_id', 0 );
+    $args = array( 'post_type' => 'post', 'post_status' => 'publish', 'posts_per_page' => 1, 'ignore_sticky_posts' => true );
+    if ( $pinned ) $args['p'] = $pinned;
+    $hidden = book_wp_hidden_tag_slugs();
+    if ( ! $pinned && $hidden ) $args['tax_query'] = array( array( 'taxonomy' => 'post_tag', 'field' => 'slug', 'terms' => $hidden, 'operator' => 'NOT IN' ) );
+    $q = new WP_Query( $args );
+    if ( ! $q->have_posts() ) return '';
+    $post = $q->posts[0];
+    $id   = $post->ID;
+    $slug = book_wp_get_form_slug( $id );
+    $cat  = book_wp_work_strand( $id );
+
+    // Content filters (blocks, shortcodes, term spans) read the current post,
+    // so point them at this one while the passage is extracted; the
+    // wp_reset_postdata() below restores the main query's post.
+    $GLOBALS['post'] = $post;
+    setup_postdata( $post );
+    $content = apply_filters( 'the_content', $post->post_content );
+    $content = book_wp_remove_chapter_blocks( $content );
+    $verse   = book_wp_is_poetry( $id );
+
+    // First passage: the first non-empty <p>, or <pre> (a verse block carries
+    // no <p> at all); line breaks are kept for verse.
+    $first = '';
+    if ( preg_match_all( '/<(p|pre)(?:\s[^>]*)?>(.*?)<\/\1>/si', $content, $mm ) ) {
+        foreach ( $mm[2] as $para ) {
+            if ( '' !== trim( wp_strip_all_tags( str_replace( '&nbsp;', ' ', $para ) ) ) ) { $first = $para; break; }
+        }
+    }
+    if ( '' === $first ) $first = wp_strip_all_tags( $content );
+    $first = wp_kses( $first, array( 'br' => array(), 'em' => array(), 'strong' => array() ) );
+    if ( $verse ) {
+        // A verse block holds the whole poem with blank lines between stanzas:
+        // keep the first stanza only, and never more than eight lines.
+        $lines  = preg_split( '/\R/', preg_replace( '/<br\s*\/?>/i', "\n", $first ) );
+        $stanza = array();
+        foreach ( $lines as $line ) {
+            if ( '' === trim( wp_strip_all_tags( $line ) ) ) { if ( $stanza ) break; continue; }
+            $stanza[] = trim( $line );
+            if ( count( $stanza ) >= 8 ) break;
+        }
+        $first = implode( '<br>', $stanza );
+    } else {
+        $first = wp_trim_words( wp_strip_all_tags( $first ), 48, '…' );
+    }
+
+    $loc  = get_post_meta( $id, 'book_wp_location', true );
+    $date = get_post_meta( $id, 'book_wp_date_composed', true );
+    $year = get_post_meta( $id, 'book_wp_year', true );
+    $dateline = implode( ', ', array_filter( array( $loc, $date ? $date : $year ) ) );
+
+    $html  = '<section class="bwp-featured" aria-labelledby="bwp-featured-title">';
+    $html .= '<p class="bwp-featured__kicker">' . ( $pinned ? esc_html__( 'Karya pilihan', 'book-wp' ) : esc_html__( 'Karya terbaharu', 'book-wp' ) ) . '</p>';
+    $html .= '<div class="bwp-featured__grid">';
+    $html .= '<div class="bwp-featured__head">';
+    $html .= '<div class="bwp-analytics">';
+    if ( $slug ) $html .= '<span class="bwp-badge bwp-badge--' . esc_attr( $slug ) . '">' . esc_html( book_wp_form_label( $slug ) ) . '</span>';
+    if ( $cat )  $html .= '<a class="bwp-analytics__item bwp-analytics__cat" href="' . esc_url( get_category_link( $cat ) ) . '">' . esc_html( $cat->name ) . '</a>';
+    $html .= '<span class="bwp-analytics__item">' . esc_html( book_wp_reading_time( $id ) ) . '</span>';
+    $html .= '</div>';
+    $html .= '<h2 class="bwp-featured__title" id="bwp-featured-title"><a href="' . esc_url( get_permalink( $id ) ) . '">' . esc_html( get_the_title( $id ) ) . '</a></h2>';
+    if ( $dateline ) $html .= '<p class="bwp-featured__dateline">' . esc_html( $dateline ) . '</p>';
+    $html .= '</div>';
+    $html .= '<div class="bwp-featured__body' . ( $verse ? ' bwp-featured__body--verse' : '' ) . '">';
+    $html .= '<p>' . $first . '</p>';
+    $html .= '<a class="bwp-featured__more" href="' . esc_url( get_permalink( $id ) ) . '">' . esc_html__( 'Baca seterusnya', 'book-wp' ) . ' <span aria-hidden="true">&rarr;</span></a>';
+    $html .= '</div></div></section>';
+    wp_reset_postdata();
+    return $html;
+}
+
+/**
+ * Front-page cover photograph: the owner's Media Library URL, or the bundled
+ * toned underwater photograph (David Boca, Pexels — see assets/img/hero/CREDITS.txt).
+ * Returns an empty array when the cover is switched off.
+ */
+function book_wp_hero_image() {
+    if ( '1' !== get_option( 'book_wp_show_hero_image', '1' ) ) {
+        return array();
+    }
+    $custom = esc_url( get_option( 'book_wp_hero_image', '' ) );
+    if ( $custom ) {
+        return array( 'src' => $custom, 'srcset' => '' );
+    }
+    $base = BOOK_WP_URI . '/assets/img/hero/';
+    return array(
+        'src'    => $base . 'di-bawah-permukaan.jpg',
+        'srcset' => $base . 'di-bawah-permukaan-sm.jpg 1000w, ' . $base . 'di-bawah-permukaan.jpg 2000w',
+    );
+}
+
+/* ── Covers: the jacket treatment for works and archives ───────────────── */
+
+/**
+ * Bundled plates for strands and forms, drawn from Wikimedia Commons
+ * (public domain or CC0; see assets/img/covers/CREDITS.txt). Keyed by
+ * taxonomy then term slug. Filter `book_wp_cover_plates` to add or swap.
+ *
+ * @return array<string, array<string, array{file:string, credit:string, url:string}>>
+ */
+function book_wp_cover_plates() {
+    $plates = array( 'literary_form' => array(), 'category' => array(), 'post_tag' => array() );
+    $manifest = BOOK_WP_DIR . '/assets/img/covers/plates.php';
+    if ( file_exists( $manifest ) ) {
+        $plates = array_replace_recursive( $plates, (array) include $manifest );
+    }
+    return apply_filters( 'book_wp_cover_plates', $plates );
+}
+
+/**
+ * Cover for a term archive: a URL set on the term (term meta
+ * `book_wp_cover_image`), else the bundled plate for that slug.
+ *
+ * @param WP_Term|null $term
+ * @return array{src:string, credit:string, url:string}|array
+ */
+function book_wp_term_cover( $term ) {
+    if ( ! $term || ! isset( $term->taxonomy ) ) return array();
+    $custom = get_term_meta( $term->term_id, 'book_wp_cover_image', true );
+    if ( $custom ) {
+        return array( 'src' => esc_url( $custom ), 'credit' => (string) get_term_meta( $term->term_id, 'book_wp_cover_credit', true ), 'url' => '' );
+    }
+    $plates = book_wp_cover_plates();
+    if ( empty( $plates[ $term->taxonomy ][ $term->slug ] ) ) return array();
+    $plate = $plates[ $term->taxonomy ][ $term->slug ];
+    return array(
+        'src'    => BOOK_WP_URI . '/assets/img/covers/' . $plate['file'],
+        'credit' => isset( $plate['credit'] ) ? $plate['credit'] : '',
+        'url'    => isset( $plate['url'] ) ? $plate['url'] : '',
+    );
+}
+
+/**
+ * Cover image element for a title page, plus its credit line.
+ *
+ * @param array $cover From book_wp_term_cover() or a featured image array.
+ * @return string
+ */
+function book_wp_cover_markup( $cover ) {
+    if ( empty( $cover['src'] ) ) return '';
+    return '<img class="bwp-opening__img" src="' . esc_url( $cover['src'] ) . '" alt="" decoding="async" fetchpriority="high">';
+}
+function book_wp_cover_credit( $cover ) {
+    if ( empty( $cover['credit'] ) ) return '';
+    $text = esc_html( $cover['credit'] );
+    if ( ! empty( $cover['url'] ) ) $text = '<a href="' . esc_url( $cover['url'] ) . '" rel="noopener">' . $text . '</a>';
+    return '<p class="bwp-opening__credit">' . $text . '</p>';
+}
+
+/**
+ * A work's featured image as its title-page cover (default on; the old
+ * figure below the apparatus is used when the toggle is off).
+ */
+function book_wp_work_cover( $post_id = 0 ) {
+    if ( ! $post_id ) $post_id = get_the_ID();
+    if ( '1' !== get_option( 'book_wp_show_featured', '1' ) ) return array();
+    if ( '1' !== get_option( 'book_wp_featured_as_cover', '1' ) ) return array();
+    if ( ! has_post_thumbnail( $post_id ) ) return array();
+    $src = get_the_post_thumbnail_url( $post_id, 'large' );
+    if ( ! $src ) return array();
+    return array( 'src' => $src, 'credit' => (string) get_the_post_thumbnail_caption( $post_id ), 'url' => '' );
+}
+
+/**
+ * Author card for a side column: portrait, name, role and social links.
+ * Used on static pages, which have no colophon to fill the column.
+ */
+function book_wp_author_card() {
+    $author = get_option( 'book_wp_author_name', '' );
+    $author = $author ? $author : get_bloginfo( 'name' );
+    $tag    = get_bloginfo( 'description' );
+    $html   = '<aside class="bwp-author-card" aria-label="' . esc_attr__( 'About the author', 'book-wp' ) . '">';
+    $html  .= '<div class="bwp-author-card__head">' . book_wp_author_portrait( 'md' );
+    $html  .= '<span class="bwp-author-card__names"><span class="bwp-author-card__name">' . esc_html( $author ) . '</span>';
+    $html  .= '<span class="bwp-author-card__role">' . esc_html__( 'Penulis & penyusun', 'book-wp' ) . '</span></span></div>';
+    if ( $tag ) $html .= '<p class="bwp-author-card__tagline">' . esc_html( $tag ) . '</p>';
+    if ( function_exists( 'book_wp_social_icons' ) ) {
+        $social = book_wp_social_icons();
+        if ( $social ) $html .= '<div class="bwp-author-card__social">' . $social . '</div>';
+    }
+    return $html . '</aside>';
+}
+
+/**
+ * The strand (category) a work is filed under: its first category that is
+ * not "Uncategorized". The header kicker, the featured block and the strand
+ * blurb all read it from here so they always name the same strand.
+ *
+ * @param int $post_id Post ID; 0 for the current post.
+ * @return object|null Category term, or null when the work has no strand.
+ */
+function book_wp_work_strand( $post_id = 0 ) {
+    $cats = get_the_category( $post_id ? (int) $post_id : get_the_ID() );
+    if ( ! is_array( $cats ) ) return null;
+    foreach ( $cats as $cat ) {
+        if ( 'uncategorized' !== $cat->slug ) return $cat;
+    }
+    return null;
+}
+
+/**
+ * Strand blurb: the category's own description, else the global "Strand
+ * Blurb" option. For a work, its strand (book_wp_work_strand) is used; for
+ * an archive, pass the term.
+ *
+ * @param int|object $subject Post ID or category term.
+ * @return string Plain text.
+ */
+function book_wp_strand_blurb( $subject = 0 ) {
+    $term = is_object( $subject ) ? $subject : book_wp_work_strand( (int) $subject );
+    $text = '';
+    if ( $term && ! empty( $term->description ) ) {
+        $text = wp_strip_all_tags( (string) $term->description );
+    }
+    if ( '' === $text ) {
+        $text = wp_strip_all_tags( (string) get_option( 'book_wp_chapter_blurb', '' ) );
+    }
+    return $text;
+}
+

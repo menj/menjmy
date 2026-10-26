@@ -3,24 +3,82 @@
 
 <main id="bwp-main" class="bwp-main">
 
-    <?php $anthology = get_option( 'book_wp_anthology_name', '' ); ?>
-    <div class="bwp-book-title">
-        <?php if ( ! empty( $anthology ) ) : ?>
-            <h1 class="bwp-book-title__name"><?php echo esc_html( $anthology ); ?></h1>
+    <?php
+    $anthology = get_option( 'book_wp_anthology_name', '' );
+    $jawi_name = get_option( 'book_wp_jawi_name', '' );
+    // Counts and term lists follow the public view: hidden-tagged works are
+    // excluded exactly as the TOC and archives exclude them.
+    $published  = book_wp_visible_work_count();
+    $jalur_cats = get_categories( array( 'hide_empty' => true, 'orderby' => 'name', 'order' => 'ASC' ) );
+    $jalur_cats = array_filter( $jalur_cats, function( $c ) { return 'uncategorized' !== $c->slug; } );
+    $jalur_cats = book_wp_visible_terms( $jalur_cats, 'category' );
+    $forms      = get_terms( array( 'taxonomy' => 'literary_form', 'hide_empty' => true, 'orderby' => 'count', 'order' => 'DESC' ) );
+    $forms      = book_wp_visible_terms( ( $forms && ! is_wp_error( $forms ) ) ? $forms : array(), 'literary_form' );
+    usort( $forms, function( $a, $b ) { return $b->count <=> $a->count; } );
+    $hero_img   = function_exists( 'book_wp_hero_image' ) ? book_wp_hero_image() : array();
+    ?>
+
+    <?php /* ── Half-title: anthology name and edition line (tagline lives in the footer) ────────── */ ?>
+    <div class="bwp-book-title<?php echo $hero_img ? ' bwp-book-title--cover' : ''; ?>">
+        <?php if ( $hero_img ) : ?>
+            <img class="bwp-book-title__img" src="<?php echo esc_url( $hero_img['src'] ); ?>"<?php if ( $hero_img['srcset'] ) : ?> srcset="<?php echo esc_attr( $hero_img['srcset'] ); ?>" sizes="(min-width: 1200px) 1104px, 100vw"<?php endif; ?> alt="" width="2000" height="833" fetchpriority="high" decoding="async">
+            <?php /* Jacket furniture: imprint line top-left, Jawi seal top-right */ ?>
+            <div class="bwp-book-title__top">
+                <span class="bwp-book-title__kicker"><?php echo esc_html( apply_filters( 'book_wp_cover_kicker', __( 'Antologi puisi dan prosa', 'book-wp' ) ) ); ?></span>
+                <?php if ( $jawi_name ) : ?>
+                    <span class="bwp-book-title__seal" aria-hidden="true" dir="rtl" lang="ms-Arab"><?php echo esc_html( $jawi_name ); ?></span>
+                <?php endif; ?>
+            </div>
+        <?php elseif ( $jawi_name ) : ?>
+            <span class="bwp-book-title__jawi" aria-hidden="true" dir="rtl"><?php echo esc_html( $jawi_name ); ?></span>
         <?php endif; ?>
-        <div class="bwp-book-title__desc"><?php bloginfo( 'description' ); ?></div>
+        <div class="bwp-book-title__block">
+            <h1 class="bwp-book-title__name"><?php echo esc_html( $anthology ? $anthology : get_bloginfo( 'name' ) ); ?></h1>
+            <?php $cover_author = get_option( 'book_wp_author_name', '' ); if ( $hero_img && $cover_author ) : ?>
+                <p class="bwp-book-title__author"><?php echo esc_html( $cover_author ); ?></p>
+            <?php endif; ?>
+            <p class="bwp-book-title__meta">
+                <span><?php echo esc_html( sprintf( _n( '%s work', '%s works', $published, 'book-wp' ), number_format_i18n( $published ) ) ); ?></span>
+                <?php if ( $jalur_cats ) : ?><span><?php echo esc_html( sprintf( _n( '%s strand', '%s strands', count( $jalur_cats ), 'book-wp' ), number_format_i18n( count( $jalur_cats ) ) ) ); ?></span><?php endif; ?>
+                <?php if ( $forms ) : ?><span><?php echo esc_html( sprintf( _n( '%s form', '%s forms', count( $forms ), 'book-wp' ), number_format_i18n( count( $forms ) ) ) ); ?></span><?php endif; ?>
+            </p>
+        </div>
     </div>
 
-    <?php
-    $front_blurb = get_option( 'book_wp_front_blurb', '' );
-    if ( ! empty( $front_blurb ) ) :
-    ?>
-        <div class="bwp-front-blurb">
-            <?php echo wp_kses_post( nl2br( $front_blurb ) ); ?>
-        </div>
+    <?php /* ── Pintu masuk: jalur tema + bentuk ──────────────────────────── */ ?>
+    <?php if ( $jalur_cats || $forms ) : ?>
+    <div class="bwp-pintu">
+        <?php if ( $jalur_cats ) : ?>
+        <nav class="bwp-jalur" aria-label="<?php esc_attr_e( 'Thematic strands', 'book-wp' ); ?>">
+            <span class="bwp-jalur__label"><?php esc_html_e( 'Jalur', 'book-wp' ); ?></span>
+            <?php foreach ( $jalur_cats as $jc ) : ?>
+                <a class="bwp-jalur__link" href="<?php echo esc_url( get_category_link( $jc->term_id ) ); ?>">
+                    <?php echo esc_html( $jc->name ); ?>
+                    <span class="bwp-jalur__count"><?php echo (int) $jc->count; ?></span>
+                </a>
+            <?php endforeach; ?>
+        </nav>
+        <?php endif; ?>
+        <?php if ( $forms ) : ?>
+        <nav class="bwp-jalur bwp-jalur--bentuk" aria-label="<?php esc_attr_e( 'Literary forms', 'book-wp' ); ?>">
+            <span class="bwp-jalur__label"><?php esc_html_e( 'Bentuk', 'book-wp' ); ?></span>
+            <?php foreach ( $forms as $ft ) : ?>
+                <a class="bwp-jalur__link bwp-jalur__link--outline" href="<?php echo esc_url( get_term_link( $ft ) ); ?>">
+                    <?php echo esc_html( book_wp_form_label( $ft->slug ) ); ?>
+                    <span class="bwp-jalur__count"><?php echo (int) $ft->count; ?></span>
+                </a>
+            <?php endforeach; ?>
+        </nav>
+        <?php endif; ?>
+    </div>
     <?php endif; ?>
 
-    <h3 class="bwp-toc-header"><?php echo esc_html( __( 'Table of Contents', 'book-wp' ) ); ?></h3>
+    <?php /* ── Karya terbaharu: the newest work opens like a first page ──── */ ?>
+    <?php echo book_wp_featured_work(); // phpcs:ignore ?>
+
+    <h2 class="bwp-toc-header"><?php echo esc_html( __( 'Table of Contents', 'book-wp' ) ); ?></h2>
+
+    <div class="bwp-toc-wrap">
 
     <?php
     $grouping    = get_option( 'book_wp_toc_grouping', 'none' );
@@ -331,7 +389,9 @@
         <?php endif; ?>
     <?php endif; ?>
 
-    <?php echo book_wp_ornament( 'fleuron' ); // phpcs:ignore ?>
+    </div><!-- .bwp-toc-wrap -->
+
+    <div class="bwp-ornament bwp-ornament--kawung" aria-hidden="true"></div>
 
 </main><!-- #bwp-main -->
 

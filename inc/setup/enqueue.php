@@ -1,6 +1,6 @@
 <?php
 /**
- * Book WP — Asset Enqueueing
+ * Sasterawan — Asset Enqueueing
  *
  * All wp_enqueue_style / wp_enqueue_script calls live here.
  * Never hardcode asset paths in templates — use these handles.
@@ -25,7 +25,7 @@ function book_wp_enqueue_frontend() {
     $remote_fonts = '1' === get_option( 'book_wp_remote_fonts', '1' );
     $style_deps   = array( 'book-wp-style' );
 
-    // UI fonts — Cinzel (display), EB Garamond (body), Jost (UI).
+    // Remote fonts — Fraunces (display), Jost (UI), Noto Naskh Arabic (Jawi fallback), Noto Sans Javanese. Body (Sabon) and Jawi (Dubidam) are self-hosted.
     // Registered here via wp_enqueue_style() so the browser can initiate
     // the request in parallel with frontend.css. A CSS @import inside
     // frontend.css would create a serialised fetch chain — the browser
@@ -46,7 +46,7 @@ function book_wp_enqueue_frontend() {
 
         wp_enqueue_style(
             'book-wp-ui-fonts',
-            'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500;600&display=swap',
+            'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:wght@400;500;600&family=Noto+Naskh+Arabic:wght@400&family=Noto+Sans+Javanese:wght@400;600&display=swap',
             array(),
             null
         );
@@ -60,6 +60,25 @@ function book_wp_enqueue_frontend() {
         array( 'book-wp-style' ),
         BOOK_WP_VERSION
     );
+
+    // Self-hosted Jawi face (Dubidam Arabic) — watermark + signature only.
+    wp_enqueue_style(
+        'book-wp-jawi-font',
+        BOOK_WP_URI . '/assets/css/fonts/jawi.css',
+        array( 'book-wp-frontend' ),
+        BOOK_WP_VERSION
+    );
+    $style_deps[] = 'book-wp-jawi-font';
+
+    // Self-hosted Latin faces: Sabon Next LT (reading) and Special Elite (accent).
+    wp_enqueue_style(
+        'book-wp-local-fonts',
+        BOOK_WP_URI . '/assets/css/fonts/local.css',
+        array( 'book-wp-frontend' ),
+        BOOK_WP_VERSION
+    );
+    $style_deps[] = 'book-wp-local-fonts';
+
     $style_deps[] = 'book-wp-frontend';
 
     // Classical Malay Literary theme layer — augments frontend.css, does not replace it.
@@ -202,9 +221,12 @@ function book_wp_enqueue_frontend() {
     // Optional Google Font + local font-family override.
     // $gfonts acts as both the Google Fonts parameter map and the font whitelist.
     // Only slugs present in this array can produce a file path — no sanitize_file_name needed.
-    $font = get_option( 'book_wp_font', 'georgia' );
-    if ( 'georgia' !== $font ) {
+    // Sabon Next LT (local.css) is the default body face; any other choice
+    // loads its own small stylesheet after it and wins the cascade.
+    $font = get_option( 'book_wp_font', 'sabon' );
+    if ( 'sabon' !== $font ) {
         $gfonts = array(
+            'georgia'  => '',
             'vollkorn' => 'Vollkorn:ital,wght@0,400;0,700;1,400;1,700',
             'arvo'     => 'Arvo:ital,wght@0,400;0,700;1,400;1,700',
             'maven'    => 'Maven+Pro:wght@400;500;700;900',
@@ -214,7 +236,7 @@ function book_wp_enqueue_frontend() {
         );
 
         if ( isset( $gfonts[ $font ] ) ) {
-            if ( $remote_fonts ) {
+            if ( $remote_fonts && $gfonts[ $font ] ) {
                 wp_enqueue_style(
                     'book-wp-gfont',
                     'https://fonts.googleapis.com/css2?family=' . $gfonts[ $font ] . '&display=swap',

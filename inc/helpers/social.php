@@ -1,7 +1,7 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 /**
- * Book WP — Social Profile Icons
+ * Sasterawan — Social Profile Icons
  *
  * Renders the social icon row used in the site footer.
  * Each platform URL is stored as a separate option (book_wp_social_{slug}).
@@ -30,18 +30,26 @@ defined( 'ABSPATH' ) || exit;
  */
 function book_wp_social_platforms() {
     return array(
-        'twitter'   => array( 'label' => 'Twitter / X',  'rss' => false ),
+        'twitter'   => array( 'label' => 'X (Twitter)',  'rss' => false ),
+        'bluesky'   => array( 'label' => 'Bluesky',      'rss' => false ),
         'facebook'  => array( 'label' => 'Facebook',     'rss' => false ),
         'instagram' => array( 'label' => 'Instagram',    'rss' => false ),
         'threads'   => array( 'label' => 'Threads',      'rss' => false ),
         'mastodon'  => array( 'label' => 'Mastodon',     'rss' => false ),
         'linkedin'  => array( 'label' => 'LinkedIn',     'rss' => false ),
         'youtube'   => array( 'label' => 'YouTube',      'rss' => false ),
+        'tiktok'    => array( 'label' => 'TikTok',       'rss' => false ),
+        'telegram'  => array( 'label' => 'Telegram',     'rss' => false ),
+        'whatsapp'  => array( 'label' => 'WhatsApp',     'rss' => false ),
         'medium'    => array( 'label' => 'Medium',       'rss' => false ),
+        'substack'  => array( 'label' => 'Substack',     'rss' => false ),
         'wikipedia' => array( 'label' => 'Wikipedia',    'rss' => false ),
+        'wikidata'  => array( 'label' => 'Wikidata',     'rss' => false ),
         'github'    => array( 'label' => 'GitHub',       'rss' => false ),
-        'goodreads' => array( 'label' => 'Goodreads',   'rss' => false ),
-        'worldcat'  => array( 'label' => 'WorldCat',    'rss' => false ),
+        'goodreads' => array( 'label' => 'Goodreads',    'rss' => false ),
+        'academia'  => array( 'label' => 'Academia.edu', 'rss' => false ),
+        'worldcat'  => array( 'label' => 'WorldCat',     'rss' => false ),
+        'viaf'      => array( 'label' => 'VIAF',         'rss' => false ),
         'loc'       => array( 'label' => 'Library of Congress', 'rss' => false ),
         'nlb'       => array( 'label' => 'NLB Singapore', 'rss' => false ),
         'pnm'       => array( 'label' => 'Perpustakaan Negara Malaysia', 'rss' => false ),
@@ -54,6 +62,16 @@ function book_wp_social_platforms() {
 /* ── Inline SVG icons ────────────────────────────────────────────────────── */
 
 function book_wp_social_icon( $slug ) {
+    // Preferred source: single-colour SVGs in assets/img/social/ (Minimalist
+    // Social & Platform Icons Pack, GPL; see LICENSE.txt there). Files are
+    // inlined so they take the link's currentColor. Read once per request.
+    static $cache = array();
+    if ( ! isset( $cache[ $slug ] ) ) {
+        $file = BOOK_WP_DIR . '/assets/img/social/' . sanitize_key( $slug ) . '.svg';
+        $cache[ $slug ] = ( is_readable( $file ) ) ? trim( (string) file_get_contents( $file ) ) : '';
+    }
+    if ( '' !== $cache[ $slug ] ) return $cache[ $slug ];
+
     $icons = array(
 
         'twitter' => '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">'
@@ -247,4 +265,33 @@ function book_wp_social_icons() {
     return '<ul class="bwp-social" aria-label="' . esc_attr__( 'Social profiles', 'book-wp' ) . '">'
         . $items
         . '</ul>';
+}
+
+/**
+ * Font Awesome credit required (CC BY 4.0) when the LinkedIn or Scribd icon
+ * from the icon pack is actually displayed.
+ */
+function book_wp_social_attribution() {
+    foreach ( array( 'linkedin', 'scribd' ) as $slug ) {
+        if ( '' !== get_option( 'book_wp_social_' . $slug, '' ) ) {
+            return '<a href="https://fontawesome.com" rel="noopener noreferrer">'
+                . esc_html__( 'Some icons by Font Awesome, CC BY 4.0', 'book-wp' ) . '</a>';
+        }
+    }
+    return '';
+}
+
+/**
+ * Social profile URLs for schema.org sameAs (RSS excluded).
+ *
+ * @return string[]
+ */
+function book_wp_social_same_as() {
+    $urls = array();
+    foreach ( book_wp_social_platforms() as $slug => $meta ) {
+        if ( ! empty( $meta['rss'] ) ) continue;
+        $url = get_option( 'book_wp_social_' . $slug, '' );
+        if ( $url ) $urls[] = esc_url_raw( $url );
+    }
+    return array_values( array_unique( $urls ) );
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Book WP — Literary Work Meta Boxes
+ * Sasterawan — Literary Work Meta Boxes
  *
  * Each literary form has its own distinctive custom fields that
  * characterise it to readers — not just bibliographic data but
@@ -29,8 +29,12 @@ function book_wp_add_meta_boxes() {
 function book_wp_render_meta_box( $post ) {
     wp_nonce_field( 'book_wp_save_meta', 'book_wp_meta_nonce' );
 
-    $terms     = get_the_terms( $post->ID, 'literary_form' );
-    $form_slug = ( $terms && ! is_wp_error( $terms ) ) ? $terms[0]->slug : '';
+    // Every assigned form, not only the first: a translation is filed under
+    // terjemahan *and* its native form, and get_the_terms() sorts by name, so
+    // "terjemahan" is never first. Each matching group is shown and saved.
+    $terms      = get_the_terms( $post->ID, 'literary_form' );
+    $form_slugs = ( $terms && ! is_wp_error( $terms ) ) ? wp_list_pluck( $terms, 'slug' ) : array();
+    $form_slug  = implode( ' ', $form_slugs );
 
     $orn_opts = array(
         ''         => '— Global default —',
@@ -150,6 +154,7 @@ function book_wp_render_meta_box( $post ) {
     );
 
     ?>
+    <?php book_wp_mf_set_group( '' ); ?>
     <div class="bwp-metabox bwp-meta-root" data-form="<?php echo esc_attr( $form_slug ); ?>">
 
     <?php /* ════════════════════════════════════════════════════
@@ -192,7 +197,7 @@ function book_wp_render_meta_box( $post ) {
        SYAIR — composed by you; metre, irama, occasion matter
     ════════════════════════════════════════════════════ */ ?>
 
-    <div class="bwp-mf-section bwp-mf-group" data-show-for="syair">
+    <div class="bwp-mf-section bwp-mf-group" data-show-for="syair"><?php book_wp_mf_set_group( 'syair' ); ?>
         <h4 class="bwp-mf-heading"><?php esc_html_e( 'Syair — Composition Details', 'book-wp' ); ?></h4>
 
         <?php book_wp_mf_text( $post, 'book_wp_narrative_subject',
@@ -236,7 +241,7 @@ function book_wp_render_meta_box( $post ) {
        KARMINA — structural; sampiran/isi labelling teaches readers the form
     ════════════════════════════════════════════════════ */ ?>
 
-    <div class="bwp-mf-section bwp-mf-group" data-show-for="karmina">
+    <div class="bwp-mf-section bwp-mf-group" data-show-for="karmina"><?php book_wp_mf_set_group( 'karmina' ); ?>
         <h4 class="bwp-mf-heading"><?php esc_html_e( 'Karmina — Pantun Structure', 'book-wp' ); ?></h4>
 
         <p class="bwp-mf-intro">
@@ -282,7 +287,7 @@ function book_wp_render_meta_box( $post ) {
                  source apparatus remains fully bibliographic
     ════════════════════════════════════════════════════ */ ?>
 
-    <div class="bwp-mf-section bwp-mf-group" data-show-for="hikayat">
+    <div class="bwp-mf-section bwp-mf-group" data-show-for="hikayat"><?php book_wp_mf_set_group( 'hikayat' ); ?>
         <h4 class="bwp-mf-heading"><?php esc_html_e( 'Hikayat — Source Text & Manuscript', 'book-wp' ); ?></h4>
 
         <?php
@@ -292,9 +297,10 @@ function book_wp_render_meta_box( $post ) {
         ?>
         <div class="bwp-mf">
             <label style="display:flex;align-items:center;gap:.5em;cursor:pointer;font-weight:600;color:#1a1814;font-size:12px;">
+                <?php $cite = book_wp_mf_field_attrs( 'book_wp_hikayat_is_citation' ); ?>
                 <input type="checkbox"
-                       name="book_wp_hikayat_is_citation"
-                       id="book_wp_hikayat_is_citation"
+                       name="<?php echo esc_attr( $cite['name'] ); ?>"
+                       id="<?php echo esc_attr( $cite['id'] ); ?>"
                        value="1"
                        <?php checked( $is_citation, '1' ); ?>>
                 <?php esc_html_e( 'This is a citation — show "Cited from" above the title', 'book-wp' ); ?>
@@ -341,13 +347,11 @@ function book_wp_render_meta_box( $post ) {
         ); ?>
     </div>
 
-    </div>
-
     <?php /* ════════════════════════════════════════════════════
        PUISI — general poetry fallback for your own compositions
     ════════════════════════════════════════════════════ */ ?>
 
-    <div class="bwp-mf-section bwp-mf-group" data-show-for="puisi">
+    <div class="bwp-mf-section bwp-mf-group" data-show-for="puisi"><?php book_wp_mf_set_group( 'puisi' ); ?>
         <h4 class="bwp-mf-heading"><?php esc_html_e( 'Puisi — Free Verse & Modern Forms', 'book-wp' ); ?></h4>
 
         <?php book_wp_mf_text( $post, 'book_wp_rhyme_scheme',
@@ -386,7 +390,7 @@ function book_wp_render_meta_box( $post ) {
        CERPEN — your own short fiction
     ════════════════════════════════════════════════════ */ ?>
 
-    <div class="bwp-mf-section bwp-mf-group" data-show-for="cerpen">
+    <div class="bwp-mf-section bwp-mf-group" data-show-for="cerpen"><?php book_wp_mf_set_group( 'cerpen' ); ?>
         <h4 class="bwp-mf-heading"><?php esc_html_e( 'Cerpen — Short Fiction Details', 'book-wp' ); ?></h4>
 
         <?php book_wp_mf_select( $post, 'book_wp_point_of_view',
@@ -420,7 +424,7 @@ function book_wp_render_meta_box( $post ) {
        NOVEL — chapter postings from your long work
     ════════════════════════════════════════════════════ */ ?>
 
-    <div class="bwp-mf-section bwp-mf-group" data-show-for="novel">
+    <div class="bwp-mf-section bwp-mf-group" data-show-for="novel"><?php book_wp_mf_set_group( 'novel' ); ?>
         <h4 class="bwp-mf-heading"><?php esc_html_e( 'Novel — Chapter Details', 'book-wp' ); ?></h4>
 
         <?php book_wp_mf_text( $post, 'book_wp_novel_title',
@@ -471,7 +475,7 @@ function book_wp_render_meta_box( $post ) {
                  source fields remain; annotation becomes your voice
     ════════════════════════════════════════════════════ */ ?>
 
-    <div class="bwp-mf-section bwp-mf-group" data-show-for="nukilan">
+    <div class="bwp-mf-section bwp-mf-group" data-show-for="nukilan"><?php book_wp_mf_set_group( 'nukilan' ); ?>
         <h4 class="bwp-mf-heading"><?php esc_html_e( 'Nukilan — Source Details', 'book-wp' ); ?></h4>
 
         <?php book_wp_mf_text( $post, 'book_wp_source_work_title',
@@ -499,7 +503,7 @@ function book_wp_render_meta_box( $post ) {
        RATAPAN — your own lament; grief context matters for readers
     ════════════════════════════════════════════════════ */ ?>
 
-    <div class="bwp-mf-section bwp-mf-group" data-show-for="ratapan">
+    <div class="bwp-mf-section bwp-mf-group" data-show-for="ratapan"><?php book_wp_mf_set_group( 'ratapan' ); ?>
         <h4 class="bwp-mf-heading"><?php esc_html_e( 'Ratapan — Grief Context', 'book-wp' ); ?></h4>
 
         <?php book_wp_mf_text( $post, 'book_wp_occasion_of_grief',
@@ -528,7 +532,7 @@ function book_wp_render_meta_box( $post ) {
        ESEI — scholarly/literary essays; some may cite others
     ════════════════════════════════════════════════════ */ ?>
 
-    <div class="bwp-mf-section bwp-mf-group" data-show-for="esei">
+    <div class="bwp-mf-section bwp-mf-group" data-show-for="esei"><?php book_wp_mf_set_group( 'esei' ); ?>
         <h4 class="bwp-mf-heading"><?php esc_html_e( 'Esei — Argument & Scope', 'book-wp' ); ?></h4>
 
         <?php book_wp_mf_textarea( $post, 'book_wp_thesis',
@@ -567,7 +571,7 @@ function book_wp_render_meta_box( $post ) {
        AUTOBIOGRAFI — your own remembered life
     ════════════════════════════════════════════════════ */ ?>
 
-    <div class="bwp-mf-section bwp-mf-group" data-show-for="memoir">
+    <div class="bwp-mf-section bwp-mf-group" data-show-for="memoir"><?php book_wp_mf_set_group( 'memoir' ); ?>
         <h4 class="bwp-mf-heading"><?php esc_html_e( 'Memoir — Memory & Context', 'book-wp' ); ?></h4>
 
         <?php book_wp_mf_text( $post, 'book_wp_period_covered',
@@ -598,6 +602,35 @@ function book_wp_render_meta_box( $post ) {
         ); ?>
     </div>
 
+    <?php /* ════════════════════════════════════════════════════
+       TERJEMAHAN — works translated into Malay (Poe, etc.)
+    ════════════════════════════════════════════════════ */ ?>
+
+    <div class="bwp-mf-section bwp-mf-group" data-show-for="terjemahan"><?php book_wp_mf_set_group( 'terjemahan' ); ?>
+        <h4 class="bwp-mf-heading"><?php esc_html_e( 'Terjemahan — Source Work', 'book-wp' ); ?></h4>
+
+        <?php book_wp_mf_text( $post, 'book_wp_source_title',
+            __( 'Original Title', 'book-wp' ),
+            'e.g. The Raven &middot; The Tell-Tale Heart'
+        ); ?>
+
+        <?php book_wp_mf_text( $post, 'book_wp_source_author',
+            __( 'Original Author', 'book-wp' ),
+            'e.g. Edgar Allan Poe'
+        ); ?>
+
+        <?php book_wp_mf_text( $post, 'book_wp_source_year',
+            __( 'Year of Original', 'book-wp' ),
+            'e.g. 1845'
+        ); ?>
+
+        <?php /* Source language is the core "Original Language" field above. */ ?>
+        <?php book_wp_mf_textarea( $post, 'book_wp_translator_note',
+            __( "Translator's Note", 'book-wp' ),
+            'Choices of rhyme, register, or what could not be carried across.'
+        ); ?>
+    </div>
+
     </div><!-- .bwp-metabox -->
 
 
@@ -621,12 +654,16 @@ function book_wp_render_meta_box( $post ) {
         var box    = document.querySelector( '.bwp-metabox' );
         var groups = document.querySelectorAll( '.bwp-mf-group' );
 
-        function applyForm( slug ) {
+        // `slugs` is a space-separated list of every assigned form; a group is
+        // shown when any of its data-show-for slugs is among them.
+        function applyForm( slugs ) {
+            var assigned = ( slugs || '' ).split( /\s+/ ).filter( Boolean );
             groups.forEach( function ( g ) {
                 var forForms = ( g.dataset.showFor || '' ).split( ' ' );
-                g.classList.toggle( 'bwp-mf-visible', !! slug && forForms.indexOf( slug ) !== -1 );
+                var show     = forForms.some( function ( f ) { return assigned.indexOf( f ) !== -1; } );
+                g.classList.toggle( 'bwp-mf-visible', show );
             } );
-            if ( box ) box.dataset.form = slug;
+            if ( box ) box.dataset.form = assigned.join( ' ' );
         }
 
         applyForm( box ? box.dataset.form : '' );
@@ -648,7 +685,7 @@ function book_wp_render_meta_box( $post ) {
                             'taxonomy', 'literary_form', { include: termIds, per_page: 100 }
                         );
                         if ( ! allTerms ) return;
-                        var slug = allTerms.length ? allTerms[0].slug : '';
+                        var slug = allTerms.map( function ( t ) { return t.slug; } ).sort().join( ' ' );
                         if ( slug !== prevSlug ) { prevSlug = slug; applyForm( slug ); }
                     } );
                 }, 0 );
@@ -658,11 +695,13 @@ function book_wp_render_meta_box( $post ) {
         var taxDiv = document.getElementById( 'literary_formdiv' );
         if ( taxDiv ) {
             taxDiv.addEventListener( 'change', function () {
-                var checked = taxDiv.querySelector( 'input[type=checkbox]:checked' );
-                if ( ! checked ) { applyForm( '' ); return; }
-                var label = document.querySelector( 'label[for="' + checked.id + '"]' );
-                var slug  = label ? label.textContent.trim().toLowerCase().replace( /\s+/g, '-' ) : '';
-                applyForm( slug );
+                var checked = taxDiv.querySelectorAll( 'input[type=checkbox]:checked' );
+                var slugs   = [];
+                checked.forEach( function ( cb ) {
+                    var label = document.querySelector( 'label[for="' + cb.id + '"]' );
+                    if ( label ) slugs.push( label.textContent.trim().toLowerCase().replace( /\s+/g, '-' ) );
+                } );
+                applyForm( slugs.join( ' ' ) );
             } );
         }
     } )();
@@ -672,29 +711,66 @@ function book_wp_render_meta_box( $post ) {
 
 /* ── Field helpers ─────────────────────────────────────────────────────── */
 
+/**
+ * Set the per-form group that subsequent field helpers render into.
+ *
+ * Several meta keys (occasion, setting, theme, …) appear in more than one
+ * form group. If every group posted the same bare `name`, the browser would
+ * submit all of them — hidden groups included — and PHP would keep the last
+ * one, silently discarding the author's edit. Grouped fields are therefore
+ * namespaced as book_wp_mf[{group}][{key}] and the save handler reads only
+ * the groups that match one of the post's assigned literary forms.
+ *
+ * @param string $group Space-separated form slugs from data-show-for, or '' for core fields.
+ */
+function book_wp_mf_set_group( $group = '' ) {
+    $GLOBALS['book_wp_mf_group'] = (string) $group;
+}
+
+/**
+ * Resolve the submitted name and unique DOM id for a meta key in the current group.
+ *
+ * @param string $key Meta key.
+ * @return array{name:string,id:string}
+ */
+function book_wp_mf_field_attrs( $key ) {
+    $group = isset( $GLOBALS['book_wp_mf_group'] ) ? $GLOBALS['book_wp_mf_group'] : '';
+    if ( '' === $group ) {
+        return array( 'name' => $key, 'id' => $key );
+    }
+    $slug = sanitize_key( str_replace( ' ', '-', $group ) );
+    return array(
+        'name' => 'book_wp_mf[' . $group . '][' . $key . ']',
+        'id'   => 'book_wp_mf_' . $slug . '_' . $key,
+    );
+}
+
 function book_wp_mf_text( $post, $key, $label, $desc = '' ) {
-    $val = get_post_meta( $post->ID, $key, true );
+    $val  = get_post_meta( $post->ID, $key, true );
+    $attr = book_wp_mf_field_attrs( $key );
     echo '<div class="bwp-mf">';
-    printf( '<label for="%s">%s</label>', esc_attr( $key ), esc_html( $label ) );
-    printf( '<input type="text" name="%s" id="%s" value="%s">', esc_attr( $key ), esc_attr( $key ), esc_attr( $val ) );
+    printf( '<label for="%s">%s</label>', esc_attr( $attr['id'] ), esc_html( $label ) );
+    printf( '<input type="text" name="%s" id="%s" value="%s">', esc_attr( $attr['name'] ), esc_attr( $attr['id'] ), esc_attr( $val ) );
     if ( $desc ) printf( '<span class="description">%s</span>', wp_kses_post( $desc ) );
     echo '</div>';
 }
 
 function book_wp_mf_textarea( $post, $key, $label, $desc = '' ) {
-    $val = get_post_meta( $post->ID, $key, true );
+    $val  = get_post_meta( $post->ID, $key, true );
+    $attr = book_wp_mf_field_attrs( $key );
     echo '<div class="bwp-mf">';
-    printf( '<label for="%s">%s</label>', esc_attr( $key ), esc_html( $label ) );
-    printf( '<textarea name="%s" id="%s" rows="3">%s</textarea>', esc_attr( $key ), esc_attr( $key ), esc_textarea( $val ) );
+    printf( '<label for="%s">%s</label>', esc_attr( $attr['id'] ), esc_html( $label ) );
+    printf( '<textarea name="%s" id="%s" rows="3">%s</textarea>', esc_attr( $attr['name'] ), esc_attr( $attr['id'] ), esc_textarea( $val ) );
     if ( $desc ) printf( '<span class="description">%s</span>', wp_kses_post( $desc ) );
     echo '</div>';
 }
 
 function book_wp_mf_select( $post, $key, $label, $desc, $options ) {
-    $val = get_post_meta( $post->ID, $key, true );
+    $val  = get_post_meta( $post->ID, $key, true );
+    $attr = book_wp_mf_field_attrs( $key );
     echo '<div class="bwp-mf">';
-    printf( '<label for="%s">%s</label>', esc_attr( $key ), esc_html( $label ) );
-    printf( '<select name="%s" id="%s">', esc_attr( $key ), esc_attr( $key ) );
+    printf( '<label for="%s">%s</label>', esc_attr( $attr['id'] ), esc_html( $label ) );
+    printf( '<select name="%s" id="%s">', esc_attr( $attr['name'] ), esc_attr( $attr['id'] ) );
     foreach ( $options as $ov => $ol ) {
         printf( '<option value="%s"%s>%s</option>', esc_attr( $ov ), selected( $val, $ov, false ), esc_html( $ol ) );
     }
@@ -715,10 +791,12 @@ function book_wp_save_meta( $post_id ) {
     if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
     if ( ! current_user_can( 'edit_post', $post_id ) ) return;
 
+    $input = book_wp_mf_collect_input( $post_id );
+
     // Checkboxes — saved as '1' or deleted when unchecked.
     $checkboxes = array( 'book_wp_hikayat_is_citation' );
     foreach ( $checkboxes as $k ) {
-        if ( ! empty( $_POST[ $k ] ) ) {
+        if ( ! empty( $input[ $k ] ) ) {
             update_post_meta( $post_id, $k, '1' );
         } else {
             delete_post_meta( $post_id, $k );
@@ -756,21 +834,66 @@ function book_wp_save_meta( $post_id ) {
         // Autobiografi — sole author
         'book_wp_key_figures', 'book_wp_memoir_tone',
         'book_wp_memory_type', 'book_wp_period_covered', 'book_wp_verification_note',
+        // Terjemahan — source work
+        'book_wp_source_title', 'book_wp_source_author', 'book_wp_source_year',
     );
 
     foreach ( $text_fields as $k ) {
-        if ( isset( $_POST[ $k ] ) ) {
-            update_post_meta( $post_id, $k, sanitize_text_field( wp_unslash( $_POST[ $k ] ) ) );
+        if ( isset( $input[ $k ] ) ) {
+            update_post_meta( $post_id, $k, sanitize_text_field( wp_unslash( $input[ $k ] ) ) );
         }
     }
 
     $textarea_fields = array(
         'book_wp_epigraph', 'book_wp_notes',
         'book_wp_thesis', 'book_wp_abstract', 'book_wp_annotation',
+        'book_wp_translator_note',
     );
     foreach ( $textarea_fields as $k ) {
-        if ( isset( $_POST[ $k ] ) ) {
-            update_post_meta( $post_id, $k, sanitize_textarea_field( wp_unslash( $_POST[ $k ] ) ) );
+        if ( isset( $input[ $k ] ) ) {
+            update_post_meta( $post_id, $k, sanitize_textarea_field( wp_unslash( $input[ $k ] ) ) );
         }
     }
+}
+
+/**
+ * Flatten the submitted meta box fields for one post.
+ *
+ * Core fields post under their bare key. Per-form groups post under
+ * book_wp_mf[{group}][{key}]; only the groups whose slugs include one of the
+ * post's assigned literary forms are merged in, so values from hidden groups
+ * can never overwrite the visible edit. Values are returned raw (still
+ * slashed) and are sanitised by the caller.
+ *
+ * @param int $post_id Post being saved.
+ * @return array<string,mixed>
+ */
+function book_wp_mf_collect_input( $post_id ) {
+    $input = array();
+    foreach ( $_POST as $k => $v ) {
+        if ( is_string( $k ) && 0 === strpos( $k, 'book_wp_' ) && 'book_wp_mf' !== $k && is_scalar( $v ) ) {
+            $input[ $k ] = $v;
+        }
+    }
+
+    if ( empty( $_POST['book_wp_mf'] ) || ! is_array( $_POST['book_wp_mf'] ) ) {
+        return $input;
+    }
+
+    $form_slugs = function_exists( 'book_wp_get_form_slugs' ) ? book_wp_get_form_slugs( $post_id ) : array();
+    if ( ! $form_slugs ) {
+        return $input;
+    }
+
+    foreach ( $_POST['book_wp_mf'] as $group => $fields ) {
+        if ( ! is_array( $fields ) ) continue;
+        $slugs = preg_split( '/\s+/', (string) $group, -1, PREG_SPLIT_NO_EMPTY );
+        if ( ! array_intersect( $form_slugs, $slugs ) ) continue;
+        foreach ( $fields as $k => $v ) {
+            if ( is_string( $k ) && 0 === strpos( $k, 'book_wp_' ) && is_scalar( $v ) ) {
+                $input[ $k ] = $v;
+            }
+        }
+    }
+    return $input;
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Book WP — Shortcodes
+ * Sasterawan — Shortcodes
  *
  * Presentation-focused shortcodes for literary content.
  * These shortcodes control display only — no content is stored via them.

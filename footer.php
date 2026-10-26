@@ -1,22 +1,30 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 /**
- * Footer template
+ * Footer template — full-bleed nila band.
  *
- * Colophon-style footer. If a copyright string is set, it is shown alone
- * as the attribution line (it already contains anthology + author names).
- * If no copyright is set, anthology name and author are shown separately.
+ * 1. Sign-off: one italic line (+ optional second line) from settings.
+ * 2. Lockup row: brand mark, anthology name, Jawi name | footer menu pills.
+ * 3. Hairline row: copyright · social glyphs · theme credit.
  *
- * No ornament — content templates own their closing ornaments.
+ * The .bwp-page-wrap opened in header.php closes before the footer so the
+ * band can run edge to edge; its inner container shares the page gutters.
  *
  * @package Book_WP
  */
 
-
 $bwp_anthology = get_option( 'book_wp_anthology_name', '' );
+$bwp_anthology = $bwp_anthology ? $bwp_anthology : get_bloginfo( 'name' );
 $bwp_author    = get_option( 'book_wp_author_name', '' );
 $bwp_author    = $bwp_author ? $bwp_author : get_bloginfo( 'name' );
 $bwp_copyright = get_option( 'book_wp_copyright', '' );
+$bwp_jawi      = get_option( 'book_wp_jawi_name', '' );
+$bwp_jawa      = get_option( 'book_wp_jawa_name', '' );
+$bwp_jawa      = $bwp_jawa ? $bwp_jawa : book_wp_default_jawa_name();
+$bwp_quote     = get_option( 'book_wp_footer_quote', book_wp_default_footer_quote() );
+$bwp_quote_sub = get_option( 'book_wp_footer_quote_sub', book_wp_default_footer_quote_sub() );
+$bwp_tagline   = get_bloginfo( 'description' );
+$bwp_portrait  = book_wp_author_portrait( 'sm' ); // '' when the portrait option is cleared
 ?>
 
     <?php if ( is_active_sidebar( 'footer-widgets' ) ) : ?>
@@ -25,56 +33,96 @@ $bwp_copyright = get_option( 'book_wp_copyright', '' );
     </aside>
     <?php endif; ?>
 
-    <footer class="bwp-site-footer" role="contentinfo">
+</div><!-- .bwp-page-wrap -->
 
+    <footer class="bwp-site-footer" role="contentinfo">
         <div class="bwp-site-footer__inner">
 
-            <?php if ( has_nav_menu( 'footer' ) ) : ?>
-            <nav class="bwp-footer-nav" aria-label="<?php esc_attr_e( 'Footer Menu', 'book-wp' ); ?>">
-                <?php wp_nav_menu( array(
-                    'theme_location' => 'footer',
-                    'menu_class'     => 'bwp-footer-nav__list',
-                    'container'      => false,
-                    'depth'          => 1,
-                    'fallback_cb'    => false,
-                ) ); ?>
-            </nav>
-            <?php endif; ?>
+            <div class="bwp-site-footer__top">
+                <?php if ( $bwp_quote ) : ?>
+                <div class="bwp-site-footer__sign">
+                    <p class="bwp-site-footer__lead"><?php echo esc_html( $bwp_quote ); ?></p>
+                    <?php if ( $bwp_quote_sub ) : ?>
+                    <p class="bwp-site-footer__sub"><?php echo esc_html( $bwp_quote_sub ); ?></p>
+                    <?php endif; ?>
+                </div>
+                <?php endif; ?>
 
-            <?php if ( has_custom_logo() ) : ?>
-            <div class="bwp-site-footer__logo"><?php the_custom_logo(); ?></div>
-            <?php endif; ?>
-
-            <?php
-            $bwp_social = book_wp_social_icons();
-            if ( $bwp_social ) : ?>
-            <div class="bwp-site-footer__social">
-                <?php echo $bwp_social; // phpcs:ignore — fully escaped in book_wp_social_icons() ?>
+                <div class="bwp-site-footer__identity">
+                    <?php if ( has_custom_logo() ) : ?>
+                        <?php echo wp_get_attachment_image( get_theme_mod( 'custom_logo' ), 'medium', false, array( 'class' => 'bwp-site-footer__mark', 'alt' => '', 'loading' => 'lazy' ) ); ?>
+                    <?php else : ?>
+                        <img class="bwp-site-footer__mark" src="<?php echo esc_url( BOOK_WP_URI . '/assets/img/brand/mark-inverse.svg' ); ?>" alt="" width="96" height="96" loading="lazy" decoding="async">
+                    <?php endif; ?>
+                    <div class="bwp-site-footer__identity-text">
+                    <?php if ( $bwp_jawi ) : ?>
+                    <span class="bwp-site-footer__jawi" dir="rtl" lang="ms-Arab"><?php echo esc_html( $bwp_jawi ); ?></span>
+                    <?php endif; ?>
+                    <?php if ( $bwp_jawa ) : ?>
+                    <span class="bwp-site-footer__jawa" lang="jv-Java"><?php echo esc_html( $bwp_jawa ); ?></span>
+                    <?php endif; ?>
+                    <a class="bwp-site-footer__anthology" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php echo esc_html( $bwp_anthology ); ?></a>
+                    <?php if ( $bwp_tagline ) : ?>
+                    <span class="bwp-site-footer__tagline"><?php echo esc_html( $bwp_tagline ); ?></span>
+                    <?php endif; ?>
+                    </div>
+                </div>
             </div>
-            <?php endif; ?>
 
-            <div class="bwp-site-footer__colophon">
+            <div class="bwp-site-footer__row">
+                <div class="bwp-site-footer__lockup">
+                    <?php if ( $bwp_portrait ) : ?>
+                        <?php echo $bwp_portrait; // phpcs:ignore — escaped in book_wp_author_portrait() ?>
+                    <?php else : ?>
+                        <span class="bwp-site-footer__initial" aria-hidden="true"><?php echo esc_html( mb_substr( $bwp_author, 0, 1 ) ); ?></span>
+                    <?php endif; ?>
+                    <span class="bwp-site-footer__names">
+                        <span class="bwp-site-footer__author"><?php echo esc_html( $bwp_author ); ?></span>
+                        <span class="bwp-site-footer__role"><?php esc_html_e( 'Penulis & penyusun', 'book-wp' ); ?></span>
+                    </span>
+                </div>
 
-                <?php if ( ! empty( $bwp_anthology ) ) : ?>
-                <p class="bwp-site-footer__anthology"><?php echo esc_html( $bwp_anthology ); ?></p>
+                <?php if ( has_nav_menu( 'footer' ) ) : ?>
+                <nav class="bwp-footer-nav" aria-label="<?php esc_attr_e( 'Footer Menu', 'book-wp' ); ?>">
+                    <?php wp_nav_menu( array(
+                        'theme_location' => 'footer',
+                        'menu_class'     => 'bwp-footer-nav__list',
+                        'container'      => false,
+                        'depth'          => 1,
+                        'fallback_cb'    => false,
+                    ) ); ?>
+                </nav>
+                <?php endif; ?>
+            </div>
+
+            <div class="bwp-site-footer__bottom">
+                <?php if ( '1' === get_option( 'book_wp_show_copyright', '1' ) ) : ?>
+                <p class="bwp-site-footer__copyright">
+                    <?php if ( ! empty( $bwp_copyright ) ) : ?>
+                        <?php echo wp_kses_post( $bwp_copyright ); ?>
+                    <?php else : ?>
+                        &copy; <?php echo esc_html( wp_date( 'Y' ) . ' ' . $bwp_author ); ?> &middot; <?php esc_html_e( 'Hakcipta terpelihara', 'book-wp' ); ?>
+                    <?php endif; ?>
+                </p>
+                <?php else : ?>
+                <span class="bwp-site-footer__copyright" aria-hidden="true"></span>
                 <?php endif; ?>
 
-                <p class="bwp-site-footer__author"><?php echo esc_html( $bwp_author ); ?></p>
-
-                <?php if ( ! empty( $bwp_copyright ) && '1' === get_option( 'book_wp_show_copyright', '1' ) ) : ?>
-                <p class="bwp-site-footer__copyright"><?php echo wp_kses_post( $bwp_copyright ); ?></p>
+                <?php
+                $bwp_social = book_wp_social_icons();
+                if ( $bwp_social ) : ?>
+                <div class="bwp-site-footer__social">
+                    <?php echo $bwp_social; // phpcs:ignore — fully escaped in book_wp_social_icons() ?>
+                </div>
                 <?php endif; ?>
 
-            </div><!-- .bwp-site-footer__colophon -->
-
-            <p class="bwp-site-footer__credit">
-                <a href="https://github.com/menj/book-wp">Book&nbsp;WP</a>
-                <?php esc_html_e( 'by', 'book-wp' ); ?>
-                <a href="https://github.com/menj">MENJ</a>
-            </p>
+                <p class="bwp-site-footer__credit">
+                    <a href="https://github.com/menj/menjmy">Sasterawan</a> <?php esc_html_e( 'by', 'book-wp' ); ?> <a href="https://github.com/menj">MENJ</a>
+                    <?php $bwp_attr = book_wp_social_attribution(); if ( $bwp_attr ) echo ' &middot; ' . $bwp_attr; // phpcs:ignore — escaped in helper ?>
+                </p>
+            </div>
 
         </div><!-- .bwp-site-footer__inner -->
-
     </footer>
 
 <?php if ( '1' === get_option( 'book_wp_back_to_top', '1' ) ) : ?>
@@ -89,8 +137,6 @@ $bwp_copyright = get_option( 'book_wp_copyright', '' );
     </svg>
 </button>
 <?php endif; ?>
-
-</div><!-- .bwp-page-wrap -->
 
 <?php wp_footer(); ?>
 

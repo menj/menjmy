@@ -1,6 +1,6 @@
 <?php
 /**
- * Book WP — Comments Template
+ * Sasterawan — Comments Template
  *
  * Renders both the comment list and the comment form with theme-native
  * markup and CSS classes. WordPress core output (wp_list_comments,

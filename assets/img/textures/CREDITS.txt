@@ -1,0 +1,16 @@
+Textures derived from Wikimedia Commons, public domain:
+
+songket-band.jpg, songket-tile.png
+  Kain limar songket bertabur (hip wrapper), Terengganu, mid-19th century; silk and
+  metal-wrapped silk. Textile Museum, George Washington University. Photo released
+  into the public domain (Wikimedia Commons, DSC09786).
+
+manuscript.jpg
+  Hikayat Amir Hamzah manuscript page (Makassarese), Wikimedia Commons, public domain.
+  Faded and tinted for use as a background texture.
+
+hikayat-abdullah-1843.jpg
+  Hikayat Abdullah, Abdullah bin Abdul Kadir, 1843 edition. Public domain.
+
+kawung motif (inline SVG in frontend.css)
+  Drawn for the theme after the classical Javanese kawung batik pattern; no external source.

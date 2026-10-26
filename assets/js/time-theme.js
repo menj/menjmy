@@ -1,5 +1,5 @@
 /**
- * Book WP — Time Theme Engine
+ * Sasterawan — Time Theme Engine
  *
  * Detects the visitor's local hour and applies a time-of-day
  * class to <html> before first paint. Admin can override via WP settings.

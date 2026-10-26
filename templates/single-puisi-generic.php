@@ -23,11 +23,21 @@ get_header(); ?>
 
 <article <?php post_class( 'bwp-single bwp-single--generic-verse' ); ?> id="post-<?php the_ID(); ?>">
 
-    <h1 class="bwp-work__title bwp-gv__title"><?php the_title(); ?></h1>
-
-    <?php if ( '1' === get_option( 'book_wp_show_analytics', '1' ) ) : ?>
-        <?php echo book_wp_analytics_bar(); // phpcs:ignore ?>
-    <?php endif; ?>
+    <?php $bwp_gv_jawi = book_wp_form_jawi( book_wp_get_form_slug() ); ?>
+    <header class="bwp-work__opening bwp-opening">
+        <div class="bwp-opening__top">
+            <?php $bwp_kicker = book_wp_header_section_label(); if ( $bwp_kicker ) : ?>
+                <p class="bwp-opening__kicker"><?php echo esc_html( $bwp_kicker ); ?></p>
+            <?php endif; ?>
+            <?php if ( $bwp_gv_jawi ) : ?>
+                <span class="bwp-opening__seal" aria-hidden="true" dir="rtl" lang="ms-Arab"><?php echo esc_html( $bwp_gv_jawi ); ?></span>
+            <?php endif; ?>
+        </div>
+        <h1 class="bwp-work__title bwp-gv__title"><?php the_title(); ?></h1>
+        <?php if ( '1' === get_option( 'book_wp_show_analytics', '1' ) ) : ?>
+            <div class="bwp-work__meta"><?php echo book_wp_analytics_bar(); // phpcs:ignore ?></div>
+        <?php endif; ?>
+    </header>
 
     <?php echo book_wp_dedication(); // phpcs:ignore ?>
 
@@ -78,10 +88,6 @@ get_header(); ?>
     <?php endif; ?>
 
     <?php echo book_wp_related_works(); // phpcs:ignore ?>
-
-    <?php if ( '1' === get_option( 'book_wp_show_nav', '1' ) ) : ?>
-        <?php echo book_wp_work_navigation(); // phpcs:ignore ?>
-    <?php endif; ?>
 
 </article>
 

@@ -1,5 +1,5 @@
 /**
- * Book WP — Literary Form: Novel
+ * Sasterawan — Literary Form: Novel
  *
  * Chapter postings from a longer work. Of all the prose forms
  * this is the most book-like — the reader settles in for duration.
@@ -14,49 +14,15 @@
  */
 
 /* ── Layout: widest prose column ────────────────────────── */
-
-body.bwp-form-novel .bwp-page-wrap  { max-width: 50em; }
 body.bwp-form-novel .bwp-work__content {
-    max-width: 42em;
+    max-width: 36em;
     margin-left: auto;
     margin-right: auto;
 }
 
 /* ── Chapter heading apparatus ───────────────────────────── */
 
-body.bwp-form-novel .bwp-work__title {
-    font-family: var(--bwp-font-display, 'Cinzel', Georgia, serif);
-    font-size: 2.4em;
-    font-weight: 400;
-    font-style: normal;
-    text-align: left;
-    letter-spacing: -.015em;
-    line-height: 1.1;
-    margin-bottom: .2em;
-}
-
 /* Chapter number label above title — "Bab I" / "Chapter 1" */
-body.bwp-form-novel .bwp-work__title::before {
-    content: attr(data-chapter);  /* set via post meta if available */
-    display: block;
-    font-family: Georgia, serif;
-    font-size: .38em;
-    font-style: normal;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: var(--bwp-muted);
-    margin-bottom: .5em;
-}
-
-body.bwp-form-novel .bwp-work__title::after {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 1px;
-    background: var(--bwp-border);
-    margin-top: .6em;
-    margin-bottom: .2em;
-}
 
 /* ── Body: conventional book prose ──────────────────────── */
 
@@ -103,46 +69,19 @@ body.bwp-form-novel .bwp-petikan {
 
 /* ── Epigraph: prominent, book-like ─────────────────────── */
 
-body.bwp-form-novel .bwp-epigraph {
-    max-width: 30em;
-    margin-left: 0;
-    font-size: .95em;
-    margin-bottom: 2.5em;
-}
-
 /* ── Analytics: left-aligned ──────────────────────────────── */
-
-body.bwp-form-novel .bwp-analytics { justify-content: flex-start; }
 
 /* ── Colophon: chapter end ───────────────────────────────── */
 
-body.bwp-form-novel .bwp-colophon {
-    text-align: left;
-    
-    
-    margin-top: 2.5em;
-    font-size: .88em;
-    color: var(--bwp-muted);
-}
-
 /* ── Work nav: prominent — chapter navigation matters ─────── */
-
-body.bwp-form-novel .bwp-work-nav {
-    font-size: 1em;
-    opacity: 1;
-    border-top: 2px solid var(--bwp-border);
-    padding-top: 1em;
-}
 
 /* ── Responsive ──────────────────────────────────────────── */
 
 @media screen and (min-width: 52em) {
-    body.bwp-form-novel .bwp-work__title   { font-size: 3em; }
     body.bwp-form-novel .bwp-work__content { font-size: 1.1em; line-height: 1.88; }
 }
 
 @media print {
-    body.bwp-form-novel .bwp-work__title   { font-size: 2em; text-align: left; }
     body.bwp-form-novel .bwp-work__content { line-height: 1.7; }
     body.bwp-form-novel .bwp-work__content > p:first-of-type::first-letter {
         font-size: 3.5em;

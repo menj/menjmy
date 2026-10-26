@@ -1,19 +1,19 @@
-=== Book WP ===
+=== Sasterawan ===
 Contributors: menj
 Requires at least: 6.0
 Tested up to: 6.9.1
 Requires PHP: 8.2
-Version: 3.5.1
-Stable tag: 3.5.1
+Version: 4.0.0
+Stable tag: 4.0.0
 License: GPL-2.0-or-later
 Tags: literary, poetry, book, bilingual, minimal, typography
 
-A minimalist-modern literary anthology theme with per-form typography, reading analytics, thematic tagging, night mode, bilingual support, and custom logo in footer.
+Sasterawan is a literary anthology theme tailored for https://menj.my (Di Bawah Permukaan): per-form typography for Malay literary forms (puisi, syair, karmina, hikayat, cerpen, certot, esei, memoir), reading analytics, thematic tagging, night mode, bilingual support, and a custom logo in the footer.
 
 
 == Description ==
 
-Book WP is a minimalist-modern WordPress theme for publishing literary works.
+Sasterawan is a minimalist-modern WordPress theme for publishing literary works.
 It treats your site as a literary anthology — white ground, high-contrast ink,
 EB Garamond at 18px, Cinzel display headings. No decorative apparatus competes
 with the writing.
@@ -27,7 +27,7 @@ fields capture your creative process, not an archivist's cataloguing notes.
 == Features ==
 
 = Post Formats =
-Book WP declares support for two WordPress post formats:
+Sasterawan declares support for two WordPress post formats:
 * aside — short annotations and prose notes outside the main literary taxonomy
 * image — illustrated works and cover reveals
 The literary_form taxonomy remains the primary classification for all full-form
@@ -35,7 +35,7 @@ works. Post formats are a complementary standard-WordPress layer enabling
 format-based queries and feed filtering.
 
 = Anthology & Organisation =
-* Author name — set in Book WP General settings; displayed in the theme header
+* Author name — set in Sasterawan General settings; displayed in the theme header
   on every page. Use the WordPress Site Title for the anthology or collection
   name — it controls the browser tab, RSS feed, and SEO title
 * Anthology name — dedicated setting for the collection title, shown prominently
@@ -102,7 +102,7 @@ dawn, dark mode at morning.
 
 = Font Choices =
 Seven options: Georgia (default), EB Garamond, Lora, Vollkorn, Arvo, Maven Pro,
-Ubuntu. Selectable from Appearance > Book WP > Typography. The Amiri font
+Ubuntu. Selectable from Appearance > Sasterawan > Typography. The Amiri font
 (Arabic script / Jawi) is also bundled for right-to-left text support. The
 Typography tab includes a Load Google Fonts toggle; disable it for a
 no-remote-fonts mode that uses browser/system fallbacks.
@@ -143,7 +143,7 @@ aria-pressed on night mode toggle, prefers-reduced-motion support.
 
 == Settings ==
 
-Six-tab settings panel under Appearance > Book WP. Each tab saves independently.
+Six-tab settings panel under Appearance > Sasterawan. Each tab saves independently.
 
 General — Author name, anthology name, front page description, copyright text,
 TOC grouping (flat / by literary form / by category / by tag), and display toggles.
@@ -177,9 +177,9 @@ docs/ssot.md included in the theme folder, or visit the project repository.
 
 1. Upload the book-wp folder to /wp-content/themes/
 2. Activate the theme in Appearance > Themes
-3. Go to Appearance > Book WP to configure settings
+3. Go to Appearance > Sasterawan to configure settings
 4. Set your WordPress Site Title (Settings > General) to the anthology or collection name
-5. Set your Author Name in the Book WP General tab
+5. Set your Author Name in the Sasterawan General tab
 6. Optionally upload a logo via Appearance > Customize > Site Identity — it will
    appear in the site footer above the anthology name and copyright block
 7. Choose a colour scheme and font in the Typography tab
@@ -190,7 +190,7 @@ docs/ssot.md included in the theme folder, or visit the project repository.
 12. Add literary metadata (epigraph, dedication, year composed, author's note) via
     the Literary Metadata panel in the post editor
 13. If using Masonry, Grid, or Infinite Scroll layouts, set your preferred layout
-    options in Appearance > Book WP > Literary
+    options in Appearance > Sasterawan > Literary
 14. If using grid or Masonry layouts with featured images, regenerate your image
     thumbnails using the Regenerate Thumbnails plugin (available from the WordPress
     plugin directory)
@@ -206,7 +206,7 @@ docs/ssot.md included in the theme folder, or visit the project repository.
 
 = Can I use this theme for prose works, not just poetry? =
 
-Yes. Book WP supports cerpen (short story), novel (long-form prose), hikayat
+Yes. Sasterawan supports cerpen (short story), novel (long-form prose), hikayat
 (classical narrative), esei (essay), and memoir in addition to verse forms
 (puisi, syair, karmina, ratapan, nukilan). Each form has its own typography,
 column width, drop cap settings, and analytics display. Assign the appropriate
@@ -214,7 +214,7 @@ literary form to each post via the Literary Form panel in the post editor.
 
 = How do I set the anthology title shown on the front page? =
 
-Go to Appearance > Book WP > General and fill in the Anthology Name field. This
+Go to Appearance > Sasterawan > General and fill in the Anthology Name field. This
 is separate from the WordPress Site Title — the Site Title controls the browser
 tab, RSS feed, and SEO title. The anthology name is displayed prominently on the
 front page above the Table of Contents.
@@ -246,11 +246,11 @@ body content, visible before the reader begins the work.
 
 = Can I disable the reading progress bar? =
 
-Yes. Go to Appearance > Book WP > Reading and turn off the Progress Bar toggle.
+Yes. Go to Appearance > Sasterawan > Reading and turn off the Progress Bar toggle.
 
 = How do I change the colour scheme? =
 
-Go to Appearance > Book WP > Typography and select from the Colour Scheme
+Go to Appearance > Sasterawan > Typography and select from the Colour Scheme
 selector: Default (high-contrast ink on warm white), Cream (aged paper), Dusk
 (warm grey), or Night (dark mode). The Night scheme can also be toggled by the
 reader using the moon icon in the navigation bar if the Night Mode toggle is
@@ -261,7 +261,7 @@ enabled under Reading settings.
 The time-of-day theme automatically adjusts the ink palette (text colour, link
 colour, accent mood) based on the visitor's local clock — lavender at dawn, amber
 in the morning, neutral in the afternoon, warm ochre at dusk, silver on dark at
-night. Configure it in Appearance > Book WP > Typography. Set it to Auto to
+night. Configure it in Appearance > Sasterawan > Typography. Set it to Auto to
 follow the clock, or pin it to a specific period.
 
 In Auto mode, the ink updates live: when you return to a backgrounded tab the
@@ -274,12 +274,12 @@ parchment at dusk, warm grey at dawn, any combination works.
 No. The floating moon toggle saves the preference in the browser, but the
 theme auto-expires it: if you toggled dark mode last night and return during
 the day, the preference clears automatically on first visit. If you want
-permanent dark mode, use the Night colour scheme in Appearance > Book WP >
+permanent dark mode, use the Night colour scheme in Appearance > Sasterawan >
 Typography instead of the toggle.
 
 = How does the hidden-post feature work? =
 
-Designate one or more tag slugs as hidden triggers in Appearance > Book WP >
+Designate one or more tag slugs as hidden triggers in Appearance > Sasterawan >
 Literary (the Hidden Tags multi-select widget). Any post carrying one of those
 tags is removed from the TOC, category archives, and search results, but remains
 accessible at its permalink and on its tag archive page. Useful for drafts,
@@ -293,7 +293,7 @@ BOOK_WP_MAX_TAGS constant — see docs/readme.md for details.
 
 = How do I use Masonry or Infinite Scroll on archives? =
 
-Go to Appearance > Book WP > Literary and set Archive Layout to Masonry (or Grid)
+Go to Appearance > Sasterawan > Literary and set Archive Layout to Masonry (or Grid)
 and Archive Pagination to Infinite Scroll. The same settings are available
 separately for the TOC flat-list when TOC Grouping is set to None. If you use
 featured images with a grid or Masonry layout, regenerate your thumbnails once
@@ -320,18 +320,18 @@ templates without touching the parent theme files.
 
 = How do I enable structured data for my posts? =
 
-Go to Appearance > Book WP > Advanced and enable the Structured Data toggle.
+Go to Appearance > Sasterawan > Advanced and enable the Structured Data toggle.
 The theme will automatically generate search-engine-readable information for
 each work, including title, author, publication date, genre, and word count.
 
 == Privacy & Data Collection ==
 
-Book WP does not collect, transmit, or store analytics or reader profile data.
+Sasterawan does not collect, transmit, or store analytics or reader profile data.
 No tracking scripts or analytics calls are loaded on the front end.
 
 = Google Fonts =
 
-When Load Google Fonts is enabled in Appearance > Book WP > Typography, the
+When Load Google Fonts is enabled in Appearance > Sasterawan > Typography, the
 theme loads Cinzel, EB Garamond, Jost, form-specific display fonts, and any
 selected optional body font from Google Fonts (fonts.googleapis.com). This
 causes the visitor's IP address to be transmitted to Google's servers when the
@@ -348,6 +348,9 @@ No other remote connections are made by this theme.
 
 
 == Upgrade Notice ==
+= 4.0.0 =
+In-place upgrade from Book WP 3.5.x: options, post meta, the literary_form taxonomy, menu locations and widget areas keep their names. Installed under a new folder, the theme copies the logo, Customizer CSS and header/background settings from the book-wp folder on activation. Previous/next navigation and the front-page blurb are removed.
+
 = 3.5.1 =
 Drop-in upgrade. Fixes Back to Top JavaScript scope, moves custom CSS to the stylesheet queue, adds no-remote-fonts mode, hardens chapter-block analytics, and adds documented lint/test/CI config.
 
@@ -380,13 +383,13 @@ Drop-in upgrade. Three bug fixes: hidden tag slugs no longer leak into page HTML
 Literary Form Permalinks — opt-in /{form-slug}/{post-slug}/ URL structure (e.g. /puisi/waktu-melata/). Off by default. After enabling, visit Settings > Permalinks and click Save Changes to flush rewrite rules. Posts with no literary form assigned are unaffected. Taxonomy archives remain at /form/{slug}/.
 
 = 3.4.59 =
-JSON Feed v1.1 published at /feed/json. Includes full content, summary, featured image, thematic tags, and a _book_wp extension object with literary form, word count, and reading time. Autodiscovery link added to front-page head. Toggle in Appearance > Book WP > Advanced.
+JSON Feed v1.1 published at /feed/json. Includes full content, summary, featured image, thematic tags, and a _book_wp extension object with literary form, word count, and reading time. Autodiscovery link added to front-page head. Toggle in Appearance > Sasterawan > Advanced.
 
 = 3.4.58 =
-Share row added to single posts — Copy link, X, Facebook, WhatsApp. Off by default; enable under Appearance > Book WP > Reading. No third-party SDKs or remote scripts loaded.
+Share row added to single posts — Copy link, X, Facebook, WhatsApp. Off by default; enable under Appearance > Sasterawan > Reading. No third-party SDKs or remote scripts loaded.
 
 = 3.4.57 =
-OpenGraph and Twitter Card meta tags now output on single posts. Controls share card appearance on X (Twitter), Facebook, LinkedIn, WhatsApp, and Telegram. Automatically disabled when RankMath, Yoast, or another SEO plugin is detected. Toggle in Appearance > Book WP > Advanced.
+OpenGraph and Twitter Card meta tags now output on single posts. Controls share card appearance on X (Twitter), Facebook, LinkedIn, WhatsApp, and Telegram. Automatically disabled when RankMath, Yoast, or another SEO plugin is detected. Toggle in Appearance > Sasterawan > Advanced.
 
 = 3.4.55 =
 Bug fix: social profile fields were not saving. The social tab fields were registered under the wrong key in the save handler ('advanced' instead of 'social'), causing all 17 social platform options to be silently discarded on every save.
@@ -416,7 +419,7 @@ Seven new book/library platforms added (Goodreads, WorldCat, LOC, NLB Singapore,
 Social icons collapse/expand toggle — max 6 icons visible by default; +N button reveals remaining icons. Degrades gracefully without JS.
 
 = 3.4.46 =
-Social profile icons added to site footer. New Social tab in Appearance > Book WP. Platforms: Twitter/X, Facebook, Instagram, Threads, LinkedIn, YouTube, Medium, Wikipedia, GitHub, RSS.
+Social profile icons added to site footer. New Social tab in Appearance > Sasterawan. Platforms: Twitter/X, Facebook, Instagram, Threads, LinkedIn, YouTube, Medium, Wikipedia, GitHub, RSS.
 
 = 3.4.45 =
 Border radius applied globally via --bwp-radius: 6px token. Featured image pinned at 6px. Form badges (literary form labels) changed to pill shape (border-radius: 2em).
@@ -500,6 +503,11 @@ Adds tag support: thematic tag display on single posts, TOC by-tag grouping, tag
 Compliance fixes: licence corrected to GPL-2.0-or-later, CRLF normalised, capability scoped to edit_theme_options, content links underlined (WCAG 1.4.1), readme expanded with FAQ and Privacy sections.
 
 == Changelog ==
+= 4.0.0 =
+* Changed: Renamed to Sasterawan, tailored for https://menj.my. Front end rebuilt: editorial openings, nila/kunyit/kapas palette, pills and rounded cards, Fraunces display type, self-hosted Jawi face, jalur tema pills on the front page, two-column TOC cards.
+* Added: Terjemahan literary form with source-work fields and translator's note; Jawi anthology name option; brand assets and favicon fallback.
+* Fixed: meta box data loss across form groups; legacy-slug redirect on paged posts, feeds and previews; stale rewrite flush on permalink toggle; stanza count regex; test bootstrap; night legibility on Cream/Dusk; undefined back-to-top tokens.
+
 = 3.5.1 =
 * Fixed: Back to Top frontend script now has its own `bookWP` config scope, preventing `cfg is not defined` errors.
 * Changed: Custom CSS is now attached with `wp_add_inline_style()` after the active theme stylesheet stack instead of being echoed from an admin-only include.
@@ -837,6 +845,8 @@ Rewrite as literary theme with custom taxonomy and colour schemes.
 Initial release.
 
 == Credits ==
+
+* Front-page cover photograph by David Boca on Pexels (https://www.pexels.com/photo/underwater-view-of-sea-5466506/), Pexels License, cropped and toned. See assets/img/hero/CREDITS.txt.
 
 Author: MENJ — https://github.com/menj
 Licence: GPL-2.0-or-later

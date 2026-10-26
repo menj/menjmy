@@ -182,4 +182,85 @@ class LiteraryTest extends \PHPUnit\Framework\TestCase {
             $result
         );
     }
+
+    /* ── Translations: verse detection and the translation block ───────── */
+
+    public function test_translation_filed_under_puisi_counts_as_poetry(): void {
+        bwp_set_post_terms( 30, 'literary_form', array( bwp_make_term( 'terjemahan' ), bwp_make_term( 'puisi' ) ) );
+        $this->assertTrue( book_wp_is_poetry( 30 ) );
+        $this->assertSame( 'terjemahan', book_wp_get_form_slug( 30 ) );
+    }
+
+    public function test_translation_of_prose_is_not_poetry(): void {
+        bwp_set_post_terms( 31, 'literary_form', array( bwp_make_term( 'terjemahan' ), bwp_make_term( 'cerpen' ) ) );
+        $this->assertFalse( book_wp_is_poetry( 31 ) );
+    }
+
+    public function test_translation_block_only_renders_for_terjemahan(): void {
+        bwp_set_post_terms( 32, 'literary_form', array( bwp_make_term( 'nukilan' ) ) );
+        bwp_set_post_meta( 32, 'book_wp_source_author', 'Edgar Allan Poe' );
+        $this->assertSame( '', book_wp_terjemahan_block( 32 ), 'nukilan share the source-author key but are not translations' );
+
+        bwp_set_post_terms( 33, 'literary_form', array( bwp_make_term( 'terjemahan' ) ) );
+        bwp_set_post_meta( 33, 'book_wp_source_author', 'Edgar Allan Poe' );
+        $this->assertStringContainsString( 'bwp-terjemahan', book_wp_terjemahan_block( 33 ) );
+    }
+
+    /* ══════════════════════════════════════════════════════════════════════
+       book_wp_work_strand() / book_wp_strand_blurb()
+       ══════════════════════════════════════════════════════════════════════ */
+
+    private function make_strand( string $slug, string $description = '' ): object {
+        $c = bwp_make_category( $slug );
+        $c->description = $description;
+        return $c;
+    }
+
+    public function test_work_strand_skips_uncategorized(): void {
+        bwp_set_categories( 301, array( $this->make_strand( 'uncategorized' ), $this->make_strand( 'puisi' ) ) );
+        $this->assertSame( 'puisi', book_wp_work_strand( 301 )->slug );
+    }
+
+    public function test_work_strand_is_null_when_only_uncategorized(): void {
+        bwp_set_categories( 302, array( $this->make_strand( 'uncategorized' ) ) );
+        $this->assertNull( book_wp_work_strand( 302 ) );
+        $this->assertNull( book_wp_work_strand( 303 ) );
+    }
+
+    public function test_strand_blurb_prefers_category_description(): void {
+        bwp_set_option( 'book_wp_chapter_blurb', 'Global blurb' );
+        bwp_set_categories( 304, array( $this->make_strand( 'puisi', '<p>Verse &amp; <em>song</em></p>' ) ) );
+        $this->assertSame( 'Verse &amp; song', book_wp_strand_blurb( 304 ) );
+    }
+
+    public function test_strand_blurb_falls_back_to_option_when_description_empty_or_markup_only(): void {
+        bwp_set_option( 'book_wp_chapter_blurb', ' Global blurb ' );
+        bwp_set_categories( 305, array( $this->make_strand( 'puisi', '' ) ) );
+        $this->assertSame( 'Global blurb', book_wp_strand_blurb( 305 ) );
+        bwp_set_categories( 306, array( $this->make_strand( 'puisi', '<p> </p>' ) ) );
+        $this->assertSame( 'Global blurb', book_wp_strand_blurb( 306 ) );
+    }
+
+    public function test_strand_blurb_falls_back_to_option_for_uncategorized_work(): void {
+        bwp_set_option( 'book_wp_chapter_blurb', 'Global blurb' );
+        bwp_set_categories( 307, array( $this->make_strand( 'uncategorized', 'Not a strand' ) ) );
+        $this->assertSame( 'Global blurb', book_wp_strand_blurb( 307 ) );
+    }
+
+    public function test_strand_blurb_is_empty_without_description_or_option(): void {
+        bwp_set_categories( 308, array( $this->make_strand( 'puisi' ) ) );
+        $this->assertSame( '', book_wp_strand_blurb( 308 ) );
+    }
+
+    public function test_strand_blurb_accepts_an_archive_term(): void {
+        bwp_set_option( 'book_wp_chapter_blurb', 'Global blurb' );
+        $this->assertSame( 'Own words', book_wp_strand_blurb( $this->make_strand( 'cerpen', 'Own words' ) ) );
+        $this->assertSame( 'Global blurb', book_wp_strand_blurb( $this->make_strand( 'cerpen' ) ) );
+    }
+
+    public function test_strand_blurb_uses_current_post_when_no_argument(): void {
+        bwp_set_current_id( 309 );
+        bwp_set_categories( 309, array( $this->make_strand( 'esei', 'Essays' ) ) );
+        $this->assertSame( 'Essays', book_wp_strand_blurb() );
+    }
 }

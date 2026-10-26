@@ -1,5 +1,5 @@
 /**
- * Book WP — Frontend JavaScript
+ * Sasterawan — Frontend JavaScript
  *
  * Literary reading enhancements:
  * - Reading progress bar (scroll-driven)
@@ -78,20 +78,6 @@
             // Skip if user is typing in a form field.
             var tag = ( e.target || e.srcElement ).tagName;
             if ( tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' ) return;
-
-            // ← → — navigate between posts (prev / next work).
-            var link = null;
-            if ( e.key === 'ArrowLeft'  || e.keyCode === 37 ) {
-                link = document.querySelector( '.bwp-work-nav__link--prev' );
-            } else if ( e.key === 'ArrowRight' || e.keyCode === 39 ) {
-                link = document.querySelector( '.bwp-work-nav__link--next' );
-            }
-
-            if ( link ) {
-                e.preventDefault();
-                window.location.href = link.href;
-                return;
-            }
 
             // ↑ ↓ — navigate between stanzas within the current work.
             var isDown = e.key === 'ArrowDown' || e.keyCode === 40;
@@ -394,7 +380,7 @@
  *
  * If the .bwp-social list contains more than BWP_SOCIAL_LIMIT items,
  * this block:
- *   1. Adds .bwp-social--collapsible to the <ul> (CSS hides items 7+)
+ *   1. Adds .bwp-social--collapsible to the <ul> (CSS hides items 9+)
  *   2. Appends a <li> containing a <button class="bwp-social__toggle">
  *      showing "+N" where N = number of hidden items
  *   3. On click: toggles .bwp-social--expanded; button label becomes "×"
@@ -409,7 +395,7 @@
 ( function () {
     'use strict';
 
-    var BWP_SOCIAL_LIMIT = 6;
+    var BWP_SOCIAL_LIMIT = 8;
 
     document.addEventListener( 'DOMContentLoaded', function () {
         var list = document.querySelector( '.bwp-social' );
@@ -632,4 +618,23 @@
         window.scrollTo( { top: 0, behavior: 'smooth' } );
     } );
 
+} )();
+
+/* ── Mobile nav toggle ─────────────────────────────────────────────────── */
+( function () {
+    'use strict';
+    var toggle = document.querySelector( '.bwp-nav-toggle' );
+    var nav    = document.getElementById( 'bwp-nav' );
+    if ( ! toggle || ! nav ) return;
+    toggle.addEventListener( 'click', function () {
+        var open = nav.classList.toggle( 'is-open' );
+        toggle.setAttribute( 'aria-expanded', open ? 'true' : 'false' );
+    } );
+    document.addEventListener( 'keydown', function ( e ) {
+        if ( e.key === 'Escape' && nav.classList.contains( 'is-open' ) ) {
+            nav.classList.remove( 'is-open' );
+            toggle.setAttribute( 'aria-expanded', 'false' );
+            toggle.focus();
+        }
+    } );
 } )();

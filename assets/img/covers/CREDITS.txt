@@ -1,0 +1,28 @@
+Cover plates for strand (jalur) and form (bentuk) archives.
+All derived from Wikimedia Commons files in the public domain or under CC0;
+each was cropped to 2.4:1, softened and toned toward the theme's indigo.
+Every title page links its credit line back to the Commons file.
+
+FORMS
+form-puisi.jpg        Gurindam_12.jpg — Gurindam Dua Belas (Raja Ali Haji), lithograph. PD.
+form-syair.jpg        Syair_perahu.png — Syair Perahu on bark boards. PD.
+form-karmina.jpg      Surat_pantun_cara_Lampung.png — pantun manuscript, Lampung script. PD.
+form-hikayat.jpg      Hkyt_merong_mahawgsa.jpg — Hikayat Merong Mahawangsa, Wilkinson 1898. PD.
+form-nukilan.jpg      Final_pages_of_the_Taj_al-Salatin… — Taj al-Salatin, closing pages. CC0.
+form-ratapan.jpg      Mawlid_sharaf_al-anam… MSS_819 — illuminated mawlid, 19th c., PNM. PD.
+form-memoir.jpg       AbdullahbinAbdulKadir-HikayatAbdullah-1843.jpg — Hikayat Abdullah, 1843. PD.
+form-terjemahan.jpg   Edgar_Allan_Poe,_circa_1849,_restored,_squared_off.jpg — daguerreotype. PD.
+
+STRANDS
+jalur-asrar.jpg       Syair_Perahu_MSS_Malay_A2_f1r.png — Hamzah Fansuri's Syair Perahu, bark. CC0.
+jalur-ceritera.jpg    YosriHikayatHangTuah.jpg — Hikayat Hang Tuah manuscript, photo by Yosri. CC0.
+jalur-fiksi.jpg       Halaman_Depan_Hikayat_Sang_Boma.png — Hikayat Sang Boma, front page. CC0.
+jalur-iktibar.jpg     Hukum_Kanun_Melaka.jpg — Hukum Kanun Melaka manuscript. CC0.
+jalur-kasmaran.jpg    Panji_Angreni_f.10v.png — Panji Angreni, Javanese romance. PD.
+jalur-kenegaraan.jpg  Initial_pages_of_the_Taj_al-Salatin… — Taj al-Salatin, opening pages. CC0.
+jalur-ketuhanan.jpg   Masjid_Kampung_Laut,_Nilampuri,_Kelantan,_Malaysia.jpg — the oldest mosque. CC0.
+jalur-sanggahan.jpg   Alamat_Langkapuri,_8_August_1869.jpg — first Jawi newspaper, 1869. PD.
+jalur-wangsa.jpg      Frontispiece_of_a_Jawi_edition_of_the_Malay_Annals.jpg — Sulalatus Salatin. PD.
+
+No plate ships for cerpen, esei and novel (no works yet); set one on the term's
+edit screen or add an entry via the book_wp_cover_plates filter.

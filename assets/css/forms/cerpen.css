@@ -1,5 +1,5 @@
 /**
- * Book WP — Literary Form: Cerpen (Short Story)
+ * Sasterawan — Literary Form: Cerpen (Short Story)
  *
  * The short story asks to be read as a book. Wider column than poetry,
  * conventional prose indent, warmer palette tint, chapter-like authority.
@@ -12,38 +12,15 @@
 
 /* ── Layout: wider column, prose-confident ───────────────── */
 
-body.bwp-form-cerpen .bwp-page-wrap {
-    max-width: 44em;   /* wider than default for extended prose reading */
-}
-
 body.bwp-form-cerpen .bwp-work__content {
-    max-width: 38em;
+    max-width: 34em;
     margin-left: auto;
     margin-right: auto;
 }
 
 /* ── Typography: slightly warmer, classical prose rhythm ─── */
 
-body.bwp-form-cerpen .bwp-work__title {
-    font-size: 2.0em;
-    font-weight: 400;
-    text-align: left;        /* left-aligned, like a chapter heading */
-    letter-spacing: -.01em;
-    line-height: 1.15;
-    border-bottom: 1px solid var(--bwp-border);
-    padding-bottom: .5em;
-    margin-bottom: .8em;
-}
-
 /* Chapter heading feel — teal rule after title */
-body.bwp-form-cerpen .bwp-work__title::after {
-    content: '';
-    display: block;
-    width: 2em;
-    height: 2px;
-    background: var(--bwp-link, #2E6A8E);
-    margin-top: .6em;
-}
 
 body.bwp-form-cerpen .bwp-work__content {
     font-size: 1.05em;
@@ -77,16 +54,7 @@ body.bwp-form-cerpen .bwp-work__content > p:first-of-type::first-letter {
 
 /* ── Epigraph: left-aligned, book-like ───────────────────── */
 
-body.bwp-form-cerpen .bwp-epigraph {
-    max-width: 28em;
-    margin-left: 0;
-    margin-right: auto;
-    font-size: .94em;
-}
-
 /* ── Analytics: left-aligned ──────────────────────────────── */
-
-body.bwp-form-cerpen .bwp-analytics { justify-content: flex-start; }
 
 /* ── Section divider: long rule for scene breaks ─────────── */
 
@@ -105,16 +73,12 @@ body.bwp-form-cerpen .bwp-petikan {
 
 /* ── Author colophon: left-aligned for prose ─────────────── */
 
-body.bwp-form-cerpen .bwp-colophon { text-align: left; }
-
 /* ── Responsive ──────────────────────────────────────────── */
 
 @media screen and (min-width: 52em) {
-    body.bwp-form-cerpen .bwp-work__title { font-size: 2.6em; }
     body.bwp-form-cerpen .bwp-work__content { font-size: 1.1em; line-height: 1.9; }
 }
 
 @media print {
-    body.bwp-form-cerpen .bwp-work__title { font-size: 1.8em; text-align: left; }
     body.bwp-form-cerpen .bwp-work__content { line-height: 1.7; }
 }

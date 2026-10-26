@@ -3,8 +3,29 @@
 
 <main id="bwp-main" class="bwp-main">
 
-<div class="bwp-archive-header">
-    <?php echo book_wp_ornament( 'leaf' ); // phpcs:ignore ?>
+<?php $bwp_cover = book_wp_term_cover( get_queried_object() ); ?>
+<div class="bwp-archive-header bwp-opening<?php echo $bwp_cover ? ' bwp-opening--cover' : ''; ?>">
+    <?php echo book_wp_cover_markup( $bwp_cover ); // phpcs:ignore ?>
+    <div class="bwp-opening__top">
+        <?php
+        $bwp_tax_label = '';
+        $bwp_tax_obj   = get_queried_object();
+        if ( $bwp_tax_obj && isset( $bwp_tax_obj->taxonomy ) ) {
+            $bwp_tax_label = ( 'literary_form' === $bwp_tax_obj->taxonomy ) ? __( 'Bentuk', 'book-wp' ) : __( 'Jalur tema', 'book-wp' );
+        } elseif ( is_date() ) {
+            $bwp_tax_label = __( 'Arkib', 'book-wp' );
+        } elseif ( is_author() ) {
+            $bwp_tax_label = __( 'Penulis', 'book-wp' );
+        }
+        if ( $bwp_tax_label ) : ?>
+            <p class="bwp-archive-header__taxlabel bwp-opening__kicker"><?php echo esc_html( $bwp_tax_label ); ?></p>
+        <?php endif; ?>
+        <?php
+        $bwp_seal = ( $bwp_tax_obj && isset( $bwp_tax_obj->taxonomy ) && 'literary_form' === $bwp_tax_obj->taxonomy ) ? book_wp_form_jawi( $bwp_tax_obj->slug ) : get_option( 'book_wp_jawi_name', '' );
+        if ( $bwp_seal ) : ?>
+            <span class="bwp-opening__seal" aria-hidden="true" dir="rtl" lang="ms-Arab"><?php echo esc_html( $bwp_seal ); ?></span>
+        <?php endif; ?>
+    </div>
 
     <h1 class="bwp-archive-header__title"><?php the_archive_title(); ?></h1>
 
@@ -15,15 +36,15 @@
         $desc = '';
         if ( 'literary_form' === $term->taxonomy ) {
             $desc = book_wp_form_description( $term->slug );
-        } elseif ( 'category' === $term->taxonomy && ! empty( $term->description ) ) {
-            $desc = $term->description;
+        } elseif ( 'category' === $term->taxonomy ) {
+            $desc = book_wp_strand_blurb( $term ); // category description, else the Strand Blurb option
         }
         if ( $desc ) :
     ?>
         <p class="bwp-archive-header__desc"><?php echo esc_html( $desc ); ?></p>
     <?php endif; endif; ?>
 
-    <?php echo book_wp_ornament( 'dash' ); // phpcs:ignore ?>
+    <?php echo book_wp_cover_credit( $bwp_cover ); // phpcs:ignore ?>
 </div>
 
 <?php if ( have_posts() ) : ?>

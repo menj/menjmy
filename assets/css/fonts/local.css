@@ -1,0 +1,43 @@
+/**
+ * Sasterawan — Self-hosted Latin faces
+ *
+ * Sabon Next LT  — the reading face (Jan Tschichold's Sabon, Monotype Next
+ *                  cut), supplied by the site owner under their own licence.
+ * Special Elite  — typewriter accent (Astigmatic, Apache 2.0) for manuscript
+ *                  references, translation source lines and the certot form.
+ * Kagnue         — brand display (Youthlabs Studio, owner's licence): the
+ *                  anthology name and section headings, never work titles.
+ * Ferments       — handwritten script (Haksen Studio, owner's licence): the
+ *                  footer sign-off and dedication lines.
+ * Ferments       — handwritten script (Haksen Studio, owner's licence) used only
+ *                  for the author's signature and dedication lines.
+ *
+ * Served from the theme; no third-party request. EB Garamond and Courier
+ * remain the fallbacks if the files are missing.
+ */
+
+@font-face { font-family: 'Sabon Next LT'; font-style: normal; font-weight: 400; font-display: swap; src: url('../../fonts/sabon/SabonNextLT-Regular.woff') format('woff'); }
+@font-face { font-family: 'Sabon Next LT'; font-style: italic; font-weight: 400; font-display: swap; src: url('../../fonts/sabon/SabonNextLT-Italic.woff') format('woff'); }
+@font-face { font-family: 'Sabon Next LT'; font-style: normal; font-weight: 700; font-display: swap; src: url('../../fonts/sabon/SabonNextLT-Bold.woff') format('woff'); }
+@font-face { font-family: 'Sabon Next LT'; font-style: italic; font-weight: 700; font-display: swap; src: url('../../fonts/sabon/SabonNextLT-BoldItalic.woff') format('woff'); }
+@font-face { font-family: 'Ferments'; font-style: normal; font-weight: 400; font-display: swap; src: url('../../fonts/ferments/Ferments-Regular.woff') format('woff'); }
+@font-face { font-family: 'Ferments'; font-style: italic; font-weight: 400; font-display: swap; src: url('../../fonts/ferments/Ferments-Slant.woff') format('woff'); }
+@font-face { font-family: 'Kagnue'; font-style: normal; font-weight: 400; font-display: swap; src: url('../../fonts/kagnue/Kagnue-Regular.woff') format('woff'); }
+@font-face { font-family: 'Kagnue Outline'; font-style: normal; font-weight: 400; font-display: swap; src: url('../../fonts/kagnue/Kagnue-Outline.woff') format('woff'); }
+@font-face { font-family: 'Ferments'; font-style: normal; font-weight: 400; font-display: swap; src: url('../../fonts/ferments/Ferments-Regular.woff') format('woff'); }
+@font-face { font-family: 'Ferments'; font-style: italic; font-weight: 400; font-display: swap; src: url('../../fonts/ferments/Ferments-Slant.woff') format('woff'); }
+@font-face { font-family: 'Special Elite'; font-style: normal; font-weight: 400; font-display: swap; src: url('../../fonts/special-elite/SpecialElite-Regular.woff') format('woff'); }
+
+:root {
+    --bwp-font:      'Sabon Next LT', 'EB Garamond', Georgia, 'Times New Roman', serif;
+    --bwp-font-mono:   'Special Elite', 'Courier New', monospace;
+    --bwp-font-brand:  'Kagnue', 'Fraunces', Georgia, serif;
+    --bwp-font-script: 'Ferments', 'Segoe Script', cursive;
+    /* Sabon runs a little smaller than Garamond at the same size */
+    --bwp-font-size: 1.1875rem;
+    --bwp-lh: 1.7;
+}
+/* phones: keep the smaller reading size frontend.css sets at this width */
+@media screen and (max-width: 36em) {
+    :root { --bwp-font-size: 1.0625rem; }
+}

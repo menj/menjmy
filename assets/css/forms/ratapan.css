@@ -1,5 +1,5 @@
 /**
- * Book WP — Literary Form: Ratapan (Lament / Elegy)
+ * Sasterawan — Literary Form: Ratapan (Lament / Elegy)
  *
  * The lament is grief made language. Sombre palette, compressed
  * leading, dark border treatments. Wide column to accommodate the
@@ -50,8 +50,6 @@ body.bwp-night.bwp-form-ratapan,
 }
 
 /* ── Layout: wide — chapter float needs room ─────────────── */
-
-body.bwp-form-ratapan .bwp-page-wrap   { max-width: 46em; }
 body.bwp-form-ratapan .bwp-work__content {
     max-width: 40em;
     margin-left: auto;
@@ -60,32 +58,13 @@ body.bwp-form-ratapan .bwp-work__content {
 
 /* ── Title: centred, normal weight, sombre ───────────────── */
 
-body.bwp-form-ratapan .bwp-work__title {
-    font-family:    var(--bwp-font-display, 'Cinzel', Georgia, serif);
-    font-size:      2.0em;
-    font-weight:    400;
-    font-style:     normal;
-    text-align:     center;
-    letter-spacing: .04em;
-    line-height:    1.2;
-    color:          var(--bwp-text);
-}
-
 /* Ash hairline — not gold, grief uses no ornament */
-body.bwp-form-ratapan .bwp-work__title::after {
-    content:    '';
-    display:    block;
-    width:      3em;
-    height:     1px;
-    background: var(--bwp-border);
-    margin:     .7em auto 0;
-}
 
 /* ── Body: measured, deliberate ──────────────────────────── */
 
 body.bwp-form-ratapan .bwp-work__content {
     font-size:  1.04em;
-    line-height: 2.0;
+    line-height: 1.75;
 }
 
 body.bwp-form-ratapan .bwp-work__content p      { text-indent: 0 !important; }
@@ -108,17 +87,6 @@ body.bwp-form-ratapan .bwp-ornament {
 
 /* ── Epigraph ────────────────────────────────────────────── */
 
-body.bwp-form-ratapan .bwp-epigraph {
-    border-left-color: var(--bwp-border);
-    background:        none;
-    opacity:           .8;
-}
-
-body.bwp-form-ratapan .bwp-epigraph::before {
-    color:   var(--bwp-ornament);
-    opacity: .2;
-}
-
 /* ── Bait numbers: muted ─────────────────────────────────── */
 
 body.bwp-form-ratapan .bwp-bait__num {
@@ -128,15 +96,11 @@ body.bwp-form-ratapan .bwp-bait__num {
 
 /* ── Colophon ────────────────────────────────────────────── */
 
-body.bwp-form-ratapan .bwp-colophon { opacity: .7; }
-
 /* ── Progress bar: cool grey ─────────────────────────────── */
 
 body.bwp-form-ratapan .bwp-progress__bar { background: var(--bwp-progress); }
 
 /* ── Analytics: centred ──────────────────────────────────── */
-
-body.bwp-form-ratapan .bwp-analytics { justify-content: center; }
 
 /* ── Bible-style chapter/verse apparatus ─────────────────── */
 
@@ -227,12 +191,10 @@ body.bwp-form-ratapan .bwp-chapter::after {
 }
 
 @media screen and (min-width: 52em) {
-    body.bwp-form-ratapan .bwp-work__title   { font-size: 2.6em; }
     body.bwp-form-ratapan .bwp-work__content { line-height: 2.1; }
 }
 
 @media print {
-    body.bwp-form-ratapan .bwp-work__title        { font-size: 1.8em; }
     body.bwp-form-ratapan .bwp-chapter__num        { font-size: 3.8em; opacity: 1; }
     body.bwp-form-ratapan .bwp-chapter             { border-top-color: #888; }
     body.bwp-form-ratapan .bwp-chapter__content    { text-align: left; hyphens: none; }

@@ -1,4 +1,4 @@
-# Book WP — Single Source of Truth
+# Sasterawan — Single Source of Truth
 
 **Version:** 3.5.1
 **License:** GPL-2.0-or-later
@@ -6,7 +6,7 @@
 **Theme slug:** `book-wp`
 
 This document names the **file of record** for every versioned or canonical
-fact in Book WP. When two sources disagree, the file named here wins; the
+fact in Sasterawan. When two sources disagree, the file named here wins; the
 other is stale and should be aligned.
 
 ---

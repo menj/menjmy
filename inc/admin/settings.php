@@ -1,6 +1,6 @@
 <?php
 /**
- * Book WP — Admin Settings
+ * Sasterawan — Admin Settings
  *
  * Design system: modern_settings_ui v1.0.0
  * Wrapper: .theme-settings-root  |  Each tab has its own <form>.
@@ -19,13 +19,23 @@ add_action( 'admin_init', 'book_wp_register_settings' );
 function book_wp_register_settings() {
     $settings = array(
         'book_wp_author_name'     => 'sanitize_text_field',
+        'book_wp_author_portrait' => 'esc_url_raw',
+        'book_wp_show_hero_image' => 'book_wp_cb',
+        'book_wp_hero_image'      => 'esc_url_raw',
+        'book_wp_featured_as_cover' => 'book_wp_cb',
         'book_wp_anthology_name'  => 'sanitize_text_field',
-        'book_wp_front_blurb'     => 'wp_kses_post',
+        'book_wp_jawi_name'       => 'sanitize_text_field',
+        'book_wp_jawa_name'       => 'sanitize_text_field',
+        'book_wp_footer_quote'    => 'sanitize_textarea_field',
+        'book_wp_footer_quote_sub' => 'sanitize_text_field',
+        'book_wp_chapter_blurb'   => 'sanitize_textarea_field',
+        'book_wp_show_chapter_blurb' => 'book_wp_cb',
+        'book_wp_show_featured_work' => 'book_wp_cb',
+        'book_wp_featured_work_id'   => 'absint',
         'book_wp_copyright'       => 'wp_kses_post',
         'book_wp_show_copyright'    => 'book_wp_cb',
         'book_wp_toc_grouping'      => 'sanitize_text_field',
         'book_wp_show_badges'       => 'book_wp_cb',
-        'book_wp_show_nav'          => 'book_wp_cb',
         'book_wp_archive_layout'    => 'sanitize_text_field',
         'book_wp_archive_pagination'=> 'sanitize_text_field',
         'book_wp_toc_layout'        => 'sanitize_text_field',
@@ -57,6 +67,14 @@ function book_wp_register_settings() {
         'book_wp_night_toggle'    => 'book_wp_cb',
         'book_wp_comments'        => 'sanitize_text_field',
         'book_wp_social_twitter'   => 'esc_url_raw',
+        'book_wp_social_viaf' => 'esc_url_raw',
+        'book_wp_social_academia' => 'esc_url_raw',
+        'book_wp_social_wikidata' => 'esc_url_raw',
+        'book_wp_social_substack' => 'esc_url_raw',
+        'book_wp_social_whatsapp' => 'esc_url_raw',
+        'book_wp_social_telegram' => 'esc_url_raw',
+        'book_wp_social_tiktok' => 'esc_url_raw',
+        'book_wp_social_bluesky' => 'esc_url_raw',
         'book_wp_social_facebook'  => 'esc_url_raw',
         'book_wp_social_instagram' => 'esc_url_raw',
         'book_wp_social_threads'   => 'esc_url_raw',
@@ -134,13 +152,23 @@ function book_wp_handle_tab_save() {
     $tab_fields = array(
         'general' => array(
             'book_wp_author_name'    => 'sanitize_text_field',
+            'book_wp_author_portrait' => 'esc_url_raw',
+            'book_wp_show_hero_image' => 'book_wp_cb',
+            'book_wp_hero_image'     => 'esc_url_raw',
+            'book_wp_featured_as_cover' => 'book_wp_cb',
             'book_wp_anthology_name' => 'sanitize_text_field',
-            'book_wp_front_blurb'         => 'wp_kses_post',
+            'book_wp_jawi_name'      => 'sanitize_text_field',
+            'book_wp_jawa_name'      => 'sanitize_text_field',
+            'book_wp_footer_quote'   => 'sanitize_textarea_field',
+            'book_wp_footer_quote_sub' => 'sanitize_text_field',
+            'book_wp_chapter_blurb'  => 'sanitize_textarea_field',
+            'book_wp_show_chapter_blurb' => 'book_wp_cb',
+            'book_wp_show_featured_work'  => 'book_wp_cb',
+            'book_wp_featured_work_id'    => 'absint',
             'book_wp_copyright'           => 'wp_kses_post',
             'book_wp_show_copyright'      => 'book_wp_cb',
             'book_wp_toc_grouping'        => 'sanitize_text_field',
             'book_wp_show_badges'         => 'book_wp_cb',
-            'book_wp_show_nav'            => 'book_wp_cb',
             'book_wp_archive_layout'      => 'sanitize_text_field',
             'book_wp_archive_pagination'  => 'sanitize_text_field',
             'book_wp_toc_layout'          => 'sanitize_text_field',
@@ -189,6 +217,14 @@ function book_wp_handle_tab_save() {
         ),
         'social' => array(
             'book_wp_social_twitter'   => 'esc_url_raw',
+            'book_wp_social_viaf' => 'esc_url_raw',
+            'book_wp_social_academia' => 'esc_url_raw',
+            'book_wp_social_wikidata' => 'esc_url_raw',
+            'book_wp_social_substack' => 'esc_url_raw',
+            'book_wp_social_whatsapp' => 'esc_url_raw',
+            'book_wp_social_telegram' => 'esc_url_raw',
+            'book_wp_social_tiktok' => 'esc_url_raw',
+            'book_wp_social_bluesky' => 'esc_url_raw',
             'book_wp_social_facebook'  => 'esc_url_raw',
             'book_wp_social_instagram' => 'esc_url_raw',
             'book_wp_social_threads'   => 'esc_url_raw',
@@ -251,7 +287,7 @@ function book_wp_admin_assets( $hook ) {
 add_action( 'admin_menu', 'book_wp_menu' );
 
 function book_wp_menu() {
-    add_theme_page( 'Book WP Settings', 'Book WP', 'edit_theme_options', 'book-wp-settings', 'book_wp_settings_page' );
+    add_theme_page( 'Sasterawan Settings', 'Sasterawan', 'edit_theme_options', 'book-wp-settings', 'book_wp_settings_page' );
 }
 
 /* ── SVG icons ─────────────────────────────────────────────────────────── */
@@ -296,8 +332,8 @@ function book_wp_settings_page() {
                 <?php echo bwp_icon( 'book' ); ?>
             </div>
             <div class="bwp-header__body">
-                <h1 class="bwp-header__title">Book WP</h1>
-                <p class="bwp-header__desc">Literary publishing theme for WordPress</p>
+                <h1 class="bwp-header__title">Sasterawan</h1>
+                <p class="bwp-header__desc"><?php esc_html_e( 'Tema antologi sastera Melayu untuk menj.my', 'book-wp' ); ?></p>
             </div>
             <span class="bwp-header__badge">v<?php echo esc_html( BOOK_WP_VERSION ); ?></span>
         </div>
@@ -408,7 +444,28 @@ function bwp_tab_general() {
                 <input type="text" name="book_wp_author_name" id="book_wp_author_name"
                        value="<?php echo esc_attr( get_option( 'book_wp_author_name', '' ) ); ?>">
             </div>
-            <span class="bwp-field__hint"><?php esc_html_e( 'Displayed in the site header on all pages in place of the WordPress Site Title.', 'book-wp' ); ?></span>
+            <span class="bwp-field__hint"><?php esc_html_e( 'Shown on the front-page cover, in the footer lockup and in structured data. The header carries the anthology name.', 'book-wp' ); ?></span>
+        </div>
+
+        <div class="bwp-field">
+            <label class="bwp-field__label" for="book_wp_author_portrait"><?php esc_html_e( 'Author Portrait', 'book-wp' ); ?></label>
+            <div class="bwp-field__control">
+                <input type="url" name="book_wp_author_portrait" id="book_wp_author_portrait" placeholder="https://"
+                       value="<?php echo esc_attr( get_option( 'book_wp_author_portrait', '' ) ); ?>">
+                <p class="bwp-field__hint"><?php esc_html_e( 'Media Library URL of a head-and-shoulders photo. The theme renders it as a nila-and-kapas duotone medallion in the footer and on the author page; a plain photo on a light background works best.', 'book-wp' ); ?></p>
+            </div>
+        </div>
+
+        <?php bwp_toggle( 'book_wp_featured_as_cover', __( 'Featured image as title-page cover', 'book-wp' ), __( 'A work with a featured image opens like the front-page jacket: title and chips set over the image. Off, the image sits below the apparatus as before.', 'book-wp' ), '1' ); ?>
+        <?php bwp_toggle( 'book_wp_show_hero_image', __( 'Front-page cover photograph', 'book-wp' ), __( 'Set the anthology title over a photograph on the front page. Off, the title sits on plain paper.', 'book-wp' ), '1' ); ?>
+
+        <div class="bwp-field">
+            <label class="bwp-field__label" for="book_wp_hero_image"><?php esc_html_e( 'Cover Photograph', 'book-wp' ); ?></label>
+            <div class="bwp-field__control">
+                <input type="url" name="book_wp_hero_image" id="book_wp_hero_image" placeholder="https://"
+                       value="<?php echo esc_attr( get_option( 'book_wp_hero_image', '' ) ); ?>">
+                <p class="bwp-field__hint"><?php esc_html_e( 'Media Library URL of a wide photograph (about 2.4:1, at least 2000px wide). Leave empty for the bundled underwater photograph by David Boca (Pexels).', 'book-wp' ); ?></p>
+            </div>
         </div>
 
         <div class="bwp-field">
@@ -421,12 +478,61 @@ function bwp_tab_general() {
         </div>
 
         <div class="bwp-field">
-            <label class="bwp-field__label" for="book_wp_front_blurb"><?php esc_html_e( 'Front Page Blurb', 'book-wp' ); ?></label>
+            <label class="bwp-field__label" for="book_wp_jawi_name"><?php esc_html_e( 'Anthology Name in Jawi', 'book-wp' ); ?></label>
             <div class="bwp-field__control">
-                <textarea name="book_wp_front_blurb" id="book_wp_front_blurb" rows="3"><?php echo esc_textarea( get_option( 'book_wp_front_blurb', '' ) ); ?></textarea>
+                <input type="text" dir="rtl" lang="ms-Arab" name="book_wp_jawi_name" id="book_wp_jawi_name"
+                       value="<?php echo esc_attr( get_option( 'book_wp_jawi_name', '' ) ); ?>">
             </div>
-            <span class="bwp-field__hint"><?php echo wp_kses( __( 'Introductory text displayed above the Table of Contents. HTML is supported — e.g. <code>&lt;em&gt;, &lt;strong&gt;, &lt;a href=""&gt;</code>.', 'book-wp' ), array( 'code' => array() ) ); ?></span>
+            <span class="bwp-field__hint"><?php esc_html_e( 'Shown beside the brandmark in the header, as the seal on title pages and in the footer.', 'book-wp' ); ?></span>
         </div>
+
+        <div class="bwp-field">
+            <label class="bwp-field__label" for="book_wp_jawa_name"><?php esc_html_e( 'Anthology Name in Aksara Jawa', 'book-wp' ); ?></label>
+            <div class="bwp-field__control">
+                <input type="text" lang="jv-Java" name="book_wp_jawa_name" id="book_wp_jawa_name"
+                       placeholder="<?php echo esc_attr( book_wp_default_jawa_name() ); ?>"
+                       value="<?php echo esc_attr( get_option( 'book_wp_jawa_name', '' ) ); ?>">
+            </div>
+            <span class="bwp-field__hint"><?php esc_html_e( 'A Javanese translation of the title in Javanese script, shown in the footer. Empty uses the bundled "Sangisoring Lumahan".', 'book-wp' ); ?></span>
+        </div>
+
+        <div class="bwp-field">
+            <label class="bwp-field__label" for="book_wp_featured_work_id"><?php esc_html_e( 'Featured Work', 'book-wp' ); ?></label>
+            <div class="bwp-field__control">
+                <input type="number" min="0" name="book_wp_featured_work_id" id="book_wp_featured_work_id"
+                       value="<?php echo esc_attr( get_option( 'book_wp_featured_work_id', 0 ) ); ?>">
+                <p class="bwp-field__hint"><?php esc_html_e( 'Post ID to open the front page with. Leave 0 to show the newest work. The block can be hidden with the toggle below.', 'book-wp' ); ?></p>
+            </div>
+        </div>
+
+        <?php bwp_toggle( 'book_wp_show_featured_work', __( 'Karya Terbaharu block', 'book-wp' ), __( 'Show the newest (or featured) work as an opening page above the table of contents.', 'book-wp' ), '1' ); ?>
+
+        <div class="bwp-field bwp-field--full">
+            <label class="bwp-field__label" for="book_wp_footer_quote"><?php esc_html_e( 'Footer Sign-off', 'book-wp' ); ?></label>
+            <div class="bwp-field__control">
+                <textarea name="book_wp_footer_quote" id="book_wp_footer_quote" rows="3"><?php echo esc_textarea( get_option( 'book_wp_footer_quote', book_wp_default_footer_quote() ) ); ?></textarea>
+                <p class="bwp-field__hint"><?php esc_html_e( 'One italic line that closes every page, set once in the Mukadimah voice. Leave blank to hide the sign-off.', 'book-wp' ); ?></p>
+            </div>
+        </div>
+
+        <div class="bwp-field bwp-field--full">
+            <label class="bwp-field__label" for="book_wp_footer_quote_sub"><?php esc_html_e( 'Sign-off Second Line', 'book-wp' ); ?></label>
+            <div class="bwp-field__control">
+                <input type="text" name="book_wp_footer_quote_sub" id="book_wp_footer_quote_sub"
+                       value="<?php echo esc_attr( get_option( 'book_wp_footer_quote_sub', book_wp_default_footer_quote_sub() ) ); ?>">
+                <p class="bwp-field__hint"><?php esc_html_e( 'Smaller supporting line beneath the sign-off. Optional.', 'book-wp' ); ?></p>
+            </div>
+        </div>
+
+        <div class="bwp-field bwp-field--full">
+            <label class="bwp-field__label" for="book_wp_chapter_blurb"><?php esc_html_e( 'Strand Blurb', 'book-wp' ); ?></label>
+            <div class="bwp-field__control">
+                <textarea name="book_wp_chapter_blurb" id="book_wp_chapter_blurb" rows="2"><?php echo esc_textarea( get_option( 'book_wp_chapter_blurb', '' ) ); ?></textarea>
+                <p class="bwp-field__hint"><?php esc_html_e( 'One line about the strands. A strand archive shows its own category description when it has one, and this text otherwise.', 'book-wp' ); ?></p>
+            </div>
+        </div>
+
+        <?php bwp_toggle( 'book_wp_show_chapter_blurb', __( 'Strand blurb on works', 'book-wp' ), __( 'Show the strand description (or the blurb above) as a line in each work\'s title panel.', 'book-wp' ), '0' ); ?>
 
         <div class="bwp-field">
             <label class="bwp-field__label" for="book_wp_copyright"><?php esc_html_e( 'Copyright', 'book-wp' ); ?></label>
@@ -467,7 +573,6 @@ function bwp_tab_general() {
         </div>
 
         <?php bwp_toggle( 'book_wp_show_badges', __( 'Literary Form Badges', 'book-wp' ), __( 'Show coloured form badges beside titles in the TOC.', 'book-wp' ) ); ?>
-        <?php bwp_toggle( 'book_wp_show_nav', __( 'Previous / Next Navigation', 'book-wp' ), __( 'Show navigation links between works on single pages.', 'book-wp' ), '1' ); ?>
 
         <?php
         $toc_layout = get_option( 'book_wp_toc_layout',     'list' );
@@ -544,13 +649,14 @@ function bwp_tab_general() {
    ══════════════════════════════════════ */
 
 function bwp_tab_typography() {
-    $font       = get_option( 'book_wp_font',         'georgia' );
+    $font       = get_option( 'book_wp_font',         'sabon' );
     $scheme     = get_option( 'book_wp_color_scheme',  'default' );
     $time_theme = get_option( 'book_wp_time_theme',    'auto' );
     $align      = get_option( 'book_wp_poetry_align',  'left' );
 
     $fonts = array(
-        'georgia' => array( 'name' => 'Georgia', 'sub' => 'Default', 'sample' => 'Gg' ),
+        'sabon'   => array( 'name' => 'Sabon Next LT', 'sub' => 'Default · self-hosted', 'sample' => 'Gg' ),
+        'georgia' => array( 'name' => 'Georgia', 'sub' => 'System serif', 'sample' => 'Gg' ),
         'lora'    => array( 'name' => 'Lora',    'sub' => 'Serif',   'sample' => 'Gg' ),
         'vollkorn'=> array( 'name' => 'Vollkorn','sub' => 'Serif',   'sample' => 'Gg' ),
         'arvo'    => array( 'name' => 'Arvo',    'sub' => 'Slab',    'sample' => 'Gg' ),
@@ -560,10 +666,10 @@ function bwp_tab_typography() {
     );
 
     $schemes = array(
-        'default' => array( 'name' => 'Default', 'sub' => 'Warm white', 'bg' => '#ffffff', 'fg' => '#111111' ),
+        'default' => array( 'name' => 'Kapas',   'sub' => 'Nila on cotton', 'bg' => '#f6f1e4', 'fg' => '#1a1f3a' ),
         'cream'   => array( 'name' => 'Cream',   'sub' => 'Aged paper', 'bg' => '#faf5dc', 'fg' => '#332d26' ),
         'dusk'    => array( 'name' => 'Dusk',    'sub' => 'Warm grey',  'bg' => '#e8e4de', 'fg' => '#2c2825' ),
-        'night'   => array( 'name' => 'Night',   'sub' => 'Dark',       'bg' => '#1a1a1f', 'fg' => '#d4d2cc' ),
+        'night'   => array( 'name' => 'Malam',   'sub' => 'Indigo night', 'bg' => '#0f1430', 'fg' => '#ece6d6' ),
     );
 
     $times = array(
@@ -1136,7 +1242,7 @@ function bwp_tab_social() {
     $groups = array(
         array(
             'label'    => __( 'Social Media', 'book-wp' ),
-            'slugs'    => array( 'twitter', 'facebook', 'instagram', 'threads', 'linkedin', 'youtube', 'medium' ),
+            'slugs'    => array( 'twitter', 'bluesky', 'facebook', 'instagram', 'threads', 'tiktok', 'linkedin', 'youtube', 'medium', 'substack', 'telegram', 'whatsapp' ),
         ),
         array(
             'label'    => __( 'Libraries & Catalogues', 'book-wp' ),
@@ -1148,7 +1254,7 @@ function bwp_tab_social() {
         ),
         array(
             'label'    => __( 'Author Identifiers', 'book-wp' ),
-            'slugs'    => array( 'orcid', 'isni' ),
+            'slugs'    => array( 'orcid', 'isni', 'viaf', 'wikidata', 'academia' ),
         ),
         array(
             'label'    => __( 'Syndication', 'book-wp' ),

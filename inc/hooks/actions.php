@@ -1,6 +1,6 @@
 <?php
 /**
- * Book WP — Action Hooks
+ * Sasterawan — Action Hooks
  *
  * Non-setup, non-admin add_action registrations.
  *
@@ -41,6 +41,7 @@ function book_wp_register_taxonomy() {
         'ratapan' => 'Ratapan',
         'esei'    => 'Esei',
         'memoir'  => 'Memoir',
+        'terjemahan' => 'Terjemahan',
     );
 
     // Term migrations: old_slug => array( 'slug' => new_slug, 'name' => new_name ).
@@ -50,7 +51,7 @@ function book_wp_register_taxonomy() {
         'autobiografi' => array( 'slug' => 'memoir', 'name' => 'Memoir' ), // 3.3.4: slug migration (3.3.3 flag already consumed by name change)
     );
 
-    $terms_version = '3.3.4';
+    $terms_version = '4.0.0';
     if ( get_option( 'book_wp_terms_version' ) !== $terms_version ) {
         // Insert any terms that don't exist yet.
         foreach ( $default_terms as $slug => $name ) {
@@ -73,6 +74,12 @@ function book_wp_register_taxonomy() {
                     wp_update_term( $term->term_id, 'literary_form', $args );
                 }
             }
+        }
+        // An in-place upgrade (same folder) never fires after_switch_theme, so
+        // the one-time 4.0 move of the body face runs from here as well. The
+        // helper is flag-guarded and does nothing on later versions.
+        if ( function_exists( 'book_wp_migrate_body_font' ) ) {
+            book_wp_migrate_body_font();
         }
         update_option( 'book_wp_terms_version', $terms_version );
     }
@@ -282,6 +289,53 @@ function book_wp_cache_word_count( $post_id ) {
 
 add_action( 'wp_head', 'book_wp_structured_data' );
 
+/**
+ * Author node reused across the site graph and every CreativeWork.
+ * Social profile URLs from the Social tab are declared as sameAs.
+ */
+function book_wp_schema_author() {
+    $name   = get_option( 'book_wp_author_name', '' );
+    $name   = $name ? $name : get_bloginfo( 'name' );
+    $person = array(
+        '@type' => 'Person',
+        '@id'   => home_url( '/#author' ),
+        'name'  => $name,
+        'url'   => home_url( '/' ),
+    );
+    $same_as = function_exists( 'book_wp_social_same_as' ) ? book_wp_social_same_as() : array();
+    if ( $same_as ) $person['sameAs'] = $same_as;
+    return $person;
+}
+
+/**
+ * Site-wide graph (WebSite + Person with sameAs) on every page, printed once.
+ */
+add_action( 'wp_head', 'book_wp_site_structured_data', 6 );
+
+function book_wp_site_structured_data() {
+    if ( '1' !== get_option( 'book_wp_structured_data', '1' ) ) return;
+
+    $anthology = get_option( 'book_wp_anthology_name', '' );
+    $tagline   = get_bloginfo( 'description' );
+    $website   = array(
+        '@type'      => 'WebSite',
+        '@id'        => home_url( '/#website' ),
+        'name'       => $anthology ? $anthology : get_bloginfo( 'name' ),
+        'url'        => home_url( '/' ),
+        'inLanguage' => get_bloginfo( 'language' ),
+        'author'     => array( '@id' => home_url( '/#author' ) ),
+        'publisher'  => array( '@id' => home_url( '/#author' ) ),
+    );
+    if ( $tagline ) $website['alternateName'] = $tagline;
+    $graph = array(
+        '@context' => 'https://schema.org',
+        '@graph'   => array( $website, book_wp_schema_author() ),
+    );
+    echo '<script type="application/ld+json">'
+        . wp_json_encode( $graph, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES )
+        . "</script>\n";
+}
+
 function book_wp_structured_data() {
     if ( ! is_single() ) return;
     if ( '1' !== get_option( 'book_wp_structured_data', '1' ) ) return;
@@ -292,7 +346,7 @@ function book_wp_structured_data() {
         '@context'      => 'https://schema.org',
         '@type'         => 'CreativeWork',
         'name'          => get_the_title(),
-        'author'        => array( '@type' => 'Person', 'name' => get_the_author() ),
+        'author'        => book_wp_schema_author(),
         'datePublished' => get_the_date( 'c' ),
         'url'           => get_permalink(),
         'inLanguage'    => substr( get_locale(), 0, 2 ),
@@ -313,8 +367,22 @@ function book_wp_structured_data() {
     $source = get_post_meta( $post->ID, 'book_wp_source', true );
     if ( $source ) $schema['isPartOf'] = array( '@type' => 'CreativeWork', 'name' => $source );
 
-    $lang = get_post_meta( $post->ID, 'book_wp_original_lang', true );
-    if ( $lang ) $schema['translationOfWork'] = array( '@type' => 'CreativeWork', 'inLanguage' => $lang );
+    $lang   = get_post_meta( $post->ID, 'book_wp_original_lang', true );
+    $stitle = get_post_meta( $post->ID, 'book_wp_source_title', true );
+    $sauth  = get_post_meta( $post->ID, 'book_wp_source_author', true );
+    $syear  = get_post_meta( $post->ID, 'book_wp_source_year', true );
+    // Only translations carry the apparatus: nukilan share the source-author
+    // key, so a source author alone must not mark a work as a translation.
+    $is_translation = function_exists( 'book_wp_has_form' ) && book_wp_has_form( $post->ID, 'terjemahan' );
+    if ( ( $lang || $is_translation ) && ( $lang || $stitle || $sauth ) ) {
+        $orig = array( '@type' => 'CreativeWork' );
+        if ( $stitle ) $orig['name'] = $stitle;
+        if ( $sauth )  $orig['author'] = array( '@type' => 'Person', 'name' => $sauth );
+        if ( $syear )  $orig['datePublished'] = $syear;
+        if ( $lang )   $orig['inLanguage'] = $lang;
+        $schema['translationOfWork'] = $orig;
+        $schema['translator'] = array( '@id' => home_url( '/#author' ) );
+    }
 
     $hidden_slugs = book_wp_hidden_tag_slugs();
     $all_tags     = get_the_tags( $post->ID );
@@ -360,6 +428,10 @@ add_action( 'after_switch_theme', 'book_wp_on_activation' );
 
 function book_wp_on_activation() {
     book_wp_register_taxonomy();
+    if ( function_exists( 'book_wp_migrate_theme_mods' ) ) {
+        book_wp_migrate_theme_mods(); // carry logo, CSS and header/background from a book-wp folder
+        book_wp_migrate_body_font();  // one-time move to the 4.0 body face
+    }
     flush_rewrite_rules();
 }
 
@@ -749,7 +821,7 @@ add_filter( 'widget_tag_cloud_args', 'book_wp_hide_tags_from_cloud' );
 
 /**
  * Detect whether a known SEO plugin is active.
- * If so, Book WP defers all OG/Twitter meta output to that plugin.
+ * If so, Sasterawan defers all OG/Twitter meta output to that plugin.
  * Covers: RankMath, Yoast SEO, All in One SEO, SEOPress, The SEO Framework.
  *
  * @return bool
@@ -767,7 +839,7 @@ function book_wp_seo_plugin_active() {
  *
  * Bails silently if:
  * - Not a single post page.
- * - The option is disabled in Appearance > Book WP > Advanced.
+ * - The option is disabled in Appearance > Sasterawan > Advanced.
  * - A known SEO plugin is active (RankMath, Yoast, etc.) — defers to that plugin.
  *
  * Description source priority: book_wp_toc_excerpt → auto-trim post content (30 words).
@@ -835,7 +907,7 @@ function book_wp_social_meta() {
     }
 
     // ── Output ─────────────────────────────────────────────────────────────
-    echo "\n<!-- Book WP: Social Meta (og / twitter) -->\n";
+    echo "\n<!-- Sasterawan: Social Meta (og / twitter) -->\n";
 
     // OpenGraph — base
     echo '<meta property="og:type" content="article" />' . "\n";
@@ -877,5 +949,16 @@ function book_wp_social_meta() {
         echo '<meta name="twitter:site" content="' . esc_attr( $twitter_handle ) . '" />' . "\n";
     }
 
-    echo "<!-- /Book WP: Social Meta -->\n\n";
+    echo "<!-- /Sasterawan: Social Meta -->\n\n";
+}
+
+/* ── Brand favicon fallback ──────────────────────────────────────────── */
+/* WordPress prints Site Icon tags when one is set; otherwise fall back to */
+/* the theme's own SVG mark so the browser tab is never blank.             */
+
+add_action( 'wp_head', 'book_wp_favicon_fallback', 5 );
+
+function book_wp_favicon_fallback() {
+    if ( has_site_icon() ) return;
+    echo '<link rel="icon" href="' . esc_url( BOOK_WP_URI . '/assets/img/brand/favicon.svg' ) . '" type="image/svg+xml">' . "\n";
 }

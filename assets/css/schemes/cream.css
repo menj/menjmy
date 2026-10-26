@@ -1,11 +1,15 @@
 /**
- * Book WP — Cream scheme (aged paper)
+ * Sasterawan — Cream scheme (aged paper)
  *
  * SCHEME OWNS SURFACE. TIME OWNS INK.
  *
  * Selectors on body.bwp-scheme-cream set surface tokens directly on <body>.
  * Custom properties set on body beat values inherited from <html> (where
  * the time class lives) — so cream paper holds regardless of time period.
+ *
+ * Compound selectors (time + scheme) are wrapped in :where() so they keep
+ * the specificity of the base rule and the reader's night toggle
+ * (html.bwp-night body in frontend.css) can still override them.
  *
  * Compound selectors (time + scheme) tune the surface tint to complement
  * the active ink mood: cooler at dawn, warmest at morning, deep at dusk,
@@ -25,7 +29,7 @@ body.bwp-scheme-cream {
 
 /* ── Cream + Dawn — faintly cooler paper, misty morning ─────────────────── */
 
-:root.bwp-time-dawn body.bwp-scheme-cream {
+:where(:root.bwp-time-dawn) body.bwp-scheme-cream {
     --bwp-bg:           #f6f4f8;
     --bwp-bg-subtle:    #efecf4;
     --bwp-border:       #ccc8d8;
@@ -35,7 +39,7 @@ body.bwp-scheme-cream {
 
 /* ── Cream + Morning — warmest paper, amber-soaked ─────────────────────── */
 
-:root.bwp-time-morning body.bwp-scheme-cream {
+:where(:root.bwp-time-morning) body.bwp-scheme-cream {
     --bwp-bg:           #fdf6e0;
     --bwp-bg-subtle:    #f8eecc;
     --bwp-border:       #dcc898;
@@ -45,7 +49,7 @@ body.bwp-scheme-cream {
 
 /* ── Cream + Dusk — ochre-tinged parchment ──────────────────────────────── */
 
-:root.bwp-time-dusk body.bwp-scheme-cream {
+:where(:root.bwp-time-dusk) body.bwp-scheme-cream {
     --bwp-bg:           #fdf0d0;
     --bwp-bg-subtle:    #f5e4b8;
     --bwp-border:       #d4b888;
@@ -55,10 +59,26 @@ body.bwp-scheme-cream {
 
 /* ── Cream + Night — dimmed warm parchment, lamp-lit ───────────────────── */
 
-:root.bwp-time-night body.bwp-scheme-cream {
+:where(:root.bwp-time-night) body.bwp-scheme-cream {
     --bwp-bg:           #f0e8cc;
     --bwp-bg-subtle:    #e8ddb8;
     --bwp-border:       #c8b898;
     --bwp-border-faint: #d8c8a8;
     --bwp-stone:        #907858;
+
+    /* Ink — the global night ink is silver for a navy surface; on parchment
+       it must be re-set to a dark, lamp-lit tone or the page is unreadable. */
+    --bwp-text:         #2b2418;
+    --bwp-text-mid:     #4a4030;
+    --bwp-muted:        #6b5d48;
+    --bwp-link:         #2d5a80;
+    --bwp-link-hover:   #1e4160;
+    --bwp-accent:       #2d5a80;
+    --bwp-ornament:     #a89878;
+    --bwp-progress:     #2d5a80;
+    --bwp-border-ink:   #8a7a60;
+    --bwp-teal:         #1B3C53;
+    --bwp-gold:         #8a7050;
+    --bwp-gold-dim:     #6a5438;
+    --bwp-gold-light:   #a89070;
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Book WP — Widget Areas (Sidebars)
+ * Sasterawan — Widget Areas (Sidebars)
  *
  * @package Book_WP
  */

@@ -1,5 +1,5 @@
 /**
- * Book WP — Night scheme (persistent dark mode)
+ * Sasterawan — Night scheme (persistent dark mode)
  *
  * Night scheme is the exception to the surface/ink split.
  *
@@ -17,27 +17,31 @@
 /* ── Base palette (afternoon fallback and default) ───────────────────────── */
 
 body.bwp-scheme-night {
-    /* Surface */
-    --bwp-bg:           #1a1a1f;
-    --bwp-bg-subtle:    #232328;
-    --bwp-border:       #333338;
-    --bwp-border-faint: #2a2a30;
-    --bwp-stone:        #4a4a52;
+    /* Surface — malam */
+    --bwp-bg:           #0f1430;
+    --bwp-bg-subtle:    #171d3d;
+    --bwp-bg-raised:    #131838;
+    --bwp-border:       #2a3156;
+    --bwp-border-faint: #1f2548;
+    --bwp-stone:        #3a4268;
+    --bwp-ui-border:    #6c7398;
 
     /* Ink — required because dark surface needs light ink */
-    --bwp-text:         #d4d2cc;
-    --bwp-text-mid:     #b8b5ae;
-    --bwp-muted:        #a09d98;
-    --bwp-link:         #7eb5d3;
-    --bwp-link-hover:   #a5d0ea;
-    --bwp-accent:       #b0a99e;
-    --bwp-ornament:     #555550;
-    --bwp-progress:     #7eb5d3;
-    --bwp-border-ink:   #707078;
-    --bwp-teal:         #4a7a9a;
-    --bwp-gold:         #8ab0c8;
-    --bwp-gold-dim:     #6a8aa0;
-    --bwp-gold-light:   #90a8b8;
+    --bwp-text:         #ece6d6;
+    --bwp-text-mid:     #d4cdb9;
+    --bwp-muted:        #b3a785;
+    --bwp-link:         #9ab8e8;
+    --bwp-link-hover:   #c3d6f5;
+    --bwp-accent:       #e0b344;
+    --bwp-ornament:     #e0b344;
+    --bwp-progress:     #e0b344;
+    --bwp-border-ink:   #ece6d6;
+    --bwp-on-ink:       #0f1430;
+    --bwp-teal:         #9ab8e8;
+    --bwp-gold:         #e0b344;
+    --bwp-gold-dim:     #b8923a;
+    --bwp-gold-light:   #f0d27a;
+    --bwp-cream:        #171d3d;
 }
 
 /* ── Night scheme + Dawn — violet-silver tint ───────────────────────────── */
