@@ -697,6 +697,36 @@ body.bwp-toc-masonry .bwp-toc__item { width: 49%; margin-bottom: .75rem; }
     .bwp-opening__seal { font-size: 1.1rem; }
 }
 
+/* ── Work layout: text column with the apparatus beside it on wide screens ──
+   Fills the full-width page instead of leaving paper either side of a centred column. */
+.bwp-work__layout { display: block; }
+.bwp-work__aside > :first-child { margin-top: 0; }
+@media screen and (min-width: 64em) {
+    .bwp-work__layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) clamp(20rem, 30vw, 28rem);
+        gap: 0 clamp(2rem, 4vw, 4rem);
+        align-items: start;
+    }
+    .bwp-work__main { --bwp-measure: 44em; min-width: 0; }
+    .bwp-work__main > * { margin-left: 0; }
+    body.bwp-form-puisi .bwp-work__main .bwp-work__content,
+    body.bwp-form-syair .bwp-work__main .bwp-work__content,
+    body.bwp-form-karmina .bwp-work__main .bwp-work__content { margin-left: 0; }
+    .bwp-work__aside { position: sticky; top: 1.25rem; }
+    .bwp-work__aside .bwp-colophon,
+    .bwp-work__aside .bwp-related { max-width: none; margin-left: 0; margin-right: 0; }
+    .bwp-work__aside .bwp-colophon { margin-top: 0; }
+    .bwp-work__aside .bwp-related { margin-top: 1.25rem; }
+    .bwp-work__main .bwp-tags,
+    .bwp-work__main .bwp-share { justify-content: flex-start; }
+    /* pages: no aside, so the text takes a wider measure from the left edge */
+    .bwp-page .bwp-work__content { --bwp-measure: 46em; max-width: var(--bwp-measure); margin-left: 0; }
+}
+/* tighter vertical rhythm throughout */
+.bwp-tags { margin-top: 1.75rem; }
+.bwp-featured { margin-bottom: 2rem; }
+
 /* analytics bar → chips */
 .bwp-analytics { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; }
 .bwp-analytics__cat { background: var(--bwp-bg-subtle); border-color: transparent; color: var(--bwp-text); }
@@ -827,10 +857,12 @@ body.bwp-toc-masonry .bwp-toc__item { width: 49%; margin-bottom: .75rem; }
 
 /* colophon → card of pills */
 .bwp-colophon {
-    margin-top: 2.5rem; padding: 1.4rem 1.6rem;
+    margin-top: 2rem; padding: 1.25rem 1.4rem;
     background: var(--bwp-bg-subtle); border-radius: var(--bwp-radius-lg);
     text-align: left;
 }
+.bwp-colophon .bwp-ornament { display: none; }
+.bwp-colophon > :first-child { margin-top: 0; }
 .bwp-colophon .bwp-ornament { margin: 0 0 .9rem; justify-content: flex-start; }
 .bwp-colophon .bwp-ornament::before { display: none; }
 .bwp-colophon__line {

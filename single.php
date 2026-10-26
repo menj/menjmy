@@ -36,9 +36,10 @@
             </div>
         </header>
 
+        <div class="bwp-work__layout">
+        <div class="bwp-work__main">
         <?php
-        // Nota Penulis — shown between analytics bar and body content,
-        // full width across the page wrap. All forms.
+        // Nota Penulis — shown between analytics bar and body content. All forms.
         $bwp_notes = get_post_meta( get_the_ID(), 'book_wp_notes', true );
         if ( $bwp_notes ) :
         ?>
@@ -87,10 +88,19 @@
         <?php endif; endif; endif; ?>
 
         <?php echo book_wp_share_row(); // phpcs:ignore ?>
+        </div><!-- .bwp-work__main -->
 
-        <?php echo book_wp_colophon(); // phpcs:ignore ?>
-
-        <?php echo book_wp_related_works(); // phpcs:ignore ?>
+        <?php
+        // Apparatus — colophon and related works. Beside the text on wide
+        // screens, below it on tablet and phone.
+        $bwp_aside = book_wp_colophon() . book_wp_related_works();
+        if ( trim( $bwp_aside ) ) :
+        ?>
+        <aside class="bwp-work__aside" aria-label="<?php esc_attr_e( 'About this work', 'book-wp' ); ?>">
+            <?php echo $bwp_aside; // phpcs:ignore ?>
+        </aside>
+        <?php endif; ?>
+        </div><!-- .bwp-work__layout -->
 
         <?php
         $bwp_nav_output = '';
