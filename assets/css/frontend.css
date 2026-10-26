@@ -483,31 +483,8 @@ html.bwp-night .bwp-book-title--cover { background: #0e1636; }
 .bwp-jalur__link:hover .bwp-jalur__count { background: rgba(255,255,255,.15); color: inherit; }
 
 /* Mukadimah excerpt — set as an epigraph under the half-title */
-.bwp-front-blurb {
-    display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: .9rem 1.5rem; align-items: start;
-    margin: 0 0 2.75rem;
-}
-.bwp-front-blurb__rule { grid-column: 1 / span 12; height: 22px; width: 160px; background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='22' viewBox='0 0 200 22'><path d='M4 12c10-12 20-12 30 0s20 12 30 0 20-12 30 0 20 12 30 0 20-12 30 0' fill='none' stroke='%23c9971c' stroke-width='1.3'/><circle cx='64' cy='12' r='2' fill='%23c9971c'/><circle cx='124' cy='12' r='2' fill='%23c9971c'/></svg>") left center / contain no-repeat; }
-.bwp-front-blurb__text {
-    grid-column: 1 / span 12; max-width: 30em;
-    font-family: var(--bwp-font-display); font-style: italic; font-weight: 300;
-    font-size: clamp(1.3rem, 2.2vw, 1.75rem); line-height: 1.35; letter-spacing: -.005em; color: var(--bwp-text);
-    text-wrap: pretty;
-}
-.bwp-front-blurb__text p { margin: 0 0 .6em; }
-.bwp-front-blurb__text p:last-child { margin-bottom: 0; }
-.bwp-front-blurb__more {
-    grid-column: 1 / span 12; justify-self: start;
-    display: inline-flex; align-items: center; gap: .5em; min-height: 38px; padding: 0 1.1em;
-    border-radius: var(--bwp-pill); border: 1px solid var(--bwp-border);
-    font-family: var(--bwp-font-ui); font-size: .68rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--bwp-text);
-}
-.bwp-front-blurb__more:hover { background: var(--bwp-text); color: var(--bwp-on-ink); border-color: transparent; }
 @media screen and (min-width: 52em) {
-    .bwp-front-blurb__rule { grid-column: 1 / span 2; margin-top: .9rem; }
-    .bwp-front-blurb__text { grid-column: 3 / span 8; }
-    .bwp-front-blurb__more { grid-column: 11 / span 2; justify-self: end; margin-top: .4rem; }
-}
+            }
 
 /* Pintu masuk — two rows of pills, one label column */
 .bwp-pintu { display: flex; flex-direction: column; gap: .6rem; margin: 0 0 3rem; padding: 1.1rem 1.25rem; border-radius: var(--bwp-radius-lg); background: var(--bwp-bg-raised); border: 1px solid var(--bwp-border-faint); position: relative; overflow: hidden; }

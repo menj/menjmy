@@ -177,6 +177,15 @@ function book_wp_default_footer_quote_sub() {
 }
 
 /**
+ * Javanese rendering of the anthology name: a translation, not a
+ * transliteration. "Sangisoring Lumahan" = beneath the surface (ngoko,
+ * literary register). Shown in Aksara Jawa in the footer identity block.
+ */
+function book_wp_default_jawa_name() {
+    return 'ꦱꦔꦶꦱꦺꦴꦫꦶꦁꦭꦸꦩꦲꦤ꧀';
+}
+
+/**
  * Duotone portrait medallion. Size: 'sm' (56px), 'md' (120px), 'lg' (240px).
  * The duotone is CSS (grayscale + screen blend over nila), so any photo works.
  */

@@ -27,7 +27,6 @@ function book_wp_register_settings() {
         'book_wp_jawa_name'       => 'sanitize_text_field',
         'book_wp_footer_quote'    => 'sanitize_textarea_field',
         'book_wp_footer_quote_sub' => 'sanitize_text_field',
-        'book_wp_front_blurb'     => 'wp_kses_post',
         'book_wp_show_featured_work' => 'book_wp_cb',
         'book_wp_featured_work_id'   => 'absint',
         'book_wp_copyright'       => 'wp_kses_post',
@@ -158,7 +157,6 @@ function book_wp_handle_tab_save() {
             'book_wp_jawa_name'      => 'sanitize_text_field',
             'book_wp_footer_quote'   => 'sanitize_textarea_field',
             'book_wp_footer_quote_sub' => 'sanitize_text_field',
-            'book_wp_front_blurb'         => 'wp_kses_post',
             'book_wp_show_featured_work'  => 'book_wp_cb',
             'book_wp_featured_work_id'    => 'absint',
             'book_wp_copyright'           => 'wp_kses_post',
@@ -474,18 +472,24 @@ function bwp_tab_general() {
 
         <div class="bwp-field">
             <label class="bwp-field__label" for="book_wp_jawi_name"><?php esc_html_e( 'Anthology Name in Jawi', 'book-wp' ); ?></label>
-            <div class="bwp-field">
-            <label class="bwp-field__label" for="book_wp_jawa_name"><?php esc_html_e( 'Anthology Name in Aksara Jawa', 'book-wp' ); ?></label>
             <div class="bwp-field__control">
                 <input type="text" dir="rtl" lang="ms-Arab" name="book_wp_jawi_name" id="book_wp_jawi_name"
                        value="<?php echo esc_attr( get_option( 'book_wp_jawi_name', '' ) ); ?>">
             </div>
-            <span class="bwp-field__hint"><?php esc_html_e( 'Displayed prominently on the front page as the collection title.', 'book-wp' ); ?></span>
+            <span class="bwp-field__hint"><?php esc_html_e( 'Shown beside the brandmark in the header, as the seal on title pages and in the footer.', 'book-wp' ); ?></span>
         </div>
 
         <div class="bwp-field">
-            <label class="bwp-field__label" for="book_wp_front_blurb"><?php esc_html_e( 'Front Page Blurb', 'book-wp' ); ?></label>
-            <div class="bwp-field">
+            <label class="bwp-field__label" for="book_wp_jawa_name"><?php esc_html_e( 'Anthology Name in Aksara Jawa', 'book-wp' ); ?></label>
+            <div class="bwp-field__control">
+                <input type="text" lang="jv-Java" name="book_wp_jawa_name" id="book_wp_jawa_name"
+                       placeholder="<?php echo esc_attr( book_wp_default_jawa_name() ); ?>"
+                       value="<?php echo esc_attr( get_option( 'book_wp_jawa_name', '' ) ); ?>">
+            </div>
+            <span class="bwp-field__hint"><?php esc_html_e( 'A Javanese translation of the title in Javanese script, shown in the footer. Empty uses the bundled "Sangisoring Lumahan".', 'book-wp' ); ?></span>
+        </div>
+
+        <div class="bwp-field">
             <label class="bwp-field__label" for="book_wp_featured_work_id"><?php esc_html_e( 'Featured Work', 'book-wp' ); ?></label>
             <div class="bwp-field__control">
                 <input type="number" min="0" name="book_wp_featured_work_id" id="book_wp_featured_work_id"
@@ -514,9 +518,6 @@ function bwp_tab_general() {
             </div>
         </div>
 
-        <div class="bwp-field__control">
-                <textarea name="book_wp_front_blurb" id="book_wp_front_blurb" rows="3"><?php echo esc_textarea( get_option( 'book_wp_front_blurb', '' ) ); ?></textarea>
-            </div>
             <span class="bwp-field__hint"><?php echo wp_kses( __( 'Introductory text displayed above the Table of Contents. HTML is supported — e.g. <code>&lt;em&gt;, &lt;strong&gt;, &lt;a href=""&gt;</code>.', 'book-wp' ), array( 'code' => array() ) ); ?></span>
         </div>
 

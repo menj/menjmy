@@ -20,6 +20,7 @@ $bwp_author    = $bwp_author ? $bwp_author : get_bloginfo( 'name' );
 $bwp_copyright = get_option( 'book_wp_copyright', '' );
 $bwp_jawi      = get_option( 'book_wp_jawi_name', '' );
 $bwp_jawa      = get_option( 'book_wp_jawa_name', '' );
+$bwp_jawa      = $bwp_jawa ? $bwp_jawa : book_wp_default_jawa_name();
 $bwp_quote     = get_option( 'book_wp_footer_quote', book_wp_default_footer_quote() );
 $bwp_quote_sub = get_option( 'book_wp_footer_quote_sub', book_wp_default_footer_quote_sub() );
 $bwp_tagline   = get_bloginfo( 'description' );
