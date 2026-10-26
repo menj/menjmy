@@ -912,12 +912,12 @@ body.bwp-archive-masonry .bwp-archive-list__item { width: 49%; margin-bottom: .7
 }
 
 /* 1 · sign-off */
-.bwp-site-footer__sign { display: flex; flex-direction: column; gap: .7rem; max-width: 34em; }
+.bwp-site-footer__sign { display: flex; flex-direction: column; gap: .7rem; max-width: 38em; }
 .bwp-site-footer__lead {
     margin: 0;
     font-family: var(--bwp-font-display); font-style: italic; font-weight: 300;
-    font-size: clamp(1.6rem, 3vw, 2.5rem); line-height: 1.15; letter-spacing: -.01em;
-    color: var(--f-gold); text-wrap: balance;
+    font-size: clamp(1.35rem, 2.2vw, 1.9rem); line-height: 1.3; letter-spacing: -.005em;
+    color: var(--f-gold); text-wrap: pretty;
 }
 .bwp-site-footer__sub { margin: 0; max-width: 34em; font-size: 1.15rem; line-height: 1.55; color: #d4cdb9; }
 

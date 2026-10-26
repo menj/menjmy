@@ -458,7 +458,7 @@ function bwp_tab_general() {
             <div class="bwp-field__control">
                 <input type="text" name="book_wp_footer_quote" id="book_wp_footer_quote"
                        value="<?php echo esc_attr( get_option( 'book_wp_footer_quote', book_wp_default_footer_quote() ) ); ?>">
-                <p class="bwp-field__hint"><?php esc_html_e( 'One italic line that closes every page, e.g. “Yang tampak hanyalah permukaan; yang membentuk ialah sedar.” Leave blank to hide the sign-off.', 'book-wp' ); ?></p>
+                <p class="bwp-field__hint"><?php esc_html_e( 'One italic line that closes every page, set once in the Mukadimah voice Leave blank to hide the sign-off.', 'book-wp' ); ?></p>
             </div>
         </div>
 
