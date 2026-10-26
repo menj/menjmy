@@ -971,7 +971,7 @@ body.bwp-archive-masonry .bwp-archive-list__item { width: 49%; margin-bottom: .7
 .bwp-site-footer__initial { display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: var(--bwp-pill); background: #f6f1e4; color: #1a2a6c; font-family: var(--bwp-font-display); font-style: italic; font-size: 1.6rem; box-shadow: inset 0 0 0 2px rgba(224, 179, 68, .9); }
 .bwp-site-footer__identity .bwp-site-footer__jawi { font-size: clamp(2.2rem, 3.4vw, 3rem); line-height: 1.2; margin: 0 0 .2rem; text-align: right; }
 .bwp-site-footer__identity .bwp-site-footer__anthology { font-size: clamp(1.6rem, 2.4vw, 2.2rem); line-height: 1; }
-.bwp-site-footer__jawa { font-family: var(--bwp-font-jawa); font-size: 1.05rem; line-height: 1.6; color: var(--f-dim); margin: -.1rem 0 .35rem; }
+.bwp-site-footer__jawa { font-family: var(--bwp-font-jawa); font-size: 1.35rem; line-height: 1.5; color: #d4cdb9; margin: 0 0 .4rem; }
 .bwp-site-footer__tagline { font-family: var(--bwp-font-ui); font-size: .64rem; letter-spacing: .2em; text-transform: uppercase; color: var(--f-dim); margin-top: .5rem; }
 .bwp-site-footer__lead {
     margin: 0;
