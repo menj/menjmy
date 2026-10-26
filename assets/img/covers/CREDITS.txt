@@ -1,0 +1,15 @@
+Cover plates for strand (jalur) and form (bentuk) archives.
+All derived from Wikimedia Commons files that are in the public domain or
+released under CC0; each was cropped to 2.4:1, softened and toned toward the
+theme's indigo. The on-page credit line links back to the Commons file.
+
+form-hikayat.jpg      Hkyt_merong_mahawgsa.jpg — opening page of Hikayat Merong Mahawangsa,
+                      R. J. Wilkinson's 1898 edition. Public domain.
+form-terjemahan.jpg   Edgar_Allan_Poe,_circa_1849,_restored,_squared_off.jpg — daguerreotype,
+                      restored. Public domain.
+jalur-ceritera.jpg    YosriHikayatHangTuah.jpg — Hikayat Hang Tuah manuscript on display,
+                      photo by Yosri. CC0.
+jalur-ketuhanan.jpg   Masjid_Kampung_Laut,_Nilampuri,_Kelantan,_Malaysia.jpg — the oldest
+                      surviving mosque in Malaysia. CC0.
+jalur-wangsa.jpg      Frontispiece_of_a_Jawi_edition_of_the_Malay_Annals.jpg — illuminated
+                      frontispiece of Sulalatus Salatin. Public domain.
