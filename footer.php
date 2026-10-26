@@ -22,7 +22,7 @@ $bwp_jawi      = get_option( 'book_wp_jawi_name', '' );
 $bwp_quote     = get_option( 'book_wp_footer_quote', book_wp_default_footer_quote() );
 $bwp_quote_sub = get_option( 'book_wp_footer_quote_sub', book_wp_default_footer_quote_sub() );
 $bwp_tagline   = get_bloginfo( 'description' );
-$bwp_portrait  = get_option( 'book_wp_author_portrait', '' );
+$bwp_portrait  = get_option( 'book_wp_author_portrait', BOOK_WP_URI . '/assets/img/brand/portrait.png' );
 ?>
 
     <?php if ( is_active_sidebar( 'footer-widgets' ) ) : ?>
@@ -47,6 +47,11 @@ $bwp_portrait  = get_option( 'book_wp_author_portrait', '' );
                 <?php endif; ?>
 
                 <div class="bwp-site-footer__identity">
+                    <?php if ( has_custom_logo() ) : ?>
+                        <?php echo wp_get_attachment_image( get_theme_mod( 'custom_logo' ), 'thumbnail', false, array( 'class' => 'bwp-site-footer__mark', 'alt' => '' ) ); ?>
+                    <?php else : ?>
+                        <img class="bwp-site-footer__mark" src="<?php echo esc_url( BOOK_WP_URI . '/assets/img/brand/mark.svg' ); ?>" alt="" width="52" height="52" loading="lazy" decoding="async">
+                    <?php endif; ?>
                     <?php if ( $bwp_jawi ) : ?>
                     <span class="bwp-site-footer__jawi" dir="rtl" lang="ms-Arab"><?php echo esc_html( $bwp_jawi ); ?></span>
                     <?php endif; ?>
@@ -61,10 +66,8 @@ $bwp_portrait  = get_option( 'book_wp_author_portrait', '' );
                 <div class="bwp-site-footer__lockup">
                     <?php if ( $bwp_portrait ) : ?>
                         <span class="bwp-portrait bwp-portrait--sm"><img src="<?php echo esc_url( $bwp_portrait ); ?>" alt="" width="56" height="56" loading="lazy" decoding="async"></span>
-                    <?php elseif ( has_custom_logo() ) : ?>
-                        <?php echo wp_get_attachment_image( get_theme_mod( 'custom_logo' ), 'thumbnail', false, array( 'class' => 'bwp-site-footer__mark', 'alt' => '' ) ); ?>
                     <?php else : ?>
-                        <img class="bwp-site-footer__mark" src="<?php echo esc_url( BOOK_WP_URI . '/assets/img/brand/mark.svg' ); ?>" alt="" width="44" height="44" loading="lazy" decoding="async">
+                        <span class="bwp-site-footer__initial" aria-hidden="true"><?php echo esc_html( mb_substr( $bwp_author, 0, 1 ) ); ?></span>
                     <?php endif; ?>
                     <span class="bwp-site-footer__names">
                         <span class="bwp-site-footer__author"><?php echo esc_html( $bwp_author ); ?></span>

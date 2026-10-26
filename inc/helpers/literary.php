@@ -181,7 +181,7 @@ function book_wp_default_footer_quote_sub() {
  * The duotone is CSS (grayscale + screen blend over nila), so any photo works.
  */
 function book_wp_author_portrait( $size = 'md' ) {
-    $url = get_option( 'book_wp_author_portrait', '' );
+    $url = get_option( 'book_wp_author_portrait', BOOK_WP_URI . '/assets/img/brand/portrait.png' );
     if ( ! $url ) return '';
     $name = get_option( 'book_wp_author_name', '' );
     $name = $name ? $name : get_bloginfo( 'name' );
