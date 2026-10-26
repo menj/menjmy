@@ -41,4 +41,13 @@ class MigrationTest extends \PHPUnit\Framework\TestCase {
         $this->assertSame( array( 'custom_logo' ), book_wp_migrate_theme_mods() );
         $this->assertFalse( get_theme_mod( 'sidebars_widgets' ) );
     }
+
+    public function test_body_font_moves_to_sabon_once(): void {
+        bwp_set_option( 'book_wp_font', 'vollkorn' );
+        $this->assertTrue( book_wp_migrate_body_font() );
+        $this->assertSame( 'sabon', get_option( 'book_wp_font' ) );
+        bwp_set_option( 'book_wp_font', 'lora' );
+        $this->assertFalse( book_wp_migrate_body_font(), 'runs once; a later explicit choice is kept' );
+        $this->assertSame( 'lora', get_option( 'book_wp_font' ) );
+    }
 }

@@ -13,7 +13,7 @@ add_filter( 'body_class', 'book_wp_body_classes' );
 
 function book_wp_body_classes( $classes ) {
     $classes[] = 'bwp-scheme-' . sanitize_key( get_option( 'book_wp_color_scheme', 'default' ) );
-    $classes[] = 'bwp-font-'   . sanitize_key( get_option( 'book_wp_font', 'georgia' ) );
+    $classes[] = 'bwp-font-'   . sanitize_key( get_option( 'book_wp_font', 'sabon' ) );
     // Language class uses WordPress locale — book_wp_language option was removed in v3.2.3.
     $classes[] = 'bwp-lang-' . sanitize_key( substr( get_locale(), 0, 2 ) );
 

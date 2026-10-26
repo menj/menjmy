@@ -639,13 +639,14 @@ function bwp_tab_general() {
    ══════════════════════════════════════ */
 
 function bwp_tab_typography() {
-    $font       = get_option( 'book_wp_font',         'georgia' );
+    $font       = get_option( 'book_wp_font',         'sabon' );
     $scheme     = get_option( 'book_wp_color_scheme',  'default' );
     $time_theme = get_option( 'book_wp_time_theme',    'auto' );
     $align      = get_option( 'book_wp_poetry_align',  'left' );
 
     $fonts = array(
-        'georgia' => array( 'name' => 'Georgia', 'sub' => 'Default', 'sample' => 'Gg' ),
+        'sabon'   => array( 'name' => 'Sabon Next LT', 'sub' => 'Default · self-hosted', 'sample' => 'Gg' ),
+        'georgia' => array( 'name' => 'Georgia', 'sub' => 'System serif', 'sample' => 'Gg' ),
         'lora'    => array( 'name' => 'Lora',    'sub' => 'Serif',   'sample' => 'Gg' ),
         'vollkorn'=> array( 'name' => 'Vollkorn','sub' => 'Serif',   'sample' => 'Gg' ),
         'arvo'    => array( 'name' => 'Arvo',    'sub' => 'Slab',    'sample' => 'Gg' ),

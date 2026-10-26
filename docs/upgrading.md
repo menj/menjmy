@@ -48,6 +48,12 @@ removed). Their stored values are harmless.
 
 **What looks different by design**
 
+- The body face is Sabon Next LT. On first activation the Font setting moves
+  to it once; Georgia, Lora, Vollkorn, Arvo, Amiri, Maven and Ubuntu remain
+  selectable under Settings → Typography.
+- Keyboard left/right between works went with the previous/next navigation;
+  up/down between stanzas remains.
+
 - Defaults for the palette swatches changed (Kapas / Malam); a stored scheme
   value still selects the same scheme.
 - The front page opens with a cover photograph; switch it off under

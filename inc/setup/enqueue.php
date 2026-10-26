@@ -221,9 +221,12 @@ function book_wp_enqueue_frontend() {
     // Optional Google Font + local font-family override.
     // $gfonts acts as both the Google Fonts parameter map and the font whitelist.
     // Only slugs present in this array can produce a file path — no sanitize_file_name needed.
-    $font = get_option( 'book_wp_font', 'georgia' );
-    if ( 'georgia' !== $font ) {
+    // Sabon Next LT (local.css) is the default body face; any other choice
+    // loads its own small stylesheet after it and wins the cascade.
+    $font = get_option( 'book_wp_font', 'sabon' );
+    if ( 'sabon' !== $font ) {
         $gfonts = array(
+            'georgia'  => '',
             'vollkorn' => 'Vollkorn:ital,wght@0,400;0,700;1,400;1,700',
             'arvo'     => 'Arvo:ital,wght@0,400;0,700;1,400;1,700',
             'maven'    => 'Maven+Pro:wght@400;500;700;900',
@@ -233,7 +236,7 @@ function book_wp_enqueue_frontend() {
         );
 
         if ( isset( $gfonts[ $font ] ) ) {
-            if ( $remote_fonts ) {
+            if ( $remote_fonts && $gfonts[ $font ] ) {
                 wp_enqueue_style(
                     'book-wp-gfont',
                     'https://fonts.googleapis.com/css2?family=' . $gfonts[ $font ] . '&display=swap',

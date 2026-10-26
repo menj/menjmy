@@ -422,6 +422,7 @@ function book_wp_on_activation() {
     book_wp_register_taxonomy();
     if ( function_exists( 'book_wp_migrate_theme_mods' ) ) {
         book_wp_migrate_theme_mods(); // carry logo, CSS and header/background from a book-wp folder
+        book_wp_migrate_body_font();  // one-time move to the 4.0 body face
     }
     flush_rewrite_rules();
 }

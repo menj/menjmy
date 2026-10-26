@@ -90,3 +90,19 @@ function book_wp_migrate_theme_mods() {
     }
     return $copied;
 }
+
+/**
+ * 4.0 ships Sabon Next LT as the body face. On the first activation of 4.x
+ * the stored Font choice moves to it once, so an upgraded site reads in the
+ * new face; the other choices stay available under Settings → Typography.
+ *
+ * @return bool True when the option was changed.
+ */
+function book_wp_migrate_body_font() {
+    if ( get_option( 'book_wp_font_migrated_40' ) ) return false;
+    update_option( 'book_wp_font_migrated_40', '1', false );
+    if ( 'sabon' === get_option( 'book_wp_font', 'sabon' ) ) return false;
+    update_option( 'book_wp_font', 'sabon' );
+    return true;
+}
+
