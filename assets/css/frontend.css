@@ -267,56 +267,59 @@ a:focus-visible, button:focus-visible { border-radius: var(--bwp-pill); }
 .bwp-main { display: block; }
 
 /* ═══════════════════════════════════════════════════════════
-   SITE HEADER — masthead: lockup | text nav, songket headband beneath
+   SITE HEADER — indigo pill bar (brackets the page with the footer)
+   lockup: mark · site name · Jawi  |  text nav with a gold dot
    ═══════════════════════════════════════════════════════════ */
 
 .bwp-site-header {
+    --h-ink: #f6f1e4; --h-dim: #c7bd9f; --h-gold: #e0b344;
     display: grid;
     grid-template-columns: 1fr auto;
-    grid-template-areas: "brand nav" "band band" "blurb blurb";
+    grid-template-areas: "brand nav" "blurb blurb";
     align-items: center;
     gap: 0 2rem;
-    padding: 1.4rem 0 0;
-    margin-bottom: clamp(2rem, 5vw, 3.25rem);
+    margin: 1rem 0 clamp(2rem, 5vw, 3.25rem);
+    padding: 0 1.6rem 0 .7rem;
+    min-height: 64px;
+    border-radius: var(--bwp-pill);
+    background: #1a2a6c;
+    color: var(--h-ink);
 }
-.bwp-brand { grid-area: brand; display: inline-flex; align-items: center; gap: .9rem; color: var(--bwp-text); padding-bottom: 1.1rem; }
-.bwp-brand:hover { color: var(--bwp-link); }
-.bwp-brand__mark { width: 46px; height: 46px; flex: none; }
-.bwp-brand__text { display: flex; flex-direction: column; gap: .15rem; }
+.bwp-brand { grid-area: brand; display: inline-flex; align-items: center; gap: .8rem; color: var(--h-ink); min-height: 64px; }
+.bwp-brand:hover { color: var(--h-gold); }
+.bwp-brand__mark { width: 48px; height: 48px; flex: none; }
+.bwp-brand__text { display: flex; align-items: baseline; gap: .8rem; flex-wrap: wrap; }
 .bwp-site-header__title {
     margin: 0;
     font-family: var(--bwp-font-display);
-    font-size: 1.45rem; font-weight: 500; letter-spacing: -.005em;
+    font-size: 1.15rem; font-weight: 500; letter-spacing: -.005em;
     line-height: 1; color: inherit;
 }
-.bwp-site-header__tagline { font-family: var(--bwp-font-ui); font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--bwp-muted); }
-.bwp-site-header__section { display: none; }
+.bwp-site-header__jawi { font-family: var(--bwp-font-jawi); font-size: 1rem; line-height: 1; color: var(--h-gold); }
+.bwp-site-header__tagline, .bwp-site-header__section, .bwp-site-header__band { display: none; }
 
 .bwp-nav-toggle { display: none; }
-.bwp-nav { grid-area: nav; align-self: center; padding-bottom: 1.1rem; }
-.bwp-nav__list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .25rem 1.6rem; }
+.bwp-nav { grid-area: nav; }
+.bwp-nav__list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 1.5rem; }
 .bwp-nav__list li { margin: 0; position: relative; }
 .bwp-nav__list a {
-    display: inline-flex; align-items: center; gap: .4em;
-    padding: .6em 0; min-height: 36px;
+    display: inline-flex; align-items: center; gap: .45em;
+    padding: 0; min-height: 44px;
     border: none; border-radius: 0; background: transparent;
-    font-family: var(--bwp-font-ui); font-size: .7rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
-    color: var(--bwp-text); white-space: nowrap;
+    font-family: var(--bwp-font-ui); font-size: .68rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--h-ink); white-space: nowrap;
     transition: color .15s;
 }
-.bwp-nav__list a::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--bwp-accent); opacity: 0; transform: scale(.4); transition: opacity .15s, transform .15s; }
-.bwp-nav__list a:hover { color: var(--bwp-link); }
+.bwp-nav__list a::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--h-gold); opacity: 0; transform: scale(.4); transition: opacity .15s, transform .15s; }
+.bwp-nav__list a:hover { color: var(--h-gold); }
 .bwp-nav__list a:hover::before { opacity: .6; transform: none; }
-.bwp-nav__list .current-menu-item > a,
-.bwp-nav__list .current_page_item > a,
-.bwp-nav__list .current-menu-ancestor > a { color: var(--bwp-link); }
 .bwp-nav__list .current-menu-item > a::before,
 .bwp-nav__list .current_page_item > a::before,
-.bwp-nav__list .current-menu-ancestor > a::before { opacity: 1; transform: none; background: var(--bwp-rubric); }
+.bwp-nav__list .current-menu-ancestor > a::before { opacity: 1; transform: none; }
 
 /* dropdowns */
 .bwp-nav__list .sub-menu {
-    display: none; position: absolute; top: calc(100% + 4px); left: -1rem;
+    display: none; position: absolute; top: calc(100% + 2px); left: -1rem;
     min-width: 12em; margin: 0; padding: 6px; list-style: none;
     background: var(--bwp-bg-raised); border: 1px solid var(--bwp-border);
     border-radius: var(--bwp-radius); box-shadow: var(--bwp-shadow-lg);
@@ -325,21 +328,15 @@ a:focus-visible, button:focus-visible { border-radius: var(--bwp-pill); }
 .bwp-nav__list li:hover > .sub-menu,
 .bwp-nav__list li:focus-within > .sub-menu,
 .bwp-nav__list li[data-touch-open="1"] > .sub-menu { display: block; }
-.bwp-nav__list .sub-menu a { display: flex; width: 100%; white-space: normal; padding: .6em 1rem; border-radius: var(--bwp-radius-sm); }
-.bwp-nav__list .sub-menu a:hover { background: var(--bwp-bg-subtle); }
-
-/* songket headband — a woven rule under the masthead (public-domain textile, see assets/img/textures/CREDITS.txt) */
-.bwp-site-header__band {
-    grid-area: band; height: 10px; border-radius: var(--bwp-pill);
-    background: url('../img/textures/songket-band.jpg') center / auto 100% repeat-x;
-    box-shadow: inset 0 0 0 1px rgba(21, 27, 61, .08);
-}
+.bwp-nav__list .sub-menu a { display: flex; width: 100%; white-space: normal; padding: .6em 1rem; border-radius: var(--bwp-radius-sm); color: var(--bwp-text); min-height: 40px; }
+.bwp-nav__list .sub-menu a::before { display: none; }
+.bwp-nav__list .sub-menu a:hover { background: var(--bwp-bg-subtle); color: var(--bwp-link); }
 
 /* category blurb under the header on single works */
 .bwp-chapter-blurb {
     grid-area: blurb;
     max-width: var(--bwp-measure);
-    margin: 1rem auto 0;
+    margin: 0 auto; padding: 0 1rem 1rem; color: var(--h-dim);
     font-style: italic; font-size: 1rem; text-align: center;
     color: var(--bwp-muted);
 }
@@ -390,8 +387,8 @@ a:focus-visible, button:focus-visible { border-radius: var(--bwp-pill); }
 }
 .bwp-book-title__meta span + span::before { content: '·'; margin: 0 .6em; color: var(--bwp-accent); }
 @media screen and (min-width: 52em) {
-    .bwp-book-title__name { grid-column: 3 / span 10; text-align: right; }
-    .bwp-book-title__desc { grid-column: 1 / span 7; grid-row: 2; align-self: end; }
+    .bwp-book-title__name { grid-column: 1 / span 10; }
+    .bwp-book-title__desc { grid-column: 1 / span 7; grid-row: 2; }
     .bwp-book-title__meta { grid-column: 1 / span 7; grid-row: 3; }
     .bwp-book-title__jawi { right: 0; top: 50%; transform: translateY(-58%); font-size: clamp(6rem, 12vw, 10.5rem); }
 }
@@ -623,8 +620,9 @@ body.bwp-toc-masonry .bwp-toc__item { width: 49%; margin-bottom: .75rem; }
     text-wrap: balance;
 }
 @media screen and (min-width: 52em) {
-    .bwp-work__meta  { grid-column: 1 / span 4; align-self: end; }
-    .bwp-work__title { grid-column: 5 / span 8; text-align: right; }
+    .bwp-work__meta  { grid-column: 1 / span 12; order: 2; flex-direction: row; align-items: center; flex-wrap: wrap; gap: .7rem 1rem; }
+    .bwp-work__title { grid-column: 1 / span 11; order: 1; }
+    .bwp-work__opening[data-jawi]::before { left: auto; right: -.05em; }
 }
 
 /* analytics bar → chips */
@@ -1194,30 +1192,33 @@ html.bwp-night .bwp-badge--karmina, body.bwp-night .bwp-badge--karmina { color: 
 
     .bwp-site-header {
         grid-template-columns: 1fr auto;
-        grid-template-areas: "brand toggle" "nav nav" "band band" "blurb blurb";
-        gap: 0 1rem;
-        padding-top: 1rem;
-        margin-bottom: 1.75rem;
+        grid-template-areas: "brand toggle" "nav nav" "blurb blurb";
+        gap: 0 .75rem;
+        margin: .75rem 0 1.75rem;
+        padding: 0 .6rem 0 .5rem;
+        min-height: 56px;
+        border-radius: 28px;
     }
-    .bwp-brand { padding-bottom: .9rem; }
-    .bwp-brand__mark { width: 38px; height: 38px; }
-    .bwp-site-header__title { font-size: 1.2rem; }
-    .bwp-site-header__tagline { display: none; }
+    .bwp-brand { min-height: 56px; gap: .6rem; }
+    .bwp-brand__mark { width: 40px; height: 40px; }
+    .bwp-site-header__title { font-size: 1.02rem; }
+    .bwp-site-header__jawi { display: none; }
 
     .bwp-nav-toggle {
-        grid-area: toggle; align-self: center; margin-bottom: .9rem;
+        grid-area: toggle; align-self: center;
         display: inline-flex; align-items: center; gap: .5em;
-        min-height: 40px; padding: 0 1.1em;
-        border: none; border-radius: var(--bwp-pill);
-        background: var(--bwp-text); color: var(--bwp-on-ink);
-        font-family: var(--bwp-font-ui); font-size: .66rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+        min-height: 38px; padding: 0 1em;
+        border: 1px solid rgba(246, 241, 228, .35); border-radius: var(--bwp-pill);
+        background: transparent; color: var(--h-ink);
+        font-family: var(--bwp-font-ui); font-size: .64rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
         cursor: pointer;
     }
-    .bwp-nav { grid-area: nav; display: none; padding-bottom: 1rem; }
+    .bwp-nav { grid-area: nav; display: none; padding: 0 .4rem .6rem; }
     .bwp-nav.is-open { display: block; }
-    .bwp-nav__list { flex-direction: column; gap: 0; padding: 6px; border-radius: var(--bwp-radius); background: var(--bwp-bg-subtle); }
-    .bwp-nav__list a { width: 100%; min-height: 44px; padding: .8em 1rem; }
+    .bwp-nav__list { flex-direction: column; gap: 0; padding: 4px 0 0; border-top: 1px solid rgba(246, 241, 228, .18); }
+    .bwp-nav__list a { width: 100%; min-height: 44px; padding: 0 .6rem; }
     .bwp-nav__list .sub-menu { position: static; display: block; box-shadow: none; border: none; background: transparent; padding: 0 0 0 1rem; }
+    .bwp-nav__list .sub-menu a { color: var(--h-ink); }
 
     .bwp-book-title { padding-top: .5rem; }
     .bwp-book-title__name { font-size: clamp(2.6rem, 13vw, 3.6rem); }
