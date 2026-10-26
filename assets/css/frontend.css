@@ -1092,11 +1092,10 @@ body.bwp-archive-masonry .bwp-archive-list__item { width: 49%; margin-bottom: .7
     .bwp-site-footer { padding-top: 2.5rem; }
     .bwp-site-footer__inner { gap: 1.75rem; }
     .bwp-site-footer__row { padding-top: 1.5rem; }
-    /* stacked footer: brandmark first at the top, then the sign-off, then the identity text */
-    .bwp-site-footer__top { display: flex; flex-direction: column; align-items: flex-start; gap: 1.5rem; }
-    .bwp-site-footer__identity { display: contents; }
-    .bwp-site-footer__identity .bwp-site-footer__mark { order: -1; width: 72px; height: 72px; }
-    .bwp-site-footer__identity-text { order: 1; }
+    /* stacked footer: the identity block (mark, titles, tagline) opens the footer; the sign-off follows */
+    .bwp-site-footer__top { display: flex; flex-direction: column; align-items: flex-start; gap: 1.75rem; }
+    .bwp-site-footer__identity { order: -1; flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: .9rem; }
+    .bwp-site-footer__identity .bwp-site-footer__mark { width: 72px; height: 72px; }
     .bwp-site-footer__identity-text { align-items: flex-start; text-align: left; }
     .bwp-site-footer__identity .bwp-site-footer__jawi { text-align: left; }
     .bwp-site-footer__bottom { grid-template-columns: 1fr; }
