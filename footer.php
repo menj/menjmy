@@ -24,7 +24,7 @@ $bwp_jawa      = $bwp_jawa ? $bwp_jawa : book_wp_default_jawa_name();
 $bwp_quote     = get_option( 'book_wp_footer_quote', book_wp_default_footer_quote() );
 $bwp_quote_sub = get_option( 'book_wp_footer_quote_sub', book_wp_default_footer_quote_sub() );
 $bwp_tagline   = get_bloginfo( 'description' );
-$bwp_portrait  = get_option( 'book_wp_author_portrait', BOOK_WP_URI . '/assets/img/brand/portrait.png' );
+$bwp_portrait  = book_wp_author_portrait( 'sm' ); // '' when the portrait option is cleared
 ?>
 
     <?php if ( is_active_sidebar( 'footer-widgets' ) ) : ?>
@@ -72,7 +72,7 @@ $bwp_portrait  = get_option( 'book_wp_author_portrait', BOOK_WP_URI . '/assets/i
             <div class="bwp-site-footer__row">
                 <div class="bwp-site-footer__lockup">
                     <?php if ( $bwp_portrait ) : ?>
-                        <span class="bwp-portrait bwp-portrait--sm"><img src="<?php echo esc_url( $bwp_portrait ); ?>" alt="" width="56" height="56" loading="lazy" decoding="async"></span>
+                        <?php echo $bwp_portrait; // phpcs:ignore — escaped in book_wp_author_portrait() ?>
                     <?php else : ?>
                         <span class="bwp-site-footer__initial" aria-hidden="true"><?php echo esc_html( mb_substr( $bwp_author, 0, 1 ) ); ?></span>
                     <?php endif; ?>
@@ -101,7 +101,7 @@ $bwp_portrait  = get_option( 'book_wp_author_portrait', BOOK_WP_URI . '/assets/i
                     <?php if ( ! empty( $bwp_copyright ) ) : ?>
                         <?php echo wp_kses_post( $bwp_copyright ); ?>
                     <?php else : ?>
-                        &copy; <?php echo esc_html( gmdate( 'Y' ) . ' ' . $bwp_author ); ?> &middot; <?php esc_html_e( 'Hakcipta terpelihara', 'book-wp' ); ?>
+                        &copy; <?php echo esc_html( wp_date( 'Y' ) . ' ' . $bwp_author ); ?> &middot; <?php esc_html_e( 'Hakcipta terpelihara', 'book-wp' ); ?>
                     <?php endif; ?>
                 </p>
                 <?php else : ?>

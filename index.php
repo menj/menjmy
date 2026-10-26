@@ -73,7 +73,7 @@
     </div>
     <?php endif; ?>
 
-    <?php /* ── Karya terbaru: the newest work opens like a first page ────── */ ?>
+    <?php /* ── Karya terbaharu: the newest work opens like a first page ──── */ ?>
     <?php echo book_wp_featured_work(); // phpcs:ignore ?>
 
     <h2 class="bwp-toc-header"><?php echo esc_html( __( 'Table of Contents', 'book-wp' ) ); ?></h2>

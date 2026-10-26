@@ -235,18 +235,39 @@ function book_wp_featured_work() {
     $slug = book_wp_get_form_slug( $id );
     $cat  = book_wp_work_strand( $id );
 
-    // First passage: first non-empty paragraph, line breaks kept for verse.
+    // Content filters (blocks, shortcodes, term spans) read the current post,
+    // so point them at this one while the passage is extracted; the
+    // wp_reset_postdata() below restores the main query's post.
+    $GLOBALS['post'] = $post;
+    setup_postdata( $post );
     $content = apply_filters( 'the_content', $post->post_content );
     $content = book_wp_remove_chapter_blocks( $content );
+    $verse   = book_wp_is_poetry( $id );
+
+    // First passage: the first non-empty <p>, or <pre> (a verse block carries
+    // no <p> at all); line breaks are kept for verse.
     $first = '';
-    if ( preg_match_all( '/<p(?:\s[^>]*)?>(.*?)<\/p>/si', $content, $mm ) ) {
-        foreach ( $mm[1] as $para ) {
+    if ( preg_match_all( '/<(p|pre)(?:\s[^>]*)?>(.*?)<\/\1>/si', $content, $mm ) ) {
+        foreach ( $mm[2] as $para ) {
             if ( '' !== trim( wp_strip_all_tags( str_replace( '&nbsp;', ' ', $para ) ) ) ) { $first = $para; break; }
         }
     }
     if ( '' === $first ) $first = wp_strip_all_tags( $content );
     $first = wp_kses( $first, array( 'br' => array(), 'em' => array(), 'strong' => array() ) );
-    if ( ! book_wp_is_poetry( $id ) ) $first = wp_trim_words( wp_strip_all_tags( $first ), 48, '…' );
+    if ( $verse ) {
+        // A verse block holds the whole poem with blank lines between stanzas:
+        // keep the first stanza only, and never more than eight lines.
+        $lines  = preg_split( '/\R/', preg_replace( '/<br\s*\/?>/i', "\n", $first ) );
+        $stanza = array();
+        foreach ( $lines as $line ) {
+            if ( '' === trim( wp_strip_all_tags( $line ) ) ) { if ( $stanza ) break; continue; }
+            $stanza[] = trim( $line );
+            if ( count( $stanza ) >= 8 ) break;
+        }
+        $first = implode( '<br>', $stanza );
+    } else {
+        $first = wp_trim_words( wp_strip_all_tags( $first ), 48, '…' );
+    }
 
     $loc  = get_post_meta( $id, 'book_wp_location', true );
     $date = get_post_meta( $id, 'book_wp_date_composed', true );
@@ -265,7 +286,7 @@ function book_wp_featured_work() {
     $html .= '<h2 class="bwp-featured__title" id="bwp-featured-title"><a href="' . esc_url( get_permalink( $id ) ) . '">' . esc_html( get_the_title( $id ) ) . '</a></h2>';
     if ( $dateline ) $html .= '<p class="bwp-featured__dateline">' . esc_html( $dateline ) . '</p>';
     $html .= '</div>';
-    $html .= '<div class="bwp-featured__body' . ( book_wp_is_poetry( $id ) ? ' bwp-featured__body--verse' : '' ) . '">';
+    $html .= '<div class="bwp-featured__body' . ( $verse ? ' bwp-featured__body--verse' : '' ) . '">';
     $html .= '<p>' . $first . '</p>';
     $html .= '<a class="bwp-featured__more" href="' . esc_url( get_permalink( $id ) ) . '">' . esc_html__( 'Baca seterusnya', 'book-wp' ) . ' <span aria-hidden="true">&rarr;</span></a>';
     $html .= '</div></div></section>';

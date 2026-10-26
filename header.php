@@ -58,12 +58,12 @@
             <?php else : ?>
                 <img class="bwp-brand__mark" src="<?php echo esc_url( BOOK_WP_URI . '/assets/img/brand/mark-inverse.svg' ); ?>" alt="" width="48" height="48" decoding="async">
             <?php endif; ?>
-            <span class="bwp-brand__text">
+            <div class="bwp-brand__text">
                 <h2 class="bwp-site-header__title"><?php echo esc_html( $bwp_site_name ); ?></h2>
                 <?php $bwp_jawi_head = get_option( 'book_wp_jawi_name', '' ); if ( $bwp_jawi_head ) : ?>
                 <span class="bwp-site-header__jawi" dir="rtl" lang="ms-Arab"><?php echo esc_html( $bwp_jawi_head ); ?></span>
                 <?php endif; ?>
-            </span>
+            </div>
         </a>
 
         <?php if ( has_nav_menu( 'primary' ) ) : ?>

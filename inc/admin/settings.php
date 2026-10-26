@@ -511,7 +511,7 @@ function bwp_tab_general() {
             <label class="bwp-field__label" for="book_wp_footer_quote"><?php esc_html_e( 'Footer Sign-off', 'book-wp' ); ?></label>
             <div class="bwp-field__control">
                 <textarea name="book_wp_footer_quote" id="book_wp_footer_quote" rows="3"><?php echo esc_textarea( get_option( 'book_wp_footer_quote', book_wp_default_footer_quote() ) ); ?></textarea>
-                <p class="bwp-field__hint"><?php esc_html_e( 'One italic line that closes every page, set once in the Mukadimah voice Leave blank to hide the sign-off.', 'book-wp' ); ?></p>
+                <p class="bwp-field__hint"><?php esc_html_e( 'One italic line that closes every page, set once in the Mukadimah voice. Leave blank to hide the sign-off.', 'book-wp' ); ?></p>
             </div>
         </div>
 

@@ -75,6 +75,12 @@ function book_wp_register_taxonomy() {
                 }
             }
         }
+        // An in-place upgrade (same folder) never fires after_switch_theme, so
+        // the one-time 4.0 move of the body face runs from here as well. The
+        // helper is flag-guarded and does nothing on later versions.
+        if ( function_exists( 'book_wp_migrate_body_font' ) ) {
+            book_wp_migrate_body_font();
+        }
         update_option( 'book_wp_terms_version', $terms_version );
     }
 }
@@ -310,21 +316,20 @@ function book_wp_site_structured_data() {
     if ( '1' !== get_option( 'book_wp_structured_data', '1' ) ) return;
 
     $anthology = get_option( 'book_wp_anthology_name', '' );
+    $tagline   = get_bloginfo( 'description' );
+    $website   = array(
+        '@type'      => 'WebSite',
+        '@id'        => home_url( '/#website' ),
+        'name'       => $anthology ? $anthology : get_bloginfo( 'name' ),
+        'url'        => home_url( '/' ),
+        'inLanguage' => get_bloginfo( 'language' ),
+        'author'     => array( '@id' => home_url( '/#author' ) ),
+        'publisher'  => array( '@id' => home_url( '/#author' ) ),
+    );
+    if ( $tagline ) $website['alternateName'] = $tagline;
     $graph = array(
         '@context' => 'https://schema.org',
-        '@graph'   => array(
-            array(
-                '@type'       => 'WebSite',
-                '@id'         => home_url( '/#website' ),
-                'name'        => $anthology ? $anthology : get_bloginfo( 'name' ),
-                'alternateName' => get_bloginfo( 'description' ),
-                'url'         => home_url( '/' ),
-                'inLanguage'  => get_bloginfo( 'language' ),
-                'author'      => array( '@id' => home_url( '/#author' ) ),
-                'publisher'   => array( '@id' => home_url( '/#author' ) ),
-            ),
-            book_wp_schema_author(),
-        ),
+        '@graph'   => array( $website, book_wp_schema_author() ),
     );
     echo '<script type="application/ld+json">'
         . wp_json_encode( $graph, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES )
@@ -366,7 +371,10 @@ function book_wp_structured_data() {
     $stitle = get_post_meta( $post->ID, 'book_wp_source_title', true );
     $sauth  = get_post_meta( $post->ID, 'book_wp_source_author', true );
     $syear  = get_post_meta( $post->ID, 'book_wp_source_year', true );
-    if ( $lang || $stitle || $sauth ) {
+    // Only translations carry the apparatus: nukilan share the source-author
+    // key, so a source author alone must not mark a work as a translation.
+    $is_translation = function_exists( 'book_wp_has_form' ) && book_wp_has_form( $post->ID, 'terjemahan' );
+    if ( ( $lang || $is_translation ) && ( $lang || $stitle || $sauth ) ) {
         $orig = array( '@type' => 'CreativeWork' );
         if ( $stitle ) $orig['name'] = $stitle;
         if ( $sauth )  $orig['author'] = array( '@type' => 'Person', 'name' => $sauth );

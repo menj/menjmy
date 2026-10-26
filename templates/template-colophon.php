@@ -30,7 +30,7 @@ defined( 'ABSPATH' ) || exit;
         </div>
         <?php edit_post_link( esc_html( __( 'Edit', 'book-wp' ) ), '<p class="bwp-edit-link">', '</p>' ); ?>
         </div>
-        <aside class="bwp-work__aside"><?php echo book_wp_author_card(); // phpcs:ignore ?></aside>
+        <div class="bwp-work__aside"><?php echo book_wp_author_card(); // phpcs:ignore ?></div>
         </div>
     </article>
 

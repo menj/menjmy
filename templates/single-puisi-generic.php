@@ -89,10 +89,6 @@ get_header(); ?>
 
     <?php echo book_wp_related_works(); // phpcs:ignore ?>
 
-    <?php if ( '1' === get_option( 'book_wp_show_nav', '1' ) ) : ?>
-        <?php echo book_wp_work_navigation(); // phpcs:ignore ?>
-    <?php endif; ?>
-
 </article>
 
 <style>

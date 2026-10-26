@@ -13,7 +13,8 @@ class MigrationTest extends \PHPUnit\Framework\TestCase {
         bwp_set_option( 'theme_mods_book-wp', array( 'custom_logo' => 42, 'custom_css_post_id' => 7, 'nav_menu_locations' => array( 'primary' => 3 ) ) );
         $copied = book_wp_migrate_theme_mods();
         sort( $copied );
-        $this->assertSame( array( 'custom_css_post_id', 'custom_logo', 'nav_menu_locations' ), $copied );
+        $this->assertSame( array( 'custom_logo', 'nav_menu_locations' ), $copied, 'the legacy custom_css post id is not shared across themes' );
+        $this->assertFalse( get_theme_mod( 'custom_css_post_id' ) );
         $this->assertSame( 42, get_theme_mod( 'custom_logo' ) );
         $this->assertSame( array( 'primary' => 3 ), get_theme_mod( 'nav_menu_locations' ) );
     }

@@ -261,7 +261,15 @@ function wp_list_pluck( $list, $field ) {
 }
 
 function wp_get_object_terms( $ids, $tax, $args = array() ) {
-    return array();
+    // (term, object) pairs derived from the per-term object lists a test sets
+    // in $GLOBALS['_bwp_term_objects'][ $taxonomy ][ $term_id ].
+    $out = array();
+    foreach ( $GLOBALS['_bwp_term_objects'][ $tax ] ?? array() as $term_id => $object_ids ) {
+        foreach ( array_intersect( (array) $object_ids, (array) $ids ) as $oid ) {
+            $out[] = (object) array( 'term_id' => $term_id, 'object_id' => $oid );
+        }
+    }
+    return $out;
 }
 
 function get_feed_link( $feed = '' ) {

@@ -29,8 +29,12 @@ function book_wp_add_meta_boxes() {
 function book_wp_render_meta_box( $post ) {
     wp_nonce_field( 'book_wp_save_meta', 'book_wp_meta_nonce' );
 
-    $terms     = get_the_terms( $post->ID, 'literary_form' );
-    $form_slug = ( $terms && ! is_wp_error( $terms ) ) ? $terms[0]->slug : '';
+    // Every assigned form, not only the first: a translation is filed under
+    // terjemahan *and* its native form, and get_the_terms() sorts by name, so
+    // "terjemahan" is never first. Each matching group is shown and saved.
+    $terms      = get_the_terms( $post->ID, 'literary_form' );
+    $form_slugs = ( $terms && ! is_wp_error( $terms ) ) ? wp_list_pluck( $terms, 'slug' ) : array();
+    $form_slug  = implode( ' ', $form_slugs );
 
     $orn_opts = array(
         ''         => '— Global default —',
@@ -620,11 +624,7 @@ function book_wp_render_meta_box( $post ) {
             'e.g. 1845'
         ); ?>
 
-        <?php book_wp_mf_text( $post, 'book_wp_original_lang',
-            __( 'Source Language', 'book-wp' ),
-            'e.g. Bahasa Inggeris'
-        ); ?>
-
+        <?php /* Source language is the core "Original Language" field above. */ ?>
         <?php book_wp_mf_textarea( $post, 'book_wp_translator_note',
             __( "Translator's Note", 'book-wp' ),
             'Choices of rhyme, register, or what could not be carried across.'
@@ -654,12 +654,16 @@ function book_wp_render_meta_box( $post ) {
         var box    = document.querySelector( '.bwp-metabox' );
         var groups = document.querySelectorAll( '.bwp-mf-group' );
 
-        function applyForm( slug ) {
+        // `slugs` is a space-separated list of every assigned form; a group is
+        // shown when any of its data-show-for slugs is among them.
+        function applyForm( slugs ) {
+            var assigned = ( slugs || '' ).split( /\s+/ ).filter( Boolean );
             groups.forEach( function ( g ) {
                 var forForms = ( g.dataset.showFor || '' ).split( ' ' );
-                g.classList.toggle( 'bwp-mf-visible', !! slug && forForms.indexOf( slug ) !== -1 );
+                var show     = forForms.some( function ( f ) { return assigned.indexOf( f ) !== -1; } );
+                g.classList.toggle( 'bwp-mf-visible', show );
             } );
-            if ( box ) box.dataset.form = slug;
+            if ( box ) box.dataset.form = assigned.join( ' ' );
         }
 
         applyForm( box ? box.dataset.form : '' );
@@ -681,7 +685,7 @@ function book_wp_render_meta_box( $post ) {
                             'taxonomy', 'literary_form', { include: termIds, per_page: 100 }
                         );
                         if ( ! allTerms ) return;
-                        var slug = allTerms.length ? allTerms[0].slug : '';
+                        var slug = allTerms.map( function ( t ) { return t.slug; } ).sort().join( ' ' );
                         if ( slug !== prevSlug ) { prevSlug = slug; applyForm( slug ); }
                     } );
                 }, 0 );
@@ -691,11 +695,13 @@ function book_wp_render_meta_box( $post ) {
         var taxDiv = document.getElementById( 'literary_formdiv' );
         if ( taxDiv ) {
             taxDiv.addEventListener( 'change', function () {
-                var checked = taxDiv.querySelector( 'input[type=checkbox]:checked' );
-                if ( ! checked ) { applyForm( '' ); return; }
-                var label = document.querySelector( 'label[for="' + checked.id + '"]' );
-                var slug  = label ? label.textContent.trim().toLowerCase().replace( /\s+/g, '-' ) : '';
-                applyForm( slug );
+                var checked = taxDiv.querySelectorAll( 'input[type=checkbox]:checked' );
+                var slugs   = [];
+                checked.forEach( function ( cb ) {
+                    var label = document.querySelector( 'label[for="' + cb.id + '"]' );
+                    if ( label ) slugs.push( label.textContent.trim().toLowerCase().replace( /\s+/g, '-' ) );
+                } );
+                applyForm( slugs.join( ' ' ) );
             } );
         }
     } )();
@@ -713,7 +719,7 @@ function book_wp_render_meta_box( $post ) {
  * submit all of them — hidden groups included — and PHP would keep the last
  * one, silently discarding the author's edit. Grouped fields are therefore
  * namespaced as book_wp_mf[{group}][{key}] and the save handler reads only
- * the group that matches the post's assigned literary form.
+ * the groups that match one of the post's assigned literary forms.
  *
  * @param string $group Space-separated form slugs from data-show-for, or '' for core fields.
  */
@@ -854,10 +860,10 @@ function book_wp_save_meta( $post_id ) {
  * Flatten the submitted meta box fields for one post.
  *
  * Core fields post under their bare key. Per-form groups post under
- * book_wp_mf[{group}][{key}]; only the group whose slugs include the post's
- * assigned literary form is merged in, so values from hidden groups can never
- * overwrite the visible edit. Values are returned raw (still slashed) and are
- * sanitised by the caller.
+ * book_wp_mf[{group}][{key}]; only the groups whose slugs include one of the
+ * post's assigned literary forms are merged in, so values from hidden groups
+ * can never overwrite the visible edit. Values are returned raw (still
+ * slashed) and are sanitised by the caller.
  *
  * @param int $post_id Post being saved.
  * @return array<string,mixed>
@@ -874,15 +880,15 @@ function book_wp_mf_collect_input( $post_id ) {
         return $input;
     }
 
-    $form_slug = function_exists( 'book_wp_get_form_slug' ) ? book_wp_get_form_slug( $post_id ) : '';
-    if ( '' === $form_slug ) {
+    $form_slugs = function_exists( 'book_wp_get_form_slugs' ) ? book_wp_get_form_slugs( $post_id ) : array();
+    if ( ! $form_slugs ) {
         return $input;
     }
 
     foreach ( $_POST['book_wp_mf'] as $group => $fields ) {
         if ( ! is_array( $fields ) ) continue;
         $slugs = preg_split( '/\s+/', (string) $group, -1, PREG_SPLIT_NO_EMPTY );
-        if ( ! in_array( $form_slug, $slugs, true ) ) continue;
+        if ( ! array_intersect( $form_slugs, $slugs ) ) continue;
         foreach ( $fields as $k => $v ) {
             if ( is_string( $k ) && 0 === strpos( $k, 'book_wp_' ) && is_scalar( $v ) ) {
                 $input[ $k ] = $v;

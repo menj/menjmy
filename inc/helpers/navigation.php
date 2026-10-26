@@ -523,11 +523,20 @@ function book_wp_visible_terms( $terms, $taxonomy ) {
     if ( ! book_wp_hidden_tag_slugs() ) return array_values( $terms );
 
     $visible = book_wp_visible_work_ids();
-    $out     = array();
+    if ( ! $visible ) return array();
+
+    // One query for every visible work's terms, then a count per term.
+    $pairs = wp_get_object_terms( $visible, $taxonomy, array( 'fields' => 'all_with_object_id' ) );
+    if ( is_wp_error( $pairs ) ) return array();
+    $counts = array();
+    foreach ( (array) $pairs as $pair ) {
+        $tid = (int) $pair->term_id;
+        $counts[ $tid ] = isset( $counts[ $tid ] ) ? $counts[ $tid ] + 1 : 1;
+    }
+
+    $out = array();
     foreach ( $terms as $term ) {
-        $in_term = get_objects_in_term( $term->term_id, $taxonomy );
-        if ( is_wp_error( $in_term ) ) continue;
-        $n = count( array_intersect( array_map( 'intval', (array) $in_term ), $visible ) );
+        $n = isset( $counts[ (int) $term->term_id ] ) ? $counts[ (int) $term->term_id ] : 0;
         if ( $n < 1 ) continue;
         $term->count = $n;
         $out[]       = $term;

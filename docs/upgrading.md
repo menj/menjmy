@@ -48,9 +48,10 @@ removed). Their stored values are harmless.
 
 **What looks different by design**
 
-- The body face is Sabon Next LT. On first activation the Font setting moves
-  to it once; Georgia, Lora, Vollkorn, Arvo, Amiri, Maven and Ubuntu remain
-  selectable under Settings → Typography.
+- The body face is Sabon Next LT. On the first run of 4.0 (activation, or the
+  first request after an in-place update) the Font setting moves to it once;
+  Georgia, Lora, Vollkorn, Arvo, Amiri, Maven and Ubuntu remain selectable
+  under Settings → Typography.
 - Keyboard left/right between works went with the previous/next navigation;
   up/down between stanzas remains.
 

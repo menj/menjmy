@@ -45,7 +45,6 @@ function book_wp_migratable_theme_mods() {
         'background_size',
         'background_repeat',
         'background_attachment',
-        'custom_css_post_id',
         'nav_menu_locations',
     );
 }
@@ -85,6 +84,20 @@ function book_wp_migrate_theme_mods() {
         }
     }
 
+    // Additional CSS lives in a post named after the theme folder; copy the
+    // text into a post for this folder rather than sharing the legacy post.
+    foreach ( book_wp_legacy_theme_slugs() as $slug ) {
+        if ( $slug === $current || in_array( 'custom_css', $copied, true ) ) continue;
+        $legacy = get_option( 'theme_mods_' . $slug );
+        if ( empty( $legacy['custom_css_post_id'] ) || ! function_exists( 'wp_get_custom_css_post' ) ) continue;
+        if ( wp_get_custom_css_post( $current ) ) continue; // the new folder already has its own
+        $legacy_post = wp_get_custom_css_post( $slug );
+        if ( $legacy_post && '' !== trim( (string) $legacy_post->post_content ) ) {
+            $result = wp_update_custom_css_post( $legacy_post->post_content, array( 'stylesheet' => $current ) );
+            if ( $result && ! is_wp_error( $result ) ) $copied[] = 'custom_css';
+        }
+    }
+
     if ( $copied ) {
         update_option( 'book_wp_migrated_from', $current . '<' . implode( ',', $copied ), false );
     }
@@ -92,9 +105,10 @@ function book_wp_migrate_theme_mods() {
 }
 
 /**
- * 4.0 ships Sabon Next LT as the body face. On the first activation of 4.x
- * the stored Font choice moves to it once, so an upgraded site reads in the
- * new face; the other choices stay available under Settings → Typography.
+ * 4.0 ships Sabon Next LT as the body face. On the first run of 4.x (theme
+ * activation, or the terms-version upgrade step after an in-place update) the
+ * stored Font choice moves to it once, so an upgraded site reads in the new
+ * face; the other choices stay available under Settings → Typography.
  *
  * @return bool True when the option was changed.
  */

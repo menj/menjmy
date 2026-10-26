@@ -522,7 +522,7 @@ html.bwp-night .bwp-book-title--cover, html.bwp-night .bwp-opening--cover { back
 .bwp-jalur__link--outline { background: transparent; border: 1px solid var(--bwp-border); }
 .bwp-jalur__link--outline .bwp-jalur__count { background: var(--bwp-bg-subtle); }
 
-/* Karya terbaru — the newest work as an opening page */
+/* Karya terbaharu — the newest work as an opening page */
 .bwp-featured { margin: 0 0 3rem; padding: 2rem clamp(1.25rem, 3vw, 2.5rem) 2.25rem; border-radius: var(--bwp-radius-lg); background: var(--bwp-bg-subtle) url('../img/textures/manuscript.jpg') right -4rem top -2rem / 60% auto no-repeat; position: relative; overflow: hidden; }
 .bwp-featured::before {
     content: ''; position: absolute; inset: 0; pointer-events: none;
