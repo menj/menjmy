@@ -474,6 +474,8 @@ html.bwp-night .bwp-book-title--cover, html.bwp-night .bwp-opening--cover { back
 .bwp-opening--cover .bwp-analytics__item,
 .bwp-opening--cover .bwp-analytics__cat { background: rgba(253, 252, 248, .12); border-color: rgba(253, 252, 248, .22); color: var(--c-ink); }
 .bwp-opening--cover .bwp-opening__foot { display: flex; flex-direction: column; gap: .9rem; position: relative; }
+.bwp-opening__blurb { margin: 0; font-style: italic; font-size: 1rem; line-height: 1.5; color: var(--bwp-muted); max-width: 40em; }
+.bwp-opening--cover .bwp-opening__blurb { color: var(--c-dim); }
 .bwp-opening__credit {
     margin: 0; font-family: var(--bwp-font-ui); font-size: .58rem; letter-spacing: .12em; text-transform: uppercase;
     color: var(--c-dim); opacity: .85;

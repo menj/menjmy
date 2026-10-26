@@ -37,6 +37,9 @@
             if ( trim( $bwp_meta ) ) : ?>
             <div class="bwp-work__meta"><?php echo $bwp_meta; // phpcs:ignore ?></div>
             <?php endif; ?>
+            <?php if ( '1' === get_option( 'book_wp_show_chapter_blurb', '0' ) ) : $bwp_blurb = book_wp_strand_blurb(); if ( $bwp_blurb ) : ?>
+            <p class="bwp-opening__blurb"><?php echo esc_html( $bwp_blurb ); ?></p>
+            <?php endif; endif; ?>
             <?php echo book_wp_cover_credit( $bwp_cover ); // phpcs:ignore ?>
         </header>
 

@@ -386,3 +386,28 @@ function book_wp_author_card() {
     return $html . '</aside>';
 }
 
+/**
+ * Strand blurb: the category's own description, else the global "Strand
+ * Blurb" option. For a work, the first non-uncategorized category is used;
+ * for an archive, pass the term.
+ *
+ * @param int|WP_Term $subject Post ID or term.
+ * @return string Plain text.
+ */
+function book_wp_strand_blurb( $subject = 0 ) {
+    $term = null;
+    if ( $subject instanceof WP_Term ) {
+        $term = $subject;
+    } else {
+        $post_id = $subject ? (int) $subject : get_the_ID();
+        $cats    = get_the_category( $post_id );
+        if ( $cats && ! is_wp_error( $cats ) ) {
+            foreach ( $cats as $cat ) {
+                if ( 'uncategorized' !== $cat->slug ) { $term = $cat; break; }
+            }
+        }
+    }
+    $text = ( $term && ! empty( $term->description ) ) ? $term->description : get_option( 'book_wp_chapter_blurb', '' );
+    return trim( wp_strip_all_tags( (string) $text ) );
+}
+

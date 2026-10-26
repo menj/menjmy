@@ -36,8 +36,8 @@
         $desc = '';
         if ( 'literary_form' === $term->taxonomy ) {
             $desc = book_wp_form_description( $term->slug );
-        } elseif ( 'category' === $term->taxonomy && ! empty( $term->description ) ) {
-            $desc = $term->description;
+        } elseif ( 'category' === $term->taxonomy ) {
+            $desc = book_wp_strand_blurb( $term ); // category description, else the Strand Blurb option
         }
         if ( $desc ) :
     ?>

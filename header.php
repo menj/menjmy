@@ -84,20 +84,4 @@
 
     </header>
 
-    <?php if ( is_single() ) : ?>
-        <?php
-        $chapter_blurb = '';
-        $cats = get_the_category();
-        if ( ! empty( $cats ) && ! is_wp_error( $cats ) ) {
-            foreach ( $cats as $cat ) {
-                $desc = term_description( $cat->term_id, 'category' );
-                if ( ! empty( $desc ) ) {
-                $chapter_blurb = $desc;
-                break;
-                }
-            }
-        }
-        ?>
-        <?php /* The strand blurb now lives in the title-page kicker (works) and the archive description; nothing is printed here. */ ?>
-    <?php endif; ?>
 

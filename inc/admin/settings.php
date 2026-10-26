@@ -28,6 +28,8 @@ function book_wp_register_settings() {
         'book_wp_jawa_name'       => 'sanitize_text_field',
         'book_wp_footer_quote'    => 'sanitize_textarea_field',
         'book_wp_footer_quote_sub' => 'sanitize_text_field',
+        'book_wp_chapter_blurb'   => 'sanitize_textarea_field',
+        'book_wp_show_chapter_blurb' => 'book_wp_cb',
         'book_wp_show_featured_work' => 'book_wp_cb',
         'book_wp_featured_work_id'   => 'absint',
         'book_wp_copyright'       => 'wp_kses_post',
@@ -159,6 +161,8 @@ function book_wp_handle_tab_save() {
             'book_wp_jawa_name'      => 'sanitize_text_field',
             'book_wp_footer_quote'   => 'sanitize_textarea_field',
             'book_wp_footer_quote_sub' => 'sanitize_text_field',
+            'book_wp_chapter_blurb'  => 'sanitize_textarea_field',
+            'book_wp_show_chapter_blurb' => 'book_wp_cb',
             'book_wp_show_featured_work'  => 'book_wp_cb',
             'book_wp_featured_work_id'    => 'absint',
             'book_wp_copyright'           => 'wp_kses_post',
@@ -506,8 +510,7 @@ function bwp_tab_general() {
         <div class="bwp-field bwp-field--full">
             <label class="bwp-field__label" for="book_wp_footer_quote"><?php esc_html_e( 'Footer Sign-off', 'book-wp' ); ?></label>
             <div class="bwp-field__control">
-                <input type="text" name="book_wp_footer_quote" id="book_wp_footer_quote"
-                       value="<?php echo esc_attr( get_option( 'book_wp_footer_quote', book_wp_default_footer_quote() ) ); ?>">
+                <textarea name="book_wp_footer_quote" id="book_wp_footer_quote" rows="3"><?php echo esc_textarea( get_option( 'book_wp_footer_quote', book_wp_default_footer_quote() ) ); ?></textarea>
                 <p class="bwp-field__hint"><?php esc_html_e( 'One italic line that closes every page, set once in the Mukadimah voice Leave blank to hide the sign-off.', 'book-wp' ); ?></p>
             </div>
         </div>
@@ -520,6 +523,16 @@ function bwp_tab_general() {
                 <p class="bwp-field__hint"><?php esc_html_e( 'Smaller supporting line beneath the sign-off. Optional.', 'book-wp' ); ?></p>
             </div>
         </div>
+
+        <div class="bwp-field bwp-field--full">
+            <label class="bwp-field__label" for="book_wp_chapter_blurb"><?php esc_html_e( 'Strand Blurb', 'book-wp' ); ?></label>
+            <div class="bwp-field__control">
+                <textarea name="book_wp_chapter_blurb" id="book_wp_chapter_blurb" rows="2"><?php echo esc_textarea( get_option( 'book_wp_chapter_blurb', '' ) ); ?></textarea>
+                <p class="bwp-field__hint"><?php esc_html_e( 'One line about the strands. A strand archive shows its own category description when it has one, and this text otherwise.', 'book-wp' ); ?></p>
+            </div>
+        </div>
+
+        <?php bwp_toggle( 'book_wp_show_chapter_blurb', __( 'Strand blurb on works', 'book-wp' ), __( 'Show the strand description (or the blurb above) as a line in each work\'s title panel.', 'book-wp' ), '0' ); ?>
 
             <span class="bwp-field__hint"><?php echo wp_kses( __( 'Introductory text displayed above the Table of Contents. HTML is supported — e.g. <code>&lt;em&gt;, &lt;strong&gt;, &lt;a href=""&gt;</code>.', 'book-wp' ), array( 'code' => array() ) ); ?></span>
         </div>
