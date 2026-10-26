@@ -47,11 +47,10 @@ $bwp_portrait  = get_option( 'book_wp_author_portrait', BOOK_WP_URI . '/assets/i
                 <?php endif; ?>
 
                 <div class="bwp-site-footer__identity">
-                    <?php if ( has_custom_logo() ) : ?>
-                        <?php echo wp_get_attachment_image( get_theme_mod( 'custom_logo' ), 'thumbnail', false, array( 'class' => 'bwp-site-footer__mark', 'alt' => '' ) ); ?>
-                    <?php else : ?>
-                        <img class="bwp-site-footer__mark" src="<?php echo esc_url( BOOK_WP_URI . '/assets/img/brand/mark.svg' ); ?>" alt="" width="52" height="52" loading="lazy" decoding="async">
+                    <?php if ( ! has_custom_logo() ) : ?>
+                        <img class="bwp-site-footer__mark" src="<?php echo esc_url( BOOK_WP_URI . '/assets/img/brand/mark-inverse.svg' ); ?>" alt="" width="96" height="96" loading="lazy" decoding="async">
                     <?php endif; ?>
+                    <div class="bwp-site-footer__identity-text">
                     <?php if ( $bwp_jawi ) : ?>
                     <span class="bwp-site-footer__jawi" dir="rtl" lang="ms-Arab"><?php echo esc_html( $bwp_jawi ); ?></span>
                     <?php endif; ?>
@@ -59,6 +58,7 @@ $bwp_portrait  = get_option( 'book_wp_author_portrait', BOOK_WP_URI . '/assets/i
                     <?php if ( $bwp_tagline ) : ?>
                     <span class="bwp-site-footer__tagline"><?php echo esc_html( $bwp_tagline ); ?></span>
                     <?php endif; ?>
+                    </div>
                 </div>
             </div>
 

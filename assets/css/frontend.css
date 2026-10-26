@@ -914,8 +914,9 @@ body.bwp-archive-masonry .bwp-archive-list__item { width: 49%; margin-bottom: .7
 /* 1 · sign-off | identity */
 .bwp-site-footer__top { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 2rem 3rem; align-items: end; }
 .bwp-site-footer__sign { display: flex; flex-direction: column; gap: .7rem; max-width: 38em; }
-.bwp-site-footer__identity { display: flex; flex-direction: column; align-items: flex-end; text-align: right; gap: .2rem; }
-.bwp-site-footer__identity .bwp-site-footer__mark { width: 52px; height: 52px; margin-bottom: .9rem; border-radius: var(--bwp-pill); box-shadow: 0 0 0 4px rgba(246, 241, 228, .08); }
+.bwp-site-footer__identity { display: flex; align-items: center; justify-content: flex-end; gap: 1.4rem; }
+.bwp-site-footer__identity .bwp-site-footer__mark { width: 96px; height: 96px; flex: none; }
+.bwp-site-footer__identity-text { display: flex; flex-direction: column; align-items: flex-end; text-align: right; gap: .2rem; }
 .bwp-site-footer__initial { display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: var(--bwp-pill); background: #f6f1e4; color: #1a2a6c; font-family: var(--bwp-font-display); font-style: italic; font-size: 1.6rem; box-shadow: inset 0 0 0 2px rgba(224, 179, 68, .9); }
 .bwp-site-footer__identity .bwp-site-footer__jawi { font-size: clamp(2.2rem, 3.4vw, 3rem); line-height: 1.2; margin: 0 0 .2rem; text-align: right; }
 .bwp-site-footer__identity .bwp-site-footer__anthology { font-size: clamp(1.6rem, 2.4vw, 2.2rem); line-height: 1; }
@@ -980,7 +981,9 @@ body.bwp-archive-masonry .bwp-archive-list__item { width: 49%; margin-bottom: .7
     .bwp-site-footer__inner { gap: 1.75rem; }
     .bwp-site-footer__row { padding-top: 1.5rem; }
     .bwp-site-footer__top { grid-template-columns: 1fr; }
-    .bwp-site-footer__identity { align-items: flex-start; text-align: left; }
+    .bwp-site-footer__identity { justify-content: flex-start; flex-direction: row-reverse; }
+    .bwp-site-footer__identity .bwp-site-footer__mark { width: 72px; height: 72px; }
+    .bwp-site-footer__identity-text { align-items: flex-start; text-align: left; }
     .bwp-site-footer__identity .bwp-site-footer__jawi { text-align: left; }
     .bwp-site-footer__bottom { grid-template-columns: 1fr; }
     .bwp-site-footer__credit { text-align: left; }
